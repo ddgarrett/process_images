@@ -1,0 +1,503 @@
+file_id,file_location,file_name,rvw_lvl,img_lat,img_lon,img_width,img_len,img_date_time,img_exif_ver,img_make,img_model
+1000,../image_loc/img,1ds_107_030W0820.JPG,0,0,0,0,0,2004:11:25 16:56:59,0220,Canon,Canon EOS-1DS
+1001,../image_loc/img,5d_IMG_0444.JPG,0,0,0,0,0,2009:01:04 12:16:25,0221,Canon,Canon EOS 5D Mark II
+1002,../image_loc/img,coolpix_DSCN07878.JPG,0,0,0,0,0,2002:06:29 21:04:50,0210,NIKON,E995
+1003,../image_loc/img,iphone.jpeg,0,25.036889,121.517258,0,0,2023:05:17 12:19:21,0232,Apple,iPhone 12 Pro
+1004,../image_loc/img,ipod_touch_IMG_2794.JPG,0,42.361511,-71.057136,0,0,2018:11:03 11:20:16,0221,Apple,iPod touch
+1005,../image_loc/img,nexus_5_IMG_20181111_083519.jpg,0,28.569075,-81.324903,1280,960,2018:11:11,0,LGE,Nexus 5
+1006,../image_loc/img,olympus_PC020419.JPG,0,0,0,0,0,2004:12:02 18:41:25,0220,OLYMPUS CORPORATION,C8080WZ
+1007,../image_loc/img,pixel_3_IMG_20181128_184447.jpg,0,33.393475,-111.698289,4032,3024,2018:11:28 18:44:48,0220,Google,Pixel 3 XL
+1008,../image_loc/img,powershot_210_IMG_0795.JPG,0,0,0,0,0,2010:05:29 04:26:37,0221,Canon,Canon PowerShot SX210 IS
+1009,../image_loc/img,powsershot_210_IMG_0767.JPG,0,0,0,0,0,2010:05:29 04:10:52,0221,Canon,Canon PowerShot SX210 IS
+1010,../image_loc/img,sample.jpg,0,34.888922,135.808131,4032,3024,2023:05:04 10:25:20,0232,Google,Pixel 5a
+1000,../image_loc/img,1ds_107_030W0820.JPG,0,0,0,0,0,2004:11:25 16:56:59,0220,Canon,Canon EOS-1DS
+1001,../image_loc/img,5d_IMG_0444.JPG,0,0,0,0,0,2009:01:04 12:16:25,0221,Canon,Canon EOS 5D Mark II
+1002,../image_loc/img,coolpix_DSCN07878.JPG,0,0,0,0,0,2002:06:29 21:04:50,0210,NIKON,E995
+1003,../image_loc/img,iphone.jpeg,0,25.036889,121.517258,0,0,2023:05:17 12:19:21,0232,Apple,iPhone 12 Pro
+1004,../image_loc/img,ipod_touch_IMG_2794.JPG,0,42.361511,-71.057136,0,0,2018:11:03 11:20:16,0221,Apple,iPod touch
+1005,../image_loc/img,nexus_5_IMG_20181111_083519.jpg,0,28.569075,-81.324903,1280,960,2018:11:11,0,LGE,Nexus 5
+1006,../image_loc/img,olympus_PC020419.JPG,0,0,0,0,0,2004:12:02 18:41:25,0220,OLYMPUS CORPORATION,C8080WZ
+1007,../image_loc/img,pixel_3_IMG_20181128_184447.jpg,0,33.393475,-111.698289,4032,3024,2018:11:28 18:44:48,0220,Google,Pixel 3 XL
+1008,../image_loc/img,powershot_210_IMG_0795.JPG,0,0,0,0,0,2010:05:29 04:26:37,0221,Canon,Canon PowerShot SX210 IS
+1009,../image_loc/img,powsershot_210_IMG_0767.JPG,0,0,0,0,0,2010:05:29 04:10:52,0221,Canon,Canon PowerShot SX210 IS
+1010,../image_loc/img,sample.jpg,0,34.888922,135.808131,4032,3024,2023:05:04 10:25:20,0232,Google,Pixel 5a
+1000,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2770.JPG,0,0,0,0,0,2018:11:01 11:06:31,0221,Apple,iPod touch
+1001,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2771.JPG,0,0,0,0,0,2018:11:01 11:09:58,0221,Apple,iPod touch
+1002,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2772.JPG,0,0,0,0,0,2018:11:01 11:15:20,0221,Apple,iPod touch
+1003,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2773.JPG,0,0,0,0,0,2018:11:01 12:12:21,0221,Apple,iPod touch
+1004,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2774.JPG,0,0,0,0,0,2018:11:01 12:13:16,0221,Apple,iPod touch
+1005,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2775.JPG,0,0,0,0,0,2018:11:01 12:15:23,0221,Apple,iPod touch
+1006,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2776.JPG,0,0,0,0,0,2018:11:01 12:44:14,0221,Apple,iPod touch
+1007,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2777.JPG,0,0,0,0,0,2018:11:01 13:00:15,0221,Apple,iPod touch
+1008,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2778.JPG,0,0,0,0,0,2018:11:01 13:00:16,0221,Apple,iPod touch
+1009,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2779.JPG,0,0,0,0,0,2018:11:01 13:00:26,0221,Apple,iPod touch
+1010,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2780.JPG,0,45.258267,-66.088797,0,0,2018:11:01 13:57:32,0221,Apple,iPod touch
+1011,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2781.JPG,0,45.271422,-66.061814,0,0,2018:11:01 14:40:50,0221,Apple,iPod touch
+1012,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2782.JPG,0,45.271458,-66.061797,0,0,2018:11:01 14:41:05,0221,Apple,iPod touch
+1013,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2783.JPG,0,45.271431,-66.061797,0,0,2018:11:01 14:41:19,0221,Apple,iPod touch
+1014,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2784.JPG,0,45.272931,-66.064439,0,0,2018:11:01 15:15:43,0221,Apple,iPod touch
+1015,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2785.JPG,0,45.272931,-66.064431,0,0,2018:11:01 15:22:06,0221,Apple,iPod touch
+1016,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-01,IMG_2786.JPG,0,45.272881,-66.064347,0,0,2018:11:01 15:22:22,0221,Apple,iPod touch
+1017,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2787.JPG,0,42.344022,-71.033111,0,0,2018:11:03 08:43:43,0221,Apple,iPod touch
+1018,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2788.JPG,0,42.360053,-71.056008,0,0,2018:11:03 11:10:32,0221,Apple,iPod touch
+1019,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2789.JPG,0,42.359864,-71.055869,0,0,2018:11:03 11:10:49,0221,Apple,iPod touch
+1020,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2790.JPG,0,42.361028,-71.057128,0,0,2018:11:03 11:16:37,0221,Apple,iPod touch
+1021,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2791.JPG,0,42.360958,-71.057114,0,0,2018:11:03 11:16:43,0221,Apple,iPod touch
+1022,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2792.JPG,0,42.361492,-71.057114,0,0,2018:11:03 11:19:24,0221,Apple,iPod touch
+1023,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2793.JPG,0,42.361522,-71.057158,0,0,2018:11:03 11:19:45,0221,Apple,iPod touch
+1024,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2794.JPG,0,42.361511,-71.057136,0,0,2018:11:03 11:20:16,0221,Apple,iPod touch
+1025,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2795.JPG,0,42.361683,-71.056939,0,0,2018:11:03 11:21:09,0221,Apple,iPod touch
+1026,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2796.JPG,0,42.362369,-71.056572,0,0,2018:11:03 11:23:53,0221,Apple,iPod touch
+1027,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2797.JPG,0,42.362142,-71.056756,0,0,2018:11:03 11:24:02,0221,Apple,iPod touch
+1028,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2798.JPG,0,42.362553,-71.056511,0,0,2018:11:03 11:24:16,0221,Apple,iPod touch
+1029,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2799.JPG,0,42.362775,-71.056633,0,0,2018:11:03 11:24:29,0221,Apple,iPod touch
+1030,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2800.JPG,0,42.362983,-71.057464,0,0,2018:11:03 11:24:59,0221,Apple,iPod touch
+1031,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2801.JPG,0,42.362614,-71.056222,0,0,2018:11:03 11:25:32,0221,Apple,iPod touch
+1032,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2802.JPG,0,42.362617,-71.056008,0,0,2018:11:03 11:25:39,0221,Apple,iPod touch
+1033,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2803.JPG,0,42.363125,-71.055244,0,0,2018:11:03 11:30:40,0221,Apple,iPod touch
+1034,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2804.JPG,0,42.363125,-71.055244,0,0,2018:11:03 11:30:40,0221,Apple,iPod touch
+1035,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2805.JPG,0,42.3632,-71.055192,0,0,2018:11:03 11:30:49,0221,Apple,iPod touch
+1036,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2806.JPG,0,42.363511,-71.053619,0,0,2018:11:03 11:33:49,0221,Apple,iPod touch
+1037,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2807.JPG,0,42.363492,-71.053597,0,0,2018:11:03 11:34:35,0221,Apple,iPod touch
+1038,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2808.JPG,0,42.363492,-71.053597,0,0,2018:11:03 11:34:35,0221,Apple,iPod touch
+1039,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2809.JPG,0,42.363492,-71.053597,0,0,2018:11:03 11:34:35,0221,Apple,iPod touch
+1040,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2810.JPG,0,42.363492,-71.053597,0,0,2018:11:03 11:34:37,0221,Apple,iPod touch
+1041,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2812.JPG,0,42.365697,-71.053017,0,0,2018:11:03 11:41:59,0221,Apple,iPod touch
+1042,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2813.JPG,0,42.365436,-71.053061,0,0,2018:11:03 11:42:40,0221,Apple,iPod touch
+1043,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2814.JPG,0,42.366358,-71.053786,0,0,2018:11:03 11:46:14,0221,Apple,iPod touch
+1044,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2815.JPG,0,42.366219,-71.053956,0,0,2018:11:03 11:46:18,0221,Apple,iPod touch
+1045,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2816.JPG,0,42.366189,-71.054008,0,0,2018:11:03 11:46:27,0221,Apple,iPod touch
+1046,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2817.JPG,0,42.366164,-71.054336,0,0,2018:11:03 11:47:07,0221,Apple,iPod touch
+1047,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2818.JPG,0,42.366239,-71.05445,0,0,2018:11:03 11:48:16,0221,Apple,iPod touch
+1048,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2819.JPG,0,42.366192,-71.054383,0,0,2018:11:03 11:48:26,0221,Apple,iPod touch
+1049,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2820.JPG,0,42.366531,-71.055069,0,0,2018:11:03 11:49:57,0221,Apple,iPod touch
+1050,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2821.JPG,0,42.366578,-71.0552,0,0,2018:11:03 11:50:37,0221,Apple,iPod touch
+1051,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2822.JPG,0,42.366578,-71.0552,0,0,2018:11:03 11:50:39,0221,Apple,iPod touch
+1052,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2823.JPG,0,42.366578,-71.0552,0,0,2018:11:03 11:50:42,0221,Apple,iPod touch
+1053,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2824.JPG,0,42.366714,-71.055489,0,0,2018:11:03 11:51:20,0221,Apple,iPod touch
+1054,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2825.JPG,0,42.366989,-71.055917,0,0,2018:11:03 11:52:25,0221,Apple,iPod touch
+1055,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2826.JPG,0,42.367108,-71.056022,0,0,2018:11:03 11:55:04,0221,Apple,iPod touch
+1056,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2827.JPG,0,42.367119,-71.0561,0,0,2018:11:03 11:55:18,0221,Apple,iPod touch
+1057,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2828.JPG,0,42.367039,-71.055983,0,0,2018:11:03 11:55:34,0221,Apple,iPod touch
+1058,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2829.JPG,0,42.367067,-71.056022,0,0,2018:11:03 11:55:40,0221,Apple,iPod touch
+1059,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2830.JPG,0,42.367028,-71.055931,0,0,2018:11:03 11:56:10,0221,Apple,iPod touch
+1060,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2831.JPG,0,42.367192,-71.056053,0,0,2018:11:03 11:56:27,0221,Apple,iPod touch
+1061,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2832.JPG,0,42.367039,-71.056039,0,0,2018:11:03 11:56:38,0221,Apple,iPod touch
+1062,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2833.JPG,0,42.367058,-71.055969,0,0,2018:11:03 11:56:46,0221,Apple,iPod touch
+1063,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2834.JPG,0,42.367367,-71.056122,0,0,2018:11:03 12:00:27,0221,Apple,iPod touch
+1064,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2835.JPG,0,42.367089,-71.055931,0,0,2018:11:03 12:00:41,0221,Apple,iPod touch
+1065,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2836.JPG,0,42.367103,-71.055922,0,0,2018:11:03 12:00:52,0221,Apple,iPod touch
+1066,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2837.JPG,0,42.367236,-71.055947,0,0,2018:11:03 12:01:13,0221,Apple,iPod touch
+1067,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2838.JPG,0,42.367492,-71.05545,0,0,2018:11:03 12:03:40,0221,Apple,iPod touch
+1068,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2839.JPG,0,42.367308,-71.055519,0,0,2018:11:03 12:04:10,0221,Apple,iPod touch
+1069,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2840.JPG,0,42.367308,-71.055519,0,0,2018:11:03 12:04:13,0221,Apple,iPod touch
+1070,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2841.JPG,0,42.367508,-71.055756,0,0,2018:11:03 12:04:30,0221,Apple,iPod touch
+1071,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2842.JPG,0,42.367447,-71.055572,0,0,2018:11:03 12:04:56,0221,Apple,iPod touch
+1072,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2843.JPG,0,42.367447,-71.055572,0,0,2018:11:03 12:05:02,0221,Apple,iPod touch
+1073,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2844.JPG,0,42.367481,-71.055625,0,0,2018:11:03 12:05:19,0221,Apple,iPod touch
+1074,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2845.JPG,0,42.367603,-71.055344,0,0,2018:11:03 12:05:51,0221,Apple,iPod touch
+1075,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2846.JPG,0,0,0,0,0,2018:11:03 12:08:11,0221,Apple,iPod touch
+1076,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2847.JPG,0,42.366847,-71.055778,0,0,2018:11:03 12:08:22,0221,Apple,iPod touch
+1077,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2848.JPG,0,42.367133,-71.056472,0,0,2018:11:03 12:09:42,0221,Apple,iPod touch
+1078,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2849.JPG,0,42.366828,-71.058433,0,0,2018:11:03 12:13:14,0221,Apple,iPod touch
+1079,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2850.JPG,0,42.3667,-71.058869,0,0,2018:11:03 12:13:16,0221,Apple,iPod touch
+1080,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2851.JPG,0,42.368033,-71.058936,0,0,2018:11:03 12:16:16,0221,Apple,iPod touch
+1081,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2852.JPG,0,42.367406,-71.058556,0,0,2018:11:03 12:16:37,0221,Apple,iPod touch
+1082,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2853.JPG,0,42.370578,-71.061342,0,0,2018:11:03 12:21:04,0221,Apple,iPod touch
+1083,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2854.JPG,0,42.370689,-71.06125,0,0,2018:11:03 12:21:10,0221,Apple,iPod touch
+1084,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2855.JPG,0,42.371583,-71.061644,0,0,2018:11:03 12:23:52,0221,Apple,iPod touch
+1085,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2856.JPG,0,42.371583,-71.061644,0,0,2018:11:03 12:23:56,0221,Apple,iPod touch
+1086,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2857.JPG,0,42.371731,-71.061508,0,0,2018:11:03 12:24:02,0221,Apple,iPod touch
+1087,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2858.JPG,0,42.371556,-71.061622,0,0,2018:11:03 12:24:27,0221,Apple,iPod touch
+1088,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2859.JPG,0,42.371825,-71.0615,0,0,2018:11:03 12:24:36,0221,Apple,iPod touch
+1089,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2860.JPG,0,42.371728,-71.062347,0,0,2018:11:03 12:25:14,0221,Apple,iPod touch
+1090,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2861.JPG,0,42.37235,-71.061583,0,0,2018:11:03 12:25:33,0221,Apple,iPod touch
+1091,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2862.JPG,0,42.372156,-71.061531,0,0,2018:11:03 12:25:45,0221,Apple,iPod touch
+1092,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2863.JPG,0,42.372319,-71.061569,0,0,2018:11:03 12:26:29,0221,Apple,iPod touch
+1093,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2864.JPG,0,42.372161,-71.061539,0,0,2018:11:03 12:26:37,0221,Apple,iPod touch
+1094,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2865.JPG,0,42.372375,-71.061897,0,0,2018:11:03 12:28:16,0221,Apple,iPod touch
+1095,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2866.JPG,0,42.372242,-71.061736,0,0,2018:11:03 12:28:56,0221,Apple,iPod touch
+1096,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2867.JPG,0,42.372544,-71.062003,0,0,2018:11:03 12:30:51,0221,Apple,iPod touch
+1097,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2868.JPG,0,42.372569,-71.062011,0,0,2018:11:03 12:31:00,0221,Apple,iPod touch
+1098,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2869.JPG,0,42.372608,-71.062011,0,0,2018:11:03 12:31:13,0221,Apple,iPod touch
+1099,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2870.JPG,0,42.372606,-71.062011,0,0,2018:11:03 12:31:17,0221,Apple,iPod touch
+1100,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2871.JPG,0,42.373139,-71.062164,0,0,2018:11:03 12:33:10,0221,Apple,iPod touch
+1101,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2872.JPG,0,42.373031,-71.062125,0,0,2018:11:03 12:33:17,0221,Apple,iPod touch
+1102,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2873.JPG,0,42.373689,-71.061761,0,0,2018:11:03 12:35:01,0221,Apple,iPod touch
+1103,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2874.JPG,0,42.373611,-71.061919,0,0,2018:11:03 12:35:10,0221,Apple,iPod touch
+1104,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2875.JPG,0,42.373611,-71.061919,0,0,2018:11:03 12:35:12,0221,Apple,iPod touch
+1105,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2876.JPG,0,42.374436,-71.060228,0,0,2018:11:03 12:39:26,0221,Apple,iPod touch
+1106,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2877.JPG,0,42.374436,-71.060228,0,0,2018:11:03 12:39:31,0221,Apple,iPod touch
+1107,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2878.JPG,0,42.375419,-71.060433,0,0,2018:11:03 12:40:51,0221,Apple,iPod touch
+1108,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2879.JPG,0,42.375419,-71.060433,0,0,2018:11:03 12:40:56,0221,Apple,iPod touch
+1109,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2880.JPG,0,42.375478,-71.060525,0,0,2018:11:03 12:41:11,0221,Apple,iPod touch
+1110,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2881.JPG,0,42.375725,-71.060936,0,0,2018:11:03 12:42:20,0221,Apple,iPod touch
+1111,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2882.JPG,0,42.375775,-71.060936,0,0,2018:11:03 12:42:33,0221,Apple,iPod touch
+1112,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2883.JPG,0,42.375764,-71.061072,0,0,2018:11:03 12:42:38,0221,Apple,iPod touch
+1113,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2884.JPG,0,42.375808,-71.061097,0,0,2018:11:03 12:43:28,0221,Apple,iPod touch
+1114,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2885.JPG,0,42.375733,-71.061067,0,0,2018:11:03 12:43:38,0221,Apple,iPod touch
+1115,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2886.JPG,0,42.376011,-71.060683,0,0,2018:11:03 12:45:20,0221,Apple,iPod touch
+1116,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2887.JPG,0,42.375831,-71.060761,0,0,2018:11:03 12:45:29,0221,Apple,iPod touch
+1117,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2888.JPG,0,42.375881,-71.060975,0,0,2018:11:03 12:45:46,0221,Apple,iPod touch
+1118,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2889.JPG,0,42.376575,-71.060233,0,0,2018:11:03 12:47:10,0221,Apple,iPod touch
+1119,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2890.JPG,0,42.371944,-71.057678,0,0,2018:11:03 13:34:22,0221,Apple,iPod touch
+1120,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2891.JPG,0,42.372006,-71.057258,0,0,2018:11:03 13:34:36,0221,Apple,iPod touch
+1121,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2892.JPG,0,42.37275,-71.056489,0,0,2018:11:03 13:35:00,0221,Apple,iPod touch
+1122,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2893.JPG,0,42.372167,-71.057617,0,0,2018:11:03 13:35:24,0221,Apple,iPod touch
+1123,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2894.JPG,0,42.372861,-71.057464,0,0,2018:11:03 13:36:12,0221,Apple,iPod touch
+1124,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2895.JPG,0,42.372556,-71.057603,0,0,2018:11:03 13:36:17,0221,Apple,iPod touch
+1125,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2896.JPG,0,42.373006,-71.056167,0,0,2018:11:03 13:37:17,0221,Apple,iPod touch
+1126,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2897.JPG,0,42.372775,-71.057075,0,0,2018:11:03 13:37:24,0221,Apple,iPod touch
+1127,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2898.JPG,0,42.373025,-71.057067,0,0,2018:11:03 13:37:35,0221,Apple,iPod touch
+1128,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2899.JPG,0,42.373092,-71.056908,0,0,2018:11:03 13:37:40,0221,Apple,iPod touch
+1129,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2900.JPG,0,42.371139,-71.061569,0,0,2018:11:03 13:56:56,0221,Apple,iPod touch
+1130,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2901.JPG,0,42.370819,-71.061356,0,0,2018:11:03 14:47:37,0221,Apple,iPod touch
+1131,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2902.JPG,0,42.370819,-71.061356,0,0,2018:11:03 14:47:38,0221,Apple,iPod touch
+1132,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2903.JPG,0,42.370122,-71.060242,0,0,2018:11:03 14:49:17,0221,Apple,iPod touch
+1133,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2904.JPG,0,42.370122,-71.060242,0,0,2018:11:03 14:49:21,0221,Apple,iPod touch
+1134,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2905.JPG,0,42.370156,-71.060067,0,0,2018:11:03 14:52:13,0221,Apple,iPod touch
+1135,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2906.JPG,0,42.370239,-71.059975,0,0,2018:11:03 14:52:19,0221,Apple,iPod touch
+1136,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2907.JPG,0,42.366797,-71.055703,0,0,2018:11:03 15:00:43,0221,Apple,iPod touch
+1137,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2908.JPG,0,42.366797,-71.055703,0,0,2018:11:03 15:00:46,0221,Apple,iPod touch
+1138,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2909.JPG,0,42.366797,-71.055703,0,0,2018:11:03 15:00:49,0221,Apple,iPod touch
+1139,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2910.JPG,0,42.366875,-71.055803,0,0,2018:11:03 15:00:56,0221,Apple,iPod touch
+1140,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2911.JPG,0,42.366489,-71.054961,0,0,2018:11:03 15:03:01,0221,Apple,iPod touch
+1141,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2912.JPG,0,42.361406,-71.055458,0,0,2018:11:03 15:19:20,0221,Apple,iPod touch
+1142,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2913.JPG,0,42.361611,-71.055831,0,0,2018:11:03 15:19:27,0221,Apple,iPod touch
+1143,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2914.JPG,0,42.359767,-71.056756,0,0,2018:11:03 15:29:24,0221,Apple,iPod touch
+1144,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2915.JPG,0,42.359547,-71.056892,0,0,2018:11:03 15:29:29,0221,Apple,iPod touch
+1145,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2916.JPG,0,42.357625,-71.059311,0,0,2018:11:03 15:44:09,0221,Apple,iPod touch
+1146,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2917.JPG,0,42.357625,-71.059311,0,0,2018:11:03 15:44:09,0221,Apple,iPod touch
+1147,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2918.JPG,0,42.357728,-71.059656,0,0,2018:11:03 15:44:19,0221,Apple,iPod touch
+1148,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2919.JPG,0,42.358325,-71.060167,0,0,2018:11:03 15:48:00,0221,Apple,iPod touch
+1149,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2920.JPG,0,42.358208,-71.060106,0,0,2018:11:03 15:48:20,0221,Apple,iPod touch
+1150,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2921.JPG,0,42.358197,-71.060028,0,0,2018:11:03 15:48:26,0221,Apple,iPod touch
+1151,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2922.JPG,0,42.357411,-71.061067,0,0,2018:11:03 15:56:08,0221,Apple,iPod touch
+1152,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2923.JPG,0,0,0,0,0,2018:11:03 15:58:18,0221,Apple,iPod touch
+1153,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-03,IMG_2924.JPG,0,42.357358,-71.061547,0,0,2018:11:03 15:59:38,0221,Apple,iPod touch
+1154,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2925.JPG,0,42.357258,-71.061578,0,0,2018:11:03 16:00:47,0221,Apple,iPod touch
+1155,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2926.JPG,0,42.35725,-71.061592,0,0,2018:11:03 16:00:55,0221,Apple,iPod touch
+1156,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2927.JPG,0,42.35725,-71.061592,0,0,2018:11:03 16:00:59,0221,Apple,iPod touch
+1157,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2928.JPG,0,42.3573,-71.061539,0,0,2018:11:03 16:02:15,0221,Apple,iPod touch
+1158,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2929.JPG,0,42.357228,-71.061592,0,0,2018:11:03 16:03:28,0221,Apple,iPod touch
+1159,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2930.JPG,0,42.357247,-71.061356,0,0,2018:11:03 16:04:42,0221,Apple,iPod touch
+1160,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2931.JPG,0,42.356514,-71.062172,0,0,2018:11:03 16:09:43,0221,Apple,iPod touch
+1161,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2932.JPG,0,42.356231,-71.062661,0,0,2018:11:03 16:11:26,0221,Apple,iPod touch
+1162,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2933.JPG,0,42.356169,-71.062225,0,0,2018:11:03 16:11:36,0221,Apple,iPod touch
+1163,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2934.JPG,0,0,0,0,0,2018:11:04 10:01:57,0221,Apple,iPod touch
+1164,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2935.JPG,0,0,0,0,0,2018:11:04 10:03:39,0221,Apple,iPod touch
+1165,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-04,IMG_2936.JPG,0,0,0,0,0,2018:11:04 10:20:46,0221,Apple,iPod touch
+1166,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2937.JPG,0,0,0,0,0,2018:11:05 07:02:43,0221,Apple,iPod touch
+1167,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2938.JPG,0,0,0,0,0,2018:11:05 07:03:34,0221,Apple,iPod touch
+1168,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2939.JPG,0,0,0,0,0,2018:11:05 09:38:53,0221,Apple,iPod touch
+1169,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2940.JPG,0,0,0,0,0,2018:11:05 09:38:55,0221,Apple,iPod touch
+1170,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2941.JPG,0,0,0,0,0,2018:11:05 11:48:09,0221,Apple,iPod touch
+1171,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2942.JPG,0,0,0,0,0,2018:11:05 11:53:30,0221,Apple,iPod touch
+1172,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2943.JPG,0,0,0,0,0,2018:11:05 11:53:41,0221,Apple,iPod touch
+1173,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2944.JPG,0,0,0,0,0,2018:11:05 11:54:43,0221,Apple,iPod touch
+1174,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2945.JPG,0,0,0,0,0,2018:11:05 11:56:04,0221,Apple,iPod touch
+1175,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2946.JPG,0,0,0,0,0,2018:11:05 11:56:06,0221,Apple,iPod touch
+1176,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2947.JPG,0,0,0,0,0,2018:11:05 11:56:18,0221,Apple,iPod touch
+1177,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2948.JPG,0,0,0,0,0,2018:11:05 11:56:25,0221,Apple,iPod touch
+1178,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2949.JPG,0,0,0,0,0,2018:11:05 11:58:50,0221,Apple,iPod touch
+1179,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2950.JPG,0,0,0,0,0,2018:11:05 11:58:51,0221,Apple,iPod touch
+1180,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2951.JPG,0,0,0,0,0,2018:11:05 11:59:08,0221,Apple,iPod touch
+1181,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2952.JPG,0,0,0,0,0,2018:11:05 11:59:36,0221,Apple,iPod touch
+1182,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2953.JPG,0,0,0,0,0,2018:11:05 12:20:01,0221,Apple,iPod touch
+1183,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2954.JPG,0,0,0,0,0,2018:11:05 12:20:11,0221,Apple,iPod touch
+1184,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2955.JPG,0,0,0,0,0,2018:11:05 12:20:22,0221,Apple,iPod touch
+1185,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2956.JPG,0,0,0,0,0,2018:11:05 12:20:36,0221,Apple,iPod touch
+1186,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2957.JPG,0,0,0,0,0,2018:11:05 12:20:49,0221,Apple,iPod touch
+1187,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2958.JPG,0,0,0,0,0,2018:11:05 12:21:13,0221,Apple,iPod touch
+1188,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-05,IMG_2959.JPG,0,0,0,0,0,2018:11:05 12:21:14,0221,Apple,iPod touch
+1189,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-07,IMG_2960.JPG,0,0,0,0,0,2018:11:07 14:07:59,0221,Apple,iPod touch
+1190,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2962.JPG,0,0,0,0,0,2018:11:07 19:21:29,0221,Apple,iPod touch
+1191,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2963.JPG,0,0,0,0,0,2018:11:07 19:21:45,0221,Apple,iPod touch
+1192,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2964.JPG,0,0,0,0,0,2018:11:07 19:22:13,0221,Apple,iPod touch
+1193,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2965.JPG,0,0,0,0,0,2018:11:08 09:48:32,0221,Apple,iPod touch
+1194,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2966.JPG,0,0,0,0,0,2018:11:08 10:06:31,0221,Apple,iPod touch
+1195,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2967.JPG,0,0,0,0,0,2018:11:08 12:04:59,0221,Apple,iPod touch
+1196,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2968.JPG,0,0,0,0,0,2018:11:08 12:05:15,0221,Apple,iPod touch
+1197,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2969.JPG,0,0,0,0,0,2018:11:08 12:05:22,0221,Apple,iPod touch
+1198,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2970.JPG,0,0,0,0,0,2018:11:08 12:05:39,0221,Apple,iPod touch
+1199,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2971.JPG,0,0,0,0,0,2018:11:08 12:07:31,0221,Apple,iPod touch
+1200,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2972.JPG,0,0,0,0,0,2018:11:08 12:07:42,0221,Apple,iPod touch
+1201,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2973.JPG,0,0,0,0,0,2018:11:08 12:07:53,0221,Apple,iPod touch
+1202,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2974.JPG,0,0,0,0,0,2018:11:08 12:07:59,0221,Apple,iPod touch
+1203,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2975.JPG,0,0,0,0,0,2018:11:08 12:08:03,0221,Apple,iPod touch
+1204,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2976.JPG,0,0,0,0,0,2018:11:08 12:08:32,0221,Apple,iPod touch
+1205,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2977.JPG,0,0,0,0,0,2018:11:08 12:08:46,0221,Apple,iPod touch
+1206,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2978.JPG,0,0,0,0,0,2018:11:08 12:09:11,0221,Apple,iPod touch
+1207,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2979.JPG,0,0,0,0,0,2018:11:08 12:11:41,0221,Apple,iPod touch
+1208,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2980.JPG,0,0,0,0,0,2018:11:08 12:12:00,0221,Apple,iPod touch
+1209,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2981.JPG,0,0,0,0,0,2018:11:08 12:12:10,0221,Apple,iPod touch
+1210,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2982.JPG,0,0,0,0,0,2018:11:08 12:12:36,0221,Apple,iPod touch
+1211,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2983.JPG,0,0,0,0,0,2018:11:08 12:13:35,0221,Apple,iPod touch
+1212,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-08,IMG_2984.JPG,0,0,0,0,0,2018:11:08 12:13:38,0221,Apple,iPod touch
+1213,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2985.JPG,0,0,0,0,0,2018:11:08 19:06:26,0221,Apple,iPod touch
+1214,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2986.JPG,0,0,0,0,0,2018:11:08 19:06:27,0221,Apple,iPod touch
+1215,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2987.JPG,0,0,0,0,0,2018:11:08 19:06:30,0221,Apple,iPod touch
+1216,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2988.JPG,0,0,0,0,0,2018:11:08 19:06:34,0221,Apple,iPod touch
+1217,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2989.JPG,0,0,0,0,0,2018:11:08 19:07:24,0221,Apple,iPod touch
+1218,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2990.JPG,0,0,0,0,0,2018:11:08 19:07:34,0221,Apple,iPod touch
+1219,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2991.JPG,0,0,0,0,0,2018:11:08 20:19:40,0221,Apple,iPod touch
+1220,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2992.JPG,0,26.102231,-80.116089,0,0,2018:11:09 06:29:04,0221,Apple,iPod touch
+1221,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2993.JPG,0,26.102231,-80.116089,0,0,2018:11:09 06:29:08,0221,Apple,iPod touch
+1222,C:/Users/doug/Documents/projects/img\2018-11\ipod touch\2018-11-09,IMG_2994.JPG,0,26.102294,-80.116128,0,0,2018:11:09 06:29:12,0221,Apple,iPod touch
+1223,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181106_134053.jpg,0,36.848342,-76.291414,2448,3264,2018:11:06 13:40:53,0220,LGE,Nexus 5
+1224,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181106_134250.jpg,0,36.848347,-76.291428,3264,2448,2018:11:06 13:42:52,0220,LGE,Nexus 5
+1225,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181111_083519.jpg,0,28.569075,-81.324903,1280,960,2018:11:11,0,LGE,Nexus 5
+1226,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181112_134024.jpg,0,28.370631,-81.519844,3264,2448,2018:11:12 13:40:24,0220,LGE,Nexus 5
+1227,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181113_081250.jpg,0,28.384503,-81.418589,2448,3264,2018:11:13 08:12:50,0220,LGE,Nexus 5
+1228,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181114_155621.jpg,0,28.443547,-81.469789,3264,2448,2018:11:14 15:56:22,0220,LGE,Nexus 5
+1229,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181114_155636.jpg,0,28.443547,-81.469789,3264,2448,2018:11:14 15:56:37,0220,LGE,Nexus 5
+1230,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181114_155651.jpg,0,28.443539,-81.469806,3264,2448,2018:11:14 15:56:51,0220,LGE,Nexus 5
+1231,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181114_155700.jpg,0,28.443531,-81.469819,3264,2448,2018:11:14 15:57:00,0220,LGE,Nexus 5
+1232,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181114_161233.jpg,0,28.443528,-81.469822,2448,3264,2018:11:14 16:12:33,0220,LGE,Nexus 5
+1233,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181114_161428.jpg,0,28.443544,-81.469786,3264,2448,2018:11:14 16:14:29,0220,LGE,Nexus 5
+1234,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181114_162817.jpg,0,28.443531,-81.469808,3264,2448,2018:11:14 16:28:17,0220,LGE,Nexus 5
+1235,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181114_162825.jpg,0,28.443531,-81.469808,3264,2448,2018:11:14 16:28:25,0220,LGE,Nexus 5
+1236,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120136.jpg,0,28.355633,-81.403064,2448,3264,2018:11:15 12:01:36,0220,LGE,Nexus 5
+1237,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120147.jpg,0,28.355611,-81.403311,2448,3264,2018:11:15 12:01:47,0220,LGE,Nexus 5
+1238,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120148.jpg,0,28.355611,-81.403311,2448,3264,2018:11:15 12:01:49,0220,LGE,Nexus 5
+1239,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120156.jpg,0,28.355619,-81.403311,2448,3264,2018:11:15 12:01:56,0220,LGE,Nexus 5
+1240,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120202.jpg,0,28.355619,-81.403311,2448,3264,2018:11:15 12:02:02,0220,LGE,Nexus 5
+1241,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120223.jpg,0,28.355619,-81.403361,2448,3264,2018:11:15 12:02:23,0220,LGE,Nexus 5
+1242,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120226.jpg,0,28.355647,-81.403075,2448,3264,2018:11:15 12:02:27,0220,LGE,Nexus 5
+1243,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120228.jpg,0,28.355647,-81.403075,2448,3264,2018:11:15 12:02:28,0220,LGE,Nexus 5
+1244,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120319.jpg,0,28.355544,-81.403528,2448,3264,2018:11:15 12:03:20,0220,LGE,Nexus 5
+1245,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120330.jpg,0,28.355447,-81.403458,2448,3264,2018:11:15 12:03:30,0220,LGE,Nexus 5
+1246,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120408.jpg,0,28.355578,-81.40325,3264,2448,2018:11:15 12:04:08,0220,LGE,Nexus 5
+1247,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120414.jpg,0,28.355578,-81.40325,3264,2448,2018:11:15 12:04:14,0220,LGE,Nexus 5
+1248,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120415.jpg,0,28.355578,-81.403247,3264,2448,2018:11:15 12:04:15,0220,LGE,Nexus 5
+1249,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120421.jpg,0,28.355578,-81.403244,3264,2448,2018:11:15 12:04:23,0220,LGE,Nexus 5
+1250,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120429.jpg,0,28.355569,-81.403286,3264,2448,2018:11:15 12:04:30,0220,LGE,Nexus 5
+1251,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120433.jpg,0,28.355569,-81.403286,3264,2448,2018:11:15 12:04:34,0220,LGE,Nexus 5
+1252,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120533.jpg,0,28.355536,-81.403717,2448,3264,2018:11:15 12:05:34,0220,LGE,Nexus 5
+1253,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_120535.jpg,0,28.355622,-81.403464,2448,3264,2018:11:15 12:05:36,0220,LGE,Nexus 5
+1254,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_124827.jpg,0,28.354839,-81.403486,2448,3264,2018:11:15 12:48:28,0220,LGE,Nexus 5
+1255,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_124832.jpg,0,28.354842,-81.403517,2448,3264,2018:11:15 12:48:32,0220,LGE,Nexus 5
+1256,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_124833.jpg,0,28.354842,-81.403517,2448,3264,2018:11:15 12:48:34,0220,LGE,Nexus 5
+1257,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_124845.jpg,0,28.354756,-81.403517,2448,3264,2018:11:15 12:48:46,0220,LGE,Nexus 5
+1258,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_125459.jpg,0,28.354869,-81.403553,2448,3264,2018:11:15 12:55:00,0220,LGE,Nexus 5
+1259,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_125615.jpg,0,28.354892,-81.403708,3264,2448,2018:11:15 12:56:15,0220,LGE,Nexus 5
+1260,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_125619.jpg,0,28.354892,-81.403708,3264,2448,2018:11:15 12:56:19,0220,LGE,Nexus 5
+1261,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_130056.jpg,0,28.354833,-81.4037,3264,2448,2018:11:15 13:00:57,0220,LGE,Nexus 5
+1262,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_130304.jpg,0,28.354964,-81.403689,2448,3264,2018:11:15 13:03:04,0220,LGE,Nexus 5
+1263,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181115_130408.jpg,0,28.354994,-81.403697,3264,2448,2018:11:15 13:04:09,0220,LGE,Nexus 5
+1264,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181117_210511.jpg,0,28.384619,-81.418586,3264,2448,2018:11:17 21:05:12,0220,LGE,Nexus 5
+1265,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181118_125844.jpg,0,28.384606,-81.418603,3264,2448,2018:11:18 12:58:45,0220,LGE,Nexus 5
+1266,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181118_125845.jpg,0,28.384606,-81.418603,3264,2448,2018:11:18 12:58:46,0220,LGE,Nexus 5
+1267,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181120_113520.jpg,0,37.332072,-122.04695,2448,3264,2018:11:20 11:35:20,0220,LGE,Nexus 5
+1268,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181120_194936.jpg,0,33.92175,-116.804586,3264,2448,2018:11:20 19:49:37,0220,LGE,Nexus 5
+1269,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181122_145330.jpg,0,33.402189,-111.645053,3264,2448,2018:11:22 14:53:30,0220,LGE,Nexus 5
+1270,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181122_145401.jpg,0,33.402192,-111.645028,3264,2448,2018:11:22 14:54:01,0220,LGE,Nexus 5
+1271,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181122_145402.jpg,0,33.402192,-111.645028,3264,2448,2018:11:22 14:54:02,0220,LGE,Nexus 5
+1272,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181122_145403.jpg,0,33.402192,-111.645028,3264,2448,2018:11:22 14:54:04,0220,LGE,Nexus 5
+1273,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181122_145405.jpg,0,33.402192,-111.645028,3264,2448,2018:11:22 14:54:05,0220,LGE,Nexus 5
+1274,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181122_145408.jpg,0,33.402192,-111.645028,3264,2448,2018:11:22 14:54:08,0220,LGE,Nexus 5
+1275,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181122_145447.jpg,0,33.402147,-111.644983,3264,2448,2018:11:22 14:54:47,0220,LGE,Nexus 5
+1276,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181125_144915.jpg,0,33.40225,-111.644967,3264,2448,2018:11:25 14:49:16,0220,LGE,Nexus 5
+1277,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181125_151949.jpg,0,33.402369,-111.645058,3264,2448,2018:11:25 15:19:50,0220,LGE,Nexus 5
+1278,C:/Users/doug/Documents/projects/img\2018-11\nexus 5,IMG_20181125_195939.jpg,0,33.402058,-111.644972,3264,2448,2018:11:25 19:59:40,0220,LGE,Nexus 5
+1279,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181126_151549.jpg,0,0,0,4032,3024,2018:11:26 15:15:49,0220,Google,Pixel 3 XL
+1280,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181126_160217.jpg,0,33.402042,-111.644981,4032,3024,2018:11:26 16:02:17,0220,Google,Pixel 3 XL
+1281,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181127_071438.jpg,0,33.402242,-111.645069,4032,3024,2018:11:27 07:14:38,0220,Google,Pixel 3 XL
+1282,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181127_135947.jpg,0,33.431717,-111.667247,4032,3024,2018:11:27 13:59:48,0220,Google,Pixel 3 XL
+1283,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181127_135951.jpg,0,33.431717,-111.667247,4032,3024,2018:11:27 13:59:51,0220,Google,Pixel 3 XL
+1284,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181128_110304.jpg,0,33.402117,-111.645033,4032,3024,2018:11:28 11:03:04,0220,Google,Pixel 3 XL
+1285,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181128_184418.jpg,0,33.39355,-111.69825,4032,3024,2018:11:28 18:44:19,0220,Google,Pixel 3 XL
+1286,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181128_184437.jpg,0,33.393353,-111.698319,4032,3024,2018:11:28 18:44:38,0220,Google,Pixel 3 XL
+1287,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181128_184443.jpg,0,33.393475,-111.698289,4032,3024,2018:11:28 18:44:43,0220,Google,Pixel 3 XL
+1288,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181128_184447.jpg,0,33.393475,-111.698289,4032,3024,2018:11:28 18:44:48,0220,Google,Pixel 3 XL
+1289,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,IMG_20181129_173129.jpg,0,33.402203,-111.645136,4032,3024,2018:11:29 17:31:29,0220,Google,Pixel 3 XL
+1290,C:/Users/doug/Documents/projects/img\2018-11\pixel 3xl,MVIMG_20181129_173136.jpg,0,33.402203,-111.645136,4032,3024,2018:11:29 17:31:36,0220,Google,Pixel 3 XL
+1291,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010651616.jpg,0,34.889744,135.807611,4032,3024,2023:05:04 10:06:51,0232,Google,Pixel 5a
+1292,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010657333.jpg,0,34.889744,135.807611,4032,3024,2023:05:04 10:06:57,0232,Google,Pixel 5a
+1293,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010741953.jpg,0,34.889744,135.807611,4032,3024,2023:05:04 10:07:41,0232,Google,Pixel 5a
+1294,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010802178.jpg,0,34.889697,135.808081,4032,3024,2023:05:04 10:08:02,0232,Google,Pixel 5a
+1295,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010809087.jpg,0,34.889697,135.808081,4032,3024,2023:05:04 10:08:09,0232,Google,Pixel 5a
+1296,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010813253.jpg,0,34.889697,135.808081,4032,3024,2023:05:04 10:08:13,0232,Google,Pixel 5a
+1297,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010825140.jpg,0,34.889697,135.808081,4032,3024,2023:05:04 10:08:25,0232,Google,Pixel 5a
+1298,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010841565.jpg,0,34.889697,135.808081,4032,3024,2023:05:04 10:08:41,0232,Google,Pixel 5a
+1299,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010908792.PANO.jpg,0,34.889697,135.808081,4194,1630,2023:05:04 10:09:14,0,Google,Pixel 5a
+1300,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010917834.jpg,0,34.889697,135.808081,4032,3024,2023:05:04 10:09:17,0232,Google,Pixel 5a
+1301,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010923720.jpg,0,34.889697,135.808081,4032,3024,2023:05:04 10:09:23,0232,Google,Pixel 5a
+1302,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_010959666.jpg,0,34.889744,135.808028,3024,4032,2023:05:04 10:09:59,0232,Google,Pixel 5a
+1303,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011007495.jpg,0,34.889744,135.808028,3024,4032,2023:05:04 10:10:07,0232,Google,Pixel 5a
+1304,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011213832.jpg,0,34.889425,135.808258,4032,3024,2023:05:04 10:12:13,0232,Google,Pixel 5a
+1305,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011218684.jpg,0,34.889425,135.808258,4032,3024,2023:05:04 10:12:18,0232,Google,Pixel 5a
+1306,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011225903.jpg,0,34.889425,135.808258,3024,4032,2023:05:04 10:12:25,0232,Google,Pixel 5a
+1307,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011229658.jpg,0,34.889425,135.808258,4032,3024,2023:05:04 10:12:29,0232,Google,Pixel 5a
+1308,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011233911.jpg,0,34.889425,135.808258,4032,3024,2023:05:04 10:12:33,0232,Google,Pixel 5a
+1309,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011238039.jpg,0,34.889425,135.808258,3024,4032,2023:05:04 10:12:38,0232,Google,Pixel 5a
+1310,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011245676.jpg,0,34.889425,135.808258,4032,3024,2023:05:04 10:12:45,0232,Google,Pixel 5a
+1311,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011249088.jpg,0,34.889425,135.808258,4032,3024,2023:05:04 10:12:49,0232,Google,Pixel 5a
+1312,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011308621.PANO.jpg,0,34.889425,135.808258,3368,1681,2023:05:04 10:13:14,0,Google,Pixel 5a
+1313,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011328330.jpg,0,34.889506,135.808308,3024,4032,2023:05:04 10:13:28,0232,Google,Pixel 5a
+1314,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011340606.jpg,0,34.889506,135.808308,4032,3024,2023:05:04 10:13:40,0232,Google,Pixel 5a
+1315,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011540096.jpg,0,34.88935,135.808194,4032,3024,2023:05:04 10:15:40,0232,Google,Pixel 5a
+1316,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011547215.jpg,0,34.88935,135.808194,3024,4032,2023:05:04 10:15:47,0232,Google,Pixel 5a
+1317,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011549509.jpg,0,34.88935,135.808194,3024,4032,2023:05:04 10:15:49,0232,Google,Pixel 5a
+1318,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011553678.jpg,0,34.88935,135.808194,4032,3024,2023:05:04 10:15:53,0232,Google,Pixel 5a
+1319,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011601610.jpg,0,34.88935,135.808194,4032,3024,2023:05:04 10:16:01,0232,Google,Pixel 5a
+1320,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011607586.jpg,0,34.88935,135.808194,4032,3024,2023:05:04 10:16:07,0232,Google,Pixel 5a
+1321,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011628267.PANO.jpg,0,34.88935,135.808194,4682,1618,2023:05:04 10:16:36,0,Google,Pixel 5a
+1322,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011644345.jpg,0,34.88935,135.808194,4032,3024,2023:05:04 10:16:44,0232,Google,Pixel 5a
+1323,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011650770.jpg,0,34.88935,135.808194,4032,3024,2023:05:04 10:16:50,0232,Google,Pixel 5a
+1324,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011656766.jpg,0,34.88935,135.808194,3024,4032,2023:05:04 10:16:56,0232,Google,Pixel 5a
+1325,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011704197.jpg,0,34.88935,135.808194,3024,4032,2023:05:04 10:17:04,0232,Google,Pixel 5a
+1326,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011708119.jpg,0,34.88935,135.808194,4032,3024,2023:05:04 10:17:08,0232,Google,Pixel 5a
+1327,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011716188.jpg,0,34.88935,135.808194,4032,3024,2023:05:04 10:17:16,0232,Google,Pixel 5a
+1328,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011736579.jpg,0,34.88935,135.808192,4032,3024,2023:05:04 10:17:36,0232,Google,Pixel 5a
+1329,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011853140.jpg,0,34.889114,135.808108,4032,3024,2023:05:04 10:18:53,0232,Google,Pixel 5a
+1330,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011912156.jpg,0,34.889114,135.808108,4032,3024,2023:05:04 10:19:12,0232,Google,Pixel 5a
+1331,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_011922808.jpg,0,34.889114,135.808108,4032,3024,2023:05:04 10:19:22,0232,Google,Pixel 5a
+1332,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012017054.jpg,0,34.889114,135.808108,3024,4032,2023:05:04 10:20:17,0232,Google,Pixel 5a
+1333,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012023398.jpg,0,34.889114,135.808108,3024,4032,2023:05:04 10:20:23,0232,Google,Pixel 5a
+1334,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012037231.jpg,0,34.889114,135.808108,3024,4032,2023:05:04 10:20:37,0232,Google,Pixel 5a
+1335,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012048267.jpg,0,34.889114,135.808108,3024,4032,2023:05:04 10:20:48,0232,Google,Pixel 5a
+1336,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012100527.jpg,0,34.889114,135.808108,3024,4032,2023:05:04 10:21:00,0232,Google,Pixel 5a
+1337,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012109622.jpg,0,34.889114,135.808108,3024,4032,2023:05:04 10:21:09,0232,Google,Pixel 5a
+1338,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012115042.jpg,0,34.889114,135.808108,4032,3024,2023:05:04 10:21:15,0232,Google,Pixel 5a
+1339,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012129875.jpg,0,34.888947,135.808378,4032,3024,2023:05:04 10:21:29,0232,Google,Pixel 5a
+1340,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012136369.jpg,0,34.888947,135.808378,4032,3024,2023:05:04 10:21:36,0232,Google,Pixel 5a
+1341,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012143568.jpg,0,34.888947,135.808378,4032,3024,2023:05:04 10:21:43,0232,Google,Pixel 5a
+1342,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012149700.jpg,0,34.888947,135.808378,4032,3024,2023:05:04 10:21:49,0232,Google,Pixel 5a
+1343,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012208062.jpg,0,34.888947,135.808378,3024,4032,2023:05:04 10:22:08,0232,Google,Pixel 5a
+1344,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012219548.jpg,0,34.888947,135.808378,3024,4032,2023:05:04 10:22:19,0232,Google,Pixel 5a
+1345,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012224930.jpg,0,34.888947,135.808378,4032,3024,2023:05:04 10:22:24,0232,Google,Pixel 5a
+1346,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012230873.jpg,0,34.888947,135.808378,4032,3024,2023:05:04 10:22:30,0232,Google,Pixel 5a
+1347,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012235651.jpg,0,34.888947,135.808378,4032,3024,2023:05:04 10:22:35,0232,Google,Pixel 5a
+1348,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012243426.jpg,0,34.888947,135.808378,4032,3024,2023:05:04 10:22:43,0232,Google,Pixel 5a
+1349,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012352437.jpg,0,34.888908,135.808336,4032,3024,2023:05:04 10:23:52,0232,Google,Pixel 5a
+1350,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012359041.jpg,0,34.888908,135.808336,4032,3024,2023:05:04 10:23:59,0232,Google,Pixel 5a
+1351,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012405335.jpg,0,34.888908,135.808336,4032,3024,2023:05:04 10:24:05,0232,Google,Pixel 5a
+1352,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012408049.jpg,0,34.888908,135.808336,3024,4032,2023:05:04 10:24:08,0232,Google,Pixel 5a
+1353,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012413228.jpg,0,34.888908,135.808336,3024,4032,2023:05:04 10:24:13,0232,Google,Pixel 5a
+1354,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012420513.jpg,0,34.888908,135.808336,4032,3024,2023:05:04 10:24:20,0232,Google,Pixel 5a
+1355,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012427652.jpg,0,34.888908,135.808336,3024,4032,2023:05:04 10:24:27,0232,Google,Pixel 5a
+1356,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012448766.jpg,0,34.888922,135.808131,4032,3024,2023:05:04 10:24:48,0232,Google,Pixel 5a
+1357,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012458231.jpg,0,34.888922,135.808131,3024,4032,2023:05:04 10:24:58,0232,Google,Pixel 5a
+1358,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012520824.jpg,0,34.888922,135.808131,4032,3024,2023:05:04 10:25:20,0232,Google,Pixel 5a
+1359,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012529422.jpg,0,34.888922,135.808131,4032,3024,2023:05:04 10:25:29,0232,Google,Pixel 5a
+1360,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012708776.jpg,0,34.888781,135.808028,4032,3024,2023:05:04 10:27:08,0232,Google,Pixel 5a
+1361,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012717089.jpg,0,34.888781,135.808028,4032,3024,2023:05:04 10:27:17,0232,Google,Pixel 5a
+1362,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012809366.jpg,0,34.888894,135.807894,3024,4032,2023:05:04 10:28:09,0232,Google,Pixel 5a
+1363,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_012812741.jpg,0,34.888894,135.807894,4032,3024,2023:05:04 10:28:12,0232,Google,Pixel 5a
+1364,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042324509.jpg,0,34.689128,135.526803,3024,4032,2023:05:04 13:23:24,0232,Google,Pixel 5a
+1365,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042328634.jpg,0,34.689122,135.526806,3024,4032,2023:05:04 13:23:28,0232,Google,Pixel 5a
+1366,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042338281.jpg,0,34.689122,135.526811,4032,3024,2023:05:04 13:23:38,0232,Google,Pixel 5a
+1367,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042347946.jpg,0,34.689122,135.526811,4032,3024,2023:05:04 13:23:47,0232,Google,Pixel 5a
+1368,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042432419.jpg,0,34.688928,135.526658,3024,4032,2023:05:04 13:24:32,0232,Google,Pixel 5a
+1369,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042437581.jpg,0,34.688936,135.526667,4032,3024,2023:05:04 13:24:37,0232,Google,Pixel 5a
+1370,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042503580.jpg,0,34.688936,135.526669,4032,3024,2023:05:04 13:25:03,0232,Google,Pixel 5a
+1371,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042513895.jpg,0,34.688936,135.526669,3024,4032,2023:05:04 13:25:13,0232,Google,Pixel 5a
+1372,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042519449.jpg,0,34.688936,135.526669,3024,4032,2023:05:04 13:25:19,0232,Google,Pixel 5a
+1373,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042520579.jpg,0,34.688936,135.526669,3024,4032,2023:05:04 13:25:20,0232,Google,Pixel 5a
+1374,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_042952091.jpg,0,34.688114,135.525464,3024,4032,2023:05:04 13:29:52,0232,Google,Pixel 5a
+1375,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043017377.jpg,0,34.688114,135.525464,4032,3024,2023:05:04 13:30:17,0232,Google,Pixel 5a
+1376,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043043951.jpg,0,34.688114,135.525464,3024,4032,2023:05:04 13:30:43,0232,Google,Pixel 5a
+1377,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043050059.jpg,0,34.688114,135.525464,4032,3024,2023:05:04 13:30:50,0232,Google,Pixel 5a
+1378,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043455051.jpg,0,34.687508,135.525431,3024,4032,2023:05:04 13:34:55,0232,Google,Pixel 5a
+1379,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043457790.jpg,0,34.687508,135.525431,4032,3024,2023:05:04 13:34:57,0232,Google,Pixel 5a
+1380,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043501729.jpg,0,34.687508,135.525431,4032,3024,2023:05:04 13:35:01,0232,Google,Pixel 5a
+1381,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043505817.jpg,0,34.687508,135.525431,3024,4032,2023:05:04 13:35:05,0232,Google,Pixel 5a
+1382,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043508854.jpg,0,34.687508,135.525431,3024,4032,2023:05:04 13:35:08,0232,Google,Pixel 5a
+1383,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043513307.jpg,0,34.687508,135.525431,3024,4032,2023:05:04 13:35:13,0232,Google,Pixel 5a
+1384,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043527593.jpg,0,34.687508,135.525431,4032,3024,2023:05:04 13:35:27,0232,Google,Pixel 5a
+1385,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043532071.jpg,0,34.687508,135.525431,4032,3024,2023:05:04 13:35:32,0232,Google,Pixel 5a
+1386,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043538783.jpg,0,34.687508,135.525431,4032,3024,2023:05:04 13:35:38,0232,Google,Pixel 5a
+1387,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043727498.jpg,0,34.686828,135.525564,3024,4032,2023:05:04 13:37:27,0232,Google,Pixel 5a
+1388,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043732215.jpg,0,34.686828,135.525564,4032,3024,2023:05:04 13:37:32,0232,Google,Pixel 5a
+1389,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043741562.jpg,0,34.686828,135.525564,3024,4032,2023:05:04 13:37:41,0232,Google,Pixel 5a
+1390,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043813886.jpg,0,34.686828,135.525564,3024,4032,2023:05:04 13:38:13,0232,Google,Pixel 5a
+1391,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043817152.jpg,0,34.686828,135.525564,4032,3024,2023:05:04 13:38:17,0232,Google,Pixel 5a
+1392,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_043821589.jpg,0,34.686828,135.525564,4032,3024,2023:05:04 13:38:21,0232,Google,Pixel 5a
+1393,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_044053721.jpg,0,34.686997,135.525986,3024,4032,2023:05:04 13:40:53,0232,Google,Pixel 5a
+1394,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_044100232.jpg,0,34.686997,135.525986,3024,4032,2023:05:04 13:41:00,0232,Google,Pixel 5a
+1395,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_044106635.jpg,0,34.686997,135.525986,4032,3024,2023:05:04 13:41:06,0232,Google,Pixel 5a
+1396,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_044324533.jpg,0,34.686269,135.526517,3024,4032,2023:05:04 13:43:24,0232,Google,Pixel 5a
+1397,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_044327877.jpg,0,34.686269,135.526517,4032,3024,2023:05:04 13:43:27,0232,Google,Pixel 5a
+1398,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_044342838.jpg,0,34.686269,135.526517,3024,4032,2023:05:04 13:43:42,0232,Google,Pixel 5a
+1399,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_044356153.jpg,0,34.686269,135.526517,3024,4032,2023:05:04 13:43:56,0232,Google,Pixel 5a
+1400,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_044521903.jpg,0,34.686281,135.525992,3024,4032,2023:05:04 13:45:21,0232,Google,Pixel 5a
+1401,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_051146219.jpg,0,34.685008,135.5257,3024,4032,2023:05:04 14:11:46,0232,Google,Pixel 5a
+1402,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_062127212.jpg,0,34.668989,135.503539,3024,4032,2023:05:04 15:21:27,0232,Google,Pixel 5a
+1403,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_071241500.jpg,0,34.668672,135.499317,3024,4032,2023:05:04 16:12:41,0232,Google,Pixel 5a
+1404,C:/Users/doug/Documents/projects/img\2023-05-04,PXL_20230504_082544805.jpg,0,34.665953,135.465406,4032,3024,2023:05:04 17:25:44,0232,Google,Pixel 5a
+1405,C:/Users/doug/Documents/projects/img\2023-05-04,test.jpg,0,0,0,0,0,1969:12:31 16:00:00,0,na,na
+1406,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230516_221313097.jpg,0,25.137708,121.74615,4032,3024,2023:05:17 06:13:13,0232,Google,Pixel 5a
+1407,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230516_223121040.jpg,0,25.135622,121.742142,3024,4032,2023:05:17 06:31:21,0232,Google,Pixel 5a
+1408,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230516_223223584.jpg,0,25.135622,121.742142,4032,3024,2023:05:17 06:32:23,0232,Google,Pixel 5a
+1409,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230516_223231907.jpg,0,25.135622,121.742142,4032,3024,2023:05:17 06:32:31,0232,Google,Pixel 5a
+1410,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230516_223559819.jpg,0,25.135733,121.742175,4032,3024,2023:05:17 06:35:59,0232,Google,Pixel 5a
+1411,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230516_223759518.jpg,0,25.136003,121.742783,4032,3024,2023:05:17 06:37:59,0232,Google,Pixel 5a
+1412,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230516_223805507.jpg,0,25.136003,121.742783,3024,4032,2023:05:17 06:38:05,0232,Google,Pixel 5a
+1413,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230516_224122972.jpg,0,25.137414,121.743558,3024,4032,2023:05:17 06:41:22,0232,Google,Pixel 5a
+1414,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230516_224244770.jpg,0,25.137344,121.743647,4032,3024,2023:05:17 06:42:44,0232,Google,Pixel 5a
+1415,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_000332683.jpg,0,25.084989,121.674611,4032,3024,2023:05:17 08:03:32,0232,Google,Pixel 5a
+1416,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_001525459.jpg,0,25.064733,121.605267,3024,4032,2023:05:17 08:15:25,0232,Google,Pixel 5a
+1417,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_001726051.jpg,0,25.066278,121.587406,4032,3024,2023:05:17 08:17:26,0232,Google,Pixel 5a
+1418,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_004906063.jpg,0,25.101753,121.548614,4032,3024,2023:05:17 08:49:06,0232,Google,Pixel 5a
+1419,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_004935485.jpg,0,25.101881,121.548961,4032,3024,2023:05:17 08:49:35,0232,Google,Pixel 5a
+1420,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_005043756.jpg,0,25.101831,121.548653,4032,3024,2023:05:17 08:50:43,0232,Google,Pixel 5a
+1421,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_005047773.jpg,0,25.101831,121.548653,4032,3024,2023:05:17 08:50:47,0232,Google,Pixel 5a
+1422,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_005050467.jpg,0,25.101831,121.548653,4032,3024,2023:05:17 08:50:50,0232,Google,Pixel 5a
+1423,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_005057665.jpg,0,25.101831,121.548653,4032,3024,2023:05:17 08:50:57,0232,Google,Pixel 5a
+1424,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_005103519.jpg,0,25.101831,121.548653,3024,4032,2023:05:17 08:51:03,0232,Google,Pixel 5a
+1425,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_005108962.jpg,0,25.101831,121.548653,4032,3024,2023:05:17 08:51:08,0232,Google,Pixel 5a
+1426,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_013213656.PORTRAIT.jpg,0,25.102444,121.548547,3024,4032,2023:05:17 09:32:13,0232,Google,Pixel 5a
+1427,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_020245000.PORTRAIT.ORIGINAL.jpg,0,25.102086,121.548019,3024,4032,2023:05:17 10:02:45,0232,Google,Pixel 5a
+1428,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_020250070.PORTRAIT.jpg,0,25.102086,121.548019,3024,4032,2023:05:17 10:02:50,0232,Google,Pixel 5a
+1429,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_020307989.PORTRAIT.jpg,0,25.102086,121.548019,3024,4032,2023:05:17 10:03:07,0232,Google,Pixel 5a
+1430,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_024634109.jpg,0,25.097639,121.545133,4032,3024,2023:05:17 10:46:34,0232,Google,Pixel 5a
+1431,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_025525988.jpg,0,25.078483,121.533167,4032,3024,2023:05:17 10:55:25,0232,Google,Pixel 5a
+1432,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_025808054.jpg,0,25.079689,121.533064,4032,3024,2023:05:17 10:58:08,0232,Google,Pixel 5a
+1433,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_025810282.jpg,0,25.079689,121.533064,4032,3024,2023:05:17 10:58:10,0232,Google,Pixel 5a
+1434,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_025812007.jpg,0,25.079689,121.533064,4032,3024,2023:05:17 10:58:12,0232,Google,Pixel 5a
+1435,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030230535.jpg,0,25.080214,121.532756,3024,4032,2023:05:17 11:02:30,0232,Google,Pixel 5a
+1436,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030305356.jpg,0,25.080214,121.532756,4032,3024,2023:05:17 11:03:05,0232,Google,Pixel 5a
+1437,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030524096.jpg,0,25.08025,121.532806,4032,3024,2023:05:17 11:05:24,0232,Google,Pixel 5a
+1438,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030526524.jpg,0,25.08025,121.532806,4032,3024,2023:05:17 11:05:26,0232,Google,Pixel 5a
+1439,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030534060.jpg,0,25.08025,121.532806,4032,3024,2023:05:17 11:05:34,0232,Google,Pixel 5a
+1440,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030544692.jpg,0,25.08025,121.532806,4032,3024,2023:05:17 11:05:44,0232,Google,Pixel 5a
+1441,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030657159.jpg,0,25.080364,121.532883,4032,3024,2023:05:17 11:06:57,0232,Google,Pixel 5a
+1442,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030709763.jpg,0,25.080364,121.532883,4032,3024,2023:05:17 11:07:09,0232,Google,Pixel 5a
+1443,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030912763.jpg,0,25.080367,121.532883,4032,3024,2023:05:17 11:09:12,0232,Google,Pixel 5a
+1444,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030920125.jpg,0,25.080367,121.532883,4032,3024,2023:05:17 11:09:20,0232,Google,Pixel 5a
+1445,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_030945301.jpg,0,25.080367,121.532883,4032,3024,2023:05:17 11:09:45,0232,Google,Pixel 5a
+1446,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_031021581.jpg,0,25.080333,121.532914,4032,3024,2023:05:17 11:10:21,0232,Google,Pixel 5a
+1447,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_031023531.jpg,0,25.080333,121.532914,4032,3024,2023:05:17 11:10:23,0232,Google,Pixel 5a
+1448,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_031048502.jpg,0,25.080333,121.532914,4032,3024,2023:05:17 11:10:48,0232,Google,Pixel 5a
+1449,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_031226956.jpg,0,25.080033,121.532842,3024,4032,2023:05:17 11:12:26,0232,Google,Pixel 5a
+1450,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_031708747.jpg,0,25.078614,121.533167,4032,3024,2023:05:17 11:17:08,0232,Google,Pixel 5a
+1451,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_031712510.jpg,0,25.078614,121.533167,4032,3024,2023:05:17 11:17:12,0232,Google,Pixel 5a
+1452,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035243716.jpg,0,25.03475,121.521647,3024,4032,2023:05:17 11:52:43,0232,Google,Pixel 5a
+1453,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035251802.jpg,0,25.03475,121.521647,4032,3024,2023:05:17 11:52:51,0232,Google,Pixel 5a
+1454,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035254802.jpg,0,25.03475,121.521647,4032,3024,2023:05:17 11:52:54,0232,Google,Pixel 5a
+1455,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035303007.jpg,0,25.03475,121.521647,3024,4032,2023:05:17 11:53:03,0232,Google,Pixel 5a
+1456,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035336967.jpg,0,25.03475,121.521647,4032,3024,2023:05:17 11:53:36,0232,Google,Pixel 5a
+1457,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035341851.jpg,0,25.03475,121.521647,3024,4032,2023:05:17 11:53:41,0232,Google,Pixel 5a
+1458,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035522139.jpg,0,25.034764,121.521403,3024,4032,2023:05:17 11:55:22,0232,Google,Pixel 5a
+1459,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035525772.jpg,0,25.034764,121.521403,4032,3024,2023:05:17 11:55:25,0232,Google,Pixel 5a
+1460,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035530489.jpg,0,25.034764,121.521403,4032,3024,2023:05:17 11:55:30,0232,Google,Pixel 5a
+1461,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035722382.PANO.jpg,0,25.034764,121.521403,9546,1613,2023:05:17 11:57:36,0,Google,Pixel 5a
+1462,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035801948.jpg,0,25.035119,121.520858,4032,3024,2023:05:17 11:58:01,0232,Google,Pixel 5a
+1463,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035807048.jpg,0,25.035119,121.520858,3024,4032,2023:05:17 11:58:07,0232,Google,Pixel 5a
+1464,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_035816040.jpg,0,25.035119,121.520858,4032,3024,2023:05:17 11:58:16,0232,Google,Pixel 5a
+1465,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_040007371.jpg,0,25.035022,121.520992,3024,4032,2023:05:17 12:00:07,0232,Google,Pixel 5a
+1466,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_040010315.jpg,0,25.035022,121.520992,3024,4032,2023:05:17 12:00:10,0232,Google,Pixel 5a
+1467,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_040014665.jpg,0,25.035022,121.520992,4032,3024,2023:05:17 12:00:14,0232,Google,Pixel 5a
+1468,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_040122327.jpg,0,25.035283,121.521225,4032,3024,2023:05:17 12:01:22,0232,Google,Pixel 5a
+1469,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_040212134.jpg,0,25.035283,121.521225,3024,4032,2023:05:17 12:02:12,0232,Google,Pixel 5a
+1470,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_040217884.jpg,0,25.035283,121.521225,4032,3024,2023:05:17 12:02:17,0232,Google,Pixel 5a
+1471,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_040357728.jpg,0,25.035453,121.522361,3024,4032,2023:05:17 12:03:57,0232,Google,Pixel 5a
+1472,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_040401924.jpg,0,25.035453,121.522361,3024,4032,2023:05:17 12:04:01,0232,Google,Pixel 5a
+1473,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_040404600.jpg,0,25.035453,121.522361,4032,3024,2023:05:17 12:04:04,0232,Google,Pixel 5a
+1474,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_042130611.jpg,0,25.038019,121.517497,4032,3024,2023:05:17 12:21:30,0232,Google,Pixel 5a
+1475,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_044132353.jpg,0,25.039067,121.56335,3024,4032,2023:05:17 12:41:32,0232,Google,Pixel 5a
+1476,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_044140118.jpg,0,25.039067,121.56335,4032,3024,2023:05:17 12:41:40,0232,Google,Pixel 5a
+1477,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_044146214.jpg,0,25.039067,121.56335,3024,4032,2023:05:17 12:41:46,0232,Google,Pixel 5a
+1478,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_044202054.jpg,0,25.039067,121.56335,3024,4032,2023:05:17 12:42:02,0232,Google,Pixel 5a
+1479,C:/Users/doug/Documents/projects/img\2023-05-17,PXL_20230517_044339519.jpg,0,25.038953,121.562908,3024,4032,2023:05:17 12:43:39,0232,Google,Pixel 5a

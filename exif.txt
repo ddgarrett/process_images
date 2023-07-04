@@ -1,0 +1,496 @@
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: Image ImageWidth, value 3024
+Key: Image ImageLength, value 4032
+Key: Image Make, value Google
+Key: Image Model, value Pixel 5a
+Key: Image Orientation, value Horizontal (normal)
+Key: Image XResolution, value 72
+Key: Image YResolution, value 72
+Key: Image ResolutionUnit, value Pixels/Inch
+Key: Image Software, value HDR+ 1.0.520435816zd
+Key: Image DateTime, value 2023:05:04 10:24:58
+Key: Image YCbCrPositioning, value Centered
+Key: Image ExifOffset, value 243
+Key: GPS GPSLatitudeRef, value N
+Key: GPS GPSLatitude, value [34, 53, 503/25]
+Key: GPS GPSLongitudeRef, value E
+Key: GPS GPSLongitude, value [135, 48, 2927/100]
+Key: GPS GPSAltitudeRef, value 0
+Key: GPS GPSAltitude, value 309/5
+Key: GPS GPSTimeStamp, value [1, 24, 42]
+Key: GPS GPSImgDirectionRef, value M
+Key: GPS GPSImgDirection, value 354
+Key: GPS GPSDate, value 2023:05:04
+Key: Image GPSInfo, value 978
+Key: Thumbnail ImageWidth, value 378
+Key: Thumbnail ImageLength, value 504
+Key: Thumbnail Compression, value JPEG (old-style)
+Key: Thumbnail Orientation, value Horizontal (normal)
+Key: Thumbnail XResolution, value 72
+Key: Thumbnail YResolution, value 72
+Key: Thumbnail ResolutionUnit, value Pixels/Inch
+Key: Thumbnail JPEGInterchangeFormat, value 1333
+Key: Thumbnail JPEGInterchangeFormatLength, value 42480
+Key: EXIF ExposureTime, value 171/500000
+Key: EXIF FNumber, value 173/100
+Key: EXIF ExposureProgram, value Program Normal
+Key: EXIF ISOSpeedRatings, value 66
+Key: EXIF ExifVersion, value 0232
+Key: EXIF DateTimeOriginal, value 2023:05:04 10:24:58
+Key: EXIF DateTimeDigitized, value 2023:05:04 10:24:58
+Key: EXIF OffsetTime, value +09:00
+Key: EXIF OffsetTimeOriginal, value +09:00
+Key: EXIF OffsetTimeDigitized, value +09:00
+Key: EXIF ComponentsConfiguration, value YCbCr
+Key: EXIF ShutterSpeedValue, value 1151/100
+Key: EXIF ApertureValue, value 79/50
+Key: EXIF BrightnessValue, value 869/100
+Key: EXIF ExposureBiasValue, value 0
+Key: EXIF MaxApertureValue, value 79/50
+Key: EXIF SubjectDistance, value 2017/250
+Key: EXIF MeteringMode, value CenterWeightedAverage
+Key: EXIF Flash, value Flash did not fire, compulsory flash mode
+Key: EXIF FocalLength, value 219/50
+Key: EXIF SubSecTime, value 231
+Key: EXIF SubSecTimeOriginal, value 231
+Key: EXIF SubSecTimeDigitized, value 231
+Key: EXIF FlashPixVersion, value 0100
+Key: EXIF ColorSpace, value sRGB
+Key: EXIF ExifImageWidth, value 3024
+Key: EXIF ExifImageLength, value 4032
+Key: Interoperability InteroperabilityIndex, value R98
+Key: Interoperability InteroperabilityVersion, value [48, 49, 48, 48]
+Key: EXIF InteroperabilityOffset, value 948
+Key: EXIF SensingMethod, value One-chip color area
+Key: EXIF SceneType, value Directly Photographed
+Key: EXIF CustomRendered, value Custom
+Key: EXIF ExposureMode, value Auto Exposure
+Key: EXIF WhiteBalance, value Auto
+Key: EXIF DigitalZoomRatio, value 0
+Key: EXIF FocalLengthIn35mmFilm, value 27
+Key: EXIF SceneCaptureType, value Standard
+Key: EXIF Contrast, value Normal
+Key: EXIF Saturation, value Normal
+Key: EXIF Sharpness, value Normal
+Key: EXIF SubjectDistanceRange, value 3
+Key: EXIF LensMake, value Google
+Key: EXIF LensModel, value Pixel 5a back camera 4.38mm f/1.73
+Key: EXIF Tag 0xA460, value 3
+Orientation: Horizontal (normal) ([1])
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: Image Make, value Canon
+Key: Image Model, value Canon EOS-1DS
+Key: Image Orientation, value Horizontal (normal)
+Key: Image XResolution, value 72
+Key: Image YResolution, value 72
+Key: Image ResolutionUnit, value Pixels/Inch
+Key: Image DateTime, value 2004:11:25 16:56:59
+Key: Image YCbCrPositioning, value Co-sited
+Key: Image ExifOffset, value 180
+Key: Thumbnail Compression, value JPEG (old-style)
+Key: Thumbnail XResolution, value 72
+Key: Thumbnail YResolution, value 72
+Key: Thumbnail ResolutionUnit, value Pixels/Inch
+Key: Thumbnail JPEGInterchangeFormat, value 9127
+Key: Thumbnail JPEGInterchangeFormatLength, value 6413
+Key: EXIF ExposureTime, value 1/40
+Key: EXIF FNumber, value 29
+Key: EXIF ExposureProgram, value Aperture Priority
+Key: EXIF ISOSpeedRatings, value 200
+Key: EXIF ExifVersion, value 0220
+Key: EXIF DateTimeOriginal, value 2004:11:25 16:56:59
+Key: EXIF DateTimeDigitized, value 2004:11:25 16:56:59
+Key: EXIF ComponentsConfiguration, value YCbCr
+Key: EXIF ShutterSpeedValue, value 43/8
+Key: EXIF ApertureValue, value 77/8
+Key: EXIF ExposureBiasValue, value 0
+Key: EXIF MeteringMode, value Pattern
+Key: EXIF FocalPlaneXResolution, value 31750/11
+Key: EXIF FocalPlaneYResolution, value 2704000/937
+Key: EXIF FocalPlaneResolutionUnit, value 2
+Key: EXIF CustomRendered, value Normal
+Key: EXIF ExposureMode, value Auto Exposure
+Key: EXIF WhiteBalance, value Auto
+Key: EXIF SceneCaptureType, value Standard
+Orientation: Horizontal (normal) ([1])
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: Image ImageDescription, value
+Key: Image Make, value NIKON
+Key: Image Model, value E995
+Key: Image Orientation, value Horizontal (normal)
+Key: Image XResolution, value 300
+Key: Image YResolution, value 300
+Key: Image ResolutionUnit, value Pixels/Inch
+Key: Image Software, value E995v1.6
+Key: Image DateTime, value 2002:06:29 21:04:50
+Key: Image YCbCrPositioning, value Co-sited
+Key: Image ExifOffset, value 284
+Key: Thumbnail Compression, value JPEG (old-style)
+Key: Thumbnail XResolution, value 300
+Key: Thumbnail YResolution, value 300
+Key: Thumbnail ResolutionUnit, value Pixels/Inch
+Key: Thumbnail JPEGInterchangeFormat, value 4084
+Key: Thumbnail JPEGInterchangeFormatLength, value 3934
+Key: EXIF ExposureTime, value 8
+Key: EXIF FNumber, value 15/2
+Key: EXIF ExposureProgram, value Shutter Priority
+Key: EXIF ISOSpeedRatings, value 100
+Key: EXIF ExifVersion, value 0210
+Key: EXIF DateTimeOriginal, value 2002:06:29 21:04:50
+Key: EXIF DateTimeDigitized, value 2002:06:29 21:04:50
+Key: EXIF ComponentsConfiguration, value YCbCr
+Key: EXIF FlashPixVersion, value 0100
+Key: EXIF ColorSpace, value sRGB
+Key: EXIF ExifImageWidth, value 2048
+Key: EXIF ExifImageLength, value 1536
+Key: Interoperability InteroperabilityIndex, value R98
+Key: Interoperability InteroperabilityVersion, value [48, 49, 48, 48]
+Key: EXIF InteroperabilityOffset, value 886
+Key: EXIF FileSource, value Digital Camera
+Key: EXIF SceneType, value Directly Photographed
+Orientation: Horizontal (normal) ([1])
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: Image Make, value Apple
+Key: Image Model, value iPhone 12 Pro
+Key: Image Orientation, value Horizontal (normal)
+Key: Image XResolution, value 72
+Key: Image YResolution, value 72
+Key: Image ResolutionUnit, value Pixels/Inch
+Key: Image Software, value 16.3.1
+Key: Image DateTime, value 2023:05:17 12:19:21
+Key: Image HostComputer, value iPhone 12 Pro
+Key: Image TileWidth, value 512
+Key: Image TileLength, value 512
+Key: Image YCbCrPositioning, value Centered
+Key: Image ExifOffset, value 260
+Key: GPS GPSLatitudeRef, value N
+Key: GPS GPSLatitude, value [25, 2, 64/5]
+Key: GPS GPSLongitudeRef, value E
+Key: GPS GPSLongitude, value [121, 31, 213/100]
+Key: GPS GPSAltitudeRef, value 0
+Key: GPS GPSAltitude, value 8081/608
+Key: GPS GPSSpeedRef, value K
+Key: GPS GPSSpeed, value 0
+Key: GPS GPSImgDirectionRef, value M
+Key: GPS GPSImgDirection, value 231005/1787
+Key: GPS GPSDestBearingRef, value M
+Key: GPS GPSDestBearing, value 231005/1787
+Key: GPS Tag 0x001F, value 42769/8960
+Key: Image GPSInfo, value 2186
+Key: EXIF ExposureTime, value 1/2283
+Key: EXIF FNumber, value 12/5
+Key: EXIF ExposureProgram, value Program Normal
+Key: EXIF ISOSpeedRatings, value 25
+Key: EXIF ExifVersion, value 0232
+Key: EXIF DateTimeOriginal, value 2023:05:17 12:19:21
+Key: EXIF DateTimeDigitized, value 2023:05:17 12:19:21
+Key: EXIF OffsetTime, value +08:00
+Key: EXIF OffsetTimeOriginal, value +08:00
+Key: EXIF OffsetTimeDigitized, value +08:00
+Key: EXIF ComponentsConfiguration, value YCbCr
+Key: EXIF ShutterSpeedValue, value 51165/4586
+Key: EXIF ApertureValue, value 126503/50079
+Key: EXIF BrightnessValue, value 91307/8443
+Key: EXIF ExposureBiasValue, value 0
+Key: EXIF MeteringMode, value Spot
+Key: EXIF Flash, value Flash did not fire, compulsory flash mode
+Key: EXIF FocalLength, value 77/50
+Key: EXIF SubjectArea, value [2809, 1754, 755, 791]
+Key: EXIF SubSecTimeOriginal, value 300
+Key: EXIF SubSecTimeDigitized, value 300
+Key: EXIF FlashPixVersion, value 0100
+Key: EXIF FocalLengthIn35mmFilm, value 17
+Key: EXIF SceneCaptureType, value Standard
+Key: EXIF LensSpecification, value [807365/524263, 6, 8/5, 12/5]
+Key: EXIF LensMake, value Apple
+Key: EXIF LensModel, value iPhone 12 Pro back triple camera 1.54mm f/2.4
+Key: EXIF Tag 0xA460, value 2
+Orientation: Horizontal (normal) ([1])
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: Image ImageDescription, value OLYMPUS DIGITAL CAMERA
+Key: Image Make, value OLYMPUS CORPORATION
+Key: Image Model, value C8080WZ
+Key: Image XResolution, value 72
+Key: Image YResolution, value 72
+Key: Image ResolutionUnit, value Pixels/Inch
+Key: Image Software, value v757-74
+Key: Image DateTime, value 2004:12:02 18:41:25
+Key: Image YCbCrPositioning, value Co-sited
+Key: Image ExifOffset, value 626
+Key: Image CustomRendered, value Normal
+Key: Image ExposureMode, value Auto Exposure
+Key: Image WhiteBalance, value Auto
+Key: Image DigitalZoomRatio, value 0
+Key: Image SceneCaptureType, value Standard
+Key: Image GainControl, value Low gain up
+Key: Image Contrast, value Normal
+Key: Image Saturation, value Hard
+Key: Image Sharpness, value Normal
+Key: Image PrintIM, value [80, 114, 105, 110, 116, 73, 77, 0, 48, 50, 53, 48, 0, 0, 20, 0, 1, 0, 20, 0, ... ]
+Key: Thumbnail Compression, value JPEG (old-style)
+Key: Thumbnail XResolution, value 72
+Key: Thumbnail YResolution, value 72
+Key: Thumbnail ResolutionUnit, value Pixels/Inch
+Key: Thumbnail JPEGInterchangeFormat, value 2056
+Key: Thumbnail JPEGInterchangeFormatLength, value 5016
+Key: EXIF ExposureTime, value 1/400
+Key: EXIF FNumber, value 4
+Key: EXIF ExposureProgram, value Program Normal
+Key: EXIF ISOSpeedRatings, value 100
+Key: EXIF ExifVersion, value 0220
+Key: EXIF DateTimeOriginal, value 2004:12:02 18:41:25
+Key: EXIF LightSource, value Unknown
+Key: EXIF Flash, value Flash did not fire, compulsory flash mode
+Key: EXIF FocalLength, value 178/5
+Key: EXIF FlashPixVersion, value 0100
+Key: EXIF ColorSpace, value sRGB
+Key: EXIF ExifImageWidth, value 2448
+Key: EXIF ExifImageLength, value 3264
+Key: EXIF FileSource, value Digital Camera
+Key: EXIF SceneType, value Directly Photographed
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: Image ImageDescription, value
+Key: Image Make, value Canon
+Key: Image Model, value Canon PowerShot SX210 IS
+Key: Image Orientation, value Horizontal (normal)
+Key: Image XResolution, value 180
+Key: Image YResolution, value 180
+Key: Image ResolutionUnit, value Pixels/Inch
+Key: Image DateTime, value 2010:05:29 04:26:37
+Key: Image YCbCrPositioning, value Co-sited
+Key: Image ExifOffset, value 240
+Key: Thumbnail Compression, value JPEG (old-style)
+Key: Thumbnail XResolution, value 180
+Key: Thumbnail YResolution, value 180
+Key: Thumbnail ResolutionUnit, value Pixels/Inch
+Key: Thumbnail JPEGInterchangeFormat, value 5108
+Key: Thumbnail JPEGInterchangeFormatLength, value 8192
+Key: EXIF ExposureTime, value 1/50
+Key: EXIF FNumber, value 31/10
+Key: EXIF ISOSpeedRatings, value 200
+Key: EXIF ExifVersion, value 0221
+Key: EXIF DateTimeOriginal, value 2010:05:29 04:26:37
+Key: EXIF DateTimeDigitized, value 2010:05:29 04:26:37
+Key: EXIF ComponentsConfiguration, value YCbCr
+Key: EXIF CompressedBitsPerPixel, value 3
+Key: EXIF ShutterSpeedValue, value 181/32
+Key: EXIF ApertureValue, value 13/4
+Key: EXIF ExposureBiasValue, value 0
+Key: EXIF MaxApertureValue, value 13/4
+Key: EXIF MeteringMode, value Pattern
+Key: EXIF Flash, value Flash did not fire, compulsory flash mode
+Key: EXIF FocalLength, value 5
+Key: EXIF FlashPixVersion, value 0100
+Key: EXIF ColorSpace, value sRGB
+Key: EXIF ExifImageWidth, value 4320
+Key: EXIF ExifImageLength, value 3240
+Key: EXIF FileSource, value Digital Camera
+Key: EXIF CustomRendered, value Normal
+Key: EXIF ExposureMode, value Auto Exposure
+Key: EXIF WhiteBalance, value Auto
+Key: EXIF DigitalZoomRatio, value 1
+Key: EXIF SceneCaptureType, value Landscape
+Orientation: Horizontal (normal) ([1])
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: Image Make, value Canon
+Key: Image Model, value Canon EOS 5D Mark II
+Key: Image Orientation, value Horizontal (normal)
+Key: Image XResolution, value 72
+Key: Image YResolution, value 72
+Key: Image ResolutionUnit, value Pixels/Inch
+Key: Image DateTime, value 2009:01:04 12:16:25
+Key: Image Artist, value 
+Key: Image YCbCrPositioning, value Co-sited
+Key: Image Copyright, value
+Key: Image ExifOffset, value 360
+Key: GPS GPSVersionID, value [2, 2, 0, 0]
+Key: Image GPSInfo, value 8660
+Key: Thumbnail Compression, value JPEG (old-style)
+Key: Thumbnail XResolution, value 72
+Key: Thumbnail YResolution, value 72
+Key: Thumbnail ResolutionUnit, value Pixels/Inch
+Key: Thumbnail JPEGInterchangeFormat, value 10548
+Key: Thumbnail JPEGInterchangeFormatLength, value 13779
+Key: EXIF ExposureTime, value 1/500
+Key: EXIF FNumber, value 5
+Key: EXIF ExposureProgram, value Unidentified
+Key: EXIF ISOSpeedRatings, value 500
+Key: EXIF ExifVersion, value 0221
+Key: EXIF DateTimeOriginal, value 2009:01:04 12:16:25
+Key: EXIF DateTimeDigitized, value 2009:01:04 12:16:25
+Key: EXIF ComponentsConfiguration, value YCbCr
+Key: EXIF ShutterSpeedValue, value 9
+Key: EXIF ApertureValue, value 37/8
+Key: EXIF ExposureBiasValue, value 0
+Key: EXIF MeteringMode, value Pattern
+Key: EXIF Flash, value Flash did not fire, compulsory flash mode
+Key: EXIF FocalLength, value 500
+Key: EXIF SubSecTime, value 56
+Key: EXIF SubSecTimeOriginal, value 56
+Key: EXIF SubSecTimeDigitized, value 56
+Key: EXIF FlashPixVersion, value 0100
+Key: EXIF ColorSpace, value sRGB
+Key: EXIF ExifImageWidth, value 5616
+Key: EXIF ExifImageLength, value 3744
+Key: Interoperability InteroperabilityIndex, value R98
+Key: Interoperability InteroperabilityVersion, value [48, 49, 48, 48]
+Key: EXIF InteroperabilityOffset, value 8614
+Key: EXIF FocalPlaneXResolution, value 5616000/1459
+Key: EXIF FocalPlaneYResolution, value 1872000/479
+Key: EXIF FocalPlaneResolutionUnit, value 2
+Key: EXIF CustomRendered, value Normal
+Key: EXIF ExposureMode, value Auto Exposure
+Key: EXIF WhiteBalance, value Auto
+Key: EXIF SceneCaptureType, value Standard
+Orientation: Horizontal (normal) ([1])
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: Image Make, value Apple
+Key: Image Model, value iPod touch
+Key: Image Orientation, value Rotated 180
+Key: Image XResolution, value 72
+Key: Image YResolution, value 72
+Key: Image ResolutionUnit, value Pixels/Inch
+Key: Image Software, value 12.0.1
+Key: Image DateTime, value 2018:11:03 11:20:16
+Key: Image YCbCrPositioning, value Centered
+Key: Image ExifOffset, value 208
+Key: GPS GPSLatitudeRef, value N
+Key: GPS GPSLatitude, value [42, 21, 1036/25]
+Key: GPS GPSLongitudeRef, value W
+Key: GPS GPSLongitude, value [71, 3, 2569/100]
+Key: GPS GPSAltitudeRef, value 0
+Key: GPS GPSAltitude, value 1036524/87323
+Key: GPS GPSTimeStamp, value [18, 20, 1121/100]
+Key: GPS GPSSpeedRef, value K
+Key: GPS GPSSpeed, value 0
+Key: GPS GPSDate, value 2018:11:03
+Key: GPS Tag 0x001F, value 65
+Key: Image GPSInfo, value 1094
+Key: Thumbnail Compression, value JPEG (old-style)
+Key: Thumbnail XResolution, value 72
+Key: Thumbnail YResolution, value 72
+Key: Thumbnail ResolutionUnit, value Pixels/Inch
+Key: Thumbnail JPEGInterchangeFormat, value 1434
+Key: Thumbnail JPEGInterchangeFormatLength, value 13293
+Key: EXIF ExposureTime, value 1/30
+Key: EXIF FNumber, value 11/5
+Key: EXIF ExposureProgram, value Program Normal
+Key: EXIF ISOSpeedRatings, value 50
+Key: EXIF ExifVersion, value 0221
+Key: EXIF DateTimeOriginal, value 2018:11:03 11:20:16
+Key: EXIF DateTimeDigitized, value 2018:11:03 11:20:16
+Key: EXIF ComponentsConfiguration, value YCbCr
+Key: EXIF ShutterSpeedValue, value 85915/17509
+Key: EXIF ApertureValue, value 193685/85136
+Key: EXIF BrightnessValue, value 84718/21127
+Key: EXIF ExposureBiasValue, value 0
+Key: EXIF MeteringMode, value Pattern
+Key: EXIF Flash, value No flash function
+Key: EXIF FocalLength, value 53/20
+Key: EXIF SubSecTimeOriginal, value 789
+Key: EXIF SubSecTimeDigitized, value 789
+Key: EXIF FlashPixVersion, value 0100
+Key: EXIF ColorSpace, value sRGB
+Key: EXIF ExifImageWidth, value 1280
+Key: EXIF ExifImageLength, value 960
+Key: EXIF SensingMethod, value One-chip color area
+Key: EXIF SceneType, value Directly Photographed
+Key: EXIF ExposureMode, value Auto Exposure
+Key: EXIF WhiteBalance, value Auto
+Key: EXIF FocalLengthIn35mmFilm, value 31
+Key: EXIF SceneCaptureType, value Standard
+Key: EXIF LensSpecification, value [53/20, 53/20, 11/5, 11/5]
+Key: EXIF LensMake, value Apple
+Key: EXIF LensModel, value iPod touch front camera 2.65mm f/2.2
+Orientation: Rotated 180 ([3])
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: GPS GPSDate, value 2018:11:11
+Key: GPS GPSAltitudeRef, value 1
+Key: GPS GPSLongitudeRef, value W
+Key: GPS GPSLongitude, value [81, 19, 593/20]
+Key: GPS GPSLatitudeRef, value N
+Key: GPS GPSTimeStamp, value [13, 35, 16]
+Key: GPS GPSAltitude, value 6
+Key: GPS GPSLatitude, value [28, 34, 867/100]
+Key: Image GPSInfo, value 248
+Key: Image Orientation, value Horizontal (normal)
+Key: Image Model, value Nexus 5
+Key: Image ImageWidth, value 1280
+Key: Image ExifOffset, value 106
+Key: Image ImageLength, value 960
+Key: Image Make, value LGE
+Key: EXIF FNumber, value 29/10
+Key: EXIF FocalLength, value 47/20
+Key: EXIF ApertureValue, value 307/100
+Key: EXIF ExifImageWidth, value 1280
+Key: EXIF ShutterSpeedValue, value -272/25
+Key: EXIF ISOSpeedRatings, value 100
+Key: EXIF ExifImageLength, value 960
+Key: EXIF ExposureTime, value 53/100000
+Orientation: Horizontal (normal) ([1])
+PS C:\Users\doug\Documents\projects\image_loc> & C:/Users/doug/scoop/apps/python/current/python.exe c:/Users/doug/Documents/projects/image_loc/test_exif.py
+Key: Image ExifOffset, value 245
+Key: GPS GPSVersionID, value [2, 2, 0, 0]
+Key: GPS GPSLatitudeRef, value N
+Key: GPS GPSLatitude, value [33, 23, 3651/100]
+Key: GPS GPSLongitudeRef, value W
+Key: GPS GPSLongitude, value [111, 41, 1346/25]
+Key: GPS GPSAltitudeRef, value 0
+Key: GPS GPSAltitude, value 37947/100
+Key: GPS GPSTimeStamp, value [1, 44, 42]
+Key: GPS GPSDOP, value 36553/1000
+Key: GPS GPSProcessingMethod, value [65, 83, 67, 73, 73, 0, 0, 0, 102, 117, 115, 101, 100]
+Key: GPS GPSDate, value 2018:11:29
+Key: Image GPSInfo, value 1356
+Key: Image ImageWidth, value 4032
+Key: Image ImageLength, value 3024
+Key: Image Make, value Google
+Key: Image Model, value Pixel 3 XL
+Key: Image Orientation, value Horizontal (normal)
+Key: Image XResolution, value 72
+Key: Image YResolution, value 72
+Key: Image ResolutionUnit, value Pixels/Inch
+Key: Image Software, value HDR+ 1.0.220943774ny
+Key: Image DateTime, value 2018:11:28 18:44:48
+Key: Image YCbCrPositioning, value Centered
+Key: EXIF ExposureTime, value 41667/1000000
+Key: EXIF FNumber, value 9/5
+Key: EXIF ExposureProgram, value Program Normal
+Key: EXIF ISOSpeedRatings, value 910
+Key: EXIF ExifVersion, value 0220
+Key: EXIF DateTimeOriginal, value 2018:11:28 18:44:48
+Key: EXIF DateTimeDigitized, value 2018:11:28 18:44:48
+Key: EXIF ComponentsConfiguration, value YCbCr
+Key: EXIF ShutterSpeedValue, value 229/50
+Key: EXIF ApertureValue, value 17/10
+Key: EXIF BrightnessValue, value -19/10
+Key: EXIF ExposureBiasValue, value 0
+Key: EXIF MaxApertureValue, value 17/10
+Key: EXIF SubjectDistance, value 249/500
+Key: EXIF MeteringMode, value CenterWeightedAverage
+Key: EXIF Flash, value Flash did not fire, compulsory flash mode
+Key: EXIF FocalLength, value 111/25
+Key: EXIF SubSecTime, value 769308
+Key: EXIF SubSecTimeOriginal, value 769308
+Key: EXIF SubSecTimeDigitized, value 769308
+Key: EXIF FlashPixVersion, value 0100
+Key: EXIF ColorSpace, value sRGB
+Key: EXIF ExifImageWidth, value 4032
+Key: EXIF ExifImageLength, value 3024
+Key: Interoperability InteroperabilityIndex, value R98
+Key: Interoperability InteroperabilityVersion, value [48, 49, 48, 48]
+Key: EXIF InteroperabilityOffset, value 1326
+Key: EXIF SensingMethod, value One-chip color area
+Key: EXIF SceneType, value Directly Photographed
+Key: EXIF CustomRendered, value Custom
+Key: EXIF ExposureMode, value Auto Exposure
+Key: EXIF WhiteBalance, value Auto
+Key: EXIF DigitalZoomRatio, value 0
+Key: EXIF FocalLengthIn35mmFilm, value 27
+Key: EXIF SceneCaptureType, value Standard
+Key: EXIF Contrast, value Normal
+Key: EXIF Saturation, value Normal
+Key: EXIF Sharpness, value Normal
+Key: EXIF SubjectDistanceRange, value 1
+Orientation: Horizontal (normal) ([1])
+PS C:\Users\doug\Documents\projects\image_loc> 
