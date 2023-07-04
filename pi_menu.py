@@ -70,9 +70,6 @@ class PiMenu(PiElement):
             if table:
                 c.table = table
                 c.directory = os.path.dirname(filename)
-                print(f"directory: {c.directory}")
-                print(f'filename: {table.get_full_image_fn()}')
-                
                 self.update_status(f"Collection with {len(c.table)} images loaded from {filename}")
                 return False # let other elements receive 'Open' event? Add Table to values?
             else:
