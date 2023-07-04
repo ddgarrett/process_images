@@ -8,6 +8,7 @@ import PySimpleGUI as sg
 
 import pi_config as c
 from pi_element import PiElement
+from pi_treedata import PiTreeData
 
 class PiTreeList(PiElement):
 
@@ -46,13 +47,16 @@ class PiTreeList(PiElement):
     
     ''' Event Handlers '''
     def update_list(self,event,values) -> bool :
+        treedata = PiTreeData(c.table)
+
+        '''
         treedata = sg.TreeData()
         print(c.directory,c.directory.split('/'))
         treedata.insert("",c.directory,c.directory,values=[],icon=self.folder_icon)
         for row in c.table:
             fullname = f"{row['file_location']}/{row['file_name']}"
             treedata.Insert(c.directory, fullname, row['file_name'], values=[], icon=self.file_icon)
-
+        '''
         c.window[self.key].update(values=treedata)
 
         return False
