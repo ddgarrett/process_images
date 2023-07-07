@@ -16,21 +16,26 @@ class PiElement:
         self.key=key
 
     def update_status(self,msg):
+        c.status.update(msg)
+        '''
         if '-STATUS-' in c.window.AllKeysDict:
             c.window['-STATUS-'].update(msg)
+        '''
 
     def get_element(self) -> sg.Element:
-        ''' Return new instance of a PySimpleGUI element or element subclass '''
+        ''' Return new instance of a PySimpleGUI element or element subclass
+            Subclasses should override this method. 
+            If they don't, calls will get a Text with the "not yet implmented" message '''
         [[sg.Text(f'{self.__class__.__name__} not yet implemented')]]
     
     def handle_event(self,event,values) -> bool:
         ''' Return true if this object handled the event and 
-            no other events need to worry about it. '''        
+            no other handlers need to worry about it. '''        
         return False
 
     def _nop(self,event,values) -> bool:
         ''' Convenience event handler for not yet implemented functions '''
-        msg = f'event {event} not yet implemented'
+        msg = f'event {event} not yet implemented in class {self.__class__.__name__}'
         print(msg)
         print(f'    values: {values}')
         self.update_status(msg)

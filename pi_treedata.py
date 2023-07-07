@@ -65,7 +65,8 @@ class PiTreeData(TreeData):
 
         # insert folders into treedata
         for k,v in dict.items():
-            self._insert_treedata_folder(k,v,"")
+            if k != "_cnt_":
+                self._insert_treedata_folder(k,v,"")
 
     @staticmethod
     def _add_dict_folder(dict:dict[str:dict],nodes:list[str],idx:int):
@@ -77,7 +78,7 @@ class PiTreeData(TreeData):
             
         key = nodes[idx]
         if not key in dict:
-            dict[key] = {}
+            dict[key] = {"_cnt_":0}
 
         idx += 1
         PiTreeData._add_dict_folder(dict[key],nodes,idx)
@@ -88,7 +89,8 @@ class PiTreeData(TreeData):
         td_key = f'{parent}/{key}'
         self.insert(parent,td_key,key,values=[],icon=PiTreeData.folder_icon)
         for k,v in value.items():
-            self._insert_treedata_folder(k,v,td_key)
+            if k != "_cnt_":
+                self._insert_treedata_folder(k,v,td_key)
 
     def _insert_files(self):
         ''' Insert a treedata node for each row in the table.

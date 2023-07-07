@@ -66,9 +66,6 @@ def convert_to_bytes(file_or_bytes, resize=None, fill=False):
         del img
         return bio.getvalue()
 
-
-
-
 def display_image_window(filename):
     try:
         layout = [[sg.Image(data=convert_to_bytes(filename, IMAGE_SIZE), enable_events=True)]]
@@ -76,7 +73,6 @@ def display_image_window(filename):
     except Exception as e:
         print(f'** Display image error **', e)
         return
-
 
 def make_thumbnails(flist):
     layout = [[]]
@@ -99,9 +95,6 @@ def make_thumbnails(flist):
     # return sg.Window('Thumbnails', layout, element_padding=(0, 0), margins=(0, 0), finalize=True, grab_anywhere=False, location=(0,0), return_keyboard_events=True)
     return sg.Window('Thumbnails', layout, element_padding=(0, 0), margins=(0, 0), 
                      finalize=True, grab_anywhere=False, location=(0,0), return_keyboard_events=True, resizable=True, enable_window_config_events=True)
-
-
-
 
 def display_images(t_win, offset, files):
     currently_displaying = {}
@@ -130,7 +123,6 @@ def display_images(t_win, offset, files):
 
 
     return offset, currently_displaying
-
 
 def main():
     sg.theme('black')
@@ -170,10 +162,6 @@ def main():
             if offset < 0:
                 offset = 0
             offset, currently_displaying = display_images(t_win, offset, files)
-
-
-
-
 
 if __name__ == '__main__':
     main()

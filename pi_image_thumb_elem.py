@@ -11,18 +11,33 @@ import pi_config as c
 from pi_element import PiElement
 from pi_image_util import is_image_file, cnv_image
 
-class PiImageElem(PiElement):
+class PiImageThumbElem(PiElement):
 
     def __init__(self,key="-IMAGE-",event="-TREE-"):
         super().__init__(key=key)
         self._event = event
-        self._new_size = (400,400)
-        self._filename = ''
+        # self._new_size = (400,400)
+        # self._filename = ''
 
     def get_element(self) -> sg.Element:
-        return [[sg.Image(key=self.key)]]
+        # return sg.Image(key=self.key)
+        c1 = [[]]
+        for i in range(10):
+            tooltip = f'tooltip for\nbutton {i}'
+            # image_source=im,
+            e = [[sg.Button(button_color=('white','black'),k=f'b{i}',
+                            pad=0,expand_x=True,expand_y=True, border_width=0,
+                            tooltip=tooltip)]]
+            f = [sg.Frame(f'Frame f{i}',e,element_justification='center',
+                        title_location=sg.TITLE_LOCATION_BOTTOM_LEFT,
+                        size=(200,200), pad=0)]
+            c1 += [f]
+
+        return c1
 
     def handle_event(self, event, values) -> bool:
+        return False
+
         if event == self._event:  
             try:
                 filename = values[self._event][0]

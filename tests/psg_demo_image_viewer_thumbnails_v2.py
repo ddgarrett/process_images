@@ -14,14 +14,15 @@ import os
     Copyright 2020 PySimpleGUI.org
 """
 
-THUMBNAIL_SIZE = (200,200)
-IMAGE_SIZE = (400,400)
+THUMBNAIL_SIZE = (300,300)
+IMAGE_SIZE = (600,600)
 # IMAGE_SIZE = (800,800)
 THUMBNAIL_PAD = (1,1)
 ROOT_FOLDER = r'C:\Users\doug\Documents\projects\img\2023-05-04'
 screen_size = sg.Window.get_screen_size()
+print(screen_size)
 thumbs_per_row = int(screen_size[0]/(THUMBNAIL_SIZE[0]+THUMBNAIL_PAD[0])) - 1
-thumbs_rows = int(screen_size[1]/(THUMBNAIL_SIZE[1]+THUMBNAIL_PAD[1])) - 1
+thumbs_rows = int((screen_size[1]-40)/(THUMBNAIL_SIZE[1]+THUMBNAIL_PAD[1])) 
 THUMBNAILS_PER_PAGE = (thumbs_per_row, thumbs_rows)
 EXTS = ('png', 'jpg', 'jpeg', 'gif')
 
@@ -66,9 +67,6 @@ def convert_to_bytes(file_or_bytes, resize=None, fill=False):
         del img
         return bio.getvalue()
 
-
-
-
 def display_image_window(filename):
     try:
         layout = [[sg.Image(data=convert_to_bytes(filename, IMAGE_SIZE), enable_events=True)]]
@@ -76,7 +74,6 @@ def display_image_window(filename):
     except Exception as e:
         print(f'** Display image error **', e)
         return
-
 
 def make_thumbnails(flist):
     layout = [[]]
@@ -99,9 +96,6 @@ def make_thumbnails(flist):
     # return sg.Window('Thumbnails', layout, element_padding=(0, 0), margins=(0, 0), finalize=True, grab_anywhere=False, location=(0,0), return_keyboard_events=True)
     return sg.Window('Thumbnails', layout, element_padding=(0, 0), margins=(0, 0), 
                      finalize=True, grab_anywhere=False, location=(0,0), return_keyboard_events=True, resizable=True, enable_window_config_events=True)
-
-
-
 
 def display_images(t_win, offset, files):
     currently_displaying = {}
@@ -130,7 +124,6 @@ def display_images(t_win, offset, files):
 
 
     return offset, currently_displaying
-
 
 def main():
     sg.theme('black')
@@ -170,10 +163,6 @@ def main():
             if offset < 0:
                 offset = 0
             offset, currently_displaying = display_images(t_win, offset, files)
-
-
-
-
 
 if __name__ == '__main__':
     main()

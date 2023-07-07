@@ -3,15 +3,15 @@ import sys
 import os
 import PySimpleGUI as sg
 
+from datetime import datetime
+
 # sg.theme('light brown 8')
 sg.theme('black')
 
 
-"""  copied from https://github.com/PySimpleGUI/PySimpleGUI/blob/master/DemoPrograms/Demo_Tree_Element.py
-
-    Demo program that will display a folder hierarchy with icons for the folders and files.
-    Note that if you are scanning a large folder then tkinter will eventually complain about too many bitmaps.
-    This can be fixed easily enough by reusing the images within PySimpleGUI (enhancement request can be opened if you hit this problem)
+""" Show Tree of selected files and folders.
+    Allow selecting a node via its key.
+    Demonstrates use of generating double click event for tree
 """
 
 # Base64 versions of images of a folder and a file. PNG files (may not work with PySimpleGUI27, swap with GIFs)
@@ -59,17 +59,17 @@ def add_files_in_folder(parent, dirname):
         fullname = os.path.join(dirname, f)
         fullname = fullname.replace('\\','/') # added: replace back slash with forward slash
         if os.path.isdir(fullname):            # if it's a folder, add folder and recurse
-            print(f"folder - parent:{parent}, fullname:{fullname}, f:{f}")
+            # print(f"folder - parent:{parent}, fullname:{fullname}, f:{f}")
             treedata.Insert(parent, fullname, f, values=[], icon=folder_icon)
             add_files_in_folder(fullname, fullname)
         else:
-            print(f"file - parent:{parent}, fullname:{fullname}, f:{f}")
+            # print(f"file - parent:{parent}, fullname:{fullname}, f:{f}")
             treedata.Insert(parent, fullname, f, values=[os.stat(fullname).st_size], icon=file_icon)
 
 # add_files_in_folder('', starting_path)
 
 layout = [
-          [sg.Tree(data=treedata,
+          [ sg.Tree(data=treedata,
                    headings=['Size', ],
                    auto_size_columns=True,
                    select_mode=sg.TABLE_SELECT_MODE_EXTENDED,
@@ -86,16 +86,29 @@ layout = [
                   key="-FOLDER-", expand_x=True) ],
           [ sg.Button(key="-SELECT-",button_text="Select",size=(8,1)),
             sg.In(size=(25, 1), enable_events=False, 
-                  key="-TREE-KEY-", expand_x=True) ]
+                  key="-TREE-KEY-", expand_x=True) ],
+          [ sg.Text('', relief=sg.RELIEF_SUNKEN,
+                    size=(55, 1), pad=(0, 3), key='-STATUS-', expand_x=True),
+            sg.Sizegrip(pad=(3,3)) ]
     ]
 
-window = sg.Window('Tree Element Test', layout, resizable=True, finalize=True)
+window = sg.Window('Tree Element Test', layout, resizable=True, finalize=True,
+                   enable_window_config_events=True)
+
+def update_status(text):
+    window['-STATUS-'].update(text)
+
+# Below sends a '-TREE-' event followed by a '-TREE-_double_clicked' event
+window['-TREE-'].bind('<Double-Button-1>', '_double_clicked')
 
 while True:     # Event Loop
     event, values = window.read()
+    print(f'-------- event: {event}  - {datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]}')
+    print(f'values: {values}')
+
     if event in (sg.WIN_CLOSED, 'Cancel'):
         break
-
+    
     if event == '-FOLDER-':
         starting_path = values['-FOLDER-']
         treedata = sg.TreeData()
@@ -103,7 +116,7 @@ while True:     # Event Loop
         window['-TREE-'].update(values=treedata)
     elif event == '-SELECT-':
         select(window['-TREE-'],key=values['-TREE-KEY-'])
-    else:
-        print(f'event: {event} values: {values}')
+
+
 
 window.close()

@@ -14,26 +14,37 @@ import pi_config as c
 from pi_menu import PiMenu
 from pi_tree_list import PiTreeList
 from pi_image_elem import PiImageElem
+from pi_image_thumb_elem import PiImageThumbElem
 
 elements = []
-c.metadata = CsvTable("image_collection_metadata.csv")
 
 def init_window():
+    global elements
     sg.theme('black')
     # sg.set_options(margins=(0, 0))
     
     menu = PiMenu()
-    tree = PiTreeList(key="-TREE-")
+    tree = PiTreeList(key="-TREE-",headings=['cnt'])
     image = PiImageElem(key="-IMAGE-",event="-TREE-")
+    # image = PiImageThumbElem(key="-IMAGE-",event="-TREE-")
 
-    elements.extend((menu,tree,image))
+    elements = [menu,tree,image]
+
+    '''
+                    sg.Column([[image.get_element()]], expand_x=True, expand_y=True, key="-IMGCOL-")],
+                    orientation='h', relief=sg.RELIEF_SUNKEN, 
+                    expand_x=True, expand_y=True, k='-PANE-',
+                    border_width=1, background_color="white")
+
+    '''
     
     # ------ GUI Defintion ------ #
     layout = [[menu.get_element()],
               [sg.Pane(
                 [sg.Column([[tree.get_element()]], expand_y=True),
                 # sg.VSeperator(),
-                sg.Column([[image.get_element()]], expand_x=True, expand_y=True, key="-IMGCOL-")],
+                sg.Column(image.get_element(), expand_x=True, expand_y=True, 
+                          key="-IMGCOL-", scrollable=True, vertical_scroll_only=True)],
                     orientation='h', relief=sg.RELIEF_SUNKEN, 
                     expand_x=True, expand_y=True, k='-PANE-',
                     border_width=1, background_color="white")
@@ -53,9 +64,9 @@ def update_status(text):
 def main():
 
     c.window = init_window()
-    status = c.window['-STATUS-']
+    c.status = c.window['-STATUS-']
 
-    print(f'window has status: {"-STATUS-" in c.window.AllKeysDict}')
+    # print(f'window has status: {"-STATUS-" in c.window.AllKeysDict}')
 
     # ------ Loop & Process button menu choices ------ #
     while True:

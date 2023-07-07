@@ -18,6 +18,9 @@ WINDOW_CONFIG = "__WINDOW CONFIG__"
 ''' initialized here '''
 metadata:CsvTable = CsvTable("image_collection_metadata.csv")
 
+''' event callbacks '''
+event_cb:dict[any:any] = []
+
 ''' set when collection is created or loaded '''
 table:ImageCollection = ImageCollection('') # new empty table
 directory = ""
@@ -26,8 +29,5 @@ directory = ""
 window:sg.Window = None   # main window
 status:sg.Element = None  # status display element
 
-''' belong in a PiTabGroup object? '''
-tabs = {}
-active_tab = None
 
 
