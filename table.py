@@ -61,6 +61,22 @@ class Table:
         rows = str([r for r in self._rows])
         return f'{cols}\n{rows}'
          
+    def _get_curr_row(self) -> Row:
+        return self._rows[self._curr_row ]
+
+    def reset_filters(self) -> Row:
+        ''' reset the list of rows to the orignal
+            unfiltered set of rows '''
+        self._rows = self._get_root_table()._rows
+
+    def _get_root_table(self):
+        ''' Get the original parent table '''
+        table = self
+        while table != table._parent_table:
+            table = table._parent_table
+
+        return table
+
     ''' Used for creating an iteration object or other shallow copy
         Override IF the iteration or copy must be of same class as subclass. '''
     def copy(self) -> Table:
@@ -91,6 +107,12 @@ class Table:
             return self._rows[idx]._get(col_name)
         except  IndexError:
             return None
+        
+    def get_int(self,col_name:str) -> int:
+        try:
+            return int(self.get(col_name))
+        except ValueError:
+            return 0
     
     ''' get system value '''
     def get_sys_value(self,name:str) -> any:

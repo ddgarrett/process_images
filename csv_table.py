@@ -84,10 +84,7 @@ class CsvTable(Table):
         ''' Make sure we save an unfiltered version of the table
             by saving the original parent table. '''
         if self._parent_table != self:
-            table = self._parent_table
-            while table._parent_table != table:
-                table = table._parent_table
-
+            table = self._get_root_table()
             return table.save_as(fn)
 
         with open(fn,'w',newline='') as cvsfile:
