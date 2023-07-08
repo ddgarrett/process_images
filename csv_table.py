@@ -77,7 +77,19 @@ class CsvTable(Table):
         self.save_as(self.fn)
 
     def save_as(self,fn:str):
-        ''' Save the table as another file name'''
+        ''' Save the table with given file name.
+            Since this table may be filtered, save all
+            rows by saving the original table '''
+        
+        ''' Make sure we save an unfiltered version of the table
+            by saving the original parent table. '''
+        if self._parent_table != self:
+            table = self._parent_table
+            while table._parent_table != table:
+                table = table._parent_table
+
+            return table.save_as(fn)
+
         with open(fn,'w',newline='') as cvsfile:
             w = csv.writer(cvsfile)
             w.writerow(self[Table.COL_NAMES])
