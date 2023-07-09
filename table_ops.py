@@ -5,6 +5,7 @@ from __future__ import annotations
 import hjson
 from table import Table, Row, Column
 from typing import Type
+from pi_filters import Filter
 
 ''' Table Sort class '''
 class TableSort:
@@ -25,7 +26,7 @@ class TableGroup:
     def _in_group(group_values:list[any],row:list[any],group_by:list[Column]):
         group_idx = 0
         for c in group_by:
-            if c._is_equal(row,group_values[group_idx]):
+            if c._equal(row,group_values[group_idx]):
                 group_idx += 1
             else:
                 return False
@@ -53,11 +54,12 @@ class TableGroup:
         # for each row, add it to a new list of rows or add to counter
         curr_row = [None]*len(new_cols)
         for row in table:
+            pass
 
         
 
-def select_rows(t:str):
-    return t['file_root'] == '\\2017-11'
+def filter(table:Table,filter:Filter):
+    return table['file_root'] == '\\2017-11'
 
 
 

@@ -22,7 +22,8 @@ metadata:CsvTable = CsvTable("image_collection_metadata.csv")
 event_cb:dict[any:any] = []
 
 ''' set when collection is created or loaded '''
-table:ImageCollection = ImageCollection('') # new empty table
+table:ImageCollection = ImageCollection('') # may be filtered
+otable:ImageCollection = table  # original table - unfiltered
 directory = ""
 
 ''' initialized in main() '''

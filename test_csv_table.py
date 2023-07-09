@@ -15,9 +15,9 @@ rows = [['row 1','r1 c2','r1,c3'],
 
 table = csv_table.CsvTable('mock_data.csv',col_names=col_names)
 for row in rows:
-    table.new_row()
+    row = table.new_row()
     for i,col in enumerate(col_names):
-        table[col] = row[i]
+        row[col] = row[i]
 
 table.save()
 

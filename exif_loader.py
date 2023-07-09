@@ -9,13 +9,14 @@
 from __future__ import annotations
 import os
 import pathlib
-
 import exifread
 import hjson  # NOTE: uses hjson instead of json for easier reading json
-from table import Table
-from csv_table import CsvTable
 
 import PySimpleGUI as sg
+
+from table import Table
+from image_collection import ImageCollection
+import pi_config as c 
 
 class ExifLoader:
 
@@ -42,10 +43,11 @@ class ExifLoader:
             sg.popup(msg)
             return None,None
 
-        from csv_table import CsvTable
-        metadata = CsvTable("image_collection_metadata.csv")
-        table = CsvTable(collection_fn,metadata=metadata)
-        loader = ExifLoader(table,metadata)
+        c.status.update(f"Searching for pictures in {d}...")
+        c.window.refresh()
+        
+        table  = ImageCollection(collection_fn)
+        loader = ExifLoader(table,c.metadata)
         loader.load_dir(d)
 
         return table,d
@@ -53,6 +55,7 @@ class ExifLoader:
     def __init__(self,data_table:Table, metadata_table:Table, 
                  first_file_id:int=1000):
         self._data = data_table
+        self._new_row = None
         self._meta = metadata_table
         self._last_fid = first_file_id-1
 
@@ -87,7 +90,7 @@ class ExifLoader:
                     tags['sys.file_size'] = os.path.getsize(file_path)
 
                     # load a new row
-                    self._data.new_row()
+                    self._new_row = self._data.new_row()
                     self._load_exif(tags)
 
     ''' load the tag info for one field into the data table
@@ -102,7 +105,7 @@ class ExifLoader:
             default   = meta['default']
 
             data = self._get_exif_data(tags,load_func,exif_tags,default=default)
-            self._data[col_name] = data
+            self._new_row[col_name] = data
 
     def _get_exif_data(self,tags:dict[str,any],load_func:str,
                        exif_tags:any,default:str):

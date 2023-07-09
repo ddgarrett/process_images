@@ -33,8 +33,7 @@ class PiMenu(PiElement):
         # ------ Menu Definition ------ #
         menu_def = [['&File', ['&New','&Open', '&Save', '&Properties', 'E&xit']],
                     ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
-                    ['&Toolbar', ['---', 'Command &1', 'Command &2',
-                                    '---', 'Command &3', 'Command &4']],
+                    ['&Review', ['&0 - Initial ', '&1 - Quality', '&2 - Duplicates','&3 - Best','&4 - Best of Best','&All']],
                     ['&Help', '&About...'], ]
         
         return sg.Menu(menu_def, )
@@ -48,11 +47,11 @@ class PiMenu(PiElement):
     ''' Event Handlers '''
 
     def new_collection(self,evnt,values) -> bool:
-        table,d = self._init_new_collection()
+        table,d = ExifLoader.new_collection()
         if table:
             c.table = table
             c.directory = d
-            self.update_status(f"{len(c.table)} images loaded from {d}")
+            self.update_status(f"{len(c.table.rows())} images loaded from {d}")
             return False  # let other elements receive the "New" event?
         else:
             self.update_status("New collection canceled")
@@ -70,7 +69,7 @@ class PiMenu(PiElement):
             if table:
                 c.table = table
                 c.directory = os.path.dirname(filename)
-                self.update_status(f"Collection with {len(c.table)} images loaded from {filename}")
+                self.update_status(f"Collection with {len(c.table.rows())} images loaded from {filename}")
                 return False # let other elements receive 'Open' event? Add Table to values?
             else:
                 self.update_status("Error opening collection file")
@@ -82,7 +81,7 @@ class PiMenu(PiElement):
     def save_collection(self,event,values):
         if c.table:
             c.table.save()
-            self.update_status(f"Collection with {len(c.table)} images saved to {c.table.fn}")
+            self.update_status(f"Collection with {len(c.table.rows())} images saved to {c.table.fn}")
         else:
             self.update_status("No collection loaded")
 
@@ -99,6 +98,8 @@ class PiMenu(PiElement):
         return True
     
     ''' private methods '''
+    ''' Moved to exifloader class '''
+    '''
     def _init_new_collection(self):
         d = sg.popup_get_folder('',no_window=True)
         if not d:
@@ -106,11 +107,7 @@ class PiMenu(PiElement):
 
         collection_fn = os.path.join(d, "image_collection.csv")
         if os.path.exists(collection_fn):
-            msg = f'''
-                Collection file already exists: \n 
-                "{collection_fn}"\n
-                Delete file then retry.
-            '''
+            msg = 'see exifloader for message'
             sg.popup(msg)
             return None,None
 
@@ -122,3 +119,4 @@ class PiMenu(PiElement):
         loader.load_dir(d)
 
         return table,d
+    '''

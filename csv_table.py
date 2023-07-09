@@ -22,7 +22,7 @@ class CsvTable(Table):
     @staticmethod
     def verify_metadata(col_names:list[str],metadata:CsvTable):
         ''' Verify that column names match those in metadata '''
-        if len(col_names) != len(metadata):
+        if len(col_names) != len(metadata.rows()):
             raise Exception("Metadata mismatch with CSV")
         
         col_dict = {}
@@ -59,7 +59,8 @@ class CsvTable(Table):
                     col_dict = CsvTable.verify_metadata(columns,metadata)
 
                 for row in reader:
-                    rows.append(Row(col_dict,row))
+                    rows.append(Row(self,col_dict,row))
+
         except FileNotFoundError:
             # build a new empty table from metadata
             if metadata == None:
@@ -77,20 +78,10 @@ class CsvTable(Table):
         self.save_as(self.fn)
 
     def save_as(self,fn:str):
-        ''' Save the table with given file name.
-            Since this table may be filtered, save all
-            rows by saving the original table '''
-        
-        ''' Make sure we save an unfiltered version of the table
-            by saving the original parent table. '''
-        if self._parent_table != self:
-            table = self._get_root_table()
-            return table.save_as(fn)
-
         with open(fn,'w',newline='') as cvsfile:
             w = csv.writer(cvsfile)
-            w.writerow(self[Table.COL_NAMES])
-            for i in range(len(self)):
-                w.writerow(self._rows[i]._data)
+            w.writerow(list(self._cols.keys()))
+            for row in self:
+                w.writerow(row._data)
 
         self.fn = fn

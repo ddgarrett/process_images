@@ -15,6 +15,7 @@ from pi_menu import PiMenu
 from pi_tree_list import PiTreeList
 from pi_image_elem import PiImageElem
 from pi_image_thumb_elem import PiImageThumbElem
+from pi_folder_stats import FolderStats
 
 elements = []
 
@@ -24,7 +25,7 @@ def init_window():
     # sg.set_options(margins=(0, 0))
     
     menu = PiMenu()
-    tree = PiTreeList(key="-TREE-",headings=['cnt'])
+    tree = PiTreeList(key="-TREE-",headings=FolderStats.get_headers())
     image = PiImageElem(key="-IMAGE-",event="-TREE-")
     # image = PiImageThumbElem(key="-IMAGE-",event="-TREE-")
 
