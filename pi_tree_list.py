@@ -17,10 +17,11 @@ class PiTreeList(PiElement):
 
     def __init__(self,key="-TREE-",headings=[],events=[]):
         super().__init__(key)
-        self._events = {
-            "New": self.update_list,
-            "Open": self.update_list,
-        }
+
+        c.listeners.add(c.EVT_TABLE_LOAD,self.update_list)
+
+        right_click_menu = ['', 
+            [f'Map::{c.EVT_ACT_MAP}', 'Properties', 'Save::',['Embdded', 'Menu'],'Save','Exit' ]]
 
         self._tree = (
             sg.Tree(data=sg.TreeData(),
@@ -28,53 +29,21 @@ class PiTreeList(PiElement):
                     auto_size_columns=True,
                     select_mode=sg.TABLE_SELECT_MODE_EXTENDED,
                     num_rows=5,
-                    col0_width=10,
+                    col0_width=25,
                     key=self.key,
                     # show_expanded=False,
                     enable_events=True,
                     expand_x=True,
                     expand_y=True,
+                    right_click_menu=right_click_menu
                     )
             )
 
     def get_element(self) -> sg.Tree:
         return  self._tree
-
-    def handle_event(self,event,values) -> bool:
-        if event in self._events:
-            return self._events[event](event,values)
-        
-        return False
     
     ''' Event Handlers '''
-    def update_list(self,event,values) -> bool :
+    def update_list(self,event,values):
         treedata = PiTreeData(c.table)
-
-        '''
-        treedata = sg.TreeData()
-        print(c.directory,c.directory.split('/'))
-        treedata.insert("",c.directory,c.directory,values=[],icon=self.folder_icon)
-        for row in c.table:
-            fullname = f"{row['file_location']}/{row['file_name']}"
-            treedata.Insert(c.directory, fullname, row['file_name'], values=[], icon=self.file_icon)
-        '''
         c.window[self.key].update(values=treedata)
 
-        return False
-
-'''
-def add_files_in_folder(parent, dirname):
-    global image_cnt, folder_cnt
-    files = os.listdir(dirname)
-    for f in files:
-        fullname = os.path.join(dirname, f)
-        fullname = fullname.replace('\\','/') # added: replace back slash with forward slash
-        # if it's a folder, add folder and recurse
-        if os.path.isdir(fullname): 
-            folder_cnt += 1          
-            treedata.Insert(parent, fullname, f, values=[], icon=folder_icon)
-            add_files_in_folder(fullname, fullname)
-        elif f.lower().endswith((".png", ".gif",".jpg","jpeg")):
-            image_cnt += 1
-            treedata.Insert(parent, fullname, f, values=[os.stat(fullname).st_size], icon=file_icon)
-'''

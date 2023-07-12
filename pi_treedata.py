@@ -107,5 +107,5 @@ class PiTreeData(TreeData):
         for row in self.collection.rows():
             parent = row['file_location']
             v      = row['file_name']
-            values = [row['img_status'],f'L{row["rvw_lvl"]}']
+            values = [row['img_status'],row['rvw_lvl']]
             self.insert(parent, f'{parent}/{v}',v,values=values, icon=self.file_icon)

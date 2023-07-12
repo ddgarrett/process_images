@@ -1,12 +1,9 @@
 '''
     Table Filter classes and subclasses.
 
-    NOTE that filters are additive. So if 
-    a table is filtered twice it will result in rows
-    which pass BOTH filters.
-
-    To avoid this, use table.reset_filter() between 
-    filters.
+    Does not affect the table being filtered.
+    Instead it returns a list of rows which match the filter
+    conditions.
 
     See below for Filers used during the review process. 
     The review process, levels and statuses include:
@@ -44,7 +41,7 @@
 '''
 from __future__ import annotations
 
-from table import Table
+from table import Table, Row
 
 class Filter():
 
@@ -52,18 +49,11 @@ class Filter():
         self._table = table
 
     def filter(self):
-        ''' Filter self._table in place,
-            leaving it with just those rows which passed
-            the filter '''
-        filtered_rows = []
+        ''' Filter self._table  returning a list
+            of rows which pass the filter   '''
+        return  [r for r in self._table if self.filter(r)]
 
-        for row in self._table:
-            if self.test(row):
-                filtered_rows.append(row._get_curr_row())
-
-        self._table._rows = filtered_rows
-
-    def test(self,row:Table):
+    def test(self,row:Row):
         ''' Return True if the row passes the test. '''
         return False
     
@@ -112,8 +102,8 @@ class ReviewForBestOfBestFilter(LevelStatusFilter):
 ''' Filters for those which have been reviewed to a certain level 
     Filters are for 
     - 'rejected' - status = 'reject'
-    - 'okay'     - level >= 2 (will include duplicates), status in [tbd,dup,ok,select]
-    - 'good'     - level >= 3 (like 'okay' but without duplicates), status in [tbd,ok,select]
+    - 'ok'       - level >= 2 (will include duplicates), status in [tbd,dup,ok,select]
+    - 'good'     - level >= 3 (like 'ok' but without duplicates), status in [tbd,ok,select]
     - 'select'   - level >= 4 (good enough to show others and upload to google), status in [tbd,select]
     - 'best'     = level == 5 (the best of the selected), status in [select]
 

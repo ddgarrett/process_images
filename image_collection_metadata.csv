@@ -11,6 +11,8 @@ img_date_time,str,1969:12:31 16:00:00,get_key,"[""Image DateTime"",""GPS GPSDate
 img_exif_ver,int,0,get_key,EXIF ExifVersion,
 img_make,str,na,get_key,Image Make,
 img_model,str,na,get_key,Image Model,
+img_rotate,any,0,get_key_value,Image Orientation,
 img_tags,str, ,,,filled in later - array of tags
-img_status,str,tbd,,,"review status - tbd,reject,accept"
+img_status,str,tbd,,,"review status - tbd,reject,dup,ok,select"
 rvw_lvl,int,0,,,review level - incremented for each review cycle
+notes,str,,,,"notes about image, such as any special reason it's being kept"

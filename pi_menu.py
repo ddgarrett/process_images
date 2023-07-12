@@ -12,45 +12,45 @@ from image_collection import ImageCollection
 from exif_loader import ExifLoader
 
 import pi_config as c
+import pi_util as util 
 from pi_element import PiElement
+
 
 class PiMenu(PiElement):
 
     def __init__(self,key=None):
         super().__init__(key=key)
 
-        self._events = {
-            "New": self.new_collection,
-            "Open": self.open_collection,
-            "Save": self.save_collection,
-            "Properties": self.second_window,
-            "About...": self.about_pi_app 
-        }
+        c.listeners.add(c.EVT__FILE_OPEN,self.open_collection)
+        c.listeners.add(c.EVT_FILE_NEW,self.new_collection)
+        c.listeners.add(c.EVT_FILE_SAVE,self.save_collection)
+        c.listeners.add(c.EVT_FILE_PROPS,self.second_window)
+        c.listeners.add(c.EVT_ABOUT,self.about_pi_app)
 
     def get_element(self) -> sg.Menu:
         ''' Return the sg.Menu element for Process Image App
         '''
         # ------ Menu Definition ------ #
-        menu_def = [['&File', ['&New','&Open', '&Save', '&Properties', 'E&xit']],
+        menu_def = [['&File', 
+                        [f'&New::{c.EVT_FILE_NEW}',
+                         f'&Open::{c.EVT__FILE_OPEN}', 
+                         f'&Save::{c.EVT_FILE_SAVE}', 
+                         f'&Properties::{c.EVT_FILE_PROPS}', 
+                         f'E&xit::{c.EVT_EXIT}' 
+                        ] 
+                    ],
                     ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
                     ['&Review', ['&0 - Initial ', '&1 - Quality', '&2 - Duplicates','&3 - Best','&4 - Best of Best','&All']],
-                    ['&Help', '&About...'], ]
+                    ['&Help', f'&About...::{c.EVT_ABOUT}'], ]
         
         return sg.Menu(menu_def, )
-    
-    def handle_event(self,event,values) -> bool:
-        if event in self._events:
-            return self._events[event](event,values)
-        
-        return False
 
     ''' Event Handlers '''
 
-    def new_collection(self,evnt,values) -> bool:
+    def new_collection(self,event,values) -> bool:
         table,d = ExifLoader.new_collection()
         if table:
-            c.table = table
-            c.directory = d
+            util.set_collection(table,d,values)
             self.update_status(f"{len(c.table.rows())} images loaded from {d}")
             return False  # let other elements receive the "New" event?
         else:
@@ -67,9 +67,9 @@ class PiMenu(PiElement):
         if filename:
             table = ImageCollection(filename)
             if table:
-                c.table = table
-                c.directory = os.path.dirname(filename)
-                self.update_status(f"Collection with {len(c.table.rows())} images loaded from {filename}")
+                d = os.path.dirname(filename)
+                util.set_collection(table,d,values)
+                self.update_status(f"Collection with {len(c.table.rows())} images loaded from {d}")
                 return False # let other elements receive 'Open' event? Add Table to values?
             else:
                 self.update_status("Error opening collection file")
@@ -97,26 +97,3 @@ class PiMenu(PiElement):
         window.close()
         return True
     
-    ''' private methods '''
-    ''' Moved to exifloader class '''
-    '''
-    def _init_new_collection(self):
-        d = sg.popup_get_folder('',no_window=True)
-        if not d:
-            return None,None
-
-        collection_fn = os.path.join(d, "image_collection.csv")
-        if os.path.exists(collection_fn):
-            msg = 'see exifloader for message'
-            sg.popup(msg)
-            return None,None
-
-        self.update_status(f"Searching for pictures in {d}...")
-        c.window.refresh()
-
-        table = ImageCollection(collection_fn)
-        loader = ExifLoader(table,c.metadata)
-        loader.load_dir(d)
-
-        return table,d
-    '''

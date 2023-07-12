@@ -16,36 +16,28 @@ from pi_tree_list import PiTreeList
 from pi_image_elem import PiImageElem
 from pi_image_thumb_elem import PiImageThumbElem
 from pi_folder_stats import FolderStats
+from pi_action_map import PiActionMap
 
 elements = []
 
 def init_window():
-    global elements
     sg.theme('black')
     # sg.set_options(margins=(0, 0))
     
     menu = PiMenu()
-    tree = PiTreeList(key="-TREE-",headings=FolderStats.get_headers())
-    image = PiImageElem(key="-IMAGE-",event="-TREE-")
-    # image = PiImageThumbElem(key="-IMAGE-",event="-TREE-")
-
-    elements = [menu,tree,image]
-
-    '''
-                    sg.Column([[image.get_element()]], expand_x=True, expand_y=True, key="-IMGCOL-")],
-                    orientation='h', relief=sg.RELIEF_SUNKEN, 
-                    expand_x=True, expand_y=True, k='-PANE-',
-                    border_width=1, background_color="white")
-
-    '''
+    tree = PiTreeList(key=c.EVT_TREE,headings=FolderStats.get_headers())
+    image = PiImageElem(key="-IMAGE-",event=c.EVT_TREE)
+    # image = PiImageThumbElem(key="-IMAGE-",event=c.EVT_TREE)
     
+    # define actions
+    action_map = PiActionMap(c.EVT_ACT_MAP,value_list=c.EVT_TREE)
+
     # ------ GUI Defintion ------ #
     layout = [[menu.get_element()],
               [sg.Pane(
-                [sg.Column([[tree.get_element()]], expand_y=True),
-                # sg.VSeperator(),
-                sg.Column(image.get_element(), expand_x=True, expand_y=True, 
-                          key="-IMGCOL-", scrollable=True, vertical_scroll_only=True)],
+                    [   sg.Column([[tree.get_element()]], expand_y=True),
+                        sg.Column(image.get_element(), key="-IMGCOL-")
+                    ],
                     orientation='h', relief=sg.RELIEF_SUNKEN, 
                     expand_x=True, expand_y=True, k='-PANE-',
                     border_width=1, background_color="white")
@@ -69,31 +61,21 @@ def main():
 
     # print(f'window has status: {"-STATUS-" in c.window.AllKeysDict}')
 
-    # ------ Loop & Process button menu choices ------ #
+    # ------ Loop & Process events Until exit ------ #
     while True:
         event, values = c.window.read()
-        event_handled = False
 
-        for e in elements:
-            if e.handle_event(event,values):
-                event_handled = True
-                break
+        # if event has MENU_KEY_SEPARATOR, remove it
+        if event != None:
+            _,_,event = event.rpartition(sg.MENU_KEY_SEPARATOR)
 
-        if event_handled:
-            pass
-        elif event in (sg.WIN_CLOSED, 'Exit'):
-            ''' Putting test here allows other elements to do cleanup before exit.
-                Also allows elements to veto the exit by returning True from their handle_event() method '''
+        print(f'e: {event}, v: {values}')
+
+        c.listeners.notify(event,values)
+
+        if event in (sg.WIN_CLOSED, c.EVT_EXIT):
+            ''' Putting test here allows other elements to do cleanup before exit  '''
             break
-        else:
-            print(f'e: {event}, v: {values}')
-
-        # TODO: add logic for internal event notifications
-        # such as '-TABLE-LOADED-'  {'table':table_object}
-        # using python queues
-        # OR
-        # Have 'Open' and 'New' passed to the tree list object?
-        # but that might have issues with order it's called, though it would be simpler.
 
     c.window.close()
 
