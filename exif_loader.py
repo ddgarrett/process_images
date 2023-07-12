@@ -25,7 +25,6 @@ class ExifLoader:
         metadata   = table columns that are loaded and how to set them
         file_suffix = suffix of files to load
     '''
-    FILE_TYPES = [".jpg",".jpeg",".png",".gif",".tiff"]
 
     @staticmethod
     def new_collection():
@@ -75,7 +74,7 @@ class ExifLoader:
             for fn in files:
                 file_path = dir_path.joinpath(fn)
                 sfx = file_path.suffix
-                if sfx.lower() in self.FILE_TYPES:
+                if sfx.lower() in c.IMG_FILE_TYPES:
 
                     # read the file exif info
                     f = open(file_path, 'rb')
@@ -113,8 +112,11 @@ class ExifLoader:
         load = self._get_default
         if load_func == 'get_key':
             load =  self._get_key
-        if load_func == 'get_lat_lon':
+        elif load_func == 'get_lat_lon':
             load = self._get_lat_lon
+        elif load_func == 'get_key_value':
+            load = self._get_key_value
+
 
         return load(tags,exif_tags,default)
 
@@ -132,6 +134,27 @@ class ExifLoader:
                 return tags[tag]
             
         return default
+        
+    ''' like _get_key but returns the value instead.
+        if exif_tags is a list, try each tag name in the list  '''
+    def _get_key_value(self,tags:dict[str,any],exif_tags:any,default:any):
+        value = default
+        if type(exif_tags) == str:
+            value = tags.get(exif_tags,default)
+            if value != default:
+                value = value.values
+
+        else:    
+            for tag in exif_tags:
+                if tag in tags:
+                    value =  tags[tag].values
+                    break
+            
+        if value != default:
+            if type(value) == list and len(value) == 1:
+                value = value[0]
+
+        return value
         
     # Get either latitude or longitude.
     # The conversion formula is the same regardless.
