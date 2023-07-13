@@ -7,14 +7,16 @@
       - get_headers
 
     Stats include
-      - count of files at each level
+      - count of files
       - a 'status' and 'lvl' which summarized the files. Either:
           - if any 'tbd' - the lowest level with 'tbd'
           - for others   - the highest level (best) in that folder
 
-    Consider: 
-      Simplify the reported "summary" to be either "completed" 
-      or "Ln Awaiting Review"
+    Consider:
+      - for 'tdb', in level use 'reject?', 'bad?', 'dup?','good?','best?'
+      - if not 'tdb', blank level
+
+      OR remove lvl and use 'tdb - reject?', etc. in status.
 
 '''
 from __future__ import annotations
@@ -26,7 +28,7 @@ class FolderStats:
     headers = ['status','lvl','cnt','L0','L1','L2','L3','L4','L5']
 
     # prioritized lists of priorities with 'tbd' highest priority
-    stat_priority = ['reject','dup','ok','selected','tbd']
+    stat_priority = ['reject','bad','dup','ok','good','best','tbd']
 
     @staticmethod
     def get_headers() -> list[str]:
