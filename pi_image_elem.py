@@ -11,6 +11,7 @@ import pi_config as c
 from pi_element import PiElement
 from pi_image_util import is_image_file, cnv_image
 from status_menu_item import StatusMenuItem
+from pi_util import get_row_for_fn
 
 class PiImageElem(PiElement):
 
@@ -61,7 +62,7 @@ class PiImageElem(PiElement):
 
         self._filename = fn
         if fn:
-            self._collection_row = self._get_row(fn)
+            self._collection_row = get_row_for_fn(fn)
         else:
             self._collection_row = None
             
@@ -103,14 +104,4 @@ class PiImageElem(PiElement):
 
         self.update_status(msg)
 
-    def _get_row(self,filename):
-        ''' given a filename which includes the "file_location + '/' + file_name"
-            find the row definining the file
-         '''
-        loc,_,name  = filename.rpartition('/') 
-        for row in c.table:
-            if row['file_name'] == name and row['file_location'] == loc:
-                return row
-
-        return None
         

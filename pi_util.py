@@ -2,6 +2,17 @@
 
 import pi_config as c
 
+def get_row_for_fn(filename):
+    ''' given a filename which includes the "file_location + '/' + file_name"
+        find the row for the file
+    '''
+    loc,_,name  = filename.rpartition('/') 
+    for row in c.table:
+        if row['file_name'] == name and row['file_location'] == loc:
+            return row
+
+    return None
+
 def set_collection(table,directory,values):
     ''' Set global table and directory then notify 
         listeners. Values are from the event which 
@@ -12,6 +23,7 @@ def set_collection(table,directory,values):
     c.listeners.notify(c.EVT_TABLE_LOAD,values)
 
 
+''' Below should be in it's own file? Maybe Along with Events from  pi_config? '''
 class EventListener:
     ''' Simple Event Listener
      
