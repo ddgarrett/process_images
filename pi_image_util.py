@@ -8,8 +8,10 @@ import PIL.Image, PIL.ImageTk
 
 def is_image_file(fn) -> bool:
     ''' Return true if the file for fn is an image file '''
-    return (os.path.isfile(fn) and 
-            fn.lower().endswith((".png", ".gif",".jpg","jpeg")))
+    if fn:
+        return (os.path.isfile(fn) and 
+                fn.lower().endswith((".png", ".gif",".jpg","jpeg")))
+    return False
 
 def cnv_image(file, resize=None, rotate=1):
     ''' Convert a file or byte stream to a Tkinter image.
