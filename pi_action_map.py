@@ -20,6 +20,9 @@ import pi_config as c
 from pi_action import PiAction
 
 class PiActionMap(PiAction):
+    '''
+        Create a heatmap for selected files and folders.
+    '''
 
     def __init__(self,event,value_list:list[str]):
         super().__init__(event)
@@ -40,18 +43,13 @@ class PiActionMap(PiAction):
         for name in files_folders:
             if name == "":
                 self._filter_folders.add(name)
-            elif name.startswith('/'):
+            elif os. path. isdir(f'{c.directory}{name}'):
                  self._filter_folders.add(name)
             else:
                 self._filter_files.add(name)
-            
+
         selected_rows = [r for r in c.table.rows() if self._filter_row(r)]
 
-        '''
-        print("selected:")
-        for r in selected_rows:
-            print(r['file_location'],r['file_name'])
-        '''
         # generate heatmap for selected_rows
         if len(selected_rows) > 0:
             self._generate_map(selected_rows)
@@ -73,6 +71,8 @@ class PiActionMap(PiAction):
     
     def _generate_map(self,rows):
         ''' generate a google maps heatmap for list of rows '''
+        marker_html = "<a href='file://{c.directory}row'>The Presidio</a>"
+
         lat_lon_lst = []
         weights = []
         markers = {}
@@ -85,14 +85,15 @@ class PiActionMap(PiAction):
             lat += lat_lon[0]
             lon += lat_lon[1]
             cnt += 1
+            href = f'<a href="file://{c.directory}{fn}" target="_blank">- {fn}</a>'
             try:
                 idx = lat_lon_lst.index(lat_lon)
                 weights[idx] = weights[idx] + 1
-                markers[lat_lon] = f'{markers[lat_lon]}<BR>- {fn}' 
+                markers[lat_lon] = f'{markers[lat_lon]}<BR>{href}' 
             except ValueError:
                 lat_lon_lst.append(lat_lon)
                 weights.append(1)
-                markers[lat_lon] = f'- {fn}'
+                markers[lat_lon] = href
 
         # print(lat_lon_lst,weights)
         
