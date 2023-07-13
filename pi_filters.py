@@ -15,7 +15,7 @@
     2. Quality review to weed out images with technical issues such
        as blurry, poor composition, portraits with eyes closed.
        - current level = '1' and status = 'tbd'
-       - if rejected, level left at '1' and status set to 'reject'
+       - if rejected, level left at '1' and status set to 'bad'
        - if acceptec, level set to '2' and status left at 'tbd'
 
     3. Duplicate Review to choose the best of multiple images that
@@ -35,8 +35,8 @@
        that you'd show to really "wow" people. Also show people who 
        have little patience for looking at your photos.
        - current level = '4' and status = 'tbd'
-       - if not chosen, level left at '4' and status set to 'select'
-       - if not chosen, level set to '5' and status set to 'select'
+       - if not chosen, level left at '4' and status set to 'good'
+       - if not chosen, level set to '5' and status set to 'best'
 
 '''
 from __future__ import annotations
@@ -55,7 +55,7 @@ class Filter():
 
     def test(self,row:Row):
         ''' Return True if the row passes the test. '''
-        return False
+        return True
     
 class LevelStatusFilter(Filter):
     ''' Filter a table for a selected review level and status '''
@@ -77,34 +77,37 @@ class InitialReviewFilter(LevelStatusFilter):
     def __init__(self,table:Table):
         super.__init__(table,"0","tbd")
 
-class ReviewForQualityFilter(LevelStatusFilter):
+class QualityReviewFilter(LevelStatusFilter):
     ''' Review for poor composition, blurry, eyes closed, etc. '''
     def __init__(self,table:Table):
         super.__init__(table,"1","tbd")
 
-class ReviewDuplicatesFilter(LevelStatusFilter):
+class DuplicateReviewFilter(LevelStatusFilter):
     ''' Review to select best of duplicate or very similar images. '''
     def __init__(self,table:Table):
         super.__init__(table,"2","tbd")
 
-class ReviewForSelectedFilter(LevelStatusFilter):
+class GoodReviewFilter(LevelStatusFilter):
     ''' Photos good enough to show others without boring them. 
         These are probably good enough to upload to Google Photos.
         Roughly around 10% of total. '''
     def __init__(self,table:Table):
         super.__init__(table,"3","tbd")
 
-class ReviewForBestOfBestFilter(LevelStatusFilter):
+class BestReviewFilter(LevelStatusFilter):
     ''' Best of the Best. Roughly about 1% of photos. '''
     def __init__(self,table:Table):
         super.__init__(table,"4","tbd")
 
 ''' Filters for those which have been reviewed to a certain level 
+    Don't need these? 
+    Shouldn't include TBD? Instead, wait until review complete for all.
     Filters are for 
-    - 'rejected' - status = 'reject'
-    - 'ok'       - level >= 2 (will include duplicates), status in [tbd,dup,ok,select]
-    - 'good'     - level >= 3 (like 'ok' but without duplicates), status in [tbd,ok,select]
-    - 'select'   - level >= 4 (good enough to show others and upload to google), status in [tbd,select]
-    - 'best'     = level == 5 (the best of the selected), status in [select]
+    - 'reject'   - status = 'reject'
+    - 'bad'      - status = 'bad'
+    - 'passed'   - level >= 2 (will include duplicates), status in [tbd,dup,ok,good,best]
+    - 'ok'       - level >= 3 (like 'ok' but without duplicates), status in [tbd,ok,select]
+    - 'good'     - level >= 4 (good enough to show others and upload to google), status in [tbd,select,best]
+    - 'best'     - level == 5 (the best of the selected), status in [best]
 
 '''
