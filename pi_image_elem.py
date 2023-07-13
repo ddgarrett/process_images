@@ -10,6 +10,7 @@ import PySimpleGUI as sg
 import pi_config as c
 from pi_element import PiElement
 from pi_image_util import is_image_file, cnv_image
+from status_menu_item import StatusMenuItem
 
 class PiImageElem(PiElement):
 
@@ -24,23 +25,47 @@ class PiImageElem(PiElement):
         c.listeners.add(c.EVT_WIN_CONFIG,self.resize_image)
 
     def get_element(self) -> sg.Element:
-        return [[sg.Image(key=self.key)]]
+        menu = ['', 
+            [f'Map::{c.EVT_ACT_MAP}', 
+             'Review As...',[
+                 StatusMenuItem('Reject',c.STAT_REJECT,c.LVL_INITIAL,self.get_row).item(), 
+                 StatusMenuItem('Bad Quality',c.STAT_QUAL_BAD,c.LVL_QUAL,self.get_row).item(),
+                 StatusMenuItem('Duplicate',c.STAT_DUP,c.LVL_DUP,self.get_row).item(),
+                 StatusMenuItem('Just Okay',c.STAT_OK,c.LVL_OK,self.get_row).item(),
+                 StatusMenuItem('Good',c.STAT_GOOD,c.LVL_GOOD,self.get_row).item(),
+                 StatusMenuItem('Best!',c.STAT_BEST,c.LVL_BEST,self.get_row).item()],
+             'TBD - Possible...',[
+                 StatusMenuItem('Reject',c.STAT_TBD,c.LVL_INITIAL,self.get_row).item(),
+                 StatusMenuItem('Bad Quality',c.STAT_TBD,c.LVL_QUAL,self.get_row).item(),
+                 StatusMenuItem('Duplicate',c.STAT_TBD,c.LVL_DUP,self.get_row).item(),
+                 StatusMenuItem('Ok Good Best',c.STAT_TBD,c.LVL_OK,self.get_row).item(),
+                 StatusMenuItem('Good or Best',c.STAT_TBD,c.LVL_GOOD,self.get_row).item()
+                 ],
+            ]]
+        return [[sg.Image(key=self.key,right_click_menu=menu)]]
     
+    def get_row(self,values):
+        return [self._collection_row]
     
     ''' Event Handlers '''
 
     def file_selected(self,event,values):
-        print(f"file selected: {event}, {values}")
-        try:
-            filename = values[event][0]
-            full_fn = f'{c.directory}{filename}'   # os.path.join(c.directory, filename)
-            if is_image_file(full_fn):
-                self._collection_row = self._get_row(filename)
-                self._filename = filename
-                self._update_image(event,values)
-        except Exception as e:
-            print("exception:",e)
+        fn_list = values[event]
+        if len(fn_list) == 0:
+            fn = None
+        else:
+            fn = values[event][-1]
+            full_fn = f'{c.directory}{fn}'
+            if not is_image_file(full_fn):
+                fn = None
 
+        self._filename = fn
+        if fn:
+            self._collection_row = self._get_row(fn)
+        else:
+            self._collection_row = None
+            
+        self._update_image()
 
     def resize_image(self,event,values):
         image_size = c.window[self.key].ParentContainer.get_size()
@@ -49,28 +74,26 @@ class PiImageElem(PiElement):
         if image_size != (1,1) and image_size[1] != None:
             if (abs(image_size[0] - self._new_size[0]) > 8 or
                 abs(image_size[1] - self._new_size[1]) > 8):
-            
                 self._new_size = image_size
-                self._update_image(event,values)
-  
+                self._update_image()
   
     ''' private methods '''
 
-    def _update_image(self,event,values):
-        # only update if image file
-        fn = f'{c.directory}{self._filename}'
-        # fn = os.path.join(c.directory, self._filename)
-        fn = fn.replace('\\','/')
-        if not is_image_file(fn):
-            # print(f"no image: {fn}")
+    def _update_image(self):
+        if not self._filename:
+            c.window[self.key].update(data=None)
+            c.window.refresh()
             return
-        
+    
+        fn = f'{c.directory}{self._filename}'
+        fn = fn.replace('\\','/')
+
         ''' Update the image displayed '''
         rotate = int(self._collection_row['img_rotate'])
         thumb,osize = cnv_image(fn, resize=self._new_size, rotate=rotate)
         c.window[self.key].update(data=thumb)
-
         c.window.refresh()
+
         img_size = c.window[self.key].get_size()
         try:
             pct_size = int(round(img_size[0]/osize[0]*100))
