@@ -22,6 +22,13 @@ def select(tree, key=''):
         tree.Widget.see(id_)
         tree.Widget.selection_set(id_)
 
+def increment(tree,key):
+    id_ = key_to_id(tree, key)
+    if id_:
+      v = int(tree.Widget.set(id_, '#1'))
+      v += 1
+      tree.Widget.set(id_, '#1',str(v))
+
 treedata = sg.TreeData()
 treedata.Insert("","_A_","A",[1])
 treedata.Insert("","_B_","B",[2])
@@ -37,6 +44,8 @@ while True:
     event, values = window.read()
     if event in (sg.WIN_CLOSED, 'Cancel'):
         break
+    
+    increment(tree,values['-TREE-'][0])
     print(event, values)
 
 window.close()
