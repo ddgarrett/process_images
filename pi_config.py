@@ -22,6 +22,9 @@ IMG_FILE_TYPES = [".jpg",".jpeg",".png",".gif",".tiff"]
 ''' initialized here '''
 metadata:CsvTable = CsvTable("image_collection_metadata.csv")
 
+# print events as they are handled?
+TRACE_EVENTS = True
+
 # standard events
 EVT__FILE_OPEN  = '-FILE_OPEN-'
 EVT_FILE_NEW    = '-FILE_NEW-'
@@ -32,9 +35,27 @@ EVT_ABOUT       = '-ABOUT-'
 
 EVT_TREE        = '-TREE-'
 EVT_TABLE_LOAD  = '-TABLE_LOAD-'
+EVT_TABLE_ROW_CHG = '-ROW_CHG-'
 EVT_WIN_CONFIG  = WINDOW_CONFIG
 
 EVT_ACT_MAP     = '-MAP-'
+
+# standard image statuses
+STAT_REJECT     = 'reject'
+STAT_QUAL_BAD   = 'bad'
+STAT_DUP        = 'dup'
+STAT_OK         = 'ok'
+STAT_GOOD       = 'good'
+STAT_BEST       = 'best'
+STAT_TBD        = 'tbd'
+
+# standard review levels
+LVL_INITIAL     = '0'
+LVL_QUAL        = '1'
+LVL_DUP         = '2'
+LVL_OK          = '3'
+LVL_GOOD        = '4'
+LVL_BEST        = '5'
 
 ''' global Event Listner '''
 listeners = EventListener()
