@@ -109,3 +109,25 @@ class PiTreeData(TreeData):
             v      = row['file_name']
             values = [row['img_status'],row['rvw_lvl']]
             self.insert(parent, f'{parent}/{v}',v,values=values, icon=self.file_icon)
+
+    def _update_rows(self,tree,key_id_dict,rows):
+        ''' Update the treedata for a list of rows.
+
+            tree - the PySimpleGUI tree object
+            'key_id_dict' - dictionary of item id to tkkinter id
+            rows - rows which were updated
+
+            TODO: propagate possible status change to parent folders
+        '''
+        for row in rows:
+            parent = row['file_location']
+            v      = row['file_name']
+            values = [row['img_status'],row['rvw_lvl']]
+
+            key = f'{parent}/{v}'
+            id = key_id_dict[key]
+
+            tree.Widget.set(id,'#1',row['img_status'])
+            tree.Widget.set(id,'#2',row['rvw_lvl'])
+
+
