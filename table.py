@@ -19,8 +19,6 @@ class Table:
         self._cols = cols   # dictionary of column name to column object
         self._rows = rows   # list of rows
 
-        self._sort_by:list[tuple[str,bool]] = None 
-
     def __iter__(self) -> Iterator[Row]:
         return iter(self._rows)
 
@@ -28,11 +26,6 @@ class Table:
         cols = str([c for c in self._cols])
         rows = str([r for r in self._rows])
         return f'{cols}\n{rows}'
-
-    def reset_filters(self) -> Row:
-        ''' reset the list of rows to the orignal
-            unfiltered set of rows '''
-        self._rows = self._get_root_table()._rows
 
     def rows(self):
         ''' return the underlying rows list '''
@@ -60,9 +53,12 @@ class Row:
         self._cols = cols   # dictionary of column name to column object
 
         # If no data passed, initialize a new row
+        # That is needed if builtin python sort is used.
+        # Will also make selects of non-equal value better as well.
         if data == None:
             data = [c._default_value() for c in cols.values()]
             
+        # CONSIDER: use Column to convert string to native object?
         self._data = data   # list of column data for this row
 
     def __repr__(self):
@@ -120,7 +116,7 @@ class Column:
         self._col_name = col_name
 
     def __repr__(self):
-        return self._col_name
+        return f'<Column {self._col_name} @ {self._col_idx}>'
         
     # Compare another value to the current value in data for this column.
     # Return an int which will be the sign equivalent of data[this] - value.
