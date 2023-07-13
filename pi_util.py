@@ -21,9 +21,7 @@ class EventListener:
         Event listener callbacks are passed and event
         and values. Usually a string and a dictionary
         as implemented by PySimpleGUI.
-
     '''
-
     def __init__(self):
         self._events = {}
 
@@ -41,6 +39,7 @@ class EventListener:
 
     def notify(self,event,values):
         if event in self._events:
-
             for callback in self._events[event]:
+                if c.TRACE_EVENTS:
+                    print(f"*** event {event} callback")
                 callback(event,values)
