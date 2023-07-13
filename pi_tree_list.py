@@ -19,12 +19,19 @@ class PiTreeList(PiElement):
         super().__init__(key)
 
         c.listeners.add(c.EVT_TABLE_LOAD,self.update_list)
+        c.listeners.add(c.EVT_TABLE_ROW_CHG,self.update_rows)
 
-        right_click_menu = ['', 
-            [f'Map::{c.EVT_ACT_MAP}', 'Properties', 'Save::',['Embdded', 'Menu'],'Save','Exit' ]]
+        menu = ['', 
+            [f'Map::{c.EVT_ACT_MAP}', 
+             'Properties', 
+             'Review',['Initial', 'Quality','Duplicate','Selected','Best'],
+             'Show',['All','Reject','Bad','Duplicate','Ok','Good','Best','Filter...'],
+             'Save',
+             'Exit' ]]
 
+        self._tree_data = PiTreeData(c.table)
         self._tree = (
-            sg.Tree(data=sg.TreeData(),
+            sg.Tree(data=self._tree_data,
                     headings=headings,
                     auto_size_columns=True,
                     select_mode=sg.TABLE_SELECT_MODE_EXTENDED,
@@ -35,15 +42,24 @@ class PiTreeList(PiElement):
                     enable_events=True,
                     expand_x=True,
                     expand_y=True,
-                    right_click_menu=right_click_menu
+                    right_click_menu=menu
                     )
             )
+        
+        self._key_id_dict = {}
 
     def get_element(self) -> sg.Tree:
         return  self._tree
     
     ''' Event Handlers '''
     def update_list(self,event,values):
-        treedata = PiTreeData(c.table)
-        c.window[self.key].update(values=treedata)
+        ''' Update the tree data after a table is loaded '''
+        self._tree_data = PiTreeData(c.table)
+        c.window[self.key].update(values=self._tree_data)
+        self._key_id_dict = {v:k for k, v in self._tree.IdToKey.items()}
+
+    def update_rows(self,event,values):
+        ''' update display after row value changes '''
+        rows = values[c.EVT_TABLE_ROW_CHG]
+        self._tree_data._update_rows(self._tree,self._key_id_dict,rows)
 
