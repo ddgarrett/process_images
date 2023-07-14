@@ -95,7 +95,7 @@ class PiTreeData(TreeData):
             keys into the TreeData '''
         td_key = f'{parent}/{key}'
         values = value[_STATS_].get_stats()
-        self.insert(parent,td_key,key,values=values,icon=PiTreeData.folder_icon)
+        self.insert(parent,td_key,key,values=values,icon=self.folder_icon)
         for k,v in value.items():
             if k != _STATS_:
                 self._insert_treedata_folder(k,v,td_key)
