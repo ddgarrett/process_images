@@ -25,9 +25,10 @@ from table import Row
 
 class FolderStats:
 
-    headers = ['status','lvl','cnt','L0','L1','L2','L3','L4','L5']
+    # headers = ['status','lvl','cnt','L0','L1','L2','L3','L4','L5']
+    headers = ['status','lvl','cnt']
 
-    # prioritized lists of priorities with 'tbd' highest priority
+    # prioritized lists of statuses with 'tbd' highest priority status
     stat_priority = ['reject','bad','dup','ok','good','best','tbd']
 
     @staticmethod
@@ -36,7 +37,7 @@ class FolderStats:
     
     def __init__(self):
         self._cnt = 0
-        self._lvl = [0]*(len(FolderStats.headers)-3)
+        # self._lvl = [0]*(len(FolderStats.headers)-3)
         self._max_status_idx = -1
         self._min_lvl = -1
 
@@ -45,7 +46,7 @@ class FolderStats:
         # highest level and highest status for all others
         self._cnt += 1
         row_lvl = row.get_int('rvw_lvl')
-        self._lvl[row_lvl] = self._lvl[row_lvl] + 1
+        # self._lvl[row_lvl] = self._lvl[row_lvl] + 1
 
         status = row['img_status']
         status_idx = FolderStats.stat_priority.index(status)
@@ -71,5 +72,5 @@ class FolderStats:
         else:
             status = FolderStats.stat_priority[self._max_status_idx]
             r = [status,self._min_lvl,self._cnt]
-            r.extend(self._lvl)
+            # r.extend(self._lvl)
         return r
