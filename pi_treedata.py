@@ -70,7 +70,7 @@ class PiTreeData(TreeData):
         idx += 1
         PiTreeData._add_dict_folder(dict[key],nodes,idx,row)
         
-    def __init__(self,rows:list[Row],stats=None):
+    def __init__(self,rows:list[Row]=[],stats=None):
         super().__init__()
         self.rows = rows
         self._insert_folders()
