@@ -1,8 +1,12 @@
 '''
     Create a heat map with gps locations for selected files.
-    Listens for events specified when action was created.
+    Listens for events specified when this action was created.
 
-    value_list = list of files or folers to generate a heat map for.
+    Like all actions, this class has a 'handle_event(self,event,values)' method.
+
+    When a new instance of this class is created:
+    event      - event to listen for
+    value_list = list of files or folers within 'values' to generate a heat map for
 
     To use, simply create a new instance with the name of the event
     and the key of the list within event values. For example:
@@ -97,7 +101,7 @@ class PiActionMap(PiAction):
         )
 
         # Pass the absolute path
-        map_fn = os.getcwd() + "/" + "temp_map.html"
+        map_fn = c.directory + "/" + "temp_map.html"
         gmap1.draw(map_fn)
 
         webbrowser.open_new_tab(map_fn)
