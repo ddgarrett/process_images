@@ -8,7 +8,6 @@ import gmplot
 import os
 import my_secrets
 import webbrowser
-import open_collection as oc
   
 # GoogleMapPlotter return Map object
 # Pass the center latitude and
@@ -59,10 +58,3 @@ def plot_images(table):
         webbrowser.open_new_tab(map_fn)
     else:
         print("no coordinates found")
-
-if __name__ == "__main__":
-    t = oc.get_collection_table()
-    plot_images(t)
-
-    print(f'Rows in table: {len(t)}')
-    print(f'first row: {t._rows[0]._data}')
