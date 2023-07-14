@@ -29,7 +29,7 @@ def init_window():
     image = PiImageElem(key="-IMAGE-",event=c.EVT_TREE)
     # image = PiImageThumbElem(key="-IMAGE-",event=c.EVT_TREE)
     
-    # define actions
+    # define global actions
     action_map = PiActionMap(c.EVT_ACT_MAP,value_list=c.EVT_TREE)
 
     # ------ GUI Defintion ------ #

@@ -53,7 +53,7 @@ class PiTreeList(PiElement):
     
     ''' Event Handlers '''
     def update_list(self,event,values):
-        ''' Update the tree data after a table is loaded '''
+        ''' Update the tree data after a table is loaded or filtered '''
         self._tree_data = PiTreeData(c.table)
         c.window[self.key].update(values=self._tree_data)
         self._key_id_dict = {v:k for k, v in self._tree.IdToKey.items()}
