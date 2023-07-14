@@ -102,6 +102,6 @@ class PiImageElem(PiElement):
         except Exception as e:
             msg = f'exception during calc of image size: {e}'
 
-        self.update_status(msg)
+        c.update_status(msg)
 
         

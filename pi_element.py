@@ -15,13 +15,6 @@ class PiElement:
     def __init__(self,key=None):
         self.key=key
 
-    def update_status(self,msg):
-        c.status.update(msg)
-        '''
-        if '-STATUS-' in c.window.AllKeysDict:
-            c.window['-STATUS-'].update(msg)
-        '''
-
     def get_element(self) -> sg.Element:
         ''' Return new instance of a PySimpleGUI element or element subclass
             Subclasses should override this method. 
@@ -38,6 +31,6 @@ class PiElement:
         msg = f'event {event} not yet implemented in class {self.__class__.__name__}'
         print(msg)
         print(f'    values: {values}')
-        self.update_status(msg)
+        c.update_status(msg)
         return True
 

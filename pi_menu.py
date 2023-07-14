@@ -51,10 +51,10 @@ class PiMenu(PiElement):
         table,d = ExifLoader.new_collection()
         if table:
             util.set_collection(table,d,values)
-            self.update_status(f"{len(c.table.rows())} images loaded from {d}")
+            c.update_status(f"{len(c.table.rows())} images loaded from {d}")
             return False  # let other elements receive the "New" event?
         else:
-            self.update_status("New collection canceled")
+            c.update_status("New collection canceled")
 
         return True
     
@@ -69,21 +69,21 @@ class PiMenu(PiElement):
             if table:
                 d = os.path.dirname(filename)
                 util.set_collection(table,d,values)
-                self.update_status(f"Collection with {len(c.table.rows())} images loaded from {d}")
+                c.update_status(f"Collection with {len(c.table.rows())} images loaded from {d}")
                 return False # let other elements receive 'Open' event? Add Table to values?
             else:
-                self.update_status("Error opening collection file")
+                c.update_status("Error opening collection file")
         else:
-            self.update_status("Open collection canceled")
+            c.update_status("Open collection canceled")
 
         return True
     
     def save_collection(self,event,values):
         if c.table:
             c.table.save()
-            self.update_status(f"Collection with {len(c.table.rows())} images saved to {c.table.fn}")
+            c.update_status(f"Collection with {len(c.table.rows())} images saved to {c.table.fn}")
         else:
-            self.update_status("No collection loaded")
+            c.update_status("No collection loaded")
 
         return True
 
