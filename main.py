@@ -69,7 +69,10 @@ def main():
         if event != None:
             _,_,event = event.rpartition(sg.MENU_KEY_SEPARATOR)
 
-        print(f'e: {event}, v: {values}')
+        v = str(values)
+        if len(v) > 120:
+            v = v[:120]+"..."
+        print(f'e: {event}, v: {v}')
 
         c.listeners.notify(event,values)
 
