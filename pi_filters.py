@@ -5,7 +5,6 @@
     Instead it returns a list of rows which match the filter
     conditions.
 
-    See below for Filers used during the review process. 
     The review process, levels and statuses include:
     1. Initial review to filter out obvious not wanted pictures.
         - current level = '0' and status = 'tbd' 
@@ -40,36 +39,66 @@
 
 '''
 from __future__ import annotations
+import os
+
+import pi_config as c
 
 from table import Table, Row
 
 class Filter():
-
-    def __init__(self,table:Table):
-        self._table = table
-
-    def filter(self):
+    def filter(self,rows:list[Row]):
         ''' Filter self._table  returning a list
-            of rows which pass the filter   '''
-        return  [r for r in self._table if self.filter(r)]
+            of rows which pass the test   '''
+        return  [r for r in rows if self.test(r)]
 
     def test(self,row:Row):
         ''' Return True if the row passes the test. '''
         return True
     
+class SelectedTreeNodesFilter(Filter):
+    ''' Given the list of selected folders and rows 
+        in a Tree, return rows which are selected
+    '''
+    def __init__(self,selected:list[str]):
+        # Build filter conditions for collection rows.
+        # Filter is for either a folder or a file
+        self._filter_folders = set()
+        self._filter_files = set()
+
+        for name in selected:
+            if name == "":
+                self._filter_folders.add(name)
+            elif os. path. isdir(f'{c.directory}{name}'):
+                 self._filter_folders.add(name)
+            else:
+                file_loc,_,file_name = name.rpartition('/')
+                self._filter_files.add((file_loc,file_name))
+
+    def test(self,row:Row):
+        file_loc = row['file_location']
+        for dir in self._filter_folders:
+            if file_loc.startswith(dir):
+                return True
+            
+        file_name = row['file_name']
+        return (file_loc,file_name) in self._filter_files
+    
+'''
+    Filters based on Level and Status
+'''
+
 class LevelStatusFilter(Filter):
     ''' Filter a table for a selected review level and status '''
-    def __init__(self,table:Table,level:str,status:str):
-        super().__init__(table)
+    def __init__(self,level:str,status:str):
         self._level = level
         self._status = status
 
-    def test(self,row:Table):
+    def test(self,row:Row):
         return (row['rvw_lvl'] == self._level and
                 row['img_status'] == self._status)
     
 ''' 
-
+    Filter for specific status and level
 '''
 class InitialReviewFilter(LevelStatusFilter):
     ''' Initial review to filter out obviously not wanted pictures, 
@@ -79,25 +108,25 @@ class InitialReviewFilter(LevelStatusFilter):
 
 class QualityReviewFilter(LevelStatusFilter):
     ''' Review for poor composition, blurry, eyes closed, etc. '''
-    def __init__(self,table:Table):
-        super.__init__(table,"1","tbd")
+    def __init__(self):
+        super.__init__("1","tbd")
 
 class DuplicateReviewFilter(LevelStatusFilter):
     ''' Review to select best of duplicate or very similar images. '''
-    def __init__(self,table:Table):
-        super.__init__(table,"2","tbd")
+    def __init__(self):
+        super.__init__("2","tbd")
 
 class GoodReviewFilter(LevelStatusFilter):
     ''' Photos good enough to show others without boring them. 
         These are probably good enough to upload to Google Photos.
         Roughly around 10% of total. '''
-    def __init__(self,table:Table):
-        super.__init__(table,"3","tbd")
+    def __init__(self):
+        super.__init__("3","tbd")
 
 class BestReviewFilter(LevelStatusFilter):
     ''' Best of the Best. Roughly about 1% of photos. '''
-    def __init__(self,table:Table):
-        super.__init__(table,"4","tbd")
+    def __init__(self):
+        super.__init__("4","tbd")
 
 ''' Filters for those which have been reviewed to a certain level 
     Don't need these? 
