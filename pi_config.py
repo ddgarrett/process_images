@@ -11,11 +11,14 @@ import PySimpleGUI as sg
 
 from csv_table import CsvTable
 from image_collection import ImageCollection
+from pi_action import *
+from pi_action_map import PiActionMap
 from pi_util import EventListener
 
 ''' constants '''
 VERSION = '0.1.0'
 WINDOW_CONFIG = "__WINDOW CONFIG__"
+
 # image file types
 IMG_FILE_TYPES = [".jpg",".jpeg",".png",".gif",".tiff"]
 
@@ -26,7 +29,7 @@ metadata:CsvTable = CsvTable("image_collection_metadata.csv")
 TRACE_EVENTS = True
 
 # standard events
-EVT__FILE_OPEN  = '-FILE_OPEN-'
+EVT_FILE_OPEN  = '-FILE_OPEN-'
 EVT_FILE_NEW    = '-FILE_NEW-'
 EVT_FILE_SAVE   = '-FILE_SAVE-'
 EVT_FILE_PROPS  = '-FILE_PROPS-'
@@ -60,6 +63,14 @@ LVL_BEST        = '5'
 ''' global Event Listner '''
 listeners = EventListener()
 
+''' standard global actions '''
+PiActionMap(EVT_ACT_MAP,value_list=EVT_TREE)
+PiOpenCollection(EVT_FILE_OPEN)
+PiNewCollection(EVT_FILE_NEW)
+PiSaveCollection(EVT_FILE_SAVE)
+PiFileProperties(EVT_FILE_PROPS)
+PiAboutApp(EVT_ABOUT)
+
 ''' set when collection is created or loaded '''
 table:ImageCollection = ImageCollection('') # may be filtered
 directory = ""  # current directory (should have this in the ImageCollection table?)
@@ -68,4 +79,6 @@ directory = ""  # current directory (should have this in the ImageCollection tab
 window:sg.Window = None   # main window
 status:sg.Element = None  # status display element
 
-
+def update_status(msg):
+    if status != None:
+        status.update(msg)
