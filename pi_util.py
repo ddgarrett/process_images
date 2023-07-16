@@ -53,5 +53,5 @@ class EventListener:
         if event in self._events:
             for callback in self._events[event]:
                 if c.TRACE_EVENTS:
-                    print(f"*** event {event} callback")
+                    print(f"*** event {event} callback {callback}")
                 callback(event,values)
