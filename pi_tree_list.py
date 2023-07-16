@@ -36,12 +36,11 @@ class PiTreeList(PiElement):
                  StatusMenuItem('Good or Best',c.STAT_TBD,c.LVL_GOOD,self.get_selected_rows).item()
                  ],
              '---',
-             f'Map::{c.EVT_ACT_MAP}'f'Map::{c.EVT_ACT_MAP}', 
-             'Properties', 
-             'Review',['Initial', 'Quality','Duplicate','Selected','Best'],
+             f'Map::{c.EVT_ACT_MAP}', 
+             f'Properties::{c.EVT_FILE_PROPS}',
              'Show',['All','Reject','Bad','Duplicate','Ok','Good','Best','Filter...'],
-             'Save',
-             'Exit' ]]
+             f'Save::{c.EVT_FILE_SAVE}',
+             f'Exit::{c.EVT_EXIT}' ]]
 
         self._tree_data = PiTreeData(c.table.rows())
         self._tree = (
