@@ -14,9 +14,7 @@ import pi_config as c
 from pi_menu import PiMenu
 from pi_tree_list import PiTreeList
 from pi_image_elem import PiImageElem
-from pi_image_thumb_elem import PiImageThumbElem
 from pi_folder_stats import FolderStats
-from pi_action_map import PiActionMap
 
 elements = []
 
@@ -55,6 +53,8 @@ def main():
 
     c.window = init_window()
     c.status = c.window['-STATUS-']
+
+    c.window.bind("<Control_L><s>", '-FILE_SAVE-')
 
     # print(f'window has status: {"-STATUS-" in c.window.AllKeysDict}')
 
