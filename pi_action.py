@@ -67,7 +67,7 @@ class PiNewCollection(PiAction):
 
 class PiSaveCollection(PiAction):
     def handle_event(self,event,values):
-        if c.table:
+        if c.table and len(c.table.fn) > 0:
             c.table.save()
             c.update_status(f"Collection with {len(c.table.rows())} images saved to {c.table.fn}")
         else:
