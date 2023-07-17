@@ -35,5 +35,5 @@ def cnv_image(file, resize=None, rotate=1):
 
         return PIL.ImageTk.PhotoImage(img),osize
     except Exception as e:
-        # print(f"image util exception: {e}")
+        print(f"image util exception: {e}")
         return '',(0,0)
