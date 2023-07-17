@@ -27,11 +27,26 @@ def init_window():
     image = PiImageElem(key="-IMAGE-",event=c.EVT_TREE)
     # image = PiImageThumbElem(key="-IMAGE-",event=c.EVT_TREE)
 
+    gallery_tab = [[sg.Text('Tab 1')],
+               [sg.Text('Put your layout in here')],
+               [sg.Text('Input something'), sg.Input(size=(12,1), key='-IN-TAB1-')]]
+    
+    image_tab = image.get_element()
+
+    # The TabgGroup layout - it must contain only Tabs
+    tab_group_layout = [[sg.Tab('Image', image_tab,     key='-IMAGE_TAB-'),
+                         sg.Tab('Gallery', gallery_tab, key='-GALLERY_TAB-')]]
+    
+    tab_group = [[sg.TabGroup(tab_group_layout,
+                       enable_events=True,
+                       expand_x=True,expand_y=True,
+                       key='-TABGROUP-')]]
+
     # ------ GUI Defintion ------ #
     layout = [[menu.get_element()],
               [sg.Pane(
                     [   sg.Column([[tree.get_element()]], expand_y=True),
-                        sg.Column(image.get_element(), key="-IMGCOL-")
+                        sg.Column(tab_group, key="-IMGCOL-")
                     ],
                     orientation='h', relief=sg.RELIEF_SUNKEN, 
                     expand_x=True, expand_y=True, k='-PANE-',
