@@ -6,10 +6,12 @@
 
 import os
 import PySimpleGUI as sg
+from pi_action_map import PiActionMap
 
 import pi_config as c
 from pi_element import PiElement
 from pi_image_util import is_image_file, cnv_image
+from status_menu import StatusMenu
 from status_menu_item import StatusMenuItem
 from pi_util import get_row_for_fn
 
@@ -25,32 +27,26 @@ class PiImageElem(PiElement):
         c.listeners.add(event,self.file_selected)
         c.listeners.add(c.EVT_WIN_CONFIG,self.resize_image)
 
-    def get_element(self) -> sg.Element:
-        menu = ['', 
-            [f'Map::{c.EVT_ACT_MAP}', 
-             'Review As...',[
-                 StatusMenuItem('Reject',c.STAT_REJECT,c.LVL_INITIAL,self.get_row).item(), 
-                 StatusMenuItem('Bad Quality',c.STAT_QUAL_BAD,c.LVL_QUAL,self.get_row).item(),
-                 StatusMenuItem('Duplicate',c.STAT_DUP,c.LVL_DUP,self.get_row).item(),
-                 StatusMenuItem('Just Okay',c.STAT_OK,c.LVL_OK,self.get_row).item(),
-                 StatusMenuItem('Good',c.STAT_GOOD,c.LVL_GOOD,self.get_row).item(),
-                 StatusMenuItem('Best!',c.STAT_BEST,c.LVL_BEST,self.get_row).item()],
-             'TBD - Possible...',[
-                 StatusMenuItem('Reject',c.STAT_TBD,c.LVL_INITIAL,self.get_row).item(),
-                 StatusMenuItem('Bad Quality',c.STAT_TBD,c.LVL_QUAL,self.get_row).item(),
-                 StatusMenuItem('Duplicate',c.STAT_TBD,c.LVL_DUP,self.get_row).item(),
-                 StatusMenuItem('Ok Good Best',c.STAT_TBD,c.LVL_OK,self.get_row).item(),
-                 StatusMenuItem('Good or Best',c.STAT_TBD,c.LVL_GOOD,self.get_row).item()
-                 ],
-            ]]
-        return [[sg.Image(key=self.key,right_click_menu=menu)]]
+        self._menu =  ['', 
+            [ StatusMenu(self.get_row).get_menu(),
+             '---',
+             PiActionMap(rowget=self.get_row).item(),
+             f'Properties::{c.EVT_FILE_PROPS}',
+             'Show',['All','Reject','Bad','Duplicate','Ok','Good','Best','Filter...'],
+             f'Save::{c.EVT_FILE_SAVE}',
+             f'Exit::{c.EVT_EXIT}' ]]
+
+    def get_element(self) -> sg.Element:        
+        return [[sg.Image(key=self.key,right_click_menu=self._menu)]]
     
     def get_row(self,values):
+        ''' Used by StatusMenu items and PiActionMap to get selected row'''
         return [self._collection_row]
     
     ''' Event Handlers '''
 
     def file_selected(self,event,values):
+        ''' Display latest selected image '''
         fn_list = values[event]
         if len(fn_list) == 0:
             fn = None
@@ -69,6 +65,7 @@ class PiImageElem(PiElement):
         self._update_image()
 
     def resize_image(self,event,values):
+        ''' Resize image based on parent size '''
         image_size = c.window[self.key].ParentContainer.get_size()
 
         # wait until resized at least 8 pixels

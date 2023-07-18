@@ -5,11 +5,13 @@
 import os
 
 import PySimpleGUI as sg
+from pi_action_map import PiActionMap
 
 import pi_config as c
 from pi_element import PiElement
 from pi_filters import SelectedTreeNodesFilter
 from pi_treedata import PiTreeData
+from status_menu import StatusMenu
 from status_menu_item import StatusMenuItem
 
 class PiTreeList(PiElement):
@@ -20,23 +22,10 @@ class PiTreeList(PiElement):
         c.listeners.add(c.EVT_TABLE_LOAD,self.update_list)
         c.listeners.add(c.EVT_TABLE_ROW_CHG,self.update_rows)
 
-        menu = ['', 
-            ['Set Status...',[
-                 StatusMenuItem('Reject',c.STAT_REJECT,c.LVL_INITIAL,self.get_selected_rows).item(), 
-                 StatusMenuItem('Bad Quality',c.STAT_QUAL_BAD,c.LVL_QUAL,self.get_selected_rows).item(),
-                 StatusMenuItem('Duplicate',c.STAT_DUP,c.LVL_DUP,self.get_selected_rows).item(),
-                 StatusMenuItem('Just Okay',c.STAT_OK,c.LVL_OK,self.get_selected_rows).item(),
-                 StatusMenuItem('Good',c.STAT_GOOD,c.LVL_GOOD,self.get_selected_rows).item(),
-                 StatusMenuItem('Best!',c.STAT_BEST,c.LVL_BEST,self.get_selected_rows).item()],
-             'TBD - Possible...',[
-                 StatusMenuItem('Reject',c.STAT_TBD,c.LVL_INITIAL,self.get_selected_rows).item(),
-                 StatusMenuItem('Bad Quality',c.STAT_TBD,c.LVL_QUAL,self.get_selected_rows).item(),
-                 StatusMenuItem('Duplicate',c.STAT_TBD,c.LVL_DUP,self.get_selected_rows).item(),
-                 StatusMenuItem('Ok Good Best',c.STAT_TBD,c.LVL_OK,self.get_selected_rows).item(),
-                 StatusMenuItem('Good or Best',c.STAT_TBD,c.LVL_GOOD,self.get_selected_rows).item()
-                 ],
+        menu = ['',
+           [ StatusMenu(self.get_selected_rows).get_menu(),
              '---',
-             f'Map::{c.EVT_ACT_MAP}', 
+             PiActionMap(rowget=self.get_selected_rows).item(), 
              f'Properties::{c.EVT_FILE_PROPS}',
              'Show',['All','Reject','Bad','Duplicate','Ok','Good','Best','Filter...'],
              f'Save::{c.EVT_FILE_SAVE}',
@@ -78,7 +67,7 @@ class PiTreeList(PiElement):
         
         filter = SelectedTreeNodesFilter(files_folders)
         rows = filter.filter(rows)
-        print(f'{len(rows)} rows selected')
+        # print(f'{len(rows)} rows selected')
         return rows
 
     ''' Event Handlers '''

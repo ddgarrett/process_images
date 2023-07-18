@@ -32,24 +32,37 @@ from pi_filters import SelectedTreeNodesFilter
 class PiActionMap(PiAction):
     '''
         Create a heatmap for selected files and folders.
+        Parms:
+        text   - menu item text to display
+        rowget - method to call to get list of rows to map
 
-        event      - the event which triggers this action
-        value_list - the name of the list within handle_event values
-                     which contains the names of selected files and folders
     '''
-    def __init__(self,event,value_list:list[str]):
-        super().__init__(event)
-        self._value_list = value_list
+
+    last_id = 0  # for generating unique Event IDs
+
+    @classmethod
+    def next_id(cls):
+        cls.last_id += 1
+        return cls.last_id
+    
+    def __init__(self,text="Map",rowget=None):
+        self._id = self.next_id()
+        self._text = text
+        self._rowget=rowget
+        super().__init__(event=self._get_event())
+
+    def _get_event(self):
+        return f'-PiActionMap{self._id}-'
+
+    def item(self):
+        ''' return an item name and unique event id'''
+        return f'{self._text}::{self._get_event()}'
 
     def handle_event(self,event,values):
-        files_folders = values[self._value_list]
-        rows = c.table.rows()
-        if len(rows) == 0 or len(files_folders) == 0:
-            return 
-        
-        ''' generate a heat map of for the folders and files specified in values '''
-        filter = SelectedTreeNodesFilter(files_folders)
-        rows = filter.filter(rows)
+        ''' Hand Map Event - get list of rows and display in map '''
+
+        # callback row getter
+        rows = self._rowget(values)
 
         # drop rows where latitude and longitude are '0'
         rows = [r for r in rows 

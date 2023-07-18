@@ -41,7 +41,7 @@ EVT_TABLE_LOAD  = '-TABLE_LOAD-'
 EVT_TABLE_ROW_CHG = '-ROW_CHG-'
 EVT_WIN_CONFIG  = WINDOW_CONFIG
 
-EVT_ACT_MAP     = '-MAP-'
+# EVT_ACT_MAP     = '-MAP-'
 
 # standard image statuses
 STAT_REJECT     = 'reject'
@@ -64,7 +64,6 @@ LVL_BEST        = '5'
 listeners = EventListener()
 
 ''' standard global actions '''
-PiActionMap(EVT_ACT_MAP,value_list=EVT_TREE)
 PiOpenCollection(EVT_FILE_OPEN)
 PiNewCollection(EVT_FILE_NEW)
 PiSaveCollection(EVT_FILE_SAVE)
