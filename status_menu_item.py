@@ -23,8 +23,6 @@ class StatusMenuItem(PiAction):
             ]
         ]
 
-
-
         Parms:
         text - The Menu Item text to be displayed
         status - value to set the selected rows status to
