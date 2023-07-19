@@ -57,7 +57,8 @@ class Filter():
     
 class SelectedTreeNodesFilter(Filter):
     ''' Given the list of selected folders and rows 
-        in a Tree, return rows which are selected
+        in a Tree, such as that returned by a TreeList,
+        return rows which are selected
     '''
     def __init__(self,selected:list[str]):
         # Build filter conditions for collection rows.
