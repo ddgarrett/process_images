@@ -11,6 +11,7 @@ import PySimpleGUI as sg
 from csv_table import CsvTable
 
 import pi_config as c
+from pi_gallery_elem import PiGalleryElem
 from pi_menu import PiMenu
 from pi_tree_list import PiTreeList
 from pi_image_elem import PiImageElem
@@ -25,13 +26,10 @@ def init_window():
     menu = PiMenu()
     tree = PiTreeList(key=c.EVT_TREE,headings=FolderStats.get_headers())
     image = PiImageElem(key="-IMAGE-",event=c.EVT_TREE)
-    # image = PiImageThumbElem(key="-IMAGE-",event=c.EVT_TREE)
+    gallery = PiGalleryElem(key="-IMAGE-",event=c.EVT_TREE)
 
-    gallery_tab = [[sg.Text('Tab 1')],
-               [sg.Text('Put your layout in here')],
-               [sg.Text('Input something'), sg.Input(size=(12,1), key='-IN-TAB1-')]]
-    
     image_tab = image.get_element()
+    gallery_tab = gallery.get_element()
 
     # The TabgGroup layout - it must contain only Tabs
     tab_group_layout = [[sg.Tab('Image', image_tab,     key='-IMAGE_TAB-'),
@@ -84,7 +82,9 @@ def main():
         v = str(values)
         if len(v) > 120:
             v = v[:120]+"..."
-        print(f'e: {event}, v: {v}')
+
+        if  event != '__WINDOW CONFIG__':
+            print(f'e: {event}, v: {v}')
 
         c.listeners.notify(event,values)
 
