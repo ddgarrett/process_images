@@ -76,15 +76,14 @@ def main():
         event, values = c.window.read()
 
         # if event has MENU_KEY_SEPARATOR, remove it
-        if event != None:
+        if event != None and type(event) == str:
             _,_,event = event.rpartition(sg.MENU_KEY_SEPARATOR)
 
-        v = str(values)
-        if len(v) > 120:
-            v = v[:120]+"..."
-
-        if  event != '__WINDOW CONFIG__':
-            print(f'e: {event}, v: {v}')
+        if  event != c.EVT_WIN_CONFIG:
+            v = str(values)
+            if len(v) > 120:
+                v = v[:120]+"..."            
+            print(f'e: {event}, v: {str(values)}')
 
         c.listeners.notify(event,values)
 

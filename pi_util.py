@@ -52,6 +52,6 @@ class EventListener:
     def notify(self,event,values):
         if event in self._events:
             for callback in self._events[event]:
-                if c.TRACE_EVENTS:
+                if c.TRACE_EVENTS and event != c.EVT_WIN_CONFIG:
                     print(f"*** event {event} callback {callback}")
                 callback(event,values)
