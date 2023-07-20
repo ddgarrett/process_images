@@ -73,6 +73,7 @@ class PiImageElem(PiElement):
             if (abs(image_size[0] - self._new_size[0]) > 8 or
                 abs(image_size[1] - self._new_size[1]) > 8):
                 self._new_size = image_size
+                print(f'new size: {image_size}')
                 self._update_image()
   
     ''' private methods '''

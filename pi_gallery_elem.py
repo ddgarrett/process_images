@@ -18,10 +18,10 @@ from pi_util import get_row_for_fn
 
 class PiGalleryElem(PiElement):
 
-    def __init__(self,key="-IMAGE-",event=c.EVT_TREE,cols=3,rows=3):
+    def __init__(self,key="-GALLERY-",event=c.EVT_TREE,cols=3,rows=3):
         super().__init__(key=key)
         #  self._event = event
-        self._new_size = (400,400)
+        self._new_size = (50,50)
         self._collection_rows = []
         self._selected_rows = []
 
@@ -41,7 +41,7 @@ class PiGalleryElem(PiElement):
              f'Exit::{c.EVT_EXIT}' ]]
         
         for i in range(9):
-            c.listeners.add(('Thumbnail',i),self.thumb_selected)
+            c.listeners.add((f'{self.key}Thumbnail',i),self.thumb_selected)
 
     def get_element(self) -> sg.Element:        
         # return [[sg.Image(key=self.key,right_click_menu=self._menu)]]
@@ -50,18 +50,17 @@ class PiGalleryElem(PiElement):
         thumbnail_width = 50
         width = height  = (thumbnail_width + 4*gap + 4) * self._cols - 4*gap
         size = (thumbnail_width, thumbnail_width)
-        bg = {True:'yellow', False:sg.theme_background_color()}
 
         layout_thumbnail = []
         for j in range(self._rows):
             temp = []
             for i in range(self._cols):
                 pad = ((0, gap), gap) if i == 0 else ((gap, 0), gap) if i == self._cols-1 else (gap, gap)
-                frame_layout = [[sg.Image(size=size, pad=(gap, gap), key=("Thumbnail", j*self._cols+i),
+                frame_layout = [[sg.Image(size=size, pad=(gap, gap), key=(f'{self.key}Thumbnail', j*self._cols+i),
                                           expand_x=True, expand_y=True,enable_events=True,right_click_menu=self._menu)]]
                 # frame = sg.Frame(f"{j},{i}", frame_layout,title_location='s',pad=pad, key=("border", j*cols+i), 
                 #                  background_color=sg.theme_background_color(),expand_x=True, expand_y=True)
-                frame = sg.Frame("", frame_layout, title_location='s', pad=pad, key=("border", j*self._cols+i), 
+                frame = sg.Frame("", frame_layout, title_location='s', pad=pad, key=(f'{self.key}border', j*self._cols+i), 
                                  background_color=sg.theme_background_color(),expand_x=True, expand_y=True)
                 temp.append(frame)
             layout_thumbnail.append(temp)
@@ -71,9 +70,9 @@ class PiGalleryElem(PiElement):
         ]
 
         layout = [
-            [sg.Frame("", layout_thumbnail_frame, size=(width, height), border_width=0,expand_x=True, expand_y=True,key='gallery_frame')],
+            [sg.Frame("", layout_thumbnail_frame, size=(width, height), border_width=0,expand_x=True, expand_y=True,key=f'{self.key}gallery_frame')],
             [sg.Text("Page 0", size=0, key='PAGE'), sg.Push(),
-             sg.Button('PgUp'), sg.Button('PgDn'), sg.Button('Home'), sg.Button('End')],
+             sg.Button('PgUp',key=f'{self.key}PgUp'), sg.Button('PgDn'), sg.Button('Home'), sg.Button('End')],
         ]
 
         return layout
@@ -87,8 +86,25 @@ class PiGalleryElem(PiElement):
     def thumb_selected(self,event,values):
         i = event[1]
         size_img = c.window[event].Size
-        frame_size = c.window[('border',event[1])].Size
-        print(f"thumbsize: {size_img}, framesize: {frame_size}")
+
+        frame_widget = c.window[(f'{self.key}border',event[1])].Widget
+        fh = frame_widget.winfo_height()
+        fw = frame_widget.winfo_width()
+        frame_size = (fw,fh)
+
+        widget = c.window[f'{self.key}gallery_frame'].Widget
+        full_frame_size = (widget.winfo_width(),widget.winfo_height())
+
+        print(f"thumbsize: {size_img}, thumb framesize: {frame_size}, full frame: {full_frame_size}")
+
+    def _get_thumb_size(self):
+        ''' get thumbnails size based on size of bordering frame '''
+        key=f'{self.key}gallery_frame'
+        frame_widget = c.window[(f'{self.key}border',0)].Widget
+        gallery_widget = c.window[key].Widget
+        fh = gallery_widget.winfo_height()
+        fw = gallery_widget.winfo_width()
+        return (int((fw-12)/3-12),int((fh-36)/3-12))
 
     def files_selected(self,event,values):
         ''' Display a list of selected table rows
@@ -104,34 +120,66 @@ class PiGalleryElem(PiElement):
 
         files_folders = values[event]
         rows = c.table.rows()
-        if len(rows) == 0 or len(files_folders) == 0:
-            return
-        
-        filter = SelectedTreeNodesFilter(files_folders)
-        self._collection_rows = filter.filter(rows)
+        if len(rows) > 0 and len(files_folders) > 0:
+            filter = SelectedTreeNodesFilter(files_folders)
+            self._collection_rows = filter.filter(rows)
+
         self._update_images()
 
     def resize_image(self,event,values):
-        ''' Resize image based on parent size '''
-        image_size = c.window[self.key].ParentContainer.ParentContainer.get_size()
-        tab_size = c.window[self.key].ParentContainer.ParentContainer.ParentContainer.get_size()
-        gallery_frame_size = c.window['gallery_frame'].Size
-        print(f'parent: {image_size}, self:{self._new_size}, frame:{gallery_frame_size}, tab:{tab_size}')
+        ''' Based on a __WINDOW CONFIG__ event, see if we need to 
+            resize images 
+        '''
+        thumb_size = self._get_thumb_size()
 
         # wait until resized at least 8 pixels
-        if image_size != (1,1) and image_size[1] != None:
-            if (abs(image_size[0] - self._new_size[0]) > 8 or
-                abs(image_size[1] - self._new_size[1]) > 8):
-                self._new_size = image_size
+        if thumb_size != (1,1) and thumb_size[1] != None:
+            if (abs(thumb_size[0] - self._new_size[0]) > 8 or
+                abs(thumb_size[1] - self._new_size[1]) > 8):
+                print(f'current: {self._new_size}, new: {thumb_size}')
+                self._new_size = thumb_size
                 self._update_images()
-            else:
-                print('change not enough')
+
   
     ''' private methods '''
 
     def _update_images(self):
+        if self._new_size[0] < 16 or self._new_size[1] < 16:
+            return
+        
         print(f"gallery: resize elements to {self._new_size}")
+
+        row_nbr = 0
+        col_nbr = 0
+        for row in self._collection_rows:
+            fn = f'{c.directory}{row["file_location"]}/{row["file_name"]}'
+            fn = fn.replace('\\','/')
+
+            rotate = int(row['img_rotate'])
+            thumb,osize = cnv_image(fn, resize=self._new_size, rotate=rotate)
+
+            key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
+            c.window[key].update(data=thumb)
+
+            col_nbr += 1
+            if col_nbr == self._cols:
+                row_nbr += 1
+                col_nbr = 0
+                if row_nbr == self._rows:
+                    break
+
+        while row_nbr < self._rows:
+            key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
+            c.window[key].update(data=None)
+            
+            col_nbr += 1
+            if col_nbr == self._cols:
+                row_nbr += 1
+                col_nbr = 0
+
+        c.window.refresh()
         return
+    
         if not self._filename:
             c.window[self.key].update(data=None)
             c.window.refresh()
