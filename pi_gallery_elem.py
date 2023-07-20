@@ -105,15 +105,18 @@ class PiGalleryElem(PiElement):
         ''' get thumbnails size based on size of bordering frame '''
         key=f'{self.key}gallery_frame'
         widget = c.window[(f'{self.key}border',0)].Widget
+
+        parent_sizes = []
         while widget != None:
             '''            try:
                 widget.pack()
             except:
                 print("no pack() method")
             '''
-
-            print(f"widget size: {widget.winfo_height()}, {widget.winfo_width()}")
+            parent_sizes.append((widget.winfo_height(),widget.winfo_width()))
             widget = widget.master
+
+        print(f"parent sizes: {parent_sizes}")
 
         gallery_widget = c.window[key].Widget
         fh = gallery_widget.winfo_height()
@@ -173,7 +176,8 @@ class PiGalleryElem(PiElement):
             fn = fn.replace('\\','/')
 
             rotate = int(row['img_rotate'])
-            thumb,osize = cnv_image(fn, resize=self._new_size, rotate=rotate)
+            resize_size = (self._new_size[0]-3,self._new_size[1]-3,)
+            thumb,osize = cnv_image(fn, resize=resize_size, rotate=rotate)
 
             key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
             c.window[key].update(data=thumb)
