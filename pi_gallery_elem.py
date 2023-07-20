@@ -39,6 +39,9 @@ class PiGalleryElem(PiElement):
              'Show',['All','Reject','Bad','Duplicate','Ok','Good','Best','Filter...'],
              f'Save::{c.EVT_FILE_SAVE}',
              f'Exit::{c.EVT_EXIT}' ]]
+        
+        for i in range(9):
+            c.listeners.add(('Thumbnail',i),self.thumb_selected)
 
     def get_element(self) -> sg.Element:        
         # return [[sg.Image(key=self.key,right_click_menu=self._menu)]]
@@ -68,7 +71,7 @@ class PiGalleryElem(PiElement):
         ]
 
         layout = [
-            [sg.Frame("", layout_thumbnail_frame, size=(width, height), border_width=0,expand_x=True, expand_y=True)],
+            [sg.Frame("", layout_thumbnail_frame, size=(width, height), border_width=0,expand_x=True, expand_y=True,key='gallery_frame')],
             [sg.Text("Page 0", size=0, key='PAGE'), sg.Push(),
              sg.Button('PgUp'), sg.Button('PgDn'), sg.Button('Home'), sg.Button('End')],
         ]
@@ -80,6 +83,12 @@ class PiGalleryElem(PiElement):
         return self._selected_rows
     
     ''' Event Handlers '''
+
+    def thumb_selected(self,event,values):
+        i = event[1]
+        size_img = c.window[event].Size
+        frame_size = c.window[('border',event[1])].Size
+        print(f"thumbsize: {size_img}, framesize: {frame_size}")
 
     def files_selected(self,event,values):
         ''' Display a list of selected table rows
@@ -104,7 +113,10 @@ class PiGalleryElem(PiElement):
 
     def resize_image(self,event,values):
         ''' Resize image based on parent size '''
-        image_size = c.window[self.key].ParentContainer.get_size()
+        image_size = c.window[self.key].ParentContainer.ParentContainer.get_size()
+        tab_size = c.window[self.key].ParentContainer.ParentContainer.ParentContainer.get_size()
+        gallery_frame_size = c.window['gallery_frame'].Size
+        print(f'parent: {image_size}, self:{self._new_size}, frame:{gallery_frame_size}, tab:{tab_size}')
 
         # wait until resized at least 8 pixels
         if image_size != (1,1) and image_size[1] != None:
@@ -112,6 +124,8 @@ class PiGalleryElem(PiElement):
                 abs(image_size[1] - self._new_size[1]) > 8):
                 self._new_size = image_size
                 self._update_images()
+            else:
+                print('change not enough')
   
     ''' private methods '''
 
