@@ -27,6 +27,7 @@ class PiGalleryElem(PiElement):
 
         self._rows = rows
         self._cols = cols
+        self._current_page = 0
 
         c.listeners.add(event,self.files_selected)
         c.listeners.add(c.EVT_WIN_CONFIG,self.resize_image)
@@ -84,6 +85,9 @@ class PiGalleryElem(PiElement):
     ''' Event Handlers '''
 
     def thumb_selected(self,event,values):
+        ''' A single thumb was click on.
+            Select or deselect it
+        '''
         i = event[1]
         size_img = c.window[event].Size
 
@@ -100,14 +104,27 @@ class PiGalleryElem(PiElement):
     def _get_thumb_size(self):
         ''' get thumbnails size based on size of bordering frame '''
         key=f'{self.key}gallery_frame'
-        frame_widget = c.window[(f'{self.key}border',0)].Widget
+        widget = c.window[(f'{self.key}border',0)].Widget
+        while widget != None:
+            '''            try:
+                widget.pack()
+            except:
+                print("no pack() method")
+            '''
+
+            print(f"widget size: {widget.winfo_height()}, {widget.winfo_width()}")
+            widget = widget.master
+
         gallery_widget = c.window[key].Widget
         fh = gallery_widget.winfo_height()
         fw = gallery_widget.winfo_width()
-        return (int((fw-12)/3-12),int((fh-36)/3-12))
+        pad = 8
+        size = (int((fw-12)/3-pad),int((fh-36)/3-pad))
+        print(f'thumb size: {size}')
+        return size
 
     def files_selected(self,event,values):
-        ''' Display a list of selected table rows
+        ''' Display a list of collection rows
          
             Get the list of rows from current table, 
             BUT - may have to make a change to get 
@@ -160,6 +177,7 @@ class PiGalleryElem(PiElement):
 
             key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
             c.window[key].update(data=thumb)
+            print(f'_new_size: {self._new_size}, thumb size: {c.window[key].get_size()}')
 
             col_nbr += 1
             if col_nbr == self._cols:
@@ -177,30 +195,5 @@ class PiGalleryElem(PiElement):
                 row_nbr += 1
                 col_nbr = 0
 
-        c.window.refresh()
-        return
-    
-        if not self._filename:
-            c.window[self.key].update(data=None)
-            c.window.refresh()
-            return
-    
-        fn = f'{c.directory}{self._filename}'
-        fn = fn.replace('\\','/')
-
-        ''' Update the image displayed '''
-        rotate = int(self._collection_row['img_rotate'])
-        thumb,osize = cnv_image(fn, resize=self._new_size, rotate=rotate)
-        c.window[self.key].update(data=thumb)
-        c.window.refresh()
-
-        img_size = c.window[self.key].get_size()
-        try:
-            pct_size = int(round(img_size[0]/osize[0]*100))
-            msg = f'{self._filename} at {pct_size}%'
-        except Exception as e:
-            msg = f'exception during calc of image size: {e}'
-
-        c.update_status(msg)
-
-        
+        # c.window.refresh()
+       
