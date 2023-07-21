@@ -61,8 +61,9 @@ class PiGalleryElem(PiElement):
                                           expand_x=True, expand_y=True,enable_events=True,right_click_menu=self._menu)]]
                 # frame = sg.Frame(f"{j},{i}", frame_layout,title_location='s',pad=pad, key=("border", j*cols+i), 
                 #                  background_color=sg.theme_background_color(),expand_x=True, expand_y=True)
-                frame = sg.Frame("", frame_layout, title_location='s', pad=pad, key=(f'{self.key}border', j*self._cols+i), 
-                                 background_color=sg.theme_background_color(),expand_x=True, expand_y=True)
+                frame = sg.Frame("", frame_layout, pad=pad, key=(f'{self.key}border', j*self._cols+i), 
+                                 background_color=sg.theme_background_color(),expand_x=True, expand_y=True,
+                                 element_justification="center")
                 temp.append(frame)
             layout_thumbnail.append(temp)
 
@@ -106,17 +107,14 @@ class PiGalleryElem(PiElement):
         key=f'{self.key}gallery_frame'
         widget = c.window[(f'{self.key}border',0)].Widget
 
+        '''
         parent_sizes = []
         while widget != None:
-            '''            try:
-                widget.pack()
-            except:
-                print("no pack() method")
-            '''
+
             parent_sizes.append((widget.winfo_height(),widget.winfo_width()))
             widget = widget.master
-
-        print(f"parent sizes: {parent_sizes}")
+        '''
+        # print(f"parent sizes: {parent_sizes}")
 
         gallery_widget = c.window[key].Widget
         fh = gallery_widget.winfo_height()
@@ -160,6 +158,16 @@ class PiGalleryElem(PiElement):
                 self._new_size = thumb_size
                 self._update_images()
 
+        # report on size of all images
+        '''
+        thumbnail_sizes = []
+        for j in range(self._rows):
+            for i in range(self._cols):
+                key = (f'{self.key}Thumbnail', j*self._cols+i)
+                size = c.window[key].Size
+                thumbnail_sizes.append(size)
+        '''
+        # print(f"thumb sizes: {thumbnail_sizes}")
   
     ''' private methods '''
 
@@ -171,6 +179,7 @@ class PiGalleryElem(PiElement):
 
         row_nbr = 0
         col_nbr = 0
+        # actual_size = []
         for row in self._collection_rows:
             fn = f'{c.directory}{row["file_location"]}/{row["file_name"]}'
             fn = fn.replace('\\','/')
@@ -180,8 +189,8 @@ class PiGalleryElem(PiElement):
             thumb,osize = cnv_image(fn, resize=resize_size, rotate=rotate)
 
             key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
-            c.window[key].update(data=thumb)
-            print(f'_new_size: {self._new_size}, thumb size: {c.window[key].get_size()}')
+            c.window[key].update(data=thumb,size=resize_size)
+            # print(f'_new_size: {self._new_size}, thumb size: {c.window[key].get_size()}')
 
             col_nbr += 1
             if col_nbr == self._cols:
@@ -199,5 +208,8 @@ class PiGalleryElem(PiElement):
                 row_nbr += 1
                 col_nbr = 0
 
+        # magic that makes everything render properly!
+        # key=f'{self.key}gallery_frame'
+        # c.window[key].Widget.pack() 
         # c.window.refresh()
        
