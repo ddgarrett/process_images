@@ -22,15 +22,25 @@ class PiGalleryElem(PiElement):
         super().__init__(key=key)
         #  self._event = event
         self._new_size = (50,50)
-        self._collection_rows = []
-        self._selected_rows = []
+        self._collection_rows = [] # rows being displayed
+        self._selected_rows = []   # rows selected
 
         self._rows = rows
         self._cols = cols
-        self._current_page = 0
+        self._page = 0
 
         c.listeners.add(event,self.files_selected)
         c.listeners.add(c.EVT_WIN_CONFIG,self.resize_image)
+
+        self._pgup_key = f'{self.key}PGUP-'
+        self._pgdn_key = f'{self.key}PGDN-'
+        self._home_key = f'{self.key}HOME-'
+        self._end_key  = f'{self.key}END-'
+
+        c.listeners.add(self._pgdn_key,self._pgup)
+        c.listeners.add(self._pgdn_key,self._pgdn)
+        c.listeners.add(self._home_key,self._home)
+        c.listeners.add(self._end_key,self._end)
 
         self._menu =  ['', 
             [ StatusMenu(self.get_rows).get_menu(),
@@ -44,6 +54,12 @@ class PiGalleryElem(PiElement):
         for i in range(9):
             c.listeners.add((f'{self.key}Thumbnail',i),self.thumb_selected)
 
+    def _img_per_page(self):
+        return self._rows * self._cols
+    
+    def _row_offset(self):
+        return self._page * self._img_per_page()
+    
     def get_element(self) -> sg.Element:        
         # return [[sg.Image(key=self.key,right_click_menu=self._menu)]]
     
@@ -74,7 +90,10 @@ class PiGalleryElem(PiElement):
         layout = [
             [sg.Frame("", layout_thumbnail_frame, size=(width, height), border_width=0,expand_x=True, expand_y=True,key=f'{self.key}gallery_frame')],
             [sg.Text("Page 0", size=0, key='PAGE'), sg.Push(),
-             sg.Button('PgUp',key=f'{self.key}PgUp'), sg.Button('PgDn'), sg.Button('Home'), sg.Button('End')],
+             sg.Button('PgUp',key=self._pgup_key), 
+             sg.Button('PgDn',key=self._pgdn_key), 
+             sg.Button('Home',key=self._home_key), 
+             sg.Button('End',key=self._end_key)],
         ]
 
         return layout
@@ -101,6 +120,38 @@ class PiGalleryElem(PiElement):
         full_frame_size = (widget.winfo_width(),widget.winfo_height())
 
         print(f"thumbsize: {size_img}, thumb framesize: {frame_size}, full frame: {full_frame_size}")
+
+    def _pgup(self,event,values):
+        ''' move one page up'''
+        if self._page == 0:
+            return
+        
+        self._page -= 1
+        self._display_pg()
+
+    def _pgdn(self,event,values):
+        ''' move one page down '''
+        self._page += 1
+        if (self._page-1) * self._img_per_page() > len(self._collection_rows):
+            self._page -= 1
+        else:
+            self._display_pg()
+
+    def _end(self,event,values):
+        ''' move to last page '''
+        self._page = int(len(self._collection_rows)/self._img_per_page())
+        self._display_pg()
+
+    def _home(self,event,values):
+        ''' move to firrst page'''
+        self._page = 0
+        self._display_pg()
+
+    ''' private routines '''
+    def _display_pg(self):
+        """ display the current page """
+        self._update_images()
+
 
     def _get_thumb_size(self):
         ''' get thumbnails size based on size of bordering frame '''
@@ -134,7 +185,7 @@ class PiGalleryElem(PiElement):
 
         self._collection_rows = []
         self._selected_rows = []
-        self._current_page = 0
+        self._page = 0
 
         files_folders = values[event]
         rows = c.table.rows()
@@ -175,12 +226,13 @@ class PiGalleryElem(PiElement):
         if self._new_size[0] < 16 or self._new_size[1] < 16:
             return
         
-        print(f"gallery: resize elements to {self._new_size}")
+        # print(f"gallery: resize elements to {self._new_size}")
 
         row_nbr = 0
         col_nbr = 0
         # actual_size = []
-        for row in self._collection_rows:
+        for i in range(self._row_offset(),len(self._collection_rows)):
+            row = self._collection_rows[i]
             fn = f'{c.directory}{row["file_location"]}/{row["file_name"]}'
             fn = fn.replace('\\','/')
 
