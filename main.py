@@ -25,7 +25,7 @@ def init_window():
     
     menu = PiMenu()
     tree = PiTreeList(key=c.EVT_TREE,headings=FolderStats.get_headers())
-    image = PiImageElem(key="-IMAGE-",event=c.EVT_TREE)
+    image = PiImageElem(key="-IMAGE-",event=[c.EVT_TREE,c.EVT_IMG_SELECT])
     gallery = PiGalleryElem(key="-GALLERY-",event=c.EVT_TREE)
 
     image_tab = image.get_element()

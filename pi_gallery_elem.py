@@ -14,7 +14,7 @@ from pi_filters import SelectedTreeNodesFilter
 from pi_image_util import is_image_file, cnv_image
 from status_menu import StatusMenu
 from status_menu_item import StatusMenuItem
-from pi_util import get_row_for_fn
+from pi_util import get_row_for_fn, get_fn_for_row
 
 class PiGalleryElem(PiElement):
 
@@ -37,8 +37,10 @@ class PiGalleryElem(PiElement):
         self._home_key = f'{self.key}HOME-'
         self._end_key  = f'{self.key}END-'
 
-        c.listeners.add(self._pgdn_key,self._pgup)
+        self._pgnbr_key  = f'{self.key}PGNBR-'
+
         c.listeners.add(self._pgdn_key,self._pgdn)
+        c.listeners.add(self._pgup_key,self._pgup)
         c.listeners.add(self._home_key,self._home)
         c.listeners.add(self._end_key,self._end)
 
@@ -59,6 +61,9 @@ class PiGalleryElem(PiElement):
     
     def _row_offset(self):
         return self._page * self._img_per_page()
+    
+    def _last_page(self):
+        return int(len(self._collection_rows)/self._img_per_page())
     
     def get_element(self) -> sg.Element:        
         # return [[sg.Image(key=self.key,right_click_menu=self._menu)]]
@@ -89,7 +94,8 @@ class PiGalleryElem(PiElement):
 
         layout = [
             [sg.Frame("", layout_thumbnail_frame, size=(width, height), border_width=0,expand_x=True, expand_y=True,key=f'{self.key}gallery_frame')],
-            [sg.Text("Page 0", size=0, key='PAGE'), sg.Push(),
+            [sg.Text("Page            ", size=0, key=self._pgnbr_key), 
+             sg.Push(),
              sg.Button('PgUp',key=self._pgup_key), 
              sg.Button('PgDn',key=self._pgdn_key), 
              sg.Button('Home',key=self._home_key), 
@@ -109,17 +115,27 @@ class PiGalleryElem(PiElement):
             Select or deselect it
         '''
         i = event[1]
-        size_img = c.window[event].Size
+        # print(f"thumb {i} selected")
+        i += self._row_offset()
 
-        frame_widget = c.window[(f'{self.key}border',event[1])].Widget
-        fh = frame_widget.winfo_height()
-        fw = frame_widget.winfo_width()
-        frame_size = (fw,fh)
+        # ignore if after last row
+        if i >= len(self._collection_rows):
+            return 
+        
+        row = self._collection_rows[i]
+        if row in self._selected_rows:
+            self._selected_rows.remove(row)
+            bg = '#000000'
+        else:
+            self._selected_rows.append(row)
+            bg = '#FFFFFF'
 
-        widget = c.window[f'{self.key}gallery_frame'].Widget
-        full_frame_size = (widget.winfo_width(),widget.winfo_height())
+        widget = c.window[event].Widget.config(bg=bg)
 
-        print(f"thumbsize: {size_img}, thumb framesize: {frame_size}, full frame: {full_frame_size}")
+        if len(self._selected_rows) > 0:
+            filename = get_fn_for_row(self._selected_rows[-1])
+            values = {c.EVT_IMG_SELECT:[filename]}
+            c.listeners.notify(c.EVT_IMG_SELECT,values)
 
     def _pgup(self,event,values):
         ''' move one page up'''
@@ -131,25 +147,28 @@ class PiGalleryElem(PiElement):
 
     def _pgdn(self,event,values):
         ''' move one page down '''
+        if self._page == self._last_page():
+            return 
+        
         self._page += 1
-        if (self._page-1) * self._img_per_page() > len(self._collection_rows):
-            self._page -= 1
-        else:
-            self._display_pg()
+        self._display_pg()
 
     def _end(self,event,values):
         ''' move to last page '''
-        self._page = int(len(self._collection_rows)/self._img_per_page())
+        self._page = self._last_page()
         self._display_pg()
 
     def _home(self,event,values):
-        ''' move to firrst page'''
+        ''' move to first page'''
         self._page = 0
         self._display_pg()
 
     ''' private routines '''
     def _display_pg(self):
         """ display the current page """
+        pnbr = f'Page {self._page} of {self._last_page()}'
+        # print("page:",pnbr)
+        c.window[self._pgnbr_key].update(value=pnbr)
         self._update_images()
 
 
@@ -193,7 +212,7 @@ class PiGalleryElem(PiElement):
             filter = SelectedTreeNodesFilter(files_folders)
             self._collection_rows = filter.filter(rows)
 
-        self._update_images()
+        self._display_pg()
 
     def resize_image(self,event,values):
         ''' Based on a __WINDOW CONFIG__ event, see if we need to 
@@ -208,17 +227,6 @@ class PiGalleryElem(PiElement):
                 print(f'current: {self._new_size}, new: {thumb_size}')
                 self._new_size = thumb_size
                 self._update_images()
-
-        # report on size of all images
-        '''
-        thumbnail_sizes = []
-        for j in range(self._rows):
-            for i in range(self._cols):
-                key = (f'{self.key}Thumbnail', j*self._cols+i)
-                size = c.window[key].Size
-                thumbnail_sizes.append(size)
-        '''
-        # print(f"thumb sizes: {thumbnail_sizes}")
   
     ''' private methods '''
 

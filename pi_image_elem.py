@@ -17,14 +17,21 @@ from pi_util import get_row_for_fn
 
 class PiImageElem(PiElement):
 
-    def __init__(self,key="-IMAGE-",event=c.EVT_TREE):
+    def __init__(self,key="-IMAGE-",event=[c.EVT_TREE]):
         super().__init__(key=key)
         # self._event = event
         self._new_size = (400,400)
         self._filename = ''
         self._collection_row = None
 
-        c.listeners.add(event,self.file_selected)
+        # add listeners for either an iterable of events
+        # or a single event
+        try: 
+            for e in event:
+                c.listeners.add(e,self.file_selected)
+        except TypeError:
+            c.listeners.add(event,self.file_selected)
+
         c.listeners.add(c.EVT_WIN_CONFIG,self.resize_image)
 
         self._menu =  ['', 
@@ -48,6 +55,7 @@ class PiImageElem(PiElement):
     def file_selected(self,event,values):
         ''' Display latest selected image '''
         fn_list = values[event]
+        print("pi_image_elem fn_list:",fn_list)
         if len(fn_list) == 0:
             fn = None
         else:

@@ -6,12 +6,18 @@ def get_row_for_fn(filename):
     ''' given a filename which includes the "file_location + '/' + file_name"
         find the row for the file
     '''
+    filename = filename.replace('\\','/')
     loc,_,name  = filename.rpartition('/') 
     for row in c.table:
         if row['file_name'] == name and row['file_location'] == loc:
             return row
 
     return None
+
+def get_fn_for_row(row):
+    ''' given a row, return the file name'''
+    fn = f"{row['file_location']}/{row['file_name']}"
+    return fn.replace('\\','/')
 
 def set_collection(table,directory,values):
     ''' Set global table and directory then notify 
