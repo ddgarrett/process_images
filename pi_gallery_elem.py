@@ -65,9 +65,8 @@ class PiGalleryElem(PiElement):
     def _last_page(self):
         return int(len(self._collection_rows)/self._img_per_page())
     
-    def get_element(self) -> sg.Element:        
-        # return [[sg.Image(key=self.key,right_click_menu=self._menu)]]
-    
+    def get_element(self) -> sg.Element:
+        ''' return the PySimpleGUI Element to display a Gallery of Images '''
         gap = 3
         thumbnail_width = 50
         width = height  = (thumbnail_width + 4*gap + 4) * self._cols - 4*gap
@@ -110,18 +109,51 @@ class PiGalleryElem(PiElement):
     
     ''' Event Handlers '''
 
-    def thumb_selected(self,event,values):
-        ''' A single thumb was click on.
-            Select or deselect it
+    def files_selected(self,event,values):
+        ''' Display a new list of collection rows
+         
+            Get the list of rows from current table, 
+            BUT - in future may have to make a change to get 
+            a filtered list of rows instead?
         '''
-        i = event[1]
-        # print(f"thumb {i} selected")
-        i += self._row_offset()
+
+        self._collection_rows = []
+        self._selected_rows = []
+        self._page = 0
+
+        files_folders = values[event] # files and folders to display
+        rows = c.table.rows()
+        if len(rows) > 0 and len(files_folders) > 0:
+            filter = SelectedTreeNodesFilter(files_folders)
+            self._collection_rows = filter.filter(rows)
+
+        self._display_pg()
+
+    def resize_image(self,event,values):
+        ''' Based on a __WINDOW CONFIG__ event, see if we need to 
+            resize images 
+        '''
+        thumb_size = self._get_thumb_size()
+
+        # wait until resized at least 8 pixels
+        if thumb_size != (1,1) and thumb_size[1] != None:
+            if (abs(thumb_size[0] - self._new_size[0]) > 8 or
+                abs(thumb_size[1] - self._new_size[1]) > 8):
+                self._new_size = thumb_size
+                self._update_images()
+
+    def thumb_selected(self,event,values):
+        ''' A single thumb was clicked.
+            Select or deselect it.
+        '''
+        i = event[1]   # get displayed thumb number
+        i += self._row_offset()  # get collection row number
 
         # ignore if after last row
         if i >= len(self._collection_rows):
             return 
         
+        # add or remove collection row from selected rows
         row = self._collection_rows[i]
         if row in self._selected_rows:
             self._selected_rows.remove(row)
@@ -130,8 +162,9 @@ class PiGalleryElem(PiElement):
             self._selected_rows.append(row)
             bg = '#FFFFFF'
 
-        widget = c.window[event].Widget.config(bg=bg)
+        c.window[event].Widget.config(bg=bg)
 
+        # notify Image Select listeners of a new selected image
         if len(self._selected_rows) > 0:
             filename = get_fn_for_row(self._selected_rows[-1])
             values = {c.EVT_IMG_SELECT:[filename]}
@@ -163,78 +196,27 @@ class PiGalleryElem(PiElement):
         self._page = 0
         self._display_pg()
 
-    ''' private routines '''
+    ''' private methods '''
+
     def _display_pg(self):
         """ display the current page """
         pnbr = f'Page {self._page} of {self._last_page()}'
-        # print("page:",pnbr)
         c.window[self._pgnbr_key].update(value=pnbr)
         self._update_images()
-
 
     def _get_thumb_size(self):
         ''' get thumbnails size based on size of bordering frame '''
         key=f'{self.key}gallery_frame'
-        widget = c.window[(f'{self.key}border',0)].Widget
-
-        '''
-        parent_sizes = []
-        while widget != None:
-
-            parent_sizes.append((widget.winfo_height(),widget.winfo_width()))
-            widget = widget.master
-        '''
-        # print(f"parent sizes: {parent_sizes}")
-
         gallery_widget = c.window[key].Widget
         fh = gallery_widget.winfo_height()
         fw = gallery_widget.winfo_width()
         pad = 8
         size = (int((fw-12)/3-pad),int((fh-36)/3-pad))
-        print(f'thumb size: {size}')
         return size
-
-    def files_selected(self,event,values):
-        ''' Display a list of collection rows
-         
-            Get the list of rows from current table, 
-            BUT - may have to make a change to get 
-            a filtered list of rows instead?
-        '''
-
-        self._collection_rows = []
-        self._selected_rows = []
-        self._page = 0
-
-        files_folders = values[event]
-        rows = c.table.rows()
-        if len(rows) > 0 and len(files_folders) > 0:
-            filter = SelectedTreeNodesFilter(files_folders)
-            self._collection_rows = filter.filter(rows)
-
-        self._display_pg()
-
-    def resize_image(self,event,values):
-        ''' Based on a __WINDOW CONFIG__ event, see if we need to 
-            resize images 
-        '''
-        thumb_size = self._get_thumb_size()
-
-        # wait until resized at least 8 pixels
-        if thumb_size != (1,1) and thumb_size[1] != None:
-            if (abs(thumb_size[0] - self._new_size[0]) > 8 or
-                abs(thumb_size[1] - self._new_size[1]) > 8):
-                print(f'current: {self._new_size}, new: {thumb_size}')
-                self._new_size = thumb_size
-                self._update_images()
-  
-    ''' private methods '''
 
     def _update_images(self):
         if self._new_size[0] < 16 or self._new_size[1] < 16:
             return
-        
-        # print(f"gallery: resize elements to {self._new_size}")
 
         row_nbr = 0
         col_nbr = 0
@@ -248,9 +230,10 @@ class PiGalleryElem(PiElement):
             resize_size = (self._new_size[0]-3,self._new_size[1]-3,)
             thumb,osize = cnv_image(fn, resize=resize_size, rotate=rotate)
 
-            key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
+            # key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
+            key = self._thumb_key(row_nbr,col_nbr)
             c.window[key].update(data=thumb,size=resize_size)
-            # print(f'_new_size: {self._new_size}, thumb size: {c.window[key].get_size()}')
+            self._set_bg_color(i,key)
 
             col_nbr += 1
             if col_nbr == self._cols:
@@ -260,16 +243,31 @@ class PiGalleryElem(PiElement):
                     break
 
         while row_nbr < self._rows:
-            key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
+            # key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
+            key = self._thumb_key(row_nbr,col_nbr)
             c.window[key].update(data=None)
+            self._set_bg_color(i,key)
             
             col_nbr += 1
             if col_nbr == self._cols:
                 row_nbr += 1
                 col_nbr = 0
-
-        # magic that makes everything render properly!
-        # key=f'{self.key}gallery_frame'
-        # c.window[key].Widget.pack() 
-        # c.window.refresh()
        
+    def _set_bg_color(self,row_nbr:int,thumb_key:str):
+        ''' set the background color of a thumbnail
+            given a row number and a thumbnail key 
+        '''
+        if row_nbr >= len(self._collection_rows):
+            bg = '#000000'
+        else:
+            row = self._collection_rows[row_nbr]
+            if row in self._selected_rows:
+                bg = '#FFFFFF'
+            else:
+                bg = '#000000'
+
+        c.window[thumb_key].Widget.config(bg=bg)
+
+    def _thumb_key(self,row_nbr:int,col_nbr:int):
+        ''' return the thumbnail key given a row and column number '''
+        return (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
