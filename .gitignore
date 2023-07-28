@@ -163,3 +163,4 @@ cython_debug/
 my_secrets.py
 temp_map.html
 gphoto_oauth.json
+photoslibrary_v1.token
