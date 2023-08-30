@@ -221,6 +221,7 @@ class PiGalleryElem(PiElement):
         row_nbr = 0
         col_nbr = 0
         # actual_size = []
+        i = 0
         for i in range(self._row_offset(),len(self._collection_rows)):
             row = self._collection_rows[i]
             fn = f'{c.directory}{row["file_location"]}/{row["file_name"]}'
