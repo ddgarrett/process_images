@@ -31,6 +31,7 @@ class PiGalleryElem(PiElement):
 
         c.listeners.add(event,self.files_selected)
         c.listeners.add(c.EVT_WIN_CONFIG,self.resize_image)
+        c.listeners.add(c.EVT_TABLE_ROW_CHG,self.deselect_all)
 
         self._pgup_key = f'{self.key}PGUP-'
         self._pgdn_key = f'{self.key}PGDN-'
@@ -142,6 +143,12 @@ class PiGalleryElem(PiElement):
                 self._new_size = thumb_size
                 self._update_images()
 
+    def deselect_all(self,event,values):
+        ''' Deselect all selected thumbs
+        '''
+        self._selected_rows = []
+        self._display_pg()
+
     def thumb_selected(self,event,values):
         ''' A single thumb was clicked.
             Select or deselect it.
@@ -215,12 +222,13 @@ class PiGalleryElem(PiElement):
         return size
 
     def _update_images(self):
+        # ignore if new size height or width < 16
         if self._new_size[0] < 16 or self._new_size[1] < 16:
             return
 
         row_nbr = 0
         col_nbr = 0
-        # actual_size = []
+ 
         i = 0
         for i in range(self._row_offset(),len(self._collection_rows)):
             row = self._collection_rows[i]
