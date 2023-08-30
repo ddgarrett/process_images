@@ -32,8 +32,8 @@ def init_window():
     gallery_tab = gallery.get_element()
 
     # The TabgGroup layout - it must contain only Tabs
-    tab_group_layout = [[sg.Tab('Image', image_tab,     key='-IMAGE_TAB-'),
-                         sg.Tab('Gallery', gallery_tab, key='-GALLERY_TAB-')]]
+    tab_group_layout = [[sg.Tab('Gallery', gallery_tab, key='-GALLERY_TAB-'),
+                         sg.Tab('Image', image_tab,     key='-IMAGE_TAB-')]]
     
     tab_group = [[sg.TabGroup(tab_group_layout,
                        enable_events=True,
