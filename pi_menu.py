@@ -34,7 +34,16 @@ class PiMenu(PiElement):
                         ] 
                     ],
                     ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
-                    ['&Review', ['&0 - Initial ', '&1 - Quality', '&2 - Duplicates','&3 - Best','&4 - Best of Best','&All']],
+
+                    ['&Show', 
+                        [f'&All::{c.EVT_SHOW_ALL}',
+                         f'&Duplicate or Better::{c.EVT_SHOW_DUP_PLUS}',
+                         f'&Okay or Better::{c.EVT_SHOW_OK_PLUS}',
+                         f'&Good or Best::{c.EVT_SHOW_GOOD_PLUS}',
+                         f'&Best::{c.EVT_SHOW_BEST}'
+                        ]
+                    ],
+
                     ['&Help', f'&About...::{c.EVT_ABOUT}'], ]
         
         return sg.Menu(menu_def, )
