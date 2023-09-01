@@ -2,7 +2,7 @@
 from PySimpleGUI import TreeData
 
 from table import Row
-from image_collection import COL_STATUS_LVL, ImageCollection
+from image_collection import ImageCollection
 from pi_folder_stats import FolderStats
 
 '''
@@ -109,7 +109,7 @@ class PiTreeData(TreeData):
         for row in self.rows:
             parent = row['file_location']
             v      = row['file_name']
-            values = row[COL_STATUS_LVL]
+            values = row.get_status_lvl()
 
             self.insert(parent, f'{parent}/{v}',v,values=values, icon=self.file_icon)
 
@@ -125,7 +125,7 @@ class PiTreeData(TreeData):
         for row in rows:
             parent = row['file_location']
             v      = row['file_name']
-            values = row[COL_STATUS_LVL]
+            values = row.get_status_lvl()
 
             key = f'{parent}/{v}'
             id = key_id_dict[key]

@@ -15,7 +15,6 @@ from pi_image_util import is_image_file, cnv_image
 from status_menu import StatusMenu
 from status_menu_item import StatusMenuItem
 from pi_util import get_row_for_fn, get_fn_for_row
-from image_collection import COL_TOOL_TIP
 
 class PiGalleryElem(PiElement):
 
@@ -243,7 +242,7 @@ class PiGalleryElem(PiElement):
             # key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
             key = self._thumb_key(row_nbr,col_nbr)
             c.window[key].update(data=thumb,size=resize_size)
-            c.window[key].set_tooltip(row[COL_TOOL_TIP])
+            c.window[key].set_tooltip(row.get_tooltip())
             self._set_bg_color(i,key)
 
             col_nbr += 1

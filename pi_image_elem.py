@@ -14,7 +14,6 @@ from pi_image_util import is_image_file, cnv_image
 from status_menu import StatusMenu
 from status_menu_item import StatusMenuItem
 from pi_util import get_row_for_fn
-from image_collection import COL_TOOL_TIP
 
 class PiImageElem(PiElement):
 
@@ -100,7 +99,7 @@ class PiImageElem(PiElement):
         rotate = int(self._collection_row['img_rotate'])
         thumb,osize = cnv_image(fn, resize=self._new_size, rotate=rotate)
         c.window[self.key].update(data=thumb)
-        c.window[self.key].set_tooltip(self._collection_row[COL_TOOL_TIP])
+        c.window[self.key].set_tooltip(self._collection_row.get_tooltip())
         c.window.refresh()
 
         img_size = c.window[self.key].get_size()
