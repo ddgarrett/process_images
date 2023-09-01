@@ -14,6 +14,7 @@ from csv_table import CsvTable
 from table import Row
 
 COL_STATUS_LVL = '_imgcol_status_lvl'
+COL_TOOL_TIP   = '_imgcol_tooltip'
 
 # translate a TBD status level to a descriptive name
 _tbd_lvl_translate = ('Reject?','Bad?','Dup?','Good?','Best?','???')
@@ -46,8 +47,21 @@ class ImgColRow(Row):
 
     def get(self,col_name:str) -> any:
         if col_name == COL_STATUS_LVL:
-            status = self.get('img_status')
-            lvl    = self.get('rvw_lvl')
-            return ImageCollection.translate_status_lvl(status,lvl)
+            return self.get_status_lvl()
+        
+        if col_name == COL_TOOL_TIP:
+            return self.get_tooltip()
         
         return super().get(col_name)
+    
+    def get_status_lvl(self):
+        ''' return human readable version of status and level'''
+        status = self.get('img_status')
+        lvl    = self.get('rvw_lvl')
+        return ImageCollection.translate_status_lvl(status,lvl)
+    
+    def get_tooltip(self):
+        ''' return tooltip text for row '''
+        status,lvl = self.get_status_lvl()
+        name = self.get('file_name')
+        return f'{status} {lvl}\n{name}'
