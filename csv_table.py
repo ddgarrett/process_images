@@ -59,7 +59,7 @@ class CsvTable(Table):
                     col_dict = CsvTable.verify_metadata(columns,metadata)
 
                 for row in reader:
-                    rows.append(Row(self,col_dict,row))
+                    rows.append(self._create_row(col_dict,row))
 
         except FileNotFoundError:
             # build a new empty table from metadata

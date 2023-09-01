@@ -35,9 +35,15 @@ class Table:
         ''' append a new row with default values to the end of self._rows
             and return the new row
         '''
-        row = Row(self,self._cols,data=None)
+        row = self._create_row(self._cols,data=None)  # Row(self,self._cols,data=None)
         self._rows.append(row)
         return row
+    
+    def _create_row(self,cols,data=None):
+        ''' Create a row without appending it. 
+            Allows subclasses to use Row subclass.
+        '''
+        return Row(self,cols,data)
 
 class Row:
     '''
