@@ -11,8 +11,24 @@ import PySimpleGUI as sg
 
 import pi_config as c
 from csv_table import CsvTable
+from table import Row
+
+COL_STATUS_LVL = '_imgcol_status_lvl'
+
+# translate a TBD status level to a descriptive name
+_tbd_lvl_translate = ('Reject?','Bad?','Dup?','Good?','Best?','???')
 
 class ImageCollection(CsvTable):
+
+    @staticmethod
+    def translate_status_lvl(status,level):
+        ''' translate status and level into something more human friendly '''
+        if status == 'tbd':
+            level = _tbd_lvl_translate[int(level)]
+        else:
+            level = ''
+
+        return [status,level]
 
     def __init__(self,fn:str,metadata:CsvTable=None):
         if metadata == None:
@@ -20,3 +36,18 @@ class ImageCollection(CsvTable):
 
         super().__init__(fn=fn,metadata=metadata)
 
+    def _create_row(self,cols,data=None) -> Row:
+        ''' append a new row with default values to the end of self._rows
+            and return the new row
+        '''
+        return ImgColRow(self,cols,data=data)
+    
+class ImgColRow(Row):
+
+    def get(self,col_name:str) -> any:
+        if col_name == COL_STATUS_LVL:
+            status = self.get('img_status')
+            lvl    = self.get('rvw_lvl')
+            return ImageCollection.translate_status_lvl(status,lvl)
+        
+        return super().get(col_name)

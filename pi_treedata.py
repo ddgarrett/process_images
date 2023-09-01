@@ -1,7 +1,8 @@
 
 from PySimpleGUI import TreeData
 
-from table import Table, Row
+from table import Row
+from image_collection import COL_STATUS_LVL, ImageCollection
 from pi_folder_stats import FolderStats
 
 '''
@@ -43,9 +44,6 @@ from pi_folder_stats import FolderStats
 # since we split the path by '/', no folder name in the path will contain a '/'
 _STATS_ = '/stats/' 
 
-# translate a TBD status level to a descriptive name
-tbd_lvl_translate = ('Reject?','Bad?','Dup?','Good?','Best?','???')
-
 class PiTreeData(TreeData):
 
     folder_icon = b'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsSAAALEgHS3X78AAABnUlEQVQ4y8WSv2rUQRSFv7vZgJFFsQg2EkWb4AvEJ8hqKVilSmFn3iNvIAp21oIW9haihBRKiqwElMVsIJjNrprsOr/5dyzml3UhEQIWHhjmcpn7zblw4B9lJ8Xag9mlmQb3AJzX3tOX8Tngzg349q7t5xcfzpKGhOFHnjx+9qLTzW8wsmFTL2Gzk7Y2O/k9kCbtwUZbV+Zvo8Md3PALrjoiqsKSR9ljpAJpwOsNtlfXfRvoNU8Arr/NsVo0ry5z4dZN5hoGqEzYDChBOoKwS/vSq0XW3y5NAI/uN1cvLqzQur4MCpBGEEd1PQDfQ74HYR+LfeQOAOYAmgAmbly+dgfid5CHPIKqC74L8RDyGPIYy7+QQjFWa7ICsQ8SpB/IfcJSDVMAJUwJkYDMNOEPIBxA/gnuMyYPijXAI3lMse7FGnIKsIuqrxgRSeXOoYZUCI8pIKW/OHA7kD2YYcpAKgM5ABXk4qSsdJaDOMCsgTIYAlL5TQFTyUIZDmev0N/bnwqnylEBQS45UKnHx/lUlFvA3fo+jwR8ALb47/oNma38cuqiJ9AAAAAASUVORK5CYII='
@@ -71,16 +69,6 @@ class PiTreeData(TreeData):
         idx += 1
         PiTreeData._add_dict_folder(dict[key],nodes,idx,row)
         
-    @staticmethod
-    def translate_status_lvl(status,level):
-        ''' translate status and level into something more human friendly '''
-        if status == 'tbd':
-            level = tbd_lvl_translate[int(level)]
-        else:
-            level = ''
-
-        return [status,level]
-
     def __init__(self,rows:list[Row]=[],stats=None):
         super().__init__()
         self.rows = rows
@@ -107,7 +95,7 @@ class PiTreeData(TreeData):
         td_key = f'{parent}/{key}'
         values = value[_STATS_].get_stats()
         cnt = values[2]
-        values = self.translate_status_lvl(values[0],values[1])
+        values = ImageCollection.translate_status_lvl(values[0],values[1])
         values.append(str(cnt))
         self.insert(parent,td_key,key,values=values,icon=self.folder_icon)
         for k,v in value.items():
@@ -121,8 +109,8 @@ class PiTreeData(TreeData):
         for row in self.rows:
             parent = row['file_location']
             v      = row['file_name']
-            values = self.translate_status_lvl(row['img_status'],row['rvw_lvl'])
-            # values = [row['img_status'],row['rvw_lvl']]
+            values = row[COL_STATUS_LVL]
+
             self.insert(parent, f'{parent}/{v}',v,values=values, icon=self.file_icon)
 
     def _update_rows(self,tree,key_id_dict,rows):
@@ -137,7 +125,7 @@ class PiTreeData(TreeData):
         for row in rows:
             parent = row['file_location']
             v      = row['file_name']
-            values = self.translate_status_lvl(row['img_status'],row['rvw_lvl'])
+            values = row[COL_STATUS_LVL]
 
             key = f'{parent}/{v}'
             id = key_id_dict[key]
