@@ -80,6 +80,8 @@ class PiImageThumbElem(PiElement):
         c.window[self.key].update(data=thumb)
 
         c.window.refresh()
+
+        ''' Redundant? pi_image_element will update status?
         img_size = c.window[self.key].get_size()
         try:
             pct_size = int(round(img_size[0]/osize[0]*100))
@@ -88,3 +90,4 @@ class PiImageThumbElem(PiElement):
             msg = f'exception during calc of image size: {e}'
 
         c.update_status(msg)
+        '''
