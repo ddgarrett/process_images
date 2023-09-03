@@ -81,7 +81,7 @@ class CsvTable(Table):
         with open(fn,'w',newline='') as cvsfile:
             w = csv.writer(cvsfile)
             w.writerow(list(self._cols.keys()))
-            for row in self:
+            for row in self._original_rows:
                 w.writerow(row._data)
 
         self.fn = fn

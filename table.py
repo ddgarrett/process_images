@@ -18,6 +18,7 @@ class Table:
                  rows:list[Row] = []) -> None:
         self._cols = cols   # dictionary of column name to column object
         self._rows = rows   # list of rows
+        self._original_rows = rows  # unfiltered version of rows
 
     def __iter__(self) -> Iterator[Row]:
         return iter(self._rows)
