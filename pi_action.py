@@ -93,6 +93,9 @@ class PiFilterTable(PiAction):
         super().__init__(event)
 
     def handle_event(self,event,values):
+        if not c.table:
+            return 
+        
         c.table.filter_rows(self._filter)
         c.listeners.notify(c.EVT_TABLE_LOAD,values)
 
