@@ -19,6 +19,7 @@ class Table:
         self._cols = cols   # dictionary of column name to column object
         self._rows = rows   # list of rows
         self._original_rows = rows  # unfiltered version of rows
+        self._filter = None
 
     def __iter__(self) -> Iterator[Row]:
         return iter(self._rows)
@@ -31,6 +32,16 @@ class Table:
     def rows(self):
         ''' return the underlying rows list '''
         return self._rows
+    
+    def filter_rows(self,filter=None):
+        self._filter = filter
+        if filter == None:
+            self._rows = self._original_rows
+        else:
+            self._rows = filter.filter(self._original_rows)
+
+    def refilter(self):
+        self.filter(self._filter)
 
     def new_row(self) -> Row:
         ''' append a new row with default values to the end of self._rows

@@ -19,6 +19,7 @@ from exif_loader import ExifLoader
 from image_collection import ImageCollection
 import pi_config as c  # configuration/globals singleton
 import pi_util as util 
+from pi_filters import Filter
 
 class PiAction:
     ''' Parent Action Class '''
@@ -40,7 +41,7 @@ class PiAction:
     def handle_event(self,event,values):
         print("unhandled action event: ",event)
 
-''' A few Common Global Actions for New, Save, Open'''
+''' A few Common Global Actions for New, Save, Open, Filter Table'''
 
 class PiOpenCollection(PiAction):
     def handle_event(self,event,values):
@@ -85,3 +86,17 @@ class PiFileProperties(PiAction):
 class PiAboutApp(PiAction):
     def handle_event(self,event,values):
         sg.popup('About this program', f'Process Images\nVersion {c.VERSION}', sg.get_versions())
+
+class PiFilterTable(PiAction):
+    def __init__(self, event=None,filter:Filter=None):
+        self._filter = filter
+        super().__init__(event)
+
+    def handle_event(self,event,values):
+        c.table.filter_rows(self._filter)
+        c.listeners.notify(c.EVT_TABLE_LOAD,values)
+
+        if self._filter == None:
+            c.update_status("Showing All Images")
+        else:
+           c.update_status("Collection Filtered for xxx")

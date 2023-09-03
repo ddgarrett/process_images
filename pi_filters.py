@@ -85,6 +85,21 @@ class SelectedTreeNodesFilter(Filter):
         return (file_loc,file_name) in self._filter_files
     
 '''
+    Standard Menu Filters
+'''
+
+class FilterPossibleGoodPlus(Filter):
+    ''' Filter rows which are possibly Good or Best
+        or already set to Good or Best '''
+
+    def test(self,row:Row):
+        # Already set to Good or Best, or still TBD?
+        if row['rvw_lvl'] > '3' or row['img_status'] == 'tbd':
+            return True
+        
+        return False
+    
+'''
     Filters based on Level and Status
 '''
 

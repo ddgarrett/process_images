@@ -15,6 +15,8 @@ import pi_config as c
 import pi_util as util 
 from pi_element import PiElement
 
+from pi_filters import FilterPossibleGoodPlus
+from pi_action  import PiFilterTable
 
 class PiMenu(PiElement):
 
@@ -50,5 +52,7 @@ class PiMenu(PiElement):
         
         return sg.Menu(menu_def, )
 
-    ''' Event Handlers '''
-    # so far all are common functions
+    ''' Non-Global Event Handlers '''
+    def set_handlers(self):
+        PiFilterTable(c.EVT_SHOW_ALL,None)
+        PiFilterTable(c.EVT_SHOW_POSSIBLE_GOOD_PLUS,FilterPossibleGoodPlus())

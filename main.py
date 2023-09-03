@@ -8,14 +8,13 @@
 
 import PySimpleGUI as sg
 
-from csv_table import CsvTable
-
 import pi_config as c
 from pi_gallery_elem import PiGalleryElem
 from pi_menu import PiMenu
 from pi_tree_list import PiTreeList
 from pi_image_elem import PiImageElem
 from pi_folder_stats import FolderStats
+from csv_table import CsvTable
 
 elements = []
 
@@ -55,6 +54,8 @@ def init_window():
                 sg.Sizegrip(pad=(3,3))
                 ]
               ]
+
+    menu.set_handlers() # set non-global handlers
 
     return sg.Window('Process Images', layout, size=(800, 500), finalize=True,
                      resizable=True, enable_window_config_events=True)
