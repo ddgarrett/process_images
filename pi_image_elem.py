@@ -105,7 +105,8 @@ class PiImageElem(PiElement):
         img_size = c.window[self.key].get_size()
         try:
             pct_size = int(round(img_size[0]/osize[0]*100))
-            msg = f'{self._filename} at {pct_size}%'
+            status,lvl = self._collection_row.get_status_lvl()
+            msg = f'{self._filename} at {pct_size}% - {status} {lvl}'
         except Exception as e:
             msg = f'exception during calc of image size: {e}'
 
