@@ -106,4 +106,4 @@ class PiFilterTable(PiAction):
         if self._filter == None:
             c.update_status("Showing All Images")
         else:
-           c.update_status("Collection Filtered for xxx")
+           c.update_status(f"Collection Filtered for {self._filter.get_descr()}")

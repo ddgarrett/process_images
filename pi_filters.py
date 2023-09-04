@@ -55,6 +55,9 @@ class Filter():
         ''' Return True if the row passes the test. '''
         return True
     
+    def get_descr(self):
+        return "xxx"
+    
 class SelectedTreeNodesFilter(Filter):
     ''' Given the list of selected folders and rows 
         in a Tree, such as that returned by a TreeList,
@@ -98,6 +101,9 @@ class FilterPossibleGoodPlus(Filter):
             return True
         
         return False
+    
+    def get_descr(self):
+        return "possible Good or Best"
     
 '''
     Filters based on Level and Status
