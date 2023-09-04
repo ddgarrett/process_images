@@ -37,7 +37,7 @@ class PiMenu(PiElement):
                     ['&Show', 
                         [f'&All::{c.EVT_SHOW_ALL}',
                          f'&Possible Good or Best::{c.EVT_SHOW_POSSIBLE_GOOD_PLUS}',
-                         f'&Best::{c.EVT_NOT_IMPL}',   # {c.EVT_SHOW_BEST}',
+                         f'&Possible Best::{c.EVT_SHOW_POSSIBLE_BEST}',
                          f'&Custom::{c.EVT_NOT_IMPL}', #{c.EVT_SHOW_CUSTOM}'
                         ]
                     ],

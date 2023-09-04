@@ -105,6 +105,20 @@ class FilterPossibleGoodPlus(Filter):
     def get_descr(self):
         return "possible Good or Best"
     
+class FilterPossibleBest(Filter):
+    ''' Filter rows which are possibly Good or Best
+        or already set to Good or Best '''
+
+    def test(self,row:Row):
+        # Already set to Best, or still TBD?
+        if row['rvw_lvl'] > '4' or row['img_status'] == 'tbd':
+            return True
+        
+        return False
+    
+    def get_descr(self):
+        return "possible Best"
+    
 '''
     Filters based on Level and Status
 '''
