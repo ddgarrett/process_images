@@ -55,8 +55,6 @@ def init_window():
                 ]
               ]
 
-    menu.set_handlers() # set non-global handlers
-
     return sg.Window('Process Images', layout, size=(800, 500), finalize=True,
                      resizable=True, enable_window_config_events=True)
 

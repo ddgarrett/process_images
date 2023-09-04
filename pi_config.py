@@ -12,8 +12,8 @@ import PySimpleGUI as sg
 from csv_table import CsvTable
 from image_collection import ImageCollection
 from pi_action import *
-from pi_action_map import PiActionMap
 from pi_util import EventListener
+from pi_filters import FilterPossibleGoodPlus
 
 ''' constants '''
 VERSION = '0.1.0'
@@ -44,6 +44,7 @@ EVT_SHOW_GOOD_PLUS = '-SHOW_GOOD_PLUS-'
 EVT_SHOW_BEST      = '-SHOW_BEST-'
 EVT_SHOW_CUSTOM    = '-SHOW_CUSTOM-'
 
+EVT_NOT_IMPL       = '-NOT_IMPLEMENTED-'
 
 EVT_TREE          = '-TREE-'
 EVT_IMG_SELECT    = '-IMGSEL-'
@@ -79,6 +80,11 @@ PiNewCollection(EVT_FILE_NEW)
 PiSaveCollection(EVT_FILE_SAVE)
 PiFileProperties(EVT_FILE_PROPS)
 PiAboutApp(EVT_ABOUT)
+PiNotImplemented(EVT_NOT_IMPL)
+
+''' global filter table events '''
+PiFilterTable(c.EVT_SHOW_ALL,None)
+PiFilterTable(c.EVT_SHOW_POSSIBLE_GOOD_PLUS,FilterPossibleGoodPlus())
 
 ''' set when collection is created or loaded '''
 table:ImageCollection = ImageCollection('') # may be filtered

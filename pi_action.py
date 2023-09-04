@@ -87,6 +87,10 @@ class PiAboutApp(PiAction):
     def handle_event(self,event,values):
         sg.popup('About this program', f'Process Images\nVersion {c.VERSION}', sg.get_versions())
 
+class PiNotImplemented(PiAction):
+    def handle_event(self,event,values):
+        sg.popup(f'Function not yet implemented')
+
 class PiFilterTable(PiAction):
     def __init__(self, event=None,filter:Filter=None):
         self._filter = filter

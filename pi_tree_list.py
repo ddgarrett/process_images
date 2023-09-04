@@ -27,7 +27,14 @@ class PiTreeList(PiElement):
              '---',
              PiActionMap(rowget=self.get_selected_rows).item(), 
              f'Properties::{c.EVT_FILE_PROPS}',
-             'Show',['All','Reject','Bad','Duplicate','Ok','Good','Best','Filter...'],
+             
+             '&Show', 
+                [f'&All::{c.EVT_SHOW_ALL}',
+                    f'&Possible Good or Best::{c.EVT_SHOW_POSSIBLE_GOOD_PLUS}',
+                    f'&Best::{c.EVT_NOT_IMPL}',   # {c.EVT_SHOW_BEST}',
+                    f'&Custom::{c.EVT_NOT_IMPL}', #{c.EVT_SHOW_CUSTOM}'
+                ],
+
              f'Save::{c.EVT_FILE_SAVE}',
              f'Exit::{c.EVT_EXIT}' ]]
 
