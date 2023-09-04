@@ -183,7 +183,7 @@ class PiGalleryElem(PiElement):
             return
         
         self._page -= 1
-        self._display_pg()
+        self.deselect_all(event,values)
 
     def _pgdn(self,event,values):
         ''' move one page down '''
@@ -191,23 +191,23 @@ class PiGalleryElem(PiElement):
             return 
         
         self._page += 1
-        self._display_pg()
+        self.deselect_all(event,values)
 
     def _end(self,event,values):
         ''' move to last page '''
         self._page = self._last_page()
-        self._display_pg()
+        self.deselect_all(event,values)
 
     def _home(self,event,values):
         ''' move to first page'''
         self._page = 0
-        self._display_pg()
+        self.deselect_all(event,values)
 
     ''' private methods '''
 
     def _display_pg(self):
         """ display the current page """
-        pnbr = f'Page {self._page} of {self._last_page()}'
+        pnbr = f'Page {self._page+1} of {self._last_page()+1}'
         c.window[self._pgnbr_key].update(value=pnbr)
         self._update_images()
 
