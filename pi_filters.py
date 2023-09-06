@@ -91,6 +91,19 @@ class SelectedTreeNodesFilter(Filter):
     Standard Menu Filters
 '''
 
+class FilterPossibleTbd(Filter):
+    ''' Filter rows which are still To Be Determined '''
+
+    def test(self,row:Row):
+        # Already set to Good or Best, or still TBD?
+        if row['img_status'] == 'tbd':
+            return True
+        
+        return False
+    
+    def get_descr(self):
+        return "To Be Determined (TBD)"
+    
 class FilterPossibleGoodPlus(Filter):
     ''' Filter rows which are possibly Good or Best
         or already set to Good or Best '''

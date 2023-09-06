@@ -13,7 +13,7 @@ from csv_table import CsvTable
 from image_collection import ImageCollection
 from pi_action import *
 from pi_util import EventListener
-from pi_filters import FilterPossibleGoodPlus, FilterPossibleBest
+from pi_filters import *
 
 ''' constants '''
 VERSION = '0.1.0'
@@ -37,6 +37,7 @@ EVT_EXIT       = '-EXIT-'
 EVT_ABOUT      = '-ABOUT-'
 
 EVT_SHOW_ALL           = '-SHOW_ALL-'
+EVT_SHOW_TBD           = '-SHOW_TBD-'
 EVT_SHOW_POSSIBLE_GOOD_PLUS = '-SHOW_POSSIBLE_GOOD_PLUS-'
 EVT_SHOW_POSSIBLE_BEST = '-SHOW_POSSIBLE_BEST-'
 EVT_SHOW_CUSTOM        = '-SHOW_CUSTOM-'
@@ -81,6 +82,7 @@ PiNotImplemented(EVT_NOT_IMPL)
 
 ''' global filter table events '''
 PiFilterTable(c.EVT_SHOW_ALL, None)
+PiFilterTable(c.EVT_SHOW_TBD, FilterPossibleTbd())
 PiFilterTable(c.EVT_SHOW_POSSIBLE_GOOD_PLUS, FilterPossibleGoodPlus())
 PiFilterTable(c.EVT_SHOW_POSSIBLE_BEST, FilterPossibleBest())
 
