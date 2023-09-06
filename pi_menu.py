@@ -7,10 +7,6 @@ import os
 
 import PySimpleGUI as sg
 
-# from csv_table import CsvTable
-from image_collection import ImageCollection
-from exif_loader import ExifLoader
-
 import pi_config as c
 import pi_util as util 
 from pi_element import PiElement

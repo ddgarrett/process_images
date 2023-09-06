@@ -12,7 +12,6 @@ from pi_element import PiElement
 from pi_filters import SelectedTreeNodesFilter
 from pi_treedata import PiTreeData
 from status_menu import StatusMenu
-from status_menu_item import StatusMenuItem
 
 class PiTreeList(PiElement):
 

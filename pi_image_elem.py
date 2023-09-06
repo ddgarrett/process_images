@@ -12,7 +12,6 @@ import pi_config as c
 from pi_element import PiElement
 from pi_image_util import is_image_file, cnv_image
 from status_menu import StatusMenu
-from status_menu_item import StatusMenuItem
 from pi_util import get_row_for_fn
 
 class PiImageElem(PiElement):

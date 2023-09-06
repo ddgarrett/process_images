@@ -11,10 +11,9 @@ from pi_action_map import PiActionMap
 import pi_config as c
 from pi_element import PiElement
 from pi_filters import SelectedTreeNodesFilter
-from pi_image_util import is_image_file, cnv_image
+from pi_image_util import cnv_image
 from status_menu import StatusMenu
-from status_menu_item import StatusMenuItem
-from pi_util import get_row_for_fn, get_fn_for_row
+from pi_util import get_fn_for_row
 
 class PiGalleryElem(PiElement):
 
