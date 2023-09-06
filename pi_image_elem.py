@@ -34,12 +34,14 @@ class PiImageElem(PiElement):
 
         c.listeners.add(c.EVT_WIN_CONFIG,self.resize_image)
 
+        status_menu = StatusMenu(self.get_row)
+
         self._menu =  ['', 
-            [ StatusMenu(self.get_row).get_menu(),
+            [ status_menu.get_set_menu(),
              '---',
              PiActionMap(rowget=self.get_row).item(),
              f'Properties::{c.EVT_FILE_PROPS}',
-             'Show',['All','Reject','Bad','Duplicate','Ok','Good','Best','Filter...'],
+             '&Show', status_menu.get_show_submenu(),
              f'Save::{c.EVT_FILE_SAVE}',
              f'Exit::{c.EVT_EXIT}' ]]
 

@@ -22,19 +22,15 @@ class PiTreeList(PiElement):
         c.listeners.add(c.EVT_TABLE_LOAD,self.update_list)
         c.listeners.add(c.EVT_TABLE_ROW_CHG,self.update_rows)
 
+        status_menu = StatusMenu(self.get_selected_rows)
+
         menu = ['',
-           [ StatusMenu(self.get_selected_rows).get_menu(),
+           [ status_menu.get_set_menu(),
              '---',
              PiActionMap(rowget=self.get_selected_rows).item(), 
              f'Properties::{c.EVT_FILE_PROPS}',
 
-             '&Show', 
-                [f'&All::{c.EVT_SHOW_ALL}',
-                 f'To Be Determined (TBD)::{c.EVT_SHOW_TBD}',
-                 f'&Possible Good or Best::{c.EVT_SHOW_POSSIBLE_GOOD_PLUS}',
-                 f'&Possible Best::{c.EVT_SHOW_POSSIBLE_BEST}',
-                 f'&Custom::{c.EVT_NOT_IMPL}', #{c.EVT_SHOW_CUSTOM}'
-                ],
+             '&Show', status_menu.get_show_submenu(),
 
              f'Save::{c.EVT_FILE_SAVE}',
              f'Exit::{c.EVT_EXIT}' ]]

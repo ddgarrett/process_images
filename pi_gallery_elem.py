@@ -45,12 +45,14 @@ class PiGalleryElem(PiElement):
         c.listeners.add(self._home_key,self._home)
         c.listeners.add(self._end_key,self._end)
 
+        status_menu = StatusMenu(self.get_rows)
+
         self._menu =  ['', 
-            [ StatusMenu(self.get_rows).get_menu(),
+            [ status_menu.get_set_menu(),
              '---',
              PiActionMap(rowget=self.get_rows).item(),
              f'Properties::{c.EVT_FILE_PROPS}',
-             'Show',['All','Reject','Bad','Duplicate','Ok','Good','Best','Filter...'],
+             '&Show', status_menu.get_show_submenu(),
              f'Save::{c.EVT_FILE_SAVE}',
              f'Exit::{c.EVT_EXIT}' ]]
         

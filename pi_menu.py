@@ -14,6 +14,7 @@ from exif_loader import ExifLoader
 import pi_config as c
 import pi_util as util 
 from pi_element import PiElement
+from status_menu import StatusMenu
 
 class PiMenu(PiElement):
 
@@ -23,6 +24,9 @@ class PiMenu(PiElement):
     def get_element(self) -> sg.Menu:
         ''' Return the sg.Menu element for Process Image App
         '''
+
+        status_menu = StatusMenu()
+
         # ------ Menu Definition ------ #
         menu_def = [['&File', 
                         [f'&New::{c.EVT_FILE_NEW}',
@@ -34,14 +38,7 @@ class PiMenu(PiElement):
                     ],
                     ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
 
-                    ['&Show', 
-                        [f'&All::{c.EVT_SHOW_ALL}',
-                         f'To Be Determined (TBD)::{c.EVT_SHOW_TBD}',
-                         f'Possible &Good or Best::{c.EVT_SHOW_POSSIBLE_GOOD_PLUS}',
-                         f'Possible &Best::{c.EVT_SHOW_POSSIBLE_BEST}',
-                         f'&Custom::{c.EVT_NOT_IMPL}', #{c.EVT_SHOW_CUSTOM}'
-                        ]
-                    ],
+                    ['&Show', status_menu.get_show_submenu()],
 
                     ['&Help', f'&About...::{c.EVT_ABOUT}'], ]
         
