@@ -5,6 +5,7 @@
 import os
 
 import PySimpleGUI as sg
+from pi_action_export import PiActionExport
 from pi_action_map import PiActionMap
 
 import pi_config as c
@@ -27,6 +28,7 @@ class PiTreeList(PiElement):
            [ status_menu.get_set_menu(),
              '---',
              PiActionMap(rowget=self.get_selected_rows).item(), 
+             PiActionExport(rowget=self.get_selected_rows).item(), 
              f'Properties::{c.EVT_FILE_PROPS}',
 
              '&Show', status_menu.get_show_submenu(),
