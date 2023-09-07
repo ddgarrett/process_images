@@ -91,7 +91,7 @@ class SelectedTreeNodesFilter(Filter):
     Standard Menu Filters
 '''
 
-class FilterPossibleTbd(Filter):
+class FilterTbd(Filter):
     ''' Filter rows which are still To Be Determined '''
 
     def test(self,row:Row):
@@ -103,6 +103,26 @@ class FilterPossibleTbd(Filter):
     
     def get_descr(self):
         return "To Be Determined (TBD)"
+    
+class FilterPossibleDup(Filter):
+    ''' Filter rows which are possibly Duplicate.
+        This includes TBD reject and bad as well as dup,
+        since TBD reject and bad may not have yet been reviewed
+        for possible duplicates. 
+        Also include those already marked duplicate. '''
+
+    def test(self,row:Row):
+        # Status = TBD and 
+        if row['rvw_lvl'] < '3' and row['img_status'] == 'tbd':
+            return True
+        
+        if row['img_status'] == 'dup':
+            return True
+        
+        return False
+    
+    def get_descr(self):
+        return "possible Good or Best"
     
 class FilterPossibleGoodPlus(Filter):
     ''' Filter rows which are possibly Good or Best
@@ -183,7 +203,7 @@ class BestReviewFilter(LevelStatusFilter):
     Filters are for 
     - 'reject'   - status = 'reject'
     - 'bad'      - status = 'bad'
-    - 'passed'   - level >= 2 (will include duplicates), status in [tbd,dup,ok,good,best]
+    - 'dup'      - level >= 2 (will include duplicates), status in [tbd,dup,ok,good,best]
     - 'ok'       - level >= 3 (like 'ok' but without duplicates), status in [tbd,ok,select]
     - 'good'     - level >= 4 (good enough to show others and upload to google), status in [tbd,select,best]
     - 'best'     - level == 5 (the best of the selected), status in [best]

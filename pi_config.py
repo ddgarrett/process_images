@@ -38,6 +38,7 @@ EVT_ABOUT      = '-ABOUT-'
 
 EVT_SHOW_ALL           = '-SHOW_ALL-'
 EVT_SHOW_TBD           = '-SHOW_TBD-'
+EVT_SHOW_POSSIBLE_DUP  = '-SHOW_POSSIBLE_DUP-'
 EVT_SHOW_POSSIBLE_GOOD_PLUS = '-SHOW_POSSIBLE_GOOD_PLUS-'
 EVT_SHOW_POSSIBLE_BEST = '-SHOW_POSSIBLE_BEST-'
 EVT_SHOW_CUSTOM        = '-SHOW_CUSTOM-'
@@ -82,7 +83,8 @@ PiNotImplemented(EVT_NOT_IMPL)
 
 ''' global filter table events '''
 PiFilterTable(c.EVT_SHOW_ALL, None)
-PiFilterTable(c.EVT_SHOW_TBD, FilterPossibleTbd())
+PiFilterTable(c.EVT_SHOW_TBD, FilterTbd())
+PiFilterTable(c.EVT_SHOW_POSSIBLE_DUP, FilterPossibleDup())
 PiFilterTable(c.EVT_SHOW_POSSIBLE_GOOD_PLUS, FilterPossibleGoodPlus())
 PiFilterTable(c.EVT_SHOW_POSSIBLE_BEST, FilterPossibleBest())
 
