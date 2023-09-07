@@ -8,11 +8,12 @@
     event      - event to listen for
     value_list = list of files or folers within 'values' to generate a heat map for
 
-    To use, simply create a new instance with the name of the event
-    and the key of the list within event values. For example:
+    To use, simply create a new instance with method to call to get
+    the list of selected rows. For example, the following generates a
+    menu item which will map selected rows in the Tree List:
 
         # set up action for Map Event and Tree List 
-        PiActionMap(c.EVT_ACT_MAP,value_list=c.EVT_TREE)
+        PiActionMap(rowget=self.get_selected_rows).item(),
 '''
 import os
 
