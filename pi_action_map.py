@@ -5,9 +5,9 @@
     Like all actions, this class has a 'handle_event(self,event,values)' method.
 
     When a new instance of this class is created:
-    event      - event to listen for
-    value_list = list of files or folers within 'values' to generate a heat map for
-
+        text   - menu item text to display
+        rowget - method to call to get list of rows to map
+        
     To use, simply create a new instance with method to call to get
     the list of selected rows. For example, the following generates a
     menu item which will map selected rows in the Tree List:
