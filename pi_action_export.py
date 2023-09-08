@@ -17,6 +17,8 @@
         PiActionExport(rowget=self.get_selected_rows).item(),
 '''
 import os
+from pathlib import Path
+import shutil
 
 import pi_config as c
 from pi_action import PiAction
@@ -27,7 +29,6 @@ class PiActionExport(PiAction):
         Parms:
         text   - menu item text to display
         rowget - method to call to get list of rows to map
-
     '''
 
     last_id = 0  # for generating unique Event IDs
@@ -55,10 +56,23 @@ class PiActionExport(PiAction):
 
         # callback row getter
         rows = self._rowget(values)
+        cnt = 0
 
         for row in rows:
+            cnt += 1
             subdir = row['file_location']
             fn     = row['file_name']
             src = f'{c.directory}{subdir}/{fn}'
-            dst = f'{c.directory}/_export{subdir}/{fn}'
-            print(f'copy from {src} to {dst}')
+            dst_dir = f'{c.directory}/_export{subdir}'
+            dst = f'{dst_dir}/{fn}'
+
+            # make sure destination directory exists
+            Path(dst_dir).mkdir(parents=True, exist_ok=True)
+
+            # copy file to dest
+            msg = f'export {cnt} {src}'
+            c.update_status(msg)
+            c.window.Refresh()
+            shutil.copy2(src,dst)
+
+        c.update_status(f'exported {cnt} images to {c.directory}/_export')
