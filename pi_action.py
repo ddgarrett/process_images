@@ -74,15 +74,6 @@ class PiSaveCollection(PiAction):
         else:
             c.update_status("No collection loaded")
 
-class PiFileProperties(PiAction):
-    def handle_event(self,event,values):
-        layout = [[sg.Text('The second form is small \nHere to show that opening a window using a window works')],
-                 [sg.OK()]]
-
-        window = sg.Window('Second Form', layout)
-        window.read() # wait for any event
-        window.close()
-
 class PiAboutApp(PiAction):
     def handle_event(self,event,values):
         sg.popup('About this program', f'Process Images\nVersion {c.VERSION}', sg.get_versions())

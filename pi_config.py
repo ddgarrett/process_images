@@ -12,6 +12,7 @@ import PySimpleGUI as sg
 from csv_table import CsvTable
 from image_collection import ImageCollection
 from pi_action import *
+from pi_action_props import PiFileProperties
 from pi_util import EventListener
 from pi_filters import *
 
