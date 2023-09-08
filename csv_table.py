@@ -21,18 +21,27 @@ class CsvTable(Table):
 
     @staticmethod
     def verify_metadata(col_names:list[str],metadata:CsvTable):
-        ''' Verify that column names match those in metadata '''
-        if len(col_names) != len(metadata.rows()):
+        ''' Verify that column names match those in metadata.
+            If metadata contains more columns, return an array of 
+            "extended" values to be used to extend each row read
+            from the file. '''
+        
+        if len(col_names) > len(metadata.rows()):
             raise Exception("Metadata mismatch with CSV")
         
         col_dict = {}
+        extend_values = []
         for i,md in enumerate(metadata):
             name = md['col_name']
-            if name != col_names[i]:
-                raise Exception("Metadata mismatch with CSV")
             col_dict[name] = Column(i,name)
 
-        return col_dict
+            if i < len(col_names):
+                if name != col_names[i]:
+                    raise Exception("Metadata mismatch with CSV")
+            else:
+                extend_values.append(md['default'])
+
+        return col_dict, extend_values
     
     @staticmethod
     def build_column_dict(metadata:CsvTable):
@@ -47,6 +56,7 @@ class CsvTable(Table):
         self.fn = fn
         rows=[]
         col_dict = {}
+        extend_values = []
 
         try:
             with open(fn, newline='') as csvfile:
@@ -56,9 +66,11 @@ class CsvTable(Table):
                 if metadata == None:
                     col_dict = CsvTable.default_metadata(columns)
                 else:
-                    col_dict = CsvTable.verify_metadata(columns,metadata)
+                    col_dict,extend_values = CsvTable.verify_metadata(columns,metadata)
 
                 for row in reader:
+                    if len(extend_values) > 0:
+                        row.extend(extend_values)
                     rows.append(self._create_row(col_dict,row))
 
         except FileNotFoundError:
