@@ -1,0 +1,16 @@
+{description}
+
+
+<a href="{album}" target="_blank">Click the link or the picture below to see more pictures.</a><br />
+<br />
+
+
+<div class="separator" style="clear: both; text-align: center;">
+<span style="margin-left: 1em; margin-right: 1em;"><a href="{album}" target="_blank">
+  
+{image}
+
+
+   
+</a></span></div>
+<br />
