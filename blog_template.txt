@@ -11,6 +11,36 @@
 {image}
 
 
-   
+
 </a></span></div>
 <br />
+
+--------------------- 
+1. Upload folder of images 
+2. Rename folder for date and location - set cover photo - adjust highlights 
+2. Set Options to share location, not allow others to comment, etc, then copy link
+3. Copy template above and paste in blogger post replacing {album} with copied link
+4. Add {description}, insert cover photo (and possibly more) images from local drive into post
+   using the size "Large" for photos
+5. May help to map the days photos to see where they were taken
+6. Adjust date on post and publish
+
+
+Some Photo Album Links:
+
+2023-04-27 Nagasaki
+https://photos.app.goo.gl/ETsoi5KB9k762BLX9
+
+
+04-29 Yokohama to Osaka (Hiroshima)
+https://photos.app.goo.gl/oERWdMTbeMJMPgbh8
+
+
+2023-04-30 Hiroshima and Itsukushima Floating Gate
+https://photos.app.goo.gl/8NT6ufcQyfjbLLvo6
+
+
+
+
+
+
