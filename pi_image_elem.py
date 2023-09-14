@@ -39,10 +39,10 @@ class PiImageElem(PiElement):
             [ status_menu.get_set_menu(),
              '---',
              PiActionMap(rowget=self.get_row).item(),
-             f'Properties::{c.EVT_FILE_PROPS}',
-             '&Show', status_menu.get_show_submenu(),
-             f'Save::{c.EVT_FILE_SAVE}',
-             f'Exit::{c.EVT_EXIT}' ]]
+             f'&Properties::{c.EVT_FILE_PROPS}',
+             'S&how', status_menu.get_show_submenu(),
+             f'&Save::{c.EVT_FILE_SAVE}',
+             f'E&xit::{c.EVT_EXIT}' ]]
 
     def get_element(self) -> sg.Element:        
         return [[sg.Image(key=self.key,right_click_menu=self._menu)]]

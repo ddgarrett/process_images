@@ -50,10 +50,10 @@ class PiGalleryElem(PiElement):
             [ status_menu.get_set_menu(),
              '---',
              PiActionMap(rowget=self.get_rows).item(),
-             f'Properties::{c.EVT_FILE_PROPS}',
-             '&Show', status_menu.get_show_submenu(),
-             f'Save::{c.EVT_FILE_SAVE}',
-             f'Exit::{c.EVT_EXIT}' ]]
+             f'&Properties::{c.EVT_FILE_PROPS}',
+             'S&how', status_menu.get_show_submenu(),
+             f'&Save::{c.EVT_FILE_SAVE}',
+             f'E&xit::{c.EVT_EXIT}' ]]
         
         for i in range(9):
             c.listeners.add((f'{self.key}Thumbnail',i),self.thumb_selected)

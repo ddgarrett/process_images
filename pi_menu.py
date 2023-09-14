@@ -34,7 +34,7 @@ class PiMenu(PiElement):
                     ],
                     ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
 
-                    ['&Show', status_menu.get_show_submenu()],
+                    ['S&how', status_menu.get_show_submenu()],
 
                     ['&Help', f'&About...::{c.EVT_ABOUT}'], ]
         
