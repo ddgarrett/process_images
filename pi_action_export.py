@@ -8,7 +8,7 @@
 
     When a new instance of this class is created:
         text   - menu item text to display
-        rowget - method to call to get list of rows to map
+        rowget - method to call to get list of rows to export
 
     To use, simply create a new instance with the name of the event
     and the key of the list within event values. For example:
@@ -28,7 +28,7 @@ class PiActionExport(PiAction):
         Export selected files and folders.
         Parms:
         text   - menu item text to display
-        rowget - method to call to get list of rows to map
+        rowget - method to call to get list of rows to export
     '''
 
     last_id = 0  # for generating unique Event IDs
@@ -52,7 +52,8 @@ class PiActionExport(PiAction):
         return f'{self._text}::{self._get_event()}'
 
     def handle_event(self,event,values):
-        ''' Hand Map Event - get list of rows and display in map '''
+        ''' Handle Export Event - get list of rows and copy
+            those images to _export subdirectory. '''
 
         # callback row getter
         rows = self._rowget(values)
