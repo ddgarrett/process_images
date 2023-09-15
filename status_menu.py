@@ -26,7 +26,7 @@ class StatusMenu():
     def get_set_menu(self):
         set_menu = [ 
              'S&et Status...',[
-                 StatusMenuItem('Reject',c.STAT_REJECT,c.LVL_INITIAL,self.rowget).item(), 
+                 StatusMenuItem('&Reject',c.STAT_REJECT,c.LVL_INITIAL,self.rowget).item(), 
                  StatusMenuItem('&Poor Quality',c.STAT_QUAL_BAD,c.LVL_QUAL,self.rowget).item(),
                  StatusMenuItem('&Duplicate',c.STAT_DUP,c.LVL_DUP,self.rowget).item(),
                  StatusMenuItem('&Just Okay',c.STAT_OK,c.LVL_OK,self.rowget).item(),
