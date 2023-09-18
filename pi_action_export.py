@@ -38,6 +38,25 @@ class PiActionExport(PiAction):
         cls.last_id += 1
         return cls.last_id
     
+    @staticmethod
+    def copy_file(src_dir, dst_dir,fn,msg=None):
+            ''' Copy file name fn from source directory src_dir
+                to destination directory dst_dir.
+                If msg is specified show it in the status'''
+            
+            # make sure to prefix source and dest with root directory name
+            src = f'{c.directory}{src_dir}/{fn}'
+            dst = f'{c.directory}{dst_dir}/{fn}'
+
+            # make sure destination directory exists
+            Path(f'{c.directory}{dst_dir}').mkdir(parents=True, exist_ok=True)
+
+            if msg:
+                c.update_status(msg)
+                c.window.Refresh()
+
+            shutil.copy2(src,dst)
+
     def __init__(self,text="Export",rowget=None):
         self._id = self.next_id()
         self._text = text
@@ -55,25 +74,18 @@ class PiActionExport(PiAction):
         ''' Handle Export Event - get list of rows and copy
             those images to _export subdirectory. '''
 
-        # callback row getter
         rows = self._rowget(values)
+        copy_cnt = len(rows)
         cnt = 0
 
         for row in rows:
-            cnt += 1
+            cnt   += 1
             subdir = row['file_location']
             fn     = row['file_name']
-            src = f'{c.directory}{subdir}/{fn}'
-            dst_dir = f'{c.directory}/_export{subdir}'
-            dst = f'{dst_dir}/{fn}'
 
-            # make sure destination directory exists
-            Path(dst_dir).mkdir(parents=True, exist_ok=True)
+            dst_dir = f'/_export{subdir}'
+            msg     = f'export {cnt} of {copy_cnt} {subdir}/{fn}'
 
-            # copy file to dest
-            msg = f'export {cnt} {src}'
-            c.update_status(msg)
-            c.window.Refresh()
-            shutil.copy2(src,dst)
+            self.copy_file(subdir,dst_dir,fn,msg)
 
         c.update_status(f'exported {cnt} images to {c.directory}/_export')
