@@ -65,3 +65,21 @@ class ImgColRow(Row):
         status,lvl = self.get_status_lvl()
         name = self.get('file_name')
         return f'{status} {lvl}\n{name}'
+    
+    def get_hyp_sq(self,row):
+        ''' Return the square of the distance between two points in Euclidian geometry.
+            This is faster for computer which co-ordinate to cluster a second point with
+            and is accurrate for short distances. 
+            
+            If either row does not have GPS co-ordinates, return -1 '''
+        
+        s_lat = self['img_lat']
+        s_lon = self['img_lon']
+
+        r_lat = row['img_lat']
+        r_lon = row['img_lon']
+
+        if r_lat == None or s_lat == None:
+            return -1
+
+        return (r_lat-s_lat)**2+(r_lon-s_lon)**2
