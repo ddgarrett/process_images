@@ -7,6 +7,8 @@
 '''
 from __future__ import annotations
 
+from operator import itemgetter
+
 import PySimpleGUI as sg
 
 import pi_config as c
@@ -31,11 +33,59 @@ class ImageCollection(CsvTable):
 
         return [status,level]
 
-    def __init__(self,fn:str,metadata:CsvTable=None):
+    def __init__(self,fn:str,metadata:CsvTable=None,
+                 renumber=False,audit_folder=False,parent_folder='{dt[0]}-{dt[1]}-{dt[2]}'):
+        '''
+            Sometimes images do not load in date,time sequence or may have been placed in the wrong 
+            parent folder. This is better fixed during the load, but for now these "hacks" have 
+            been added. They allow you to resort and renumber the image csv and to test for images 
+            in an improper parent folder. NOT IMPLEMENTED is moving images to the proper parent folder.
+
+            Note that the date and time used to create image name on Pixel (Android?) phones is based
+            on UTC. Therefore some pictures near begining or end of day may appear as taken on a 
+            different day.
+
+            Additional optional parameters:
+            renumber - if True, will resort by file_location, img_date_time 
+                       then recalculate the file_id (primary key)
+            audit_folder - if True will confirm that the parent folder name (file_location)
+                       starts with a given pattern. 
+            parent_folder - if audit_folder is true, this is the pattern to use in 
+                       testing parent folder name. Default is yyyy-mm-dd but for some collections
+                       you may want to use parent_folder='{dt[0]}-{dt[1]}' for yyyy-mm groupings
+        '''
         if metadata == None:
             metadata = c.metadata
 
         super().__init__(fn=fn,metadata=metadata)
+
+        # Note any images that are NOT in their correct folder
+        # based on parent folder starts with yyyy-mm-dd
+        # NOTE: Adjust if parent folder starts with yyyy-mm
+        if audit_folder:
+            for r in self:
+                dt = r['img_date_time']
+                loc = r['file_location']
+
+                dt = dt.split(' ')               # [date,time]
+                dt = dt[0].split(':')            # [yyyy,mm,dd]
+                dt = f'{dt[0]}-{dt[1]}-{dt[2]}'  # 'yyyy-mm-dd'
+                loc = loc.split('/')[-1]         # parent folder name
+                correct = loc.startswith(dt)
+
+                if not correct:
+                    print(loc,dt,r['file_name'])
+        
+        # Sort by file location and image date time then renumber rows
+        if renumber:
+            self._rows =  sorted(self._rows,key=itemgetter('file_location','img_date_time'))
+            self._original_rows = self._rows
+
+            # now renumber rows
+            file_id = 1000
+            for row in self:
+                row['file_id'] = file_id
+                file_id += 1
 
     def _create_row(self,cols,data=None) -> Row:
         ''' append a new row with default values to the end of self._rows
