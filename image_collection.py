@@ -63,6 +63,7 @@ class ImageCollection(CsvTable):
         # based on parent folder starts with yyyy-mm-dd
         # NOTE: Adjust if parent folder starts with yyyy-mm
         if audit_folder:
+            print("auditing folders")
             for r in self:
                 dt = r['img_date_time']
                 loc = r['file_location']
@@ -78,6 +79,7 @@ class ImageCollection(CsvTable):
         
         # Sort by file location and image date time then renumber rows
         if renumber:
+            print("renumber images using parent folder name and image date time")
             self._rows =  sorted(self._rows,key=itemgetter('file_location','img_date_time'))
             self._original_rows = self._rows
 
