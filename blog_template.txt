@@ -1,33 +1,45 @@
-
+<!--- intro paragraph(s)  --->
 <p>
-{description}
-
-<a href="{album}" target="_blank">Click this link or a picture below to see more pictures.</a>
+{intro}
 </p>
 
+<!----- image and paragraph(s) describing picture -->
+<br>
 <div class="separator" style="clear: both; text-align: center;">
-<span style="margin-left: 1em; margin-right: 1em;"><a href="{album}" target="_blank">
-  
-{image}
+<a href="{album}" target="_blank">
+<figure>
+  {image}
+ <figcaption>{image_caption}</figcaption>
+</figure> 
+</a></div>
 
+<p>
+{image_description}
+</p>
 
-
-</a></span></div>
-<br />
+<!--- final link to album --->
+<p>
+<a href="{album}" target="_blank">Click this link or one of the pictures above to see the photo ablum for {album_name}</a></p>
+<br>
 
 --------------------- 
-1. Upload folder of images 
-2. Rename folder for date and location - set cover photo - adjust highlights 
-2. Set Options to share location, not allow others to comment, etc, then copy link
-3. Copy template above and paste in blogger post replacing {album} with copied link
-4. Add {description}, insert cover photo (and possibly more) images from local drive into post
-   using the size "Large" for photos
-5. May help to map the days photos to see where they were taken
-6. Adjust date on post and publish
+0. Create new album: yyyyy-mm-dd location
+1. Upload folder of images into a new album
+2. Rename album for date and location - set cover photo - adjust highlights 
+3. Set Options to share location, not allow others to comment, etc, then copy link
+4. Paste link into a new blog post for later use
+5. Copy template above and paste in blogger post replacing {album} with copied link
+6. Add intro paragraph(s)
+7. For each picture to be insert
+	a. Copy <!----- image and paragraph(s) describing picture --> segment of template
+	b. insert one or more images from local drive using the size "Large" for photos
+	c. add description of segment of day
+8. May help to map the days photos to see where they were taken
+9. Adjust date on post and publish
+10. Make sure all '{' characters have been replaced with something
 
 
 Some Photo Album Links:
-
 
 
 2023-04-30 Hiroshima and Itsukushima Floating Gate
