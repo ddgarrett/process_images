@@ -4,22 +4,25 @@
 </p>
 
 <!----- image and paragraph(s) describing picture -->
+<p>
+{image_intro_paragraph}
+</p>
 <br>
 <div class="separator" style="clear: both; text-align: center;">
 <a href="{album}" target="_blank">
-<figure>
+<figure> <!-- image height or width at 500 - manually override -->
   {image}
  <figcaption>{image_caption}</figcaption>
 </figure> 
 </a></div>
 
-<p>
-{image_description}
+<p> <!--- optional - delete if not needed -->
+{image_extended_description} 
 </p>
 
 <!--- final link to album --->
 <p>
-<a href="{album}" target="_blank">Click this link or one of the pictures above to see the photo ablum for {album_name}</a></p>
+<a href="{album}" target="_blank">Click this link or one of the pictures above to see more pictures in the  {album_name} photo album</a></p>
 <br>
 
 --------------------- 
@@ -32,7 +35,7 @@
 6. Add intro paragraph(s)
 7. For each picture to be insert
 	a. Copy <!----- image and paragraph(s) describing picture --> segment of template
-	b. insert one or more images from local drive using the size "Large" for photos
+	b. insert one or more images from local drive using the size "Large" for photos - override image size
 	c. add description of segment of day
 8. May help to map the days photos to see where they were taken
 9. Adjust date on post and publish
