@@ -135,3 +135,12 @@ class ImgColRow(Row):
             return -1
 
         return (r_lat-s_lat)**2+(r_lon-s_lon)**2
+    
+    def get_readable_date(self):
+        dt = self['img_date_time']
+        date = dt.split(' ')[0]
+        date = date.split(':')
+        if len(date) == 3:
+            return f'{date[1]}/{date[2]}/{date[0]}'
+        
+        return 'unknown date'
