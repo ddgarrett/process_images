@@ -4,7 +4,7 @@
 </p>
 
 <!----- image and paragraph(s) describing picture -->
-<p>
+<p id="{jpg_fn}">
 {image_intro_paragraph}
 </p>
 <br>
