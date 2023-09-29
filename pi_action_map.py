@@ -84,12 +84,12 @@ class PiActionMap(PiAction):
         lon = 0 
         cnt = 0
         for row in rows:
-            fn = f"{row['file_location']}/{row['file_name']}"
+            fn = row['file_name']
             lat_lon = (float(row['img_lat']),float(row['img_lon']))
             lat += lat_lon[0]
             lon += lat_lon[1]
             cnt += 1
-            href = f'<a href="file://{c.directory}{fn}" target="_blank">- {fn}</a>'
+            href = f'<a href="{c.BLOG_URI}/#{fn}" target="_blank">{row.get_readable_date()} - {fn}</a>'
             try:
                 idx = lat_lon_lst.index(lat_lon)
                 weights[idx] = weights[idx] + 1

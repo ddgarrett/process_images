@@ -19,6 +19,7 @@ from pi_filters import *
 ''' constants '''
 VERSION = '0.1.0'
 WINDOW_CONFIG = "__WINDOW CONFIG__"
+BLOG_URI = 'https://www.garrettblog.com'
 
 # image file types
 IMG_FILE_TYPES = [".jpg",".jpeg",".png",".gif",".tiff"]
