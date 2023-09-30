@@ -7,6 +7,7 @@ import os
 import PySimpleGUI as sg
 from pi_action_export import PiActionExport
 from pi_action_map import PiActionMap
+from pi_action_blog import PiActionBlog
 
 import pi_config as c
 from pi_element import PiElement
@@ -29,6 +30,7 @@ class PiTreeList(PiElement):
              '---',
              PiActionMap(rowget=self.get_selected_rows).item(), 
              PiActionExport(rowget=self.get_selected_rows).item(), 
+             PiActionBlog(rowget=self.get_selected_rows).item(),
              f'Properties::{c.EVT_FILE_PROPS}',
 
              'S&how', status_menu.get_show_submenu(),
