@@ -42,47 +42,47 @@ class PiActionBlog(PiAction):
         ''' Return a string with the blog header html '''
         
         return ''' 
-            <!--- intro paragraph(s)  --->
-            <p>
-            {intro}
-            </p>
-        '''
+<!--- intro paragraph(s)  --->
+<p>
+{intro}
+</p>
+'''
     @staticmethod
     def get_body(row):
         ''' Return the blog body for a single row '''
         return f'''
-            <!----- image and paragraph(s) describing picture -->
-            <p id="{row['file_name']}">
-            {{image_intro_paragraph}}
-            </p>
-            <br>
-            <div class="separator" style="clear: both; text-align: center;">
-            <a href="{{album}}" target="_blank">
-            <figure> 
-                <!-- image height or width at 500 - manually override -->
-                <!----- image {row['file_name']} -->
+<!----- image and paragraph(s) describing picture -->
+<p id="{row['file_name']}">
+{{image_intro_paragraph}}
+</p>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="{{album}}" target="_blank">
+<figure> 
+    <!-- image height or width at 500 - manually override -->
+    <!----- image {row['file_name']} -->
 
 
 
-            <figcaption>{{image_caption}}</figcaption>
-            </figure> 
-            </a></div>
+<figcaption>{{image_caption}}</figcaption>
+</figure> 
+</a></div>
 
-            <p> <!--- optional - delete if not needed -->
-            {{image_extended_description}} 
-            </p>
-            '''
+<p> <!--- optional - delete if not needed -->
+{{image_extended_description}} 
+</p>
+'''
 
     @staticmethod
     def get_footer():
          ''' Return a string with blog footer html '''
 
          return '''
-            <!--- final link to album --->
-            <p>
-            <a href="{album}" target="_blank">Click this link or one of the pictures above to see more pictures in the  {album_name} photo album</a></p>
-            <br>
-            '''
+<!--- final link to album --->
+<p>
+<a href="{album}" target="_blank">Click this link or one of the pictures above to see more pictures in the  {album_name} photo album</a></p>
+<br>
+'''
 
     def __init__(self,text="Generate Blog",rowget=None,fn="blog.html"):
         self._id = self.next_id()
@@ -110,4 +110,4 @@ class PiActionBlog(PiAction):
             for row in self._rowget(values):
                 f.write(self.get_body(row))
 
-            f.write(self.get_header())
+            f.write(self.get_footer())
