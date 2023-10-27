@@ -14,6 +14,15 @@ def get_row_for_fn(filename):
 
     return None
 
+def dir_loaded(subdir):
+    ''' return true if subdirectory already loaded '''
+    loc = subdir.replace('\\','/')
+    for row in c.table:
+        if row['file_location'] == loc:
+            return True
+
+    return False
+
 def get_fn_for_row(row):
     ''' given a row, return the file name'''
     fn = f"{row['file_location']}/{row['file_name']}"

@@ -17,6 +17,7 @@ import PySimpleGUI as sg
 from table import Table
 from image_collection import ImageCollection
 import pi_config as c 
+import pi_util as util
 
 class ExifLoader:
 
@@ -28,10 +29,16 @@ class ExifLoader:
 
     @staticmethod
     def new_collection():
+        ''' Define a new collection by adding images from a selected 
+            directory and its subdirectories.
+        '''
+
+        # select directory
         d = sg.popup_get_folder('',no_window=True)
         if not d:
             return None,None
 
+        # don't load if image_collection.csv already exists
         collection_fn = os.path.join(d, "image_collection.csv")
         if os.path.exists(collection_fn):
             msg = f'''
@@ -42,6 +49,7 @@ class ExifLoader:
             sg.popup(msg)
             return None,None
 
+        # load all images in the directory and its subdirectories
         c.status.update(f"Searching for pictures in {d}...")
         c.window.refresh()
         
@@ -53,24 +61,30 @@ class ExifLoader:
 
     @staticmethod
     def add_folders():
-        d = sg.popup_get_folder('',no_window=True)
-        if not d:
-            return None,None
+        ''' Add images to an existing collection,
+            searching for new subdirectories of the main directory
+            for the currently loaded image collection.
+        '''
 
-        collection_fn = os.path.join(d, "image_collection.csv")
-        if os.path.exists(collection_fn):
+        # verify that we have a collection loaded
+        if c.directory == "":
             msg = f'''
-                Collection file already exists: \n 
-                "{collection_fn}"\n
-                Delete file then retry.
+                Collection not yet opened.
             '''
             sg.popup(msg)
             return None,None
 
-        c.status.update(f"Searching for pictures in {d}...")
+        d = c.directory
+        c.status.update(f"Searching for new folders in {d}...")
         c.window.refresh()
         
-        table  = ImageCollection(collection_fn)
+        # collection_fn = os.path.join(d, "image_collection.csv")
+        # table  = ImageCollection(collection_fn)
+        table = c.table
+
+        # Remove any table filters
+        table.filter_rows()
+
         loader = ExifLoader(table,c.metadata)
         loader.load_dir(d)
 
@@ -81,7 +95,13 @@ class ExifLoader:
         self._data = data_table
         self._new_row = None
         self._meta = metadata_table
+
+        # IF data_table has rows, set first file ID to highest ID In table
         self._last_fid = first_file_id-1
+        rows = data_table.rows()
+        if len(rows) > 0:
+            last_row = rows[len(rows)-1]
+            self._last_fid = last_row.get_int('file_id')
 
         # convert any array values in exif_tags to arrays
         for row in metadata_table:
@@ -92,9 +112,23 @@ class ExifLoader:
 
     ''' load starting at a directory and traversing all subdirectories  '''
     def load_dir(self,startpath:str):
+
+        adding_dir = False
+        if len(self._data.rows()) > 0:
+            adding_dir = True
+
         for root, dirs, files in os.walk(startpath):
             subdir = root.replace(startpath, '')
             dir_path = pathlib.Path(root)
+            subdir = subdir.replace('\\','/')
+
+            # skip directories begining with '_'
+            if subdir.startswith('/_'):
+                continue
+
+            # skip if subdir already loaded
+            if adding_dir and util.dir_loaded(subdir):
+                continue
 
             for fn in files:
                 file_path = dir_path.joinpath(fn)
@@ -109,7 +143,7 @@ class ExifLoader:
                     # add a few fields of our own
                     self._last_fid += 1
                     tags['sys.next_id']   = self._last_fid
-                    tags['sys.subdir']    = subdir.replace('\\','/')
+                    tags['sys.subdir']    = subdir
                     tags['sys.file_name'] = fn
                     tags['sys.file_size'] = os.path.getsize(file_path)
 
