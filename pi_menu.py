@@ -28,6 +28,7 @@ class PiMenu(PiElement):
                         [f'&New::{c.EVT_FILE_NEW}',
                          f'&Open::{c.EVT_FILE_OPEN}', 
                          f'&Save::{c.EVT_FILE_SAVE}', 
+                         f'&Add Folders::{c.EVT_ADD_FOLDERS}', 
                          f'&Properties::{c.EVT_FILE_PROPS}', 
                          f'E&xit::{c.EVT_EXIT}' 
                         ] 

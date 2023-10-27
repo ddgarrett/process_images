@@ -34,6 +34,7 @@ TRACE_EVENTS = True
 EVT_FILE_OPEN  = '-FILE_OPEN-'
 EVT_FILE_NEW   = '-FILE_NEW-'
 EVT_FILE_SAVE  = '-FILE_SAVE-'
+EVT_ADD_FOLDERS  = '-ADD_FOLDERS-'
 EVT_FILE_PROPS = '-FILE_PROPS-'
 EVT_EXIT       = '-EXIT-'
 EVT_ABOUT      = '-ABOUT-'
@@ -78,6 +79,7 @@ listeners = EventListener()
 ''' standard global actions '''
 PiOpenCollection(EVT_FILE_OPEN)
 PiNewCollection(EVT_FILE_NEW)
+PiAddFolders(EVT_ADD_FOLDERS)
 PiSaveCollection(EVT_FILE_SAVE)
 PiFileProperties(EVT_FILE_PROPS)
 PiAboutApp(EVT_ABOUT)

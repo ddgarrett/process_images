@@ -66,6 +66,15 @@ class PiNewCollection(PiAction):
         else:
             c.update_status("New collection canceled")
 
+class PiAddFolders(PiAction):
+    def handle_event(self,event,values):
+        table,d = ExifLoader.add_folders()
+        if table:
+            util.set_collection(table,d,values)
+            c.update_status(f"{len(c.table.rows())} images added from {d}")
+        else:
+            c.update_status("Add folders canceled")
+
 class PiSaveCollection(PiAction):
     def handle_event(self,event,values):
         if c.table and len(c.table.fn) > 0:

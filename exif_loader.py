@@ -51,6 +51,31 @@ class ExifLoader:
 
         return table,d
 
+    @staticmethod
+    def add_folders():
+        d = sg.popup_get_folder('',no_window=True)
+        if not d:
+            return None,None
+
+        collection_fn = os.path.join(d, "image_collection.csv")
+        if os.path.exists(collection_fn):
+            msg = f'''
+                Collection file already exists: \n 
+                "{collection_fn}"\n
+                Delete file then retry.
+            '''
+            sg.popup(msg)
+            return None,None
+
+        c.status.update(f"Searching for pictures in {d}...")
+        c.window.refresh()
+        
+        table  = ImageCollection(collection_fn)
+        loader = ExifLoader(table,c.metadata)
+        loader.load_dir(d)
+
+        return table,d
+
     def __init__(self,data_table:Table, metadata_table:Table, 
                  first_file_id:int=1000):
         self._data = data_table
