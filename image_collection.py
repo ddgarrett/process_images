@@ -79,21 +79,28 @@ class ImageCollection(CsvTable):
         
         # Sort by file location and image date time then renumber rows
         if renumber:
-            print("renumber images using parent folder name and image date time")
-            self._rows =  sorted(self._rows,key=itemgetter('file_location','img_date_time'))
-            self._original_rows = self._rows
-
-            # now renumber rows
-            file_id = 1000
-            for row in self:
-                row['file_id'] = file_id
-                file_id += 1
+            self.resort()
+            self.renumber()
 
     def _create_row(self,cols,data=None) -> Row:
         ''' append a new row with default values to the end of self._rows
             and return the new row
         '''
         return ImgColRow(self,cols,data=data)
+    
+    # resort and renumber rows in image collection
+    def resort(self):
+        ''' resort images by file location and image date time '''
+        # print("renumber images using parent folder name and image date time")
+        self._rows =  sorted(self._rows,key=itemgetter('file_location','img_date_time'))
+        self._original_rows = self._rows
+
+    def renumber(self):
+        ''' renumber rows '''
+        file_id = 1000
+        for row in self:
+            row['file_id'] = file_id
+            file_id += 1
     
 class ImgColRow(Row):
 
