@@ -74,6 +74,8 @@ class PiAddFolders(PiAction):
 
         # add folders to table
         table,d = ExifLoader.add_folders()
+        table.resort()
+        table.renumber()
         if table:
             util.set_collection(table,d,values)
             pics_added = len(c.table.rows()) - pic_count
