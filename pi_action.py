@@ -60,6 +60,8 @@ class PiOpenCollection(PiAction):
 class PiNewCollection(PiAction):
     def handle_event(self,event,values):
         table,d = ExifLoader.new_collection()
+        table.resort()
+        table.renumber()
         if table:
             util.set_collection(table,d,values)
             c.update_status(f"{len(c.table.rows())} images loaded from {d}")
