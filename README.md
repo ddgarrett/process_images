@@ -1,6 +1,6 @@
 # Process Images
 
-Review your photos to select only the best for inclusion in Google Albums and Blogger.com posts. Advanced features generate skeleton HTML for Blogger.com entries. If your pictures have GPS data embedded, you can even generate HTML pages to display Google Maps with pins than link to your Blogger.com entries.
+Review your photos to select only the best for inclusion in Google Albums and Blogger.com posts. Advanced features generate skeleton HTML for Blogger.com entries. If your pictures have GPS data embedded, you can even generate HTML pages to display Google Maps with pins that link to your Blogger.com entries.
 
 ## Overview
 
@@ -8,15 +8,15 @@ It's fun to take a lot of pictures during trips, family gatherings, or just dail
 
 Personally, I keep all of my photos backed up on external hard drives and rarely delete any pictures. I  use PI to review all of my pictures and select the top 10% or so to upload to Google Photo Albums. I then take the top 10% or so of those, the top 1% of all of my photos, and put them on <a href="https://www.garrettblog.com">my blogger.com website,</a> sometimes along with a description of what was happening that day.
 
-If you photo review process is similar to mine you can use Process Images (PI) to quickly review your pictures and weed out those which are obviously not going to be in your final albums. This would include pictures you took of menus or signs to share with others, accidental shots or those which are grossly out of focus or otherwise flawed.
+If your photo review process is similar to mine you can use Process Images (PI) to quickly review your pictures and weed out those which are obviously not going to be in your final albums. This would include pictures you took of menus or signs to share with others, accidental shots or those which are grossly out of focus or otherwise flawed.
 
 Next you can use PI to filter out those previouly rejected pictures and do a second review to weed out those which are maybe just "so-so" or those where you wanted to see how the photo would turn out, and it just didn't work as you wanted. Maybe the picture is just "ok" but not really good enough to show others.
 
 If you're anything like me, you tend to take a number of pictures of the same thing to see which turn out best. Or a number of pictures say of the inside of a church or another tourist attraction, but you just want to keep a few of the best. PI allows you to see a gallery of multiple pictures where can select just one or a few of them for inclusion in a final album, marking the others as "duplicate".
 
-With PI you can then filter your list of pictures to see just those which have survived the previous reviews and are potential winning pictures. Here you might have some which are good, but just not good enough. Or maybe there are too many and you just want to bore others with fewer pictures. 
+With PI you can then filter your list of pictures to see just those which have survived the previous reviews and are potential winning pictures. Here you might have some which are good, but just not good enough. Or maybe you just don't want to bore others with too many pictures. 
 
-Or maybe there was a sight you did want to show others, even if the picture wasn't the best? PI makes it easy to "unfilter" the list of pictures and show you all of them, giving you a second chance to review those pictures you might want to include in your final selection. For me, knowing that I can at a moment's notice go back for a second look at a previously rejected picture, makes it much easier for me to reject a photo in the first place.
+Or maybe there was a sight you did want to show others, even if the picture wasn't the best? PI makes it easy to "unfilter" the list of pictures and show previously rejected photos, giving you a second chance to review those pictures you might want to include in your final selection. For me, knowing that I can at a moment's notice go back for a second look at a previously rejected picture, makes it much easier for me to reject a photo in the first place.
 
 By this point, if you've taken thousands of pictures like I do, you've narrowed it down to just your best 10% or maybe even less. These are the ones you'd want to upload to Google Photo Albums to create an organized set of lasting memories. Memories that you'd be proud to show others as well as fond of enough to review for yourself from time to time. This is where you can use PI to filter to show just your good photos and then export them to another folder. From those folders you can then drag and drop them into a Google Photo Albums that you create.
 
@@ -24,7 +24,7 @@ If you use blogger.com, like I do, you can take it one step further and do a fin
 
 Taking it one step further, if you've used a smart phone or some other GPS enabled camera to take your photos, you can now create a map based on where those "best" pictures you blogged about were taken. Although you'll have to do some manual changes to that HTML in order to make a final product, it will contain a pin for every photo in your "best" category with links to anchors in the blogger.com posts previously created. You can then upload that HTML to a free github website and allow friends to view the map via a blogger.com post.
 
-You can see examples of all of this on my blogger.com website. There is even a blog post with <a href="https://www.garrettblog.com/2023/05/back-home-from-japan.html">a link to an example map.</a> If you follow that link you'll seen a screen shot of a map. If you click on that screen shot it will take you to <a href="https://ddgarrett.github.io/2023-04_japan_trip.html">the map itself.</a> You can even see the source for that map on <a href="https://github.com/ddgarrett/ddgarrett.github.io">my GitHub repository. HTML uploaded to the GitHub repo named 'ddgarrett.github.io' will be served up on the URL 'ddgarrett.github.io'.
+You can see examples of all of this on my blogger.com website. There is even a blog post with <a href="https://www.garrettblog.com/2023/05/back-home-from-japan.html">a link to an example map.</a> If you follow that link you'll seen a screen shot of a map. If you click on that screen shot it will take you to <a href="https://ddgarrett.github.io/2023-04_japan_trip.html">the map itself.</a> You can even see the source for that map on <a href="https://github.com/ddgarrett/ddgarrett.github.io">my GitHub repository</a>. HTML uploaded to the GitHub repo named 'ddgarrett.github.io' will be served up on the URL 'ddgarrett.github.io'.
 
 The best part of all of this is, the Google Photo Albums, the blogger.com web page, the GitHub website and the Google Maps API are all free! Assuming you stay below certain limits of course.
 
