@@ -85,11 +85,13 @@ class PiActionMap(PiAction):
         cnt = 0
         for row in rows:
             fn = row['file_name']
+            sub_uri = row['img_date_time']
+            sub_uri = f'{sub_uri[0:4]}/{sub_uri[5:7]}'
             lat_lon = (float(row['img_lat']),float(row['img_lon']))
             lat += lat_lon[0]
             lon += lat_lon[1]
             cnt += 1
-            href = f'<a href="{c.BLOG_URI}/#{fn}" target="_blank">{row.get_readable_date()} - {fn}</a>'
+            href = f'<a href="{c.BLOG_URI}/{sub_uri}#{fn}" target="_blank">{row.get_readable_date()} - {fn}</a>'
             try:
                 idx = lat_lon_lst.index(lat_lon)
                 weights[idx] = weights[idx] + 1
