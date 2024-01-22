@@ -11,6 +11,8 @@ import pi_config as c
 import pi_util as util 
 from pi_element import PiElement
 from status_menu import StatusMenu
+from pi_action_reorg_img import PiActionReorgImg
+
 
 class PiMenu(PiElement):
 
@@ -29,6 +31,8 @@ class PiMenu(PiElement):
                          f'&Open::{c.EVT_FILE_OPEN}', 
                          f'&Save::{c.EVT_FILE_SAVE}', 
                          f'&Add Folders::{c.EVT_ADD_FOLDERS}', 
+                         # f'&Reorg Images::{c.EVT_REORG_IMG}', 
+                         PiActionReorgImg().item(),
                          f'&Properties::{c.EVT_FILE_PROPS}', 
                          f'E&xit::{c.EVT_EXIT}' 
                         ] 
