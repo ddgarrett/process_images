@@ -46,8 +46,13 @@ The best part of all of this is, the Google Photo Albums, the blogger.com web pa
 
 Below is the process I've used for reviewing my photos using the Process Image (PI) project. 
 
+### Grouping Pictures by Day
+
+To be continued...
+
+
 ### Selecting Images to Process
 
-So far I've grouped my pictures by trip. Within trip create subfolders, one for each day. Note that 
+To Be continued...
 
 
