@@ -35,6 +35,24 @@ Copy template my_secrets.py to my_secrets.py
 Run main program
 > python main.py
 
-
 When done, be sure to deactivate virtual environment
 > deactivate
+
+--------------------------------------------------------------------
+
+To run app again, open terminal window in venv directory
+Activate virtual environment (see article for Linux and MaxOS)
+# In cmd.exe
+> Scripts\activate.bat
+# In PowerShell
+> Scripts\Activate.ps1
+
+CD into process_images
+> cd process_images
+
+Run app
+> python main.py
+
+When done, shut down virtual environment
+> deactivate
+
