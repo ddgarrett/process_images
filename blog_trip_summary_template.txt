@@ -1,6 +1,11 @@
 <!----- image and paragraph(s) describing picture -->
 <p>
-Click the picture below to see a photo album with some of the best photos from this trip. The album has a summary slide show or you can click any photo in the album and scroll through the pictures manually. The manual review displays a description for each picture. For more detailed information including date and location, click <b>&nbsp;&nbsp;ⓘ&nbsp;&nbsp;</b> or <b>&nbsp;&nbsp;⋮&nbsp;</b>&nbsp;&nbsp; during the manual review.
+Click the picture below to see a photo album with some of the best photos 
+from this trip. The album has a summary slide show or you can click any photo 
+in the album and scroll through the pictures manually. The manual review 
+displays a description for each picture. For more detailed information 
+including date and location, click <b>&nbsp;&nbsp;ⓘ&nbsp;&nbsp;</b> or 
+<b>&nbsp;&nbsp;⋮&nbsp;</b>&nbsp;&nbsp; during the manual review.
 </p>
 <div class="separator" style="clear: both; text-align: center;">
 <a href="{trip_album}" target="_blank">
