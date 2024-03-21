@@ -22,7 +22,7 @@ WINDOW_CONFIG = "__WINDOW CONFIG__"
 BLOG_URI = 'https://www.garrettblog.com'
 
 # image file types
-IMG_FILE_TYPES = [".jpg",".jpeg",".png",".gif",".tiff"]
+IMG_FILE_TYPES = [".jpg",".jpeg",".png",".gif",".tiff",".tif"]
 
 ''' initialized here '''
 metadata:CsvTable = CsvTable("image_collection_metadata.csv")
