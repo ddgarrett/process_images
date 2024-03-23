@@ -1,8 +1,9 @@
 '''
-    Main program for Image Processing System
+    Main program for Image Processing System Organize Images Function
 
-    1. Prompt user for existing or new image library folder
+    1. Prompt user for photo folder
     2. Display folder hiearchy and images in the folder
+    3. Allow user to organize pictures into daily folders (YYYY-MM-DD)
 
 '''
 
