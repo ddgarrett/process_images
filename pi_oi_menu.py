@@ -23,8 +23,6 @@ class PiMenu(PiElement):
         ''' Return the sg.Menu element for Process Image App
         '''
 
-        status_menu = StatusMenu()
-
         # ------ Menu Definition ------ #
         menu_def = [['&File', 
                         [f'&Open::{c.EVT_FILE_NEW}', 
