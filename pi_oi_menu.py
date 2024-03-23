@@ -27,17 +27,11 @@ class PiMenu(PiElement):
 
         # ------ Menu Definition ------ #
         menu_def = [['&File', 
-                        [f'&New::{c.EVT_FILE_NEW}',
-                         f'&Open::{c.EVT_FILE_OPEN}', 
-                         f'&Save::{c.EVT_FILE_SAVE}', 
-                         f'&Add Folders::{c.EVT_ADD_FOLDERS}', 
-                         f'&Properties::{c.EVT_FILE_PROPS}', 
+                        [f'&Open::{c.EVT_FILE_OPEN}', 
+                         PiActionReorgImg().item(),
                          f'E&xit::{c.EVT_EXIT}' 
                         ] 
                     ],
-                    ['&Edit', ['&Paste', ['Special', 'Normal', ], 'Undo'], ],
-
-                    ['S&how', status_menu.get_show_submenu()],
 
                     ['&Help', f'&About...::{c.EVT_ABOUT}'], ]
         

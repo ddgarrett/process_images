@@ -17,7 +17,7 @@ from pi_util import EventListener
 from pi_filters import *
 
 ''' constants '''
-VERSION = '0.1.0'
+VERSION = '0.2.0'
 WINDOW_CONFIG = "__WINDOW CONFIG__"
 BLOG_URI = 'https://www.garrettblog.com'
 

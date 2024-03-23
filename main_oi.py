@@ -10,7 +10,7 @@ import PySimpleGUI as sg
 
 import pi_config as c
 from pi_gallery_elem import PiGalleryElem
-from pi_menu import PiMenu
+from pi_oi_menu import PiMenu
 from pi_tree_list import PiTreeList
 from pi_image_elem import PiImageElem
 from pi_folder_stats import FolderStats
@@ -55,7 +55,7 @@ def init_window():
                 ]
               ]
 
-    return sg.Window('Review Images', layout, size=(800, 500), finalize=True,
+    return sg.Window('Organize Images', layout, size=(800, 500), finalize=True,
                      resizable=True, enable_window_config_events=True)
 
 def update_status(text):
