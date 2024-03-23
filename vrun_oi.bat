@@ -10,7 +10,7 @@ call Scripts\activate.bat
 
 REM start process images
 cd process_images
-python main.py
+python main_oi.py
 
 REM deactive virtual environment
 call deactivate
