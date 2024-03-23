@@ -27,7 +27,7 @@ class PiMenu(PiElement):
 
         # ------ Menu Definition ------ #
         menu_def = [['&File', 
-                        [f'&Open::{c.EVT_FILE_OPEN}', 
+                        [f'&Open::{c.EVT_FILE_NEW}', 
                          PiActionReorgImg().item(),
                          f'E&xit::{c.EVT_EXIT}' 
                         ] 
