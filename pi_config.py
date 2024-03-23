@@ -97,6 +97,11 @@ PiFilterTable(c.EVT_SHOW_POSSIBLE_BEST, FilterPossibleBest())
 table:ImageCollection = ImageCollection('') # may be filtered
 directory = ""  # current directory (should have this in the ImageCollection table?)
 
+''' Application Functions '''
+APP_ORG_IMG = "OI"  # runnning "organize images" function of app
+APP_RVW_IMG = "RI"  # running "review images" function of app
+app_function = APP_RVW_IMG  # default to Review Images
+
 ''' initialized in main() '''
 window:sg.Window = None   # main window
 status:sg.Element = None  # status display element

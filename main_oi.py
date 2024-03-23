@@ -63,6 +63,7 @@ def update_status(text):
     c.window['-STATUS-'].update(text)
 
 def main():
+    c.app_function = c.APP_ORG_IMG # running orginize images
 
     c.window = init_window()
     c.status = c.window['-STATUS-']
