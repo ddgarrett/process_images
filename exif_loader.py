@@ -123,7 +123,7 @@ class ExifLoader:
             subdir = subdir.replace('\\','/')
 
             # skip directories begining with '_'
-            if subdir.startswith('/_'):
+            if subdir.startswith('/_') or subdir.startswith('$') :
                 continue
 
             # skip if subdir already loaded
@@ -139,6 +139,9 @@ class ExifLoader:
                     f = open(file_path, 'rb')
                     tags = exifread.process_file(f, details=False)
                     f.close()
+
+                    if tags == {}:
+                        print(f'error reading {f}')
 
                     # add a few fields of our own
                     self._last_fid += 1
