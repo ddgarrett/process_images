@@ -8,9 +8,7 @@ import os
 import PySimpleGUI as sg
 
 import pi_config as c
-import pi_util as util 
 from pi_element import PiElement
-from status_menu import StatusMenu
 from pi_action_reorg_img import PiActionReorgImg
 
 
