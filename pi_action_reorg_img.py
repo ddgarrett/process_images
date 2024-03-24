@@ -94,7 +94,11 @@ class PiActionReorgImg(PiAction):
                     curr_file_loc = row['file_location']
                     fn = row['file_name']
                     dt  = row['img_date_time']
-                    new_file_loc  = f'{dir}/{dt[0:4]}-{dt[5:7]}-{dt[8:10]}'
+
+                    if dt[0:10] in ["0000:00:00","1969:12:31"]:
+                        new_file_loc = f'{dir}/0000-00-00 NO DATE{curr_file_loc}'
+                    else:
+                        new_file_loc = f'{dir}/{dt[0:4]}-{dt[5:7]}-{dt[8:10]}'
 
                     if curr_file_loc != new_file_loc:
                         msg = f'moving {fn} from {curr_file_loc} to {new_file_loc}'
