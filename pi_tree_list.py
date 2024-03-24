@@ -23,20 +23,20 @@ class PiTreeList(PiElement):
         c.listeners.add(c.EVT_TABLE_LOAD,self.update_list)
         c.listeners.add(c.EVT_TABLE_ROW_CHG,self.update_rows)
 
-        status_menu = StatusMenu(self.get_selected_rows)
+        menu = None
 
-        menu = ['',
-           [ status_menu.get_set_menu(),
-             '---',
-             PiActionMap(rowget=self.get_selected_rows).item(), 
-             PiActionExport(rowget=self.get_selected_rows).item(), 
-             PiActionBlog(rowget=self.get_selected_rows).item(),
-             f'Properties::{c.EVT_FILE_PROPS}',
-
-             'S&how', status_menu.get_show_submenu(),
-
-             f'&Save::{c.EVT_FILE_SAVE}',
-             f'E&xit::{c.EVT_EXIT}' ]]
+        if c.app_function == c.APP_RVW_IMG:
+            status_menu = StatusMenu(self.get_selected_rows)
+            menu = ['',
+            [ status_menu.get_set_menu(),
+                '---',
+                PiActionMap(rowget=self.get_selected_rows).item(), 
+                PiActionExport(rowget=self.get_selected_rows).item(), 
+                PiActionBlog(rowget=self.get_selected_rows).item(),
+                f'Properties::{c.EVT_FILE_PROPS}',
+                'S&how', status_menu.get_show_submenu(),
+                f'&Save::{c.EVT_FILE_SAVE}',
+                f'E&xit::{c.EVT_EXIT}' ]]
 
         self._tree_data = PiTreeData(c.table.rows())
         self._tree = (
