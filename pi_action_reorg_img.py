@@ -103,6 +103,14 @@ class PiActionReorgImg(PiAction):
                         new_file_loc = f'{dir}/{dt[0:4]}-{dt[5:7]}-{dt[8:10]}'
 
                     if curr_file_loc != new_file_loc:
+
+                        # if file already exists, move under _dup filder
+                        if Path(f'{c.directory}{new_file_loc}/{fn}').exists():
+                            if dt[0:10] in ["0000:00:00","1969:12:31"]:
+                                new_file_loc = f'{dir}/_dup/{fn}/0000-00-00 NO DATE{curr_file_loc}'
+                            else:
+                                new_file_loc = f'{dir}/_dup/{fn}/{dt[0:4]}-{dt[5:7]}-{dt[8:10]}{curr_file_loc}'
+
                         msg = f'moving {fn} from {curr_file_loc} to {new_file_loc}'
                         cnt   += 1
                         self.move_file(curr_file_loc,new_file_loc,fn,msg)
