@@ -54,9 +54,11 @@ class PiActionReorgImg(PiAction):
             # make sure destination directory exists
             Path(f'{c.directory}{dst_dir}').mkdir(parents=True, exist_ok=True)
 
+            '''
             if msg:
                 c.update_status(msg)
                 c.window.Refresh()
+            '''
 
             shutil.move(src,dst)
 
