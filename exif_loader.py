@@ -122,9 +122,11 @@ class ExifLoader:
             dir_path = pathlib.Path(root)
             subdir = subdir.replace('\\','/')
 
-            # skip directories begining with '_'
-            if subdir.startswith('/_') or subdir.startswith('$') :
-                continue
+            # skip directories begining with '_','.' or '$'
+            if len(subdir) > 1:
+                if subdir[1] in ['_','.','$']:
+                    print("skipping subdir:",subdir)
+                    continue
 
             # skip if subdir already loaded
             if adding_dir and util.dir_loaded(subdir):
