@@ -117,3 +117,13 @@ class PiFilterTable(PiAction):
             c.update_status("Showing All Images")
         else:
            c.update_status(f"Collection Filtered for {self._filter.get_descr()}")
+
+class PiTestCode(PiAction):
+    def handle_event(self,event,values):
+        # import here to prevent circular imports
+        from pi_action_cleanup_dir import PiCleanupDir
+        PiCleanupDir().handle_event(event,values)
+        return 
+    
+
+

@@ -39,6 +39,7 @@ EVT_REORG_IMG  = '-REORG_IMG-'
 EVT_FILE_PROPS = '-FILE_PROPS-'
 EVT_EXIT       = '-EXIT-'
 EVT_ABOUT      = '-ABOUT-'
+EVT_TEST_CODE  = '-TEST_CODE-'
 
 EVT_SHOW_ALL           = '-SHOW_ALL-'
 EVT_SHOW_TBD           = '-SHOW_TBD-'
@@ -84,6 +85,7 @@ PiAddFolders(EVT_ADD_FOLDERS)
 PiSaveCollection(EVT_FILE_SAVE)
 PiFileProperties(EVT_FILE_PROPS)
 PiAboutApp(EVT_ABOUT)
+PiTestCode(EVT_TEST_CODE)
 PiNotImplemented(EVT_NOT_IMPL)
 
 ''' global filter table events '''
