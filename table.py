@@ -41,7 +41,8 @@ class Table:
             self._rows = filter.filter(self._original_rows)
 
     def refilter(self):
-        self.filter(self._filter)
+        ''' refilter rows using current filter '''
+        self.filter_rows(self._filter)
 
     def new_row(self) -> Row:
         ''' append a new row with default values to the end of self._rows
