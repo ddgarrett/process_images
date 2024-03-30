@@ -1,5 +1,7 @@
 ''' General Process Image Utilities '''
 
+from pathlib import Path
+import shutil
 import pi_config as c
 
 def get_row_for_fn(filename):
@@ -23,6 +25,17 @@ def dir_loaded(subdir):
 
     return False
 
+def dir_in_collection(dir):
+    ''' return true if the directory or any subdirectories of it
+        contain any images in this collection '''
+    
+    loc = dir.replace('\\','/')
+    for row in c.table:
+        if row['file_location'].startswith(loc):
+            return True
+
+    return False
+
 def get_fn_for_row(row):
     ''' given a row, return the file name'''
     fn = f"{row['file_location']}/{row['file_name']}"
@@ -37,6 +50,31 @@ def set_collection(table,directory,values):
     c.directory = directory
     c.listeners.notify(c.EVT_TABLE_LOAD,values)
 
+def move_file(src_dir, dst_dir,fn):
+    ''' Move a file from source directory to destination directory 
+        creating destination directory if it doesn't exist.
+    '''
+    # make sure to prefix source and dest with root directory name
+    src = f'{c.directory}{src_dir}/{fn}'
+    dst = f'{c.directory}{dst_dir}/{fn}'
+
+    # make sure destination directory exists
+    Path(f'{c.directory}{dst_dir}').mkdir(parents=True, exist_ok=True)
+
+    shutil.move(src,dst)
+    
+def move_dir(src_dir, dst_dir):
+    ''' Move a directory to destination directory 
+        creating destination directory if it doesn't exist.
+    '''
+    # make sure to prefix source and dest with root directory name
+    src = f'{c.directory}{src_dir}'
+    dst = f'{c.directory}{dst_dir}'
+
+    # make sure destination directory exists
+    Path(f'{dst}').mkdir(parents=True, exist_ok=True)
+
+    shutil.move(src,dst)
 
 ''' Below should be in it's own file? Maybe Along with Events from  pi_config? '''
 class EventListener:
