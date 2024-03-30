@@ -120,9 +120,12 @@ class PiFilterTable(PiAction):
 
 class PiTestCode(PiAction):
     def handle_event(self,event,values):
+        '''
         # import here to prevent circular imports
         from pi_action_cleanup_dir import PiCleanupDir
         PiCleanupDir().handle_event(event,values)
+        '''
+        c.listeners.notify(c.EVT_CLEANUP_DIR,values)
         return 
     
 

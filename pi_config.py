@@ -12,6 +12,7 @@ import PySimpleGUI as sg
 from csv_table import CsvTable
 from image_collection import ImageCollection
 from pi_action import *
+from pi_action_cleanup_dir import PiCleanupDir
 from pi_action_props import PiFileProperties
 from pi_util import EventListener
 from pi_filters import *
@@ -35,7 +36,7 @@ EVT_FILE_OPEN  = '-FILE_OPEN-'
 EVT_FILE_NEW   = '-FILE_NEW-'
 EVT_FILE_SAVE  = '-FILE_SAVE-'
 EVT_ADD_FOLDERS  = '-ADD_FOLDERS-'
-EVT_REORG_IMG  = '-REORG_IMG-'
+EVT_CLEANUP_DIR  = '-REORG_IMG-'
 EVT_FILE_PROPS = '-FILE_PROPS-'
 EVT_EXIT       = '-EXIT-'
 EVT_ABOUT      = '-ABOUT-'
@@ -86,6 +87,7 @@ PiSaveCollection(EVT_FILE_SAVE)
 PiFileProperties(EVT_FILE_PROPS)
 PiAboutApp(EVT_ABOUT)
 PiTestCode(EVT_TEST_CODE)
+PiCleanupDir(EVT_CLEANUP_DIR)
 PiNotImplemented(EVT_NOT_IMPL)
 
 ''' global filter table events '''

@@ -2,6 +2,13 @@
     Reorganize selected folders to put images in a yyyy-mm-dd subfolder
     where yyyy-mm-dd is the date the photo was taken.
 
+    Details:
+    1. pictures without a date (defaulted to "1969:12:31 16:00:00") or a "0000-00-00" date
+       are moved into a "0000-00-00 NO DATE" subfolder.
+    2. duplicate pictures are moved into a f'/_dup/{fn}/{date_yyyy_mm_dd}/' folder
+    3. remaining folders, those without a recognized image format or empty, are
+       moved to either _empty or _lost
+
     Listens for a unique event name generated when this action was created. 
     The unique part of the event name is generated via a class variable which
     is incremented for each instance of this class.
@@ -47,20 +54,13 @@ class PiActionReorgImg(PiAction):
                 to destination directory dst_dir.
                 If msg is specified show it in the status'''
             
-            # make sure to prefix source and dest with root directory name
-            src = f'{c.directory}{src_dir}/{fn}'
-            dst = f'{c.directory}{dst_dir}/{fn}'
+            util.move_file(src_dir,dst_dir,fn)
 
-            # make sure destination directory exists
-            Path(f'{c.directory}{dst_dir}').mkdir(parents=True, exist_ok=True)
-
-            '''
+            ''' This didn't seem to be working
             if msg:
                 c.update_status(msg)
                 c.window.Refresh()
             '''
-
-            shutil.move(src,dst)
 
     def __init__(self,text="&Reorg Images",dirget=None):
         self._id = self.next_id()
@@ -89,6 +89,9 @@ class PiActionReorgImg(PiAction):
         cnt = 0
         table = c.table
 
+        # make sure table is NOT filtered!!!
+        table.filter_rows()
+
         for dir in directories:
 
             for row in table:
@@ -106,6 +109,8 @@ class PiActionReorgImg(PiAction):
 
                         # if file already exists, move under _dup filder
                         if Path(f'{c.directory}{new_file_loc}/{fn}').exists():
+                            # NOTE: currently, because the 0000-00-00 subdirectory includes the original file path
+                            #       duplicates will NEVER go into the _dup subdirectory
                             if dt[0:10] in ["0000:00:00","1969:12:31"]:
                                 new_file_loc = f'{dir}/_dup/{fn}/0000-00-00 NO DATE{curr_file_loc}'
                             else:
@@ -121,4 +126,7 @@ class PiActionReorgImg(PiAction):
             table.renumber()
             util.set_collection(table,c.directory,values)
 
+        # self._move_unused()
+        c.listeners.notify(c.EVT_CLEANUP_DIR,values)
+        print("unused moved")
         c.update_status(f'moved {cnt} images')
