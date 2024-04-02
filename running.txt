@@ -12,9 +12,10 @@ CD into venv directory
 > cd venv
 
 Activate virtual environment (see article for Linux and MaxOS)
-# In cmd.exe
+Either option 1 or option 2 below, depending on your command line terminal
+# Option 1 - In cmd.exe
 > Scripts\activate.bat
-# In PowerShell
+# Option 2 - In PowerShell
 > Scripts\Activate.ps1
 
 Download Process Images source
