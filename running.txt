@@ -32,7 +32,10 @@ CD into project directory
 Copy template my_secrets.py to my_secrets.py
 > copy "my_secrets template.py" my_secrets.py
 
-Run main program
+Run main program - Organize Images:
+> python main_oi.py
+
+OR - Process Images: 
 > python main.py
 
 When done, be sure to deactivate virtual environment
