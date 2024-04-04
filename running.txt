@@ -51,6 +51,6 @@ To run app again, open terminal window in venv directory
 OR...
 
 Open ...\venv\process_images in file manager
-Double click either _vrun_org. bat or _vrun_rvw.bat
+Double click either _vrun_org.bat or _vrun_rvw.bat
 
 
