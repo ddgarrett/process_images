@@ -235,6 +235,8 @@ class ExifLoader:
             return round(float(dec_val),6)
         except KeyError:
             return default
+        except ArithmeticError as e:
+            return default
     
 if __name__ == "__main__":
     table,d = ExifLoader.new_collection()
