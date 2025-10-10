@@ -1,6 +1,7 @@
 
 # du command to output tab delimited directory structure with human readable directory size, file counts and oldest and newest modified date of files in each directory. Show Dates in yyyy-mm-dd format. Only report on directories one level deep but count children directories for those directories.
 # command is /home/dgarrett/Documents/projects/process_images/disk_analyze.sh
+# run from directory to be analyzed
 
 #!/bin/bash
 
