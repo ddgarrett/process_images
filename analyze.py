@@ -12,6 +12,8 @@ import datetime
 To run,use the command `python /home/dgarrett/Documents/projects/process_images/analyze.py` 
 in the directory you want to analyze.
 '''
+
+''' Google Search: generate a python program to output tab delimited directory structure with human readable directory size, file counts and oldest and newest modified date of files in each directory. Show Dates in yyyy-mm-dd format. Only report on directories one level deep but count children directories for those directories. Sort results by oldest file date. Save the result in a file named summary.csv'''
 import os
 import datetime
 
