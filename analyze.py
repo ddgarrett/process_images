@@ -1,5 +1,4 @@
-import os
-import datetime
+
 
 ''' This script analyzes disk usage for directories. It outputs a tab-delimited summary including:
 - Directory name
@@ -13,92 +12,125 @@ To run,use the command `python /home/dgarrett/Documents/projects/process_images/
 in the directory you want to analyze.
 '''
 
-''' Google Search: generate a python program to output tab delimited directory structure with human readable directory size, file counts and oldest and newest modified date of files in each directory. Show Dates in yyyy-mm-dd format. Only report on directories one level deep but count children directories for those directories. Sort results by oldest file date. Save the result in a file named summary.csv'''
-import os
-import datetime
+''' Google Search: 
+    generate a python program to output tab delimited directory structure with human readable directory size, 
+    file counts and oldest and newest modified date of files in each directory. 
+    Only include files which are images and videos. 
+    Show Dates in yyyy-mm-dd format. 
+    Only report on directories one level deep but count children directories for those directories. 
+    Sort results by oldest file date. Save the result in a file named summary.csv
+'''
 
-def human_readable_size(size_bytes):
-    """Converts bytes to a human-readable format."""
+import os
+import csv
+from datetime import datetime
+
+def convert_size(size_bytes):
+    """
+    Converts a size in bytes to a more human-readable format.
+    """
     if size_bytes == 0:
         return "0B"
-    size_names = ("B", "KB", "MB", "GB", "TB")
+    size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
     i = 0
-    while size_bytes >= 1024 and i < len(size_names) - 1:
+    while size_bytes >= 1024 and i < len(size_name) - 1:
         size_bytes /= 1024
         i += 1
-    return f"{size_bytes:.2f}{size_names[i]}"
+    return f"{size_bytes:.2f}{size_name[i]}"
 
-def get_directory_summary(root_dir):
+def analyze_directory(base_path):
     """
-    Generates a summary for directories one level deep within the root_dir.
-    Includes size, file count, child directory count, and date range.
+    Analyzes directories one level deep from the base_path for image and video files.
     """
-    results = []
-    for entry in os.scandir(root_dir):
-        if entry.is_dir():
-            dir_path = entry.path
-            total_size = 0
-            file_count = 0
-            child_dir_count = 0
-            oldest_date = None
-            newest_date = None
+    allowed_extensions = (
+        '.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.tiff', '.heif', '.heic',
+        '.mp4', '.mov', '.mkv', '.avi', '.wmv', '.flv', '.webm'
+    )
+    
+    report_data = []
+    
+    # Iterate over all items in the base directory
+    with os.scandir(base_path) as entries:
+        for entry in entries:
+            if entry.is_dir():
+                dir_path = entry.path
+                total_size = 0
+                file_count = 0
+                oldest_date = None
+                newest_date = None
+                child_dirs_count = 0
 
-            for sub_entry in os.walk(dir_path):
-                current_dir = sub_entry[0]
-                files = sub_entry[2]
-                dirs = sub_entry[1]
+                # Walk the subdirectory to find image and video files
+                for root, dirs, files in os.walk(dir_path):
+                    child_dirs_count += len(dirs)
+                    for file_name in files:
+                        if file_name.lower().endswith(allowed_extensions):
+                            file_path = os.path.join(root, file_name)
+                            try:
+                                stats = os.stat(file_path)
+                                total_size += stats.st_size
+                                file_count += 1
+                                mod_date = datetime.fromtimestamp(stats.st_mtime)
 
-                if current_dir == dir_path:  # Only count direct children for child_dir_count
-                    child_dir_count = len(dirs)
+                                if oldest_date is None or mod_date < oldest_date:
+                                    oldest_date = mod_date
+                                if newest_date is None or mod_date > newest_date:
+                                    newest_date = mod_date
+                            except (OSError, FileNotFoundError):
+                                continue # Skip files with permission errors or broken links
 
-                for file_name in files:
-                    file_path = os.path.join(current_dir, file_name)
-                    try:
-                        file_size = os.path.getsize(file_path)
-                        total_size += file_size
-                        file_count += 1
-                        mod_time = os.path.getmtime(file_path)
-                        mod_date = datetime.datetime.fromtimestamp(mod_time).date()
+                # Only include the directory if it contains relevant files
+                if file_count > 0:
+                    report_data.append({
+                        'directory_name': entry.name,
+                        'total_size': convert_size(total_size),
+                        'file_count': file_count,
+                        'child_directories': child_dirs_count,
+                        'oldest_file': oldest_date.strftime('%Y-%m-%d') if oldest_date else 'N/A',
+                        'newest_file': newest_date.strftime('%Y-%m-%d') if newest_date else 'N/A',
+                        'sort_key': oldest_date # For sorting purposes
+                    })
 
-                        if oldest_date is None or mod_date < oldest_date:
-                            oldest_date = mod_date
-                        if newest_date is None or mod_date > newest_date:
-                            newest_date = mod_date
-                    except OSError:
-                        # Handle cases where file might be inaccessible or deleted
-                        pass
+    # Sort the data by the oldest file date, ascending
+    report_data.sort(key=lambda x: x['sort_key'] if x['sort_key'] else datetime.min)
+    
+    return report_data
 
-            oldest_date_str = oldest_date.strftime("%Y-%m-%d") if oldest_date else "N/A"
-            newest_date_str = newest_date.strftime("%Y-%m-%d") if newest_date else "N/A"
+def save_to_csv(data, filename='summary.csv'):
+    """
+    Saves the analyzed data to a tab-delimited CSV file.
+    """
+    if not data:
+        print("No image or video files found in the specified directories.")
+        return
 
-            results.append({
-                "directory": entry.name,
-                "size": human_readable_size(total_size),
-                "file_count": file_count,
-                "child_dir_count": child_dir_count,
-                "oldest_file_date": oldest_date_str,
-                "newest_file_date": newest_date_str,
-                "sort_key_oldest_date": oldest_date # For sorting
+    with open(filename, 'w', newline='', encoding='utf-8') as f:
+        fieldnames = [
+            'Directory Name', 'Total Size', 'File Count', 
+            'Child Directories', 'Oldest File Date', 'Newest File Date'
+        ]
+        writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
+        
+        writer.writeheader()
+        for row in data:
+            del row['sort_key'] # Remove the temporary sort key
+            writer.writerow({
+                'Directory Name': row['directory_name'],
+                'Total Size': row['total_size'],
+                'File Count': row['file_count'],
+                'Child Directories': row['child_directories'],
+                'Oldest File Date': row['oldest_file'],
+                'Newest File Date': row['newest_file']
             })
 
-    # Sort results by oldest file date
-    results.sort(key=lambda x: x["sort_key_oldest_date"] if x["sort_key_oldest_date"] else datetime.date.min)
-
-    return results
-
-def save_summary_to_file(summary_data, output_file="summary.csv"):
-    """Saves the summary data to a tab-delimited file."""
-    with open(output_file, "w") as f:
-        # Write header
-        f.write("Directory\tSize\tFile Count\tChild Dir Count\tOldest File Date\tNewest File Date\n")
-        # Write data
-        for item in summary_data:
-            f.write(f"{item['directory']}\t{item['size']}\t{item['file_count']}\t"
-                    f"{item['child_dir_count']}\t{item['oldest_file_date']}\t"
-                    f"{item['newest_file_date']}\n")
+    print(f"Summary saved to {filename}")
 
 if __name__ == "__main__":
-    target_directory = "."  # Current directory, change as needed
-    summary = get_directory_summary(target_directory)
-    save_summary_to_file(summary)
-    print(f"Directory summary saved to summary.csv in {os.getcwd()}")
+    # Specify the directory you want to analyze
+    # This example uses the current working directory.
+    # To analyze a different path, replace '.' with your desired path (e.g., r'C:\Photos').
+    path_to_analyze = '.' 
+    
+    summary = analyze_directory(path_to_analyze)
+    save_to_csv(summary)
+
