@@ -165,3 +165,4 @@ temp_map.html
 gphoto_oauth.json
 photoslibrary_v1.token
 token.pickle
+.DS_Store
