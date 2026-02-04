@@ -135,6 +135,7 @@ class PiActionMap(PiAction):
 
         # free up memory
         self._page_dict = {}
+        del gmap1
 
 
     def _get_href_descr(self,uri,anchor):

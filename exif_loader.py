@@ -135,7 +135,7 @@ class ExifLoader:
             for fn in files:
                 file_path = dir_path.joinpath(fn)
                 sfx = file_path.suffix
-                if sfx.lower() in c.IMG_FILE_TYPES:
+                if sfx.lower() in c.IMG_FILE_TYPES and not fn.startswith('.'):
 
                     # read the file exif info
                     f = open(file_path, 'rb')
