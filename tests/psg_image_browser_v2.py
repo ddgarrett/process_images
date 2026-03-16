@@ -1,7 +1,7 @@
 # image_browser.py
 
 import glob
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 from PIL import Image, ImageTk
 

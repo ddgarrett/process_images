@@ -1,4 +1,4 @@
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 from PIL import Image
 from pi_image_util import cnv_image
 

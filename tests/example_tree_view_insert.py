@@ -1,8 +1,8 @@
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 '''
     Example of inserting in Tree. 
-    From https://github.com/PySimpleGUI/PySimpleGUI/issues/3772
+    From https://github.com/PySimpleGUI/PySimpleGUI/issues/3772 (FreeSimpleGUI is API-compatible)
 '''
 
 

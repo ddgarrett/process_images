@@ -7,7 +7,7 @@
     TODO: add zoom in and zoom out?
 
 '''
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 from pi_tab import PiTab
 from pi_config import window

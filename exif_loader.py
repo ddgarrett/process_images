@@ -12,7 +12,7 @@ import pathlib
 import exifread
 import hjson  # NOTE: uses hjson instead of json for easier reading json
 
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 from table import Table
 from image_collection import ImageCollection

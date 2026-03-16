@@ -9,7 +9,7 @@
 
 '''
 
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 from pi_element import PiElement
 

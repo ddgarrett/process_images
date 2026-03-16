@@ -5,7 +5,7 @@
 '''
 
 import os
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 from pi_action_map import PiActionMap
 
 import pi_config as c

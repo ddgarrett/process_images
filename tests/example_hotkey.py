@@ -1,4 +1,4 @@
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 layout = [
     [sg.Button("ok", size=(10, 2), key='button1'),

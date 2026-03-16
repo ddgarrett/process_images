@@ -13,7 +13,7 @@
 '''
 import os
 
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 from exif_loader import ExifLoader
 
 from image_collection import ImageCollection

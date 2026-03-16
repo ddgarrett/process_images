@@ -5,7 +5,7 @@
 
 import os
 
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 import pi_config as c
 import pi_util as util 

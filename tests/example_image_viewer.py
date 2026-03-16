@@ -15,7 +15,7 @@
 '''
 
 import PIL.Image, PIL.ImageTk
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 import os.path
 
 def cnv_image(file, resize=None):

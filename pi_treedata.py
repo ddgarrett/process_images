@@ -1,5 +1,5 @@
 
-from PySimpleGUI import TreeData
+from FreeSimpleGUI import TreeData
 
 from table import Row
 from image_collection import ImageCollection

@@ -1,7 +1,7 @@
 from io import BytesIO
 from pathlib import Path
 from PIL import Image,ImageTk
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 import os
 
 from pi_image_util import cnv_image

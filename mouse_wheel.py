@@ -1,4 +1,4 @@
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 layout = [  [sg.Text('My Window')],
             [sg.Multiline(size=(40,20), key='-ML-')],

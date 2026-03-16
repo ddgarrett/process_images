@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from operator import itemgetter
 
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 import pi_config as c
 from csv_table import CsvTable

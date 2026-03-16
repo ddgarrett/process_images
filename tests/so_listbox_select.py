@@ -4,7 +4,7 @@
 '''
 
 from random import choice
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 sg.theme("DarkBlue")
 sg.set_options(font=('Courier New', 12))

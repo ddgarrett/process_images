@@ -1,6 +1,6 @@
 ''' Implement action to display and update properties '''
 
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 from pi_action import PiAction
 

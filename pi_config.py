@@ -7,7 +7,7 @@
 '''
 from __future__ import annotations
 
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 
 from csv_table import CsvTable
 from image_collection import ImageCollection
