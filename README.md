@@ -1,5 +1,34 @@
 # Process Images
 
+## Running on macOS
+
+This app uses FreeSimpleGUI (tkinter). On macOS you need **Python with Tcl/Tk 8.6 or newer**. The system Python (`/usr/bin/python3`) ships with old Tcl/Tk 8.5, which can cause a PNG warning, a "macOS 26 (2603) or later required" message, and `zsh: abort`.
+
+**Recommended: use Homebrew's Python 3.12** (includes Tcl/Tk 8.6 or 9.x):
+
+```bash
+brew install python@3.12
+```
+
+Homebrew does not add a `python3` symlink for this version; use the versioned executable. On Apple Silicon the path is `/opt/homebrew/opt/python@3.12/bin/python3.12`. Create and use a venv:
+
+```bash
+rm -rf .venv
+/opt/homebrew/opt/python@3.12/bin/python3.12 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/pip install -r requirements.txt
+.venv/bin/python main.py
+```
+
+On Intel Macs, use `brew --prefix python@3.12` to get the path (often `/usr/local`). **Alternative:** Install Python 3.10+ from [python.org/downloads](https://www.python.org/downloads/); the official installers bundle Tcl/Tk 8.6.
+
+The project pins `urllib3` to 1.x so it works with macOS’s LibreSSL Save `requirements.txt` as **UTF-8**; if it is saved as UTF-16, `pip install -r requirements.txt` will fail.
+
+## Adding columns to the image collection
+
+To add a column to the `image_collection.csv` file that the program creates and opens, edit **`image_collection_metadata.csv`**. See [ADDING_COLUMNS.md](ADDING_COLUMNS.md) for step-by-step instructions.
+
+---
 
 Review your photos to select only the best for inclusion in Google Albums and Blogger.com posts. Advanced features generate skeleton HTML for Blogger.com entries. If your pictures have GPS data embedded, you can even generate HTML pages to display Google Maps with pins that link to your Blogger.com entries.
 
