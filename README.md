@@ -1,4 +1,4 @@
-# Process Images
+## Process Images
 
 ## Running on macOS
 
@@ -70,6 +70,67 @@ You can see examples of all of this on my blogger.com website. There is even a b
 
 
 The best part of all of this is, the Google Photo Albums, the blogger.com web page, the GitHub website and the Google Maps API are all free! Assuming you stay below certain limits of course.
+
+## Using MUSIQ scores and duplicates from `backup_pics`
+
+The `backup_pics` project and this app share a common image analysis library, `image_analysis_lib`,
+which provides:
+
+- MUSIQ image-quality scoring.
+- Scene duplicate detection (CNN encodings + optional GPS radius).
+
+### Typical Pi + Mac workflow
+
+1. **On Raspberry Pi 5 (using `backup_pics`)**
+   - Run `backup_pics` to copy images from phone/SD card into dated backup folders on the Pi SSD.
+   - In a terminal on the Pi, run MUSIQ scoring on one or more day folders, for example:
+
+     ```bash
+     image-analysis score /home/dgarrett/Documents/pictures/MEDIA_BACKUP/yyyy-mm-dd_backup \
+       --max-size 1024 0 \
+       --output-prefix image_evaluation_musiq_results
+     ```
+
+   - Optionally run scene duplicate detection on an individual day folder:
+
+     ```bash
+     image-analysis dedupe /home/dgarrett/Documents/pictures/MEDIA_BACKUP/yyyy-mm-dd_backup \
+       --musiq-csv-size 1024 \
+       --threshold 0.65 \
+       --gps-radius-meters 200
+     ```
+
+   - These commands write:
+     - `image_evaluation_musiq_results_1024.csv` (and/or `_full.csv`) with MUSIQ scores.
+     - `scene_duplicates_report.json` with keeper/duplicate mappings.
+     - `image_scores_and_status.csv` with MUSIQ scores, EXIF extras, and initial status/duplicate labels.
+     - `_by_status/` folders grouping images by `best`, `good`, `dup`, `poor quality`, etc.
+
+2. **On MacBook Air (or the same Pi)**
+   - Mount or copy the same `MEDIA_BACKUP/yyyy-mm-dd_backup` folders.
+   - If desired, re-run scoring or deduplication with different thresholds for experimentation:
+
+     ```bash
+     image-analysis score /Volumes/PI_BACKUP/yyyy-mm-dd_backup --max-size 1024
+     image-analysis dedupe /Volumes/PI_BACKUP/yyyy-mm-dd_backup --threshold 0.6
+     ```
+
+   - This keeps CSV formats stable so they continue to work with this app.
+
+3. **In Process Images**
+   - Start the app (on Pi or Mac) and create or open a collection that points at the same day folders.
+   - When the collection is built/updated:
+     - The MUSIQ score from the CSV is loaded into the `musiq_rating` column.
+     - Any status/duplicate information from `image_scores_and_status.csv` is available to guide your review.
+   - Use the existing filters and menus:
+     - Filter by status (`tbd`, `reject`, `bad`, `dup`, `ok`, `good`, `best`).
+     - Use the Duplicate Review level and the “possible duplicate” filters to quickly review auto-flagged duplicates.
+
+Because the analysis happens in a shared library, you can:
+
+- Run initial heavy work on the Raspberry Pi 5 (close to where images are ingested).
+- Re-run or tweak thresholds later on a faster MacBook Air without changing this GUI.
+- Keep `backup_pics` and `process_images` in sync via the same CSV and folder layouts.
 
 ## Review
 

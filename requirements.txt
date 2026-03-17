@@ -11,3 +11,6 @@ requests==2.31.0
 rsa==4.9
 # Pin to 1.x for macOS: urllib3 v2 requires OpenSSL 1.1.1+; system Python often uses LibreSSL
 urllib3>=1.26,<2
+
+# Shared image analysis library (MUSIQ scoring + duplicates)
+git+https://github.com/ddgarrett/image_analysis_lib.git@main#egg=image_analysis_lib
