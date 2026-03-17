@@ -5,6 +5,7 @@
   "python.linting.flake8Enabled": false,
   "python.linting.mypyEnabled": false,
   "python.linting.banditEnabled": false,
+  "python.terminal.activateEnvironment": true,
   "python.analysis.typeCheckingMode": "basic",
   "[python]": {
     "editor.formatOnSave": true,
@@ -13,5 +14,12 @@
       "source.organizeImports.ruff": "explicit"
     },
     "editor.defaultFormatter": "charliermarsh.ruff"
-  }
+  },
+  "python-envs.pythonProjects": [
+    {
+      "path": ".",
+      "envManager": "ms-python.python:venv",
+      "packageManager": "ms-python.python:pip"
+    }
+  ]
 }
