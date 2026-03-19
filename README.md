@@ -120,7 +120,7 @@ which provides:
 3. **In Process Images**
    - Start the app (on Pi or Mac) and create or open a collection that points at the same day folders.
    - When the collection is built/updated:
-     - The MUSIQ score from the CSV is loaded into the `musiq_rating` column.
+     - The MUSIQ score from the CSV is loaded into the `musiq_score` column.
      - Any status/duplicate information from `image_scores_and_status.csv` is available to guide your review.
    - Use the existing filters and menus:
      - Filter by status (`tbd`, `reject`, `bad`, `dup`, `ok`, `good`, `best`).
