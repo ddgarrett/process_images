@@ -58,8 +58,10 @@ from pi_tree_list import PiTreeList
 from pi_image_elem import PiImageElem
 from pi_folder_stats import FolderStats
 from csv_table import CsvTable
+from pi_macos_popup import install_macos_popup_fallbacks
 
 elements = []
+_ui_refs = {}
 
 def init_window():
     # Main Menu for either Organize Images
@@ -78,6 +80,9 @@ def init_window():
     tree = PiTreeList(key=c.EVT_TREE,headings=FolderStats.get_headers())
     image = PiImageElem(key="-IMAGE-",event=[c.EVT_TREE,c.EVT_IMG_SELECT])
     gallery = PiGalleryElem(key="-GALLERY-",event=c.EVT_TREE)
+    _ui_refs['tree'] = tree
+    _ui_refs['image'] = image
+    _ui_refs['gallery'] = gallery
 
     image_tab = image.get_element()
     gallery_tab = gallery.get_element()
@@ -116,6 +121,7 @@ def update_status(text):
 def main():
 
     c.window = init_window()
+    install_macos_popup_fallbacks(c.window, _ui_refs)
     c.status = c.window['-STATUS-']
 
     c.window.bind("<Control_L><s>", '-FILE_SAVE-')

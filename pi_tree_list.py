@@ -37,6 +37,7 @@ class PiTreeList(PiElement):
                 'S&how', status_menu.get_show_submenu(),
                 f'&Save::{c.EVT_FILE_SAVE}',
                 f'E&xit::{c.EVT_EXIT}' ]]
+        self._menu = menu
 
         self._tree_data = PiTreeData(c.table.rows())
         self._tree = (
