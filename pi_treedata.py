@@ -42,7 +42,23 @@ from pi_folder_stats import FolderStats
 '''
 # dictionary key for folder stats
 # since we split the path by '/', no folder name in the path will contain a '/'
-_STATS_ = '/stats/' 
+_STATS_ = '/stats/'
+
+
+def _musiq_tree_text(row: Row) -> str:
+    '''Third tree column: file MUSIQ score; empty when unset or default zero.'''
+    try:
+        v = row.get('musiq_score')
+        if v is None or v == '':
+            return ''
+        f = float(v)
+    except (TypeError, ValueError):
+        return ''
+    if f == 0.0:
+        return ''
+    txt = f'{f:g}'
+    return txt
+
 
 class PiTreeData(TreeData):
 
@@ -109,7 +125,8 @@ class PiTreeData(TreeData):
         for row in self.rows:
             parent = row['file_location']
             v      = row['file_name']
-            values = row.get_status_lvl()
+            values = list(row.get_status_lvl())
+            values.append(_musiq_tree_text(row))
 
             self.insert(parent, f'{parent}/{v}',v,values=values, icon=self.file_icon)
 
@@ -132,5 +149,6 @@ class PiTreeData(TreeData):
 
             tree.Widget.set(id,'#1',values[0])
             tree.Widget.set(id,'#2',values[1])
+            tree.Widget.set(id,'#3',_musiq_tree_text(row))
 
 

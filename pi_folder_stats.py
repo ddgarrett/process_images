@@ -25,8 +25,8 @@ from table import Row
 
 class FolderStats:
 
-    # headers = ['status','lvl','cnt','L0','L1','L2','L3','L4','L5']
-    headers = ['status','lvl','cnt']
+    # headers = ['status','lvl','cnt/iq','L0','L1','L2','L3','L4','L5']
+    headers = ['status', 'lvl', 'cnt/iq']
 
     # prioritized lists of statuses with 'tbd' highest priority status
     stat_priority = ['reject','bad','dup','ok','good','best','tbd']
