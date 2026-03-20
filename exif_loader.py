@@ -7,6 +7,7 @@
 '''
 
 from __future__ import annotations
+import csv
 import os
 import pathlib
 import exifread
@@ -18,6 +19,81 @@ from table import Table
 from image_collection import ImageCollection
 import pi_config as c 
 import pi_util as util
+
+SCORES_CSV_NAME = "image_scores_and_status.csv"
+
+
+def _norm_collection_subdir(s: str) -> str:
+    '''Align with ExifLoader / file_location: empty for root, else /sub/dir.'''
+    s = (s or "").strip().replace("\\", "/")
+    s = s.strip("/")
+    if not s:
+        return ""
+    return "/" + s
+
+
+def _key_from_path_relative_root(path_val: str, root_dir: str) -> tuple[str, str] | None:
+    path_val = (path_val or "").strip()
+    if not path_val:
+        return None
+    root_dir = os.path.abspath(root_dir)
+    p = path_val.replace("\\", "/")
+    if not os.path.isabs(p):
+        p = os.path.join(root_dir, p)
+    p = os.path.abspath(os.path.normpath(p))
+    if os.path.commonpath([p, root_dir]) != root_dir:
+        return None
+    rel = os.path.relpath(p, root_dir)
+    if rel == ".":
+        return None
+    rel = rel.replace("\\", "/")
+    parent, name = os.path.split(rel)
+    loc = _norm_collection_subdir(parent) if parent and parent != "." else ""
+    return loc, name
+
+
+def _musiq_key_from_scores_row(row: dict[str, str], root_dir: str) -> tuple[str, str] | None:
+    fn = (row.get("file_name") or "").strip()
+    if fn:
+        fl = row.get("file_location")
+        loc = _norm_collection_subdir("" if fl is None else str(fl))
+        return loc, os.path.basename(fn)
+    for col in ("relative_path", "rel_path", "path", "file_path", "filepath"):
+        if (row.get(col) or "").strip():
+            return _key_from_path_relative_root(row[col], root_dir)
+    return None
+
+
+def apply_musiq_scores_csv(table: Table, root_dir: str) -> None:
+    '''If image_scores_and_status.csv exists under root_dir, copy musiq_score
+    onto collection rows keyed by path (file_location + file_name or path cols).'''
+    scores_path = os.path.join(root_dir, SCORES_CSV_NAME)
+    if not os.path.isfile(scores_path):
+        return
+    try:
+        with open(scores_path, newline="", encoding="utf-8-sig") as f:
+            reader = csv.DictReader(f)
+            if not reader.fieldnames or "musiq_score" not in reader.fieldnames:
+                return
+            scores: dict[tuple[str, str], float] = {}
+            for raw in reader:
+                key = _musiq_key_from_scores_row(raw, root_dir)
+                if key is None:
+                    continue
+                raw_score = (raw.get("musiq_score") or "").strip()
+                if not raw_score:
+                    continue
+                try:
+                    scores[key] = float(raw_score)
+                except ValueError:
+                    continue
+    except OSError:
+        return
+    for r in table.rows():
+        k = (r["file_location"], r["file_name"])
+        if k in scores:
+            r["musiq_score"] = scores[k]
+
 
 class ExifLoader:
 
@@ -56,6 +132,7 @@ class ExifLoader:
         table  = ImageCollection(collection_fn)
         loader = ExifLoader(table,c.metadata)
         loader.load_dir(d)
+        apply_musiq_scores_csv(table, d)
 
         return table,d
 
