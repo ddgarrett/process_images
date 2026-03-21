@@ -12,6 +12,15 @@ import pi_util as util
 from pi_element import PiElement
 from status_menu import StatusMenu
 from pi_action_reorg_img import PiActionReorgImg
+from pi_filters import SelectedTreeNodesFilter
+
+
+def _menu_bar_dup_group_rowget(values):
+    files_folders = values.get(c.EVT_TREE, [])
+    rows = c.table.rows()
+    if not files_folders or not rows:
+        return []
+    return SelectedTreeNodesFilter(files_folders).filter(rows)
 
 
 class PiMenu(PiElement):
@@ -23,7 +32,7 @@ class PiMenu(PiElement):
         ''' Return the sg.Menu element for Process Image App
         '''
 
-        status_menu = StatusMenu()
+        status_menu = StatusMenu(rowget=_menu_bar_dup_group_rowget)
 
         # ------ Menu Definition ------ #
         menu_def = [['&File', 

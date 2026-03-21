@@ -17,11 +17,15 @@
 '''
 
 import pi_config as c
+from pi_action_show_dup_group import PiShowDuplicateGroup
 from status_menu_item import StatusMenuItem
 
 class StatusMenu():
     def __init__(self,rowget=None):
         self.rowget = rowget
+        self._show_dup_group = (
+            PiShowDuplicateGroup(rowget=rowget) if rowget is not None else None
+        )
 
     def get_set_menu(self):
         set_menu = [ 
@@ -52,4 +56,6 @@ class StatusMenu():
             f'Possible &Best::{c.EVT_SHOW_POSSIBLE_BEST}',
             f'&Custom::{c.EVT_NOT_IMPL}', #{c.EVT_SHOW_CUSTOM}'
         ]
+        if self._show_dup_group is not None:
+            show_submenu = show_submenu + [self._show_dup_group.item()]
         return show_submenu
