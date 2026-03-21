@@ -25,7 +25,8 @@ SCORES_CSV_NAME = "image_scores_and_status.csv"
 
 def apply_musiq_scores_csv(table: Table, root_dir: str) -> None:
     '''If image_scores_and_status.csv exists under root_dir, copy musiq_score
-    onto collection rows where file_location and file_name match the CSV row.'''
+    (as a string, unchanged from the CSV) onto collection rows where
+    file_location and file_name match the CSV row.'''
     scores_path = os.path.join(root_dir, SCORES_CSV_NAME)
     if not os.path.isfile(scores_path):
         return
@@ -38,16 +39,13 @@ def apply_musiq_scores_csv(table: Table, root_dir: str) -> None:
                 set(reader.fieldnames)
             ):
                 return
-            scores: dict[tuple[str, str], float] = {}
+            scores: dict[tuple[str, str], str] = {}
             for raw in reader:
                 key = (raw["file_location"], raw["file_name"])
-                raw_score = (raw.get("musiq_score") or "").strip()
-                if not raw_score:
+                raw_score = raw.get("musiq_score")
+                if raw_score is None or raw_score == "":
                     continue
-                try:
-                    scores[key] = float(raw_score)
-                except ValueError:
-                    continue
+                scores[key] = raw_score
     except OSError:
         return
     for r in table.rows():
