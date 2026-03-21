@@ -1,77 +1,113 @@
-'''
-    Exif Loader
+"""
+Exif Loader
 
-    Load Exif information from image files into a Table object.
-    Data to be populated is defined in a metadata Table such as the 
-    one defined in "image_collection_metadata.csv"
-'''
+Load Exif information from image files into a Table object.
+Data to be populated is defined in a metadata Table such as the
+one defined in "image_collection_metadata.csv"
+"""
 
 from __future__ import annotations
+
 import csv
 import os
 import pathlib
+
 import exifread
+import FreeSimpleGUI as sg
 import hjson  # NOTE: uses hjson instead of json for easier reading json
 
-import FreeSimpleGUI as sg
-
-from table import Table
-from image_collection import ImageCollection
-import pi_config as c 
+import pi_config as c
 import pi_util as util
+from image_collection import ImageCollection
+from table import Table
 
 SCORES_CSV_NAME = "image_scores_and_status.csv"
 
 
+def _status_csv_to_collection(status_raw: str | None) -> tuple[str, str]:
+    """Map image_scores_and_status.csv 'status' to (img_status, rvw_lvl as string).
+
+    Unknown or empty status uses ("tbd", "0").
+    """
+    s = (status_raw or "").strip()
+    if s == "poor quality":
+        return ("bad", "1")
+    if s == "dup":
+        return ("dup", "2")
+    if s == "best":
+        return ("best", "5")
+    if s == "good":
+        return ("tbd", "4")
+    if s == "TBD":
+        return ("tbd", "3")
+    return ("tbd", "0")
+
+
 def apply_musiq_scores_csv(table: Table, root_dir: str) -> None:
-    '''If image_scores_and_status.csv exists under root_dir, copy musiq_score
-    (as a string, unchanged from the CSV) onto collection rows where
-    file_location and file_name match the CSV row.'''
+    """If image_scores_and_status.csv exists under root_dir, copy musiq_score,
+    img_status, rvw_lvl (from status), and dup_photo onto collection rows where
+    file_location and file_name match."""
     scores_path = os.path.join(root_dir, SCORES_CSV_NAME)
     if not os.path.isfile(scores_path):
         return
+    required_cols = {
+        "musiq_score",
+        "file_location",
+        "file_name",
+        "status",
+        "dup_photo",
+    }
     try:
         with open(scores_path, newline="", encoding="utf-8-sig") as f:
             reader = csv.DictReader(f)
             if not reader.fieldnames:
                 return
-            if not {"musiq_score", "file_location", "file_name"}.issubset(
-                set(reader.fieldnames)
-            ):
+            if not required_cols.issubset(set(reader.fieldnames)):
+                req_list = ", ".join(sorted(required_cols))
+                print(
+                    f"Warning: skipped {scores_path}: CSV does not include all "
+                    f"required columns. Required columns: {req_list}"
+                )
                 return
-            scores: dict[tuple[str, str], str] = {}
+            # (file_location, file_name) -> (musiq_score, img_status, rvw_lvl, dup_photo)
+            by_key: dict[tuple[str, str], tuple[str, str, str, str]] = {}
             for raw in reader:
                 key = (raw["file_location"], raw["file_name"])
-                raw_score = raw.get("musiq_score")
-                if raw_score is None or raw_score == "":
-                    continue
-                scores[key] = raw_score
+                score = raw.get("musiq_score")
+                img_status, rvw_lvl = _status_csv_to_collection(raw.get("status"))
+                dup_photo = raw.get("dup_photo")
+                by_key[key] = (score, img_status, rvw_lvl, dup_photo)  # type: ignore
     except OSError:
         return
+
     for r in table.rows():
         k = (r["file_location"], r["file_name"])
-        if k in scores:
-            r["musiq_score"] = scores[k]
+        if k not in by_key:
+            continue
+        score, img_status, rvw_lvl, dup_photo = by_key[k]
+        r["musiq_score"] = score
+        r["img_status"] = img_status
+        r["rvw_lvl"] = rvw_lvl
+        r["dup_photo"] = dup_photo
 
 
 class ExifLoader:
-
-    '''
-        data_table = table to load exif information into
-        metadata   = table columns that are loaded and how to set them
-        file_suffix = suffix of files to load
-    '''
+    """
+    data_table = table to load exif information into
+    metadata   = table columns that are loaded and how to set them
+    file_suffix = suffix of files to load
+    """
 
     @staticmethod
     def new_collection():
-        ''' Define a new collection by adding images from a selected 
-            directory and its subdirectories.
-        '''
+        """Define a new collection by adding images from a selected
+        directory and its subdirectories.
+        """
 
         # select directory
-        d = sg.popup_get_folder('',no_window=True)
+        d = sg.popup_get_folder("", no_window=True)
         if not d:
-            return None,None
+            return None, None
 
         # don't load if image_collection.csv already exists
         collection_fn = os.path.join(d, "image_collection.csv")
@@ -82,38 +118,38 @@ class ExifLoader:
                 Delete file then retry.
             '''
             sg.popup(msg)
-            return None,None
+            return None, None
 
         # load all images in the directory and its subdirectories
         c.status.update(f"Searching for pictures in {d}...")
         c.window.refresh()
-        
-        table  = ImageCollection(collection_fn)
-        loader = ExifLoader(table,c.metadata)
+
+        table = ImageCollection(collection_fn)
+        loader = ExifLoader(table, c.metadata)
         loader.load_dir(d)
         apply_musiq_scores_csv(table, d)
 
-        return table,d
+        return table, d
 
     @staticmethod
     def add_folders():
-        ''' Add images to an existing collection,
-            searching for new subdirectories of the main directory
-            for the currently loaded image collection.
-        '''
+        """Add images to an existing collection,
+        searching for new subdirectories of the main directory
+        for the currently loaded image collection.
+        """
 
         # verify that we have a collection loaded
         if c.directory == "":
-            msg = f'''
+            msg = """
                 Collection not yet opened.
-            '''
+            """
             sg.popup(msg)
-            return None,None
+            return None, None
 
         d = c.directory
         c.status.update(f"Searching for new folders in {d}...")
         c.window.refresh()
-        
+
         # collection_fn = os.path.join(d, "image_collection.csv")
         # table  = ImageCollection(collection_fn)
         table = c.table
@@ -121,47 +157,49 @@ class ExifLoader:
         # Remove any table filters
         table.filter_rows()
 
-        loader = ExifLoader(table,c.metadata)
+        loader = ExifLoader(table, c.metadata)
         loader.load_dir(d)
 
-        return table,d
+        return table, d
 
-    def __init__(self,data_table:Table, metadata_table:Table, 
-                 first_file_id:int=1000):
+    def __init__(
+        self, data_table: Table, metadata_table: Table, first_file_id: int = 1000
+    ):
         self._data = data_table
         self._new_row = None
         self._meta = metadata_table
 
         # IF data_table has rows, set first file ID to highest ID In table
-        self._last_fid = first_file_id-1
+        self._last_fid = first_file_id - 1
         rows = data_table.rows()
         if len(rows) > 0:
-            last_row = rows[len(rows)-1]
-            self._last_fid = last_row.get_int('file_id')
+            last_row = rows[len(rows) - 1]
+            self._last_fid = last_row.get_int("file_id")
 
         # convert any array values in exif_tags to arrays
         for row in metadata_table:
-            v = row['exif_tags']
-            if type(v) == str and v.startswith('['):
+            v = row["exif_tags"]
+            if type(v) == str and v.startswith("["):
                 v = hjson.loads(v)
-                row.set('exif_tags',v,as_str=False)
+                row.set("exif_tags", v, as_str=False)
 
-    ''' load starting at a directory and traversing all subdirectories  '''
-    def load_dir(self,startpath:str):
+    """ load starting at a directory and traversing all subdirectories  """
+
+    def load_dir(self, startpath: str):
 
         adding_dir = False
         if len(self._data.rows()) > 0:
             adding_dir = True
 
         for root, dirs, files in os.walk(startpath):
-            subdir = root.replace(startpath, '')
+            subdir = root.replace(startpath, "")
             dir_path = pathlib.Path(root)
-            subdir = subdir.replace('\\','/')
+            subdir = subdir.replace("\\", "/")
 
             # skip directories begining with '_','.' or '$'
             if len(subdir) > 1:
-                if subdir[1] in ['_','.','$']:
-                    print("skipping subdir:",subdir)
+                if subdir[1] in ["_", ".", "$"]:
+                    print("skipping subdir:", subdir)
                     continue
 
             # skip if subdir already loaded
@@ -171,111 +209,115 @@ class ExifLoader:
             for fn in files:
                 file_path = dir_path.joinpath(fn)
                 sfx = file_path.suffix
-                if sfx.lower() in c.IMG_FILE_TYPES and not fn.startswith('.'):
-
+                if sfx.lower() in c.IMG_FILE_TYPES and not fn.startswith("."):
                     # read the file exif info
-                    f = open(file_path, 'rb')
+                    f = open(file_path, "rb")
                     tags = exifread.process_file(f, details=False)
                     f.close()
 
                     if tags == {}:
-                        print(f'error reading {f}')
+                        print(f"error reading {f}")
 
                     # add a few fields of our own
                     self._last_fid += 1
-                    tags['sys.next_id']   = self._last_fid
-                    tags['sys.subdir']    = subdir
-                    tags['sys.file_name'] = fn
-                    tags['sys.file_size'] = os.path.getsize(file_path)
+                    tags["sys.next_id"] = self._last_fid
+                    tags["sys.subdir"] = subdir
+                    tags["sys.file_name"] = fn
+                    tags["sys.file_size"] = os.path.getsize(file_path)
 
                     # load a new row
                     self._new_row = self._data.new_row()
                     self._load_exif(tags)
 
-    ''' load the tag info for one field into the data table
-        using load function defined in metadata '''
-    def _load_exif(self,tags:dict[str,any]):
+    """ load the tag info for one field into the data table
+        using load function defined in metadata """
+
+    def _load_exif(self, tags: dict[str, any]):
         # each row in metadata defines how to extract info
         # from tags and put in data table
         for meta in self._meta:
-            col_name  = meta['col_name']
-            load_func = meta['load_func']
-            exif_tags = meta['exif_tags']
-            default   = meta['default']
+            col_name = meta["col_name"]
+            load_func = meta["load_func"]
+            exif_tags = meta["exif_tags"]
+            default = meta["default"]
 
-            data = self._get_exif_data(tags,load_func,exif_tags,default=default)
+            data = self._get_exif_data(tags, load_func, exif_tags, default=default)
             self._new_row[col_name] = data
 
-    def _get_exif_data(self,tags:dict[str,any],load_func:str,
-                       exif_tags:any,default:str):
-        
+    def _get_exif_data(
+        self, tags: dict[str, any], load_func: str, exif_tags: any, default: str
+    ):
+
         load = self._get_default
-        if load_func == 'get_key':
-            load =  self._get_key
-        elif load_func == 'get_lat_lon':
+        if load_func == "get_key":
+            load = self._get_key
+        elif load_func == "get_lat_lon":
             load = self._get_lat_lon
-        elif load_func == 'get_key_value':
+        elif load_func == "get_key_value":
             load = self._get_key_value
 
+        return load(tags, exif_tags, default)
 
-        return load(tags,exif_tags,default)
+    """ Load Functions """
 
-    ''' Load Functions '''
-    def _get_default(self,tags:dict[str,any],exif_tags:any,default:any):
+    def _get_default(self, tags: dict[str, any], exif_tags: any, default: any):
         return default
-    
-    ''' if exif_tags is a list, try each tag name in the list  '''
-    def _get_key(self,tags:dict[str,any],exif_tags:any,default:any):
+
+    """ if exif_tags is a list, try each tag name in the list  """
+
+    def _get_key(self, tags: dict[str, any], exif_tags: any, default: any):
         if type(exif_tags) == str:
-            return tags.get(exif_tags,default)
-        
+            return tags.get(exif_tags, default)
+
         for tag in exif_tags:
             if tag in tags:
                 return tags[tag]
-            
+
         return default
-        
-    ''' like _get_key but returns the value instead.
-        if exif_tags is a list, try each tag name in the list  '''
-    def _get_key_value(self,tags:dict[str,any],exif_tags:any,default:any):
+
+    """ like _get_key but returns the value instead.
+        if exif_tags is a list, try each tag name in the list  """
+
+    def _get_key_value(self, tags: dict[str, any], exif_tags: any, default: any):
         value = default
         if type(exif_tags) == str:
-            value = tags.get(exif_tags,default)
+            value = tags.get(exif_tags, default)
             if value != default:
                 value = value.values
 
-        else:    
+        else:
             for tag in exif_tags:
                 if tag in tags:
-                    value =  tags[tag].values
+                    value = tags[tag].values
                     break
-            
+
         if value != default:
             if type(value) == list and len(value) == 1:
                 value = value[0]
 
         return value
-        
+
     # Get either latitude or longitude.
     # The conversion formula is the same regardless.
     # If the GPS reference is either "S" or "W" we negate the value.
-    def _get_lat_lon(self,tags:dict[str,any],exif_tags:list[str],default:any):
+    def _get_lat_lon(self, tags: dict[str, any], exif_tags: list[str], default: any):
         try:
             lat_lon = tags[exif_tags[0]].values
             ref = tags[exif_tags[1]].values
 
-            dec_val = lat_lon[0] + lat_lon[1]/60 + lat_lon[2]/3600
-            if ref in ['S','W']:
+            dec_val = lat_lon[0] + lat_lon[1] / 60 + lat_lon[2] / 3600
+            if ref in ["S", "W"]:
                 dec_val = -dec_val
 
-            return round(float(dec_val),6)
+            return round(float(dec_val), 6)
         except KeyError:
             return default
-        except ArithmeticError as e:
+        except ArithmeticError:
             return default
-    
+
+
 if __name__ == "__main__":
-    table,d = ExifLoader.new_collection()
+    table, d = ExifLoader.new_collection()
 
     if table:
         table.save()
