@@ -101,7 +101,14 @@ class PiImageElem(PiElement):
 
         ''' Update the image displayed '''
         rotate = int(self._collection_row['img_rotate'])
-        thumb,osize = cnv_image(fn, resize=self._new_size, rotate=rotate)
+        show_badge = self._collection_row.get('dup_target') == 'T'
+        thumb, osize = cnv_image(
+            fn,
+            resize=self._new_size,
+            rotate=rotate,
+            dup_target_badge=show_badge,
+            badge_for_gallery=False,
+        )
         c.window[self.key].update(data=thumb)
         c.window[self.key].set_tooltip(self._collection_row.get_tooltip())
         c.window.refresh()

@@ -245,7 +245,14 @@ class PiGalleryElem(PiElement):
 
             rotate = int(row['img_rotate'])
             resize_size = (self._new_size[0]-3,self._new_size[1]-3,)
-            thumb,osize = cnv_image(fn, resize=resize_size, rotate=rotate)
+            show_badge = row.get('dup_target') == 'T'
+            thumb, osize = cnv_image(
+                fn,
+                resize=resize_size,
+                rotate=rotate,
+                dup_target_badge=show_badge,
+                badge_for_gallery=True,
+            )
 
             # key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
             key = self._thumb_key(row_nbr,col_nbr)

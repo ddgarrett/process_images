@@ -19,6 +19,7 @@ import hjson  # NOTE: uses hjson instead of json for easier reading json
 import pi_config as c
 import pi_util as util
 from image_collection import ImageCollection
+from pi_dup_group import refresh_dup_target_flags
 from table import Table
 
 SCORES_CSV_NAME = "image_scores_and_status.csv"
@@ -46,7 +47,8 @@ def _status_csv_to_collection(status_raw: str | None) -> tuple[str, str]:
 def apply_musiq_scores_csv(table: Table, root_dir: str) -> None:
     """If image_scores_and_status.csv exists under root_dir, copy musiq_score,
     img_status, rvw_lvl (from status), and dup_photo onto collection rows where
-    file_location and file_name match."""
+    file_location and file_name match. Then refresh dup_target (T/F) from
+    dup_photo links."""
     scores_path = os.path.join(root_dir, SCORES_CSV_NAME)
     if not os.path.isfile(scores_path):
         return
@@ -89,6 +91,8 @@ def apply_musiq_scores_csv(table: Table, root_dir: str) -> None:
         r["img_status"] = img_status
         r["rvw_lvl"] = rvw_lvl
         r["dup_photo"] = dup_photo
+
+    refresh_dup_target_flags(table.rows())
 
 
 class ExifLoader:

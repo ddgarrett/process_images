@@ -21,8 +21,32 @@ def normalize_dup_path_key(s: str) -> str:
     return t.lstrip('/')
 
 
+def refresh_dup_target_flags(rows: list[Row]) -> None:
+    '''Set each row's dup_target to T or F from dup_photo links.
+
+    T when another row's non-blank dup_photo normalizes to this row's
+    row_dup_ref. Otherwise F.
+    '''
+    if not rows:
+        return
+    referenced: set[str] = set()
+    for r in rows:
+        dp = r.get('dup_photo')
+        if str(dp or '').strip():
+            referenced.add(normalize_dup_path_key(dp))
+    for r in rows:
+        key = normalize_dup_path_key(row_dup_ref(r))
+        val = 'T' if key in referenced else 'F'
+        r.set('dup_target', val)
+
+
 def resolve_duplicate_group_target(selected: list[Row], all_rows: list[Row]) -> str | None:
-    '''Return the normalized duplicate group key, or None if no chain found.'''
+    '''Return the normalized duplicate group key, or None if no chain found.
+
+    For the canonical-row case, ``dup_target`` is always uppercase ``T`` or ``F``.
+    Callers should refresh flags after ``dup_photo`` changes (e.g.
+    ``apply_musiq_scores_csv``).
+    '''
     if not selected or not all_rows:
         return None
 
@@ -31,27 +55,24 @@ def resolve_duplicate_group_target(selected: list[Row], all_rows: list[Row]) -> 
         if str(dp or '').strip():
             return normalize_dup_path_key(dp)
 
-        ref = normalize_dup_path_key(row_dup_ref(row))
-        if ref and any(
-            normalize_dup_path_key(r.get('dup_photo')) == ref for r in all_rows
-        ):
-            return ref
+        if row.get('dup_target') == 'T':
+            return normalize_dup_path_key(row_dup_ref(row))
 
     return None
 
 
 class DuplicateGroupFilter(Filter):
-    '''Keep canonical row(s) for ``dup_target`` and rows with that ``dup_photo``.'''
+    '''Keep rows in a duplicate cluster given normalized path key *cluster_key*.'''
 
-    def __init__(self, dup_target: str):
-        self._dup_target = dup_target
+    def __init__(self, cluster_key: str):
+        self._cluster_key = cluster_key
 
     def test(self, row: Row):
         key = normalize_dup_path_key(row_dup_ref(row))
         dp_key = normalize_dup_path_key(row.get('dup_photo'))
-        return key == self._dup_target or dp_key == self._dup_target
+        return key == self._cluster_key or dp_key == self._cluster_key
 
     def get_descr(self):
-        if not self._dup_target:
+        if not self._cluster_key:
             return "Duplicate group"
-        return f"Duplicate group (/{self._dup_target})"
+        return f"Duplicate group (/{self._cluster_key})"
