@@ -14,6 +14,7 @@ import FreeSimpleGUI as sg
 import pi_config as c
 import tcl_check  # must run before tkinter loads; exits if Tcl < 8.6  # noqa: F401
 from pi_folder_stats import FolderStats
+from pi_dup_elem import PiDupElem
 from pi_gallery_elem import PiGalleryElem
 from pi_image_elem import PiImageElem
 from pi_macos_popup import install_macos_popup_fallbacks
@@ -42,17 +43,21 @@ def init_window():
     tree = PiTreeList(key=c.EVT_TREE, headings=FolderStats.get_headers())
     image = PiImageElem(key="-IMAGE-", event=[c.EVT_TREE, c.EVT_IMG_SELECT])
     gallery = PiGalleryElem(key="-GALLERY-", event=c.EVT_TREE)
+    dup = PiDupElem(key="-DUP-", events=[c.EVT_TREE, c.EVT_IMG_SELECT])
     _ui_refs["tree"] = tree
     _ui_refs["image"] = image
     _ui_refs["gallery"] = gallery
+    _ui_refs["dup"] = dup
 
     image_tab = image.get_element()
     gallery_tab = gallery.get_element()
+    dup_tab = dup.get_element()
 
     # The TabgGroup layout - it must contain only Tabs
     tab_group_layout = [
         [
             sg.Tab("Gallery", gallery_tab, key="-GALLERY_TAB-"),
+            sg.Tab("Duplicates", dup_tab, key="-DUP_TAB-"),
             sg.Tab("Image", image_tab, key="-IMAGE_TAB-"),
         ]
     ]

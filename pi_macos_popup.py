@@ -116,6 +116,7 @@ def install_macos_popup_fallbacks(window, ui_refs):
     tree = ui_refs.get('tree')
     image = ui_refs.get('image')
     gallery = ui_refs.get('gallery')
+    dup = ui_refs.get('dup')
 
     if tree is not None and getattr(tree, '_menu', None):
         popup = _build_tk_popup_menu(window, tree._menu)
@@ -129,5 +130,12 @@ def install_macos_popup_fallbacks(window, ui_refs):
         popup = _build_tk_popup_menu(window, gallery._menu)
         for i in range(gallery._rows * gallery._cols):
             key = (f'{gallery.key}Thumbnail', i)
+            if key in window.AllKeysDict:
+                _bind_popup_to_widget(window[key].Widget, popup)
+
+    if dup is not None and getattr(dup, '_menu', None):
+        popup = _build_tk_popup_menu(window, dup._menu)
+        for i in range(dup._rows * dup._cols):
+            key = (f'{dup.key}Thumbnail', i)
             if key in window.AllKeysDict:
                 _bind_popup_to_widget(window[key].Widget, popup)
