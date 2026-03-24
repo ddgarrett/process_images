@@ -95,7 +95,12 @@ class PiImageElem(PiElement):
             c.window[self.key].update(data=None)
             c.window.refresh()
             return
-    
+
+        if not self._collection_row:
+            c.window[self.key].update(data=None)
+            c.window.refresh()
+            return
+
         fn = f'{c.directory}{self._filename}'
         fn = fn.replace('\\','/')
 

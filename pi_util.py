@@ -6,11 +6,16 @@ import pi_config as c
 
 def get_row_for_fn(filename):
     ''' given a filename which includes the "file_location + '/' + file_name"
-        find the row for the file
+        find the row for the file.
+
+        Uses the table's unfiltered row list so lookups succeed when the UI
+        (e.g. Duplicates tab) shows images that are not in the current filter.
     '''
+    if not c.table:
+        return None
     filename = filename.replace('\\','/')
-    loc,_,name  = filename.rpartition('/') 
-    for row in c.table:
+    loc, _, name = filename.rpartition('/')
+    for row in c.table._original_rows:
         if row['file_name'] == name and row['file_location'] == loc:
             return row
 
