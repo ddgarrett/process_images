@@ -17,9 +17,8 @@ from pi_util import get_fn_for_row
 
 class PiGalleryElem(PiElement):
 
-    def __init__(self,key="-GALLERY-",event=c.EVT_TREE,cols=3,rows=3):
+    def __init__(self, key="-GALLERY-", events=None, cols=3, rows=3):
         super().__init__(key=key)
-        #  self._event = event
         self._new_size = (50,50)
         self._collection_rows = [] # rows being displayed
         self._selected_rows = []   # rows selected
@@ -28,7 +27,10 @@ class PiGalleryElem(PiElement):
         self._cols = cols
         self._page = 0
 
-        c.listeners.add(event,self.files_selected)
+        if events is None:
+            events = []
+        for e in events:
+            c.listeners.add(e, self.files_selected)
         c.listeners.add(c.EVT_WIN_CONFIG,self.resize_image)
         c.listeners.add(c.EVT_TABLE_ROW_CHG,self.deselect_all)
 

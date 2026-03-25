@@ -16,20 +16,16 @@ from pi_util import get_row_for_fn
 
 class PiImageElem(PiElement):
 
-    def __init__(self,key="-IMAGE-",event=[c.EVT_TREE]):
+    def __init__(self, key="-IMAGE-", events=None):
         super().__init__(key=key)
-        # self._event = event
         self._new_size = (400,400)
         self._filename = ''
         self._collection_row = None
 
-        # add listeners for either an iterable of events
-        # or a single event
-        try: 
-            for e in event:
-                c.listeners.add(e,self.file_selected)
-        except TypeError:
-            c.listeners.add(event,self.file_selected)
+        if events is None:
+            events = []
+        for e in events:
+            c.listeners.add(e, self.file_selected)
 
         c.listeners.add(c.EVT_WIN_CONFIG,self.resize_image)
 

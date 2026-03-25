@@ -1,6 +1,6 @@
-'''
-    Process Images Element to Display Duplicate Groups in a Gallery layout.
-'''
+"""
+Process Images Element to Display Duplicate Groups in a Gallery layout.
+"""
 
 import pi_config as c
 from pi_dup_group import DuplicateGroupFilter, resolve_duplicate_group_target
@@ -10,10 +10,10 @@ from pi_util import get_row_for_fn
 
 
 class PiDupElem(PiGalleryElem):
-
-    def __init__(self, key="-DUP-", event=c.EVT_TREE, cols=3, rows=3):
-        # Behave like Gallery: rebuild only on the provided event.
-        super().__init__(key=key, event=event, cols=cols, rows=rows)
+    def __init__(self, key="-DUP-", events=None, cols=3, rows=3):
+        if events is None:
+            events = []
+        super().__init__(key=key, events=events, cols=cols, rows=rows)
 
     def files_selected(self, event, values):
         self._collection_rows = []
@@ -25,7 +25,7 @@ class PiDupElem(PiGalleryElem):
         dup_target = resolve_duplicate_group_target(selected_rows, all_rows)
         if dup_target:
             self._collection_rows = DuplicateGroupFilter(dup_target).filter(all_rows)
-            self._update_status_if_active(values, f'Duplicates for /{dup_target}')
+            self._update_status_if_active(values, f"Duplicates for /{dup_target}")
         else:
             self._update_status_if_active(
                 values, "Duplicates: no duplicate group for current selection"
@@ -44,7 +44,42 @@ class PiDupElem(PiGalleryElem):
                 return []
             return SelectedTreeNodesFilter(selected).filter(rows)
 
+        if event == c.EVT_IMG_SELECT:
+            selected_rows = []
+            for fn in values.get(event, []):
+                row = get_row_for_fn(fn)
+                if row is not None:
+                    selected_rows.append(row)
+            return selected_rows
+
         return []
+
+    def thumb_selected(self, event, values):
+        """A single thumb was clicked. Toggle selection and notify Image tab.
+
+        Duplicates tab emits EVT_DUP_IMG_SELECT so it does not trigger its own
+        rebuild (it listens to EVT_IMG_SELECT from Gallery).
+        """
+        i = event[1]
+        i += self._row_offset()
+
+        if i >= len(self._collection_rows):
+            return
+
+        row = self._collection_rows[i]
+        if row in self._selected_rows:
+            self._selected_rows.remove(row)
+            bg = "#000000"
+        else:
+            self._selected_rows.append(row)
+            bg = "#FFFFFF"
+
+        c.window[event].Widget.config(bg=bg)
+
+        if len(self._selected_rows) > 0:
+            filename = f"{row['file_location']}/{row['file_name']}".replace("\\", "/")
+            out_values = {c.EVT_DUP_IMG_SELECT: [filename]}
+            c.listeners.notify(c.EVT_DUP_IMG_SELECT, out_values)
 
     def _update_status_if_active(self, values, msg):
         if self._is_active_tab(values):
