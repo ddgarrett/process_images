@@ -11,13 +11,9 @@ from pi_util import get_row_for_fn
 
 class PiDupElem(PiGalleryElem):
 
-    def __init__(self, key="-DUP-", events=None, cols=3, rows=3):
-        super().__init__(key=key, event=c.EVT_TREE, cols=cols, rows=rows)
-        if events is None:
-            events = [c.EVT_TREE, c.EVT_IMG_SELECT]
-        for event in events:
-            if event != c.EVT_TREE:
-                c.listeners.add(event, self.files_selected)
+    def __init__(self, key="-DUP-", event=c.EVT_TREE, cols=3, rows=3):
+        # Behave like Gallery: rebuild only on the provided event.
+        super().__init__(key=key, event=event, cols=cols, rows=rows)
 
     def files_selected(self, event, values):
         self._collection_rows = []
@@ -47,14 +43,6 @@ class PiDupElem(PiGalleryElem):
             if not selected:
                 return []
             return SelectedTreeNodesFilter(selected).filter(rows)
-
-        if event == c.EVT_IMG_SELECT:
-            selected_rows = []
-            for fn in values.get(event, []):
-                row = get_row_for_fn(fn)
-                if row is not None:
-                    selected_rows.append(row)
-            return selected_rows
 
         return []
 

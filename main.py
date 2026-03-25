@@ -43,7 +43,7 @@ def init_window():
     tree = PiTreeList(key=c.EVT_TREE, headings=FolderStats.get_headers())
     image = PiImageElem(key="-IMAGE-", event=[c.EVT_TREE, c.EVT_IMG_SELECT])
     gallery = PiGalleryElem(key="-GALLERY-", event=c.EVT_TREE)
-    dup = PiDupElem(key="-DUP-", events=[c.EVT_TREE, c.EVT_IMG_SELECT])
+    dup = PiDupElem(key="-DUP-", event=c.EVT_TREE)
     _ui_refs["tree"] = tree
     _ui_refs["image"] = image
     _ui_refs["gallery"] = gallery
