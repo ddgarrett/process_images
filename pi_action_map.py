@@ -16,6 +16,10 @@
         PiActionMap(rowget=self.get_selected_rows).item(),
 '''
 import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
 
 from my_secrets import apikey
 # ******************* CRITICAL *************
@@ -31,6 +35,35 @@ from urllib.error   import URLError
 import pi_config as c
 from pi_action import PiAction
 from pi_filters import SelectedTreeNodesFilter
+
+
+def _open_local_html(map_path: str) -> None:
+    '''Open a local HTML file in the system default GUI browser.
+
+    Avoids webbrowser on Unix falling through to Lynx/w3m (blocking P_WAIT, no JS maps).
+    '''
+    path = Path(map_path).resolve()
+    if sys.platform == 'darwin':
+        subprocess.Popen(
+            ['open', str(path)],
+            start_new_session=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    elif sys.platform == 'win32':
+        os.startfile(str(path))
+    else:
+        opener = shutil.which('xdg-open')
+        if opener:
+            subprocess.Popen(
+                [opener, str(path)],
+                start_new_session=True,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+        else:
+            webbrowser.open_new_tab(path.as_uri())
+
 
 class PiActionMap(PiAction):
     '''
@@ -131,7 +164,7 @@ class PiActionMap(PiAction):
         map_fn = c.directory + "/" + "temp_map.html"
         gmap1.draw(map_fn)
 
-        webbrowser.open_new_tab(map_fn)
+        _open_local_html(map_fn)
 
         # free up memory
         self._page_dict = {}
