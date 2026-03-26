@@ -4,7 +4,7 @@ This folder contains `image_collection.csv` files for image collections that are
 
 ## Notes
 
-- These CSV files represent reviewed and published image records.
-- Keep this folder as a historical backup source.
-- Add new backup CSV files here after images are reviewed and posted.
-- Maps for highlight pictures are kept at 
+- The CSV files in this folder represent reviewed and published image records as well as collections in review
+- Keep this folder as a historical backup source and backup the work done to create the .csv files
+- Add new backup CSV files here after images are reviewed and posted or as being reviewed
+- Maps for locations of "best" pictures are kept at [ddgarrett.github.io](https://ddgarrett.github.io/)
