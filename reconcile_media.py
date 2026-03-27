@@ -6,6 +6,15 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
+"""
+Past runs: 
+    - python reconcile_media.py --paths /Users/douglasgarrett/Documents/pictures /Volumes/T7 --output reconcile_media.csv
+    - python reconcile_media.py --paths '/Volumes/My Passport/photos' '/Volumes/My Passport/pictures' '/Volumes/My Passport/_acer_swift_backup' --output reconcile_media.csv
+    - python reconcile_media.py --paths  --output reconcile_media.csv
+    - python reconcile_media.py --paths  --output reconcile_media.csv
+    - python reconcile_media.py --paths  --output reconcile_media.csv
+"""
+
 MEDIA_CSV_HEADERS = [
     "Directory Name",
     "Full Path",
@@ -101,8 +110,12 @@ def load_existing_parm_rows(parms_csv):
         return list(reader)
 
 
-def scan_media_directories(source_directories, run_date_str):
-    """Walk scan roots and return new media rows (dicts without dup_cnt set)."""
+def scan_media_directories(source_directories, run_date_str, explicit_roots):
+    """Walk scan roots and return new media rows (dicts without dup_cnt set).
+
+    explicit_roots: normalized paths from --paths. Those directories are always
+    analyzed even if their basename starts with '_' or '.'.
+    """
     valid_extensions = {
         ".jpg",
         ".jpeg",
@@ -124,7 +137,10 @@ def scan_media_directories(source_directories, run_date_str):
 
         for root, dirs, files in os.walk(root_path):
             dirs[:] = [d for d in dirs if not d.startswith(("_", "."))]
-            if os.path.basename(root).startswith(("_", ".")):
+            if (
+                os.path.basename(root).startswith(("_", "."))
+                and norm_path(root) not in explicit_roots
+            ):
                 dirs.clear()
                 continue
 
@@ -196,11 +212,7 @@ def write_parms_csv(parms_csv, rows):
 
 def merge_parm_rows(existing_rows, scan_paths_norm, run_date_str, run_time_str):
     scan_set = set(scan_paths_norm)
-    kept = [
-        r
-        for r in existing_rows
-        if norm_path(r["Path"]) not in scan_set
-    ]
+    kept = [r for r in existing_rows if norm_path(r["Path"]) not in scan_set]
     new_rows = [
         {
             "Path": p,
@@ -246,6 +258,7 @@ def reconcile_media(source_directories, output_csv):
     new_media, processed_count = scan_media_directories(
         source_directories,
         run_date_str,
+        set(scan_roots_norm),
     )
 
     merged_media = kept_media + new_media
