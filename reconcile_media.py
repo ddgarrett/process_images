@@ -8,11 +8,13 @@ from pathlib import Path
 
 """
 Past runs: 
-    - python reconcile_media.py --paths /Users/douglasgarrett/Documents/pictures /Volumes/T7 --output reconcile_media.csv
-    - python reconcile_media.py --paths '/Volumes/My Passport/photos' '/Volumes/My Passport/pictures' '/Volumes/My Passport/_acer_swift_backup' --output reconcile_media.csv
-    - python reconcile_media.py --paths  --output reconcile_media.csv
-    - python reconcile_media.py --paths  --output reconcile_media.csv
-    - python reconcile_media.py --paths  --output reconcile_media.csv
+    - python reconcile_media.py --paths /Users/douglasgarrett/Documents/pictures /Volumes/T7 --output backup/reconcile_media.csv
+    - python reconcile_media.py --paths '/Volumes/My Passport/photos' '/Volumes/My Passport/pictures' '/Volumes/My Passport/_acer_swift_backup' --output backup/reconcile_media.csv
+    - python reconcile_media.py --paths '/Volumes/My Passport/photos/_BACKUP' --output backup/reconcile_media.csv
+    - python reconcile_media.py --paths /Volumes/seagate_5/pictures --output backup/reconcile_media.csv
+
+Not yet run:
+    - python reconcile_media.py --paths /Volumes/dgarrett/Documents/pictures --output backup/reconcile_media.csv
 """
 
 MEDIA_CSV_HEADERS = [
