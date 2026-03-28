@@ -134,8 +134,9 @@ def scan_media_directories(
 ):
     """Walk scan roots and return new media rows (dicts without dup_cnt set).
 
-    explicit_roots: normalized paths from --paths. Those directories are always
-    analyzed even if their basename starts with '_' or '.'.
+    explicit_roots: normalized paths from --paths. Dot-prefixed basenames are
+    skipped when descending unless the directory is itself a scan root; this set
+    implements that exception.
 
     rehash_cache: normalized Full Path -> prior CSV fields; same file count and
     rounded total size MB reuses Directory Hash without reading file contents.
@@ -163,9 +164,9 @@ def scan_media_directories(
             continue
 
         for root, dirs, files in os.walk(root_path):
-            dirs[:] = [d for d in dirs if not d.startswith(("_", "."))]
+            dirs[:] = [d for d in dirs if not d.startswith(".")]
             if (
-                os.path.basename(root).startswith(("_", "."))
+                os.path.basename(root).startswith(".")
                 and norm_path(root) not in explicit_roots
             ):
                 dirs.clear()
@@ -269,17 +270,43 @@ def write_parms_csv(parms_csv, rows):
         writer.writerows(rows)
 
 
-def merge_parm_rows(existing_rows, scan_paths_norm, run_date_str, run_time_str):
+def merge_parm_rows(
+    existing_rows, scan_paths_norm, run_date_str, run_time_str, paths_present
+):
+    """paths_present: set of normalized paths that exist this run. Missing paths
+    keep prior run_date and run_time from existing_rows when available."""
     scan_set = set(scan_paths_norm)
+    present = paths_present
     kept = [r for r in existing_rows if norm_path(r["Path"]) not in scan_set]
-    new_rows = [
-        {
-            "Path": p,
-            "run_date": run_date_str,
-            "run_time": run_time_str,
-        }
-        for p in scan_paths_norm
-    ]
+    prior_by_path = {norm_path(r["Path"]): r for r in existing_rows}
+    new_rows = []
+    for p in scan_paths_norm:
+        if p in present:
+            new_rows.append(
+                {
+                    "Path": p,
+                    "run_date": run_date_str,
+                    "run_time": run_time_str,
+                }
+            )
+            continue
+        old = prior_by_path.get(p)
+        if old:
+            new_rows.append(
+                {
+                    "Path": p,
+                    "run_date": old.get("run_date") or run_date_str,
+                    "run_time": old.get("run_time") or run_time_str,
+                }
+            )
+        else:
+            new_rows.append(
+                {
+                    "Path": p,
+                    "run_date": run_date_str,
+                    "run_time": run_time_str,
+                }
+            )
     return kept + new_rows
 
 
@@ -299,6 +326,10 @@ def reconcile_media(source_directories, output_csv):
             seen_scan.add(n)
             scan_roots_norm.append(n)
 
+    # Only refresh CSV rows for scan roots that exist (e.g. mounted volumes).
+    # Missing paths keep prior rows; scan_media_directories still warns per path.
+    scan_roots_present = [n for n in scan_roots_norm if os.path.exists(n)]
+
     print("--- Starting Reconciliation ---")
 
     kept_media = []
@@ -309,7 +340,7 @@ def reconcile_media(source_directories, output_csv):
         kept_media = [
             r
             for r in all_existing
-            if not row_matches_any_scan_root(r["Full Path"], scan_roots_norm)
+            if not row_matches_any_scan_root(r["Full Path"], scan_roots_present)
         ]
 
     parm_existing = []
@@ -338,6 +369,7 @@ def reconcile_media(source_directories, output_csv):
         scan_roots_norm,
         run_date_str,
         run_time_str,
+        set(scan_roots_present),
     )
     write_parms_csv(parms_csv, merged_parms)
 
