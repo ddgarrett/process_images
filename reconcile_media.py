@@ -13,6 +13,10 @@ Past runs:
     - python reconcile_media.py --paths '/Volumes/My Passport/photos/_BACKUP' --output backup/reconcile_media.csv
     - python reconcile_media.py --paths /Volumes/seagate_5/pictures --output backup/reconcile_media.csv
 
+Re-run with same paths:
+    - python reconcile_media.py --paths /Volumes/T7 --output backup/reconcile_media.csv
+    - python reconcile_media.py --paths '/Volumes/My Passport/photos' '/Volumes/My Passport/pictures' '/Volumes/My Passport/_acer_swift_backup' --output backup/reconcile_media.csv
+    
 Not yet run:
     - python reconcile_media.py --paths /Volumes/dgarrett/Documents/pictures --output backup/reconcile_media.csv
 """
@@ -112,11 +116,29 @@ def load_existing_parm_rows(parms_csv):
         return list(reader)
 
 
-def scan_media_directories(source_directories, run_date_str, explicit_roots):
+def build_rehash_cache_from_rows(rows):
+    """Map normalized Full Path -> prior row fields for skipping content rehash."""
+    cache = {}
+    for r in rows:
+        cache[norm_path(r["Full Path"])] = {
+            "File Count": r["File Count"],
+            "Total Size (MB)": r["Total Size (MB)"],
+            "Directory Hash": r["Directory Hash"],
+            "run_date": r.get("run_date", ""),
+        }
+    return cache
+
+
+def scan_media_directories(
+    source_directories, run_date_str, explicit_roots, rehash_cache
+):
     """Walk scan roots and return new media rows (dicts without dup_cnt set).
 
     explicit_roots: normalized paths from --paths. Those directories are always
     analyzed even if their basename starts with '_' or '.'.
+
+    rehash_cache: normalized Full Path -> prior CSV fields; same file count and
+    rounded total size MB reuses Directory Hash without reading file contents.
     """
     valid_extensions = {
         ".jpg",
@@ -131,6 +153,9 @@ def scan_media_directories(source_directories, run_date_str, explicit_roots):
     }
     rows = []
     processed_count = 0
+    skipped_rehash_count = 0
+    rehashed_count = 0
+    new_dir_count = 0
 
     for root_path in source_directories:
         if not os.path.exists(root_path):
@@ -157,20 +182,52 @@ def scan_media_directories(source_directories, run_date_str, explicit_roots):
             if not media_files:
                 continue
 
-            file_hashes = []
-            total_size = 0
+            key = norm_path(root)
+            if key not in rehash_cache:
+                new_dir_count += 1
+            cached = rehash_cache.get(key)
+            reused = False
+            combined_hash = None
+            size_mb = None
+            row_run_date = run_date_str
 
-            for filename in sorted(media_files):
-                filepath = os.path.join(root, filename)
-                if os.path.islink(filepath):
-                    continue
-                f_hash = get_file_hash(filepath)
-                if f_hash:
-                    file_hashes.append(f_hash)
-                    total_size += os.path.getsize(filepath)
+            if cached:
+                try:
+                    if len(media_files) == int(cached["File Count"]):
+                        quick_total = 0
+                        for filename in sorted(media_files):
+                            filepath = os.path.join(root, filename)
+                            if os.path.islink(filepath):
+                                continue
+                            quick_total += os.path.getsize(filepath)
+                        size_mb = round(quick_total / (1024 * 1024), 2)
+                        cached_mb = round(float(cached["Total Size (MB)"]), 2)
+                        if size_mb == cached_mb:
+                            combined_hash = cached["Directory Hash"]
+                            rd = cached.get("run_date") or ""
+                            row_run_date = rd if rd else run_date_str
+                            reused = True
+                            skipped_rehash_count += 1
+                except (ValueError, TypeError, OSError):
+                    reused = False
 
-            combined_hash = hashlib.md5("".join(file_hashes).encode()).hexdigest()
-            size_mb = round(total_size / (1024 * 1024), 2)
+            if not reused:
+                rehashed_count += 1
+                file_hashes = []
+                total_size = 0
+
+                for filename in sorted(media_files):
+                    filepath = os.path.join(root, filename)
+                    if os.path.islink(filepath):
+                        continue
+                    f_hash = get_file_hash(filepath)
+                    if f_hash:
+                        file_hashes.append(f_hash)
+                        total_size += os.path.getsize(filepath)
+
+                combined_hash = hashlib.md5("".join(file_hashes).encode()).hexdigest()
+                size_mb = round(total_size / (1024 * 1024), 2)
+                row_run_date = run_date_str
 
             rows.append(
                 {
@@ -179,13 +236,13 @@ def scan_media_directories(source_directories, run_date_str, explicit_roots):
                     "File Count": str(len(media_files)),
                     "Total Size (MB)": str(size_mb),
                     "Directory Hash": combined_hash,
-                    "run_date": run_date_str,
+                    "run_date": row_run_date,
                 }
             )
             processed_count += 1
             print(f"Analyzed: {root}")
 
-    return rows, processed_count
+    return rows, processed_count, skipped_rehash_count, rehashed_count, new_dir_count
 
 
 def recompute_dup_cnt(rows):
@@ -245,8 +302,10 @@ def reconcile_media(source_directories, output_csv):
     print("--- Starting Reconciliation ---")
 
     kept_media = []
+    rehash_cache = {}
     if os.path.isfile(output_csv):
         all_existing = load_existing_media_rows(output_csv)
+        rehash_cache = build_rehash_cache_from_rows(all_existing)
         kept_media = [
             r
             for r in all_existing
@@ -257,10 +316,17 @@ def reconcile_media(source_directories, output_csv):
     if os.path.isfile(parms_csv):
         parm_existing = load_existing_parm_rows(parms_csv)
 
-    new_media, processed_count = scan_media_directories(
+    (
+        new_media,
+        processed_count,
+        skipped_rehash_count,
+        rehashed_count,
+        new_dir_count,
+    ) = scan_media_directories(
         source_directories,
         run_date_str,
         set(scan_roots_norm),
+        rehash_cache,
     )
 
     merged_media = kept_media + new_media
@@ -283,6 +349,11 @@ def reconcile_media(source_directories, output_csv):
 
     print("\n--- Process Complete ---")
     print(f"Directories analyzed this run: {processed_count}")
+    print(
+        f"Directories skipped rehash (unchanged count and size): {skipped_rehash_count}"
+    )
+    print(f"Directories rehashed: {rehashed_count}")
+    print(f"New directories (not in prior report): {new_dir_count}")
     print(f"Total rows in report: {len(merged_media)}")
     print(f"Identical directory sets found: {len(duplicate_sets)}")
     print(f"Report saved to: {output_csv}")
