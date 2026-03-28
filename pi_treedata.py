@@ -129,6 +129,8 @@ class PiTreeData(TreeData):
             values = row.get_status_lvl()
 
             key = f'{parent}/{v}'
+            if key not in key_id_dict:
+                continue
             id = key_id_dict[key]
 
             tree.Widget.set(id,'#1',values[0])
