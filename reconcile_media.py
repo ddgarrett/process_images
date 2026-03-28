@@ -15,7 +15,7 @@ Past runs:
     - python reconcile_media.py --paths '/Volumes/My Passport/photos' '/Volumes/My Passport/pictures' '/Volumes/My Passport/_acer_swift_backup' --output backup/reconcile_media.csv
     - python reconcile_media.py --paths /Volumes/seagate_5/pictures --output backup/reconcile_media.csv
     - python reconcile_media.py --paths '/Volumes/Seagate Backup Plus Drive/_surface pro backup/2017-08-19_android' '/Volumes/Seagate Backup Plus Drive/photos' '/Volumes/Seagate Backup Plus Drive/pictures' '/Volumes/Seagate Backup Plus Drive/travel/2017-11_cruises'
-
+    - python reconcile_media.py --paths /home/dgarrett/Documents/pictures
 """
 
 MEDIA_CSV_HEADERS = [
