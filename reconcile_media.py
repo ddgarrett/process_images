@@ -7,18 +7,15 @@ from datetime import date, datetime
 from pathlib import Path
 
 """
-Past runs: 
-    - python reconcile_media.py --paths /Users/douglasgarrett/Documents/pictures /Volumes/T7 --output backup/reconcile_media.csv
-    - python reconcile_media.py --paths '/Volumes/My Passport/photos' '/Volumes/My Passport/pictures' '/Volumes/My Passport/_acer_swift_backup' --output backup/reconcile_media.csv
-    - python reconcile_media.py --paths '/Volumes/My Passport/photos/_BACKUP' --output backup/reconcile_media.csv
-    - python reconcile_media.py --paths /Volumes/seagate_5/pictures --output backup/reconcile_media.csv
-
-Re-run with same paths:
+Past runs:
+    - python reconcile_media.py
+      (default output backup/reconcile_media.csv; paths from backup/reconcile_media_parms.csv)
+    - python reconcile_media.py --paths /Users/douglasgarrett/Documents/pictures --output backup/reconcile_media.csv
     - python reconcile_media.py --paths /Volumes/T7 --output backup/reconcile_media.csv
     - python reconcile_media.py --paths '/Volumes/My Passport/photos' '/Volumes/My Passport/pictures' '/Volumes/My Passport/_acer_swift_backup' --output backup/reconcile_media.csv
-    
-Not yet run:
-    - python reconcile_media.py --paths /Volumes/dgarrett/Documents/pictures --output backup/reconcile_media.csv
+    - python reconcile_media.py --paths /Volumes/seagate_5/pictures --output backup/reconcile_media.csv
+    - python reconcile_media.py --paths '/Volumes/Seagate Backup Plus Drive/_surface pro backup/2017-08-19_android' '/Volumes/Seagate Backup Plus Drive/photos' '/Volumes/Seagate Backup Plus Drive/pictures' '/Volumes/Seagate Backup Plus Drive/travel/2017-11_cruises'
+
 """
 
 MEDIA_CSV_HEADERS = [
@@ -116,6 +113,29 @@ def load_existing_parm_rows(parms_csv):
         return list(reader)
 
 
+def load_scan_paths_from_parms(parms_csv):
+    """Ordered, deduped Path values from parms file. sys.exit if unusable."""
+    if not os.path.isfile(parms_csv):
+        sys.exit(
+            "Error: --paths was not given and parms file was not found: "
+            f"'{parms_csv}'. Run once with --paths, or pass --paths."
+        )
+    rows = load_existing_parm_rows(parms_csv)
+    if not rows:
+        sys.exit(f"Error: --paths was not given but '{parms_csv}' has no data rows.")
+    out = []
+    seen = set()
+    for r in rows:
+        p = (r.get("Path") or "").strip()
+        if not p:
+            sys.exit(f"Error: '{parms_csv}' contains a row with an empty Path column.")
+        n = norm_path(p)
+        if n not in seen:
+            seen.add(n)
+            out.append(p)
+    return out
+
+
 def build_rehash_cache_from_rows(rows):
     """Map normalized Full Path -> prior row fields for skipping content rehash."""
     cache = {}
@@ -157,9 +177,17 @@ def scan_media_directories(
     skipped_rehash_count = 0
     rehashed_count = 0
     new_dir_count = 0
+    dot_line_active = False
+
+    def end_dot_line():
+        nonlocal dot_line_active
+        if dot_line_active:
+            print()
+            dot_line_active = False
 
     for root_path in source_directories:
         if not os.path.exists(root_path):
+            end_dot_line()
             print(f"Warning: Path does not exist -> {root_path}")
             continue
 
@@ -241,7 +269,14 @@ def scan_media_directories(
                 }
             )
             processed_count += 1
-            print(f"Analyzed: {root}")
+            if reused:
+                print(".", end="", flush=True)
+                dot_line_active = True
+            else:
+                end_dot_line()
+                print(f"Analyzed: {root}")
+
+    end_dot_line()
 
     return rows, processed_count, skipped_rehash_count, rehashed_count, new_dir_count
 
@@ -398,18 +433,34 @@ def main():
     )
 
     parser.add_argument(
-        "--paths", nargs="+", required=True, help="One or more directory paths to scan."
+        "--paths",
+        nargs="+",
+        default=None,
+        metavar="PATH",
+        help=(
+            "One or more directory paths to scan. If omitted, Path values are "
+            "read from reconcile_media_parms.csv next to --output (same folder)."
+        ),
     )
 
     parser.add_argument(
         "--output",
-        default="reconciliation_report.csv",
-        help="The name of the CSV file to generate (default: reconciliation_report.csv)",
+        default="backup/reconcile_media.csv",
+        help=(
+            "CSV file to write (default: backup/reconcile_media.csv). Parms file "
+            "is written alongside it as reconcile_media_parms.csv."
+        ),
     )
 
     args = parser.parse_args()
 
-    reconcile_media(args.paths, args.output)
+    output_abs = os.path.abspath(os.path.normpath(args.output))
+    parms_csv = str(Path(output_abs).parent / PARMS_FILENAME)
+    source_paths = (
+        args.paths if args.paths is not None else load_scan_paths_from_parms(parms_csv)
+    )
+
+    reconcile_media(source_paths, args.output)
 
 
 if __name__ == "__main__":
