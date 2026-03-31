@@ -2,9 +2,11 @@
     Return a common set of menu items to set the status of one or more photos
     or filter for particular statuses.
 
-    Returns an array of items which can be added to a list of menu items.
+    "Set status" uses canonical events on pi_config (EVT_STATUS_*) handled once
+    in pi_status_apply; row targets come from status_menu_rowgetter (set on
+    right-click). rowget on StatusMenu is only for Show / duplicate-group items.
 
-    Use something like this to embed the items in your memnu
+    Use something like this to embed the items in your menu:
 
     status_menu = StatusMenu(self.rowgetter)
     menu = ['',
@@ -18,7 +20,7 @@
 
 import pi_config as c
 from pi_action_show_dup_group import PiShowDuplicateGroup
-from status_menu_item import StatusMenuItem
+
 
 class StatusMenu():
     def __init__(self,rowget=None):
@@ -27,25 +29,26 @@ class StatusMenu():
             PiShowDuplicateGroup(rowget=rowget) if rowget is not None else None
         )
 
-    def get_set_menu(self):
-        set_menu = [ 
-             'S&et Status...',[
-                 StatusMenuItem('&Reject',c.STAT_REJECT,c.LVL_INITIAL,self.rowget).item(), 
-                 StatusMenuItem('&Poor Quality',c.STAT_QUAL_BAD,c.LVL_QUAL,self.rowget).item(),
-                 StatusMenuItem('&Duplicate',c.STAT_DUP,c.LVL_DUP,self.rowget).item(),
-                 StatusMenuItem('&Just Okay',c.STAT_OK,c.LVL_OK,self.rowget).item(),
-                 StatusMenuItem('&Good',c.STAT_GOOD,c.LVL_GOOD,self.rowget).item(),
-                 StatusMenuItem('&Best!',c.STAT_BEST,c.LVL_BEST,self.rowget).item()],
-             '&TBD - Possible...',[
-                 StatusMenuItem('&Reject',c.STAT_TBD,c.LVL_INITIAL,self.rowget).item(),
-                 StatusMenuItem('&Poor Quality',c.STAT_TBD,c.LVL_QUAL,self.rowget).item(),
-                 StatusMenuItem('&Duplicate',c.STAT_TBD,c.LVL_DUP,self.rowget).item(),
-                 StatusMenuItem('&Ok Good Best',c.STAT_TBD,c.LVL_OK,self.rowget).item(),
-                 StatusMenuItem('&Good or Best',c.STAT_TBD,c.LVL_GOOD,self.rowget).item()
-                 ],
-            ]
-        
-        return set_menu
+    @staticmethod
+    def get_set_menu():
+        """Shared menu definition; same event strings on tree, gallery, image, dup."""
+        return [
+            'S&et Status...', [
+                f'&Reject::{c.EVT_STATUS_SET_REJECT}',
+                f'&Poor Quality::{c.EVT_STATUS_SET_POOR_QUALITY}',
+                f'&Duplicate::{c.EVT_STATUS_SET_DUPLICATE}',
+                f'&Just Okay::{c.EVT_STATUS_SET_JUST_OKAY}',
+                f'&Good::{c.EVT_STATUS_SET_GOOD}',
+                f'&Best!::{c.EVT_STATUS_SET_BEST}',
+            ],
+            '&TBD - Possible...', [
+                f'&Reject::{c.EVT_STATUS_TBD_REJECT}',
+                f'&Poor Quality::{c.EVT_STATUS_TBD_POOR_QUALITY}',
+                f'&Duplicate::{c.EVT_STATUS_TBD_DUPLICATE}',
+                f'&Ok Good Best::{c.EVT_STATUS_TBD_OK_GOOD_BEST}',
+                f'&Good or Best::{c.EVT_STATUS_TBD_GOOD_OR_BEST}',
+            ],
+        ]
     
     def get_show_submenu(self):
         show_submenu =  [

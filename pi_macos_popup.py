@@ -17,6 +17,8 @@ What this does:
 
 import platform
 
+import pi_config as c
+
 
 def _strip_menu_accelerators(label):
     return label.replace('&', '')
@@ -86,12 +88,14 @@ def _build_tk_popup_menu(window, menu_def):
     return popup
 
 
-def _bind_popup_to_widget(widget, popup):
+def _bind_popup_to_widget(widget, popup, rowgetter=None):
     """Attach popup handlers directly to a widget for secondary-click gestures."""
     if widget is None or popup is None:
         return
 
     def _show_popup(event):
+        if rowgetter is not None:
+            c.status_menu_rowgetter = rowgetter
         try:
             popup.tk_popup(event.x_root, event.y_root)
         finally:
@@ -120,22 +124,22 @@ def install_macos_popup_fallbacks(window, ui_refs):
 
     if tree is not None and getattr(tree, '_menu', None):
         popup = _build_tk_popup_menu(window, tree._menu)
-        _bind_popup_to_widget(window[tree.key].Widget, popup)
+        _bind_popup_to_widget(window[tree.key].Widget, popup, tree.get_selected_rows)
 
     if image is not None and getattr(image, '_menu', None):
         popup = _build_tk_popup_menu(window, image._menu)
-        _bind_popup_to_widget(window[image.key].Widget, popup)
+        _bind_popup_to_widget(window[image.key].Widget, popup, image.get_row)
 
     if gallery is not None and getattr(gallery, '_menu', None):
         popup = _build_tk_popup_menu(window, gallery._menu)
         for i in range(gallery._rows * gallery._cols):
             key = (f'{gallery.key}Thumbnail', i)
             if key in window.AllKeysDict:
-                _bind_popup_to_widget(window[key].Widget, popup)
+                _bind_popup_to_widget(window[key].Widget, popup, gallery.get_rows)
 
     if dup is not None and getattr(dup, '_menu', None):
         popup = _build_tk_popup_menu(window, dup._menu)
         for i in range(dup._rows * dup._cols):
             key = (f'{dup.key}Thumbnail', i)
             if key in window.AllKeysDict:
-                _bind_popup_to_widget(window[key].Widget, popup)
+                _bind_popup_to_widget(window[key].Widget, popup, dup.get_rows)

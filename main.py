@@ -18,6 +18,8 @@ from pi_dup_elem import PiDupElem
 from pi_gallery_elem import PiGalleryElem
 from pi_image_elem import PiImageElem
 from pi_macos_popup import install_macos_popup_fallbacks
+from pi_status_apply import register_status_menu_handlers
+from pi_status_menu_context import install_status_menu_context_bindings
 from pi_tree_list import PiTreeList
 
 elements = []
@@ -121,8 +123,10 @@ def update_status(text):
 
 def main():
 
+    register_status_menu_handlers()
     c.window = init_window()
     install_macos_popup_fallbacks(c.window, _ui_refs)
+    install_status_menu_context_bindings(c.window, _ui_refs)
     c.status = c.window["-STATUS-"]
 
     c.window.bind("<Control_L><s>", "-FILE_SAVE-")
@@ -140,6 +144,9 @@ def main():
             next_event = next_values = None
         else:
             event, values = c.window.read()
+
+        if values is not None:
+            c.last_window_values = values
 
         # if event has MENU_KEY_SEPARATOR, remove it
         if event != None and type(event) == str:

@@ -58,6 +58,19 @@ EVT_TABLE_LOAD    = '-TABLE_LOAD-'
 EVT_TABLE_ROW_CHG = '-ROW_CHG-'
 EVT_WIN_CONFIG    = WINDOW_CONFIG
 
+# Canonical "Set status" menu events (single global handlers; row source from status_menu_rowgetter).
+EVT_STATUS_SET_REJECT = '-STS_REJECT-'
+EVT_STATUS_SET_POOR_QUALITY = '-STS_POOR-'
+EVT_STATUS_SET_DUPLICATE = '-STS_DUP-'
+EVT_STATUS_SET_JUST_OKAY = '-STS_OK-'
+EVT_STATUS_SET_GOOD = '-STS_GOOD-'
+EVT_STATUS_SET_BEST = '-STS_BEST-'
+EVT_STATUS_TBD_REJECT = '-STSTBD_REJECT-'
+EVT_STATUS_TBD_POOR_QUALITY = '-STSTBD_POOR-'
+EVT_STATUS_TBD_DUPLICATE = '-STSTBD_DUP-'
+EVT_STATUS_TBD_OK_GOOD_BEST = '-STSTBD_OKGB-'
+EVT_STATUS_TBD_GOOD_OR_BEST = '-STSTBD_GOB-'
+
 # EVT_ACT_MAP     = '-MAP-'
 
 # standard image statuses
@@ -80,6 +93,12 @@ LVL_BEST        = '5'
 ''' global Event Listner '''
 listeners = EventListener()
 
+# Callable(values) -> list of rows; set on right-click before status menu (see pi_status_menu_context).
+status_menu_rowgetter = None
+
+# Last full values dict from window.read(); used when macOS Tk menu emits write_event_value(..., None).
+last_window_values = None
+
 ''' standard global actions '''
 PiOpenCollection(EVT_FILE_OPEN)
 PiNewCollection(EVT_FILE_NEW)
@@ -92,11 +111,11 @@ PiCleanupDir(EVT_CLEANUP_DIR)
 PiNotImplemented(EVT_NOT_IMPL)
 
 ''' global filter table events '''
-PiFilterTable(c.EVT_SHOW_ALL, None)
-PiFilterTable(c.EVT_SHOW_TBD, FilterTbd())
-PiFilterTable(c.EVT_SHOW_POSSIBLE_DUP, FilterPossibleDup())
-PiFilterTable(c.EVT_SHOW_POSSIBLE_GOOD_PLUS, FilterPossibleGoodPlus())
-PiFilterTable(c.EVT_SHOW_POSSIBLE_BEST, FilterPossibleBest())
+PiFilterTable(EVT_SHOW_ALL, None)
+PiFilterTable(EVT_SHOW_TBD, FilterTbd())
+PiFilterTable(EVT_SHOW_POSSIBLE_DUP, FilterPossibleDup())
+PiFilterTable(EVT_SHOW_POSSIBLE_GOOD_PLUS, FilterPossibleGoodPlus())
+PiFilterTable(EVT_SHOW_POSSIBLE_BEST, FilterPossibleBest())
 
 ''' set when collection is created or loaded '''
 table:ImageCollection = ImageCollection('') # may be filtered
