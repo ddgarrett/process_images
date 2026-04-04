@@ -128,10 +128,17 @@ class ImgColRow(Row):
 
     def get_tooltip(self):
         """return tooltip text for row"""
+        return self.get_tooltip_filename()
+
+    def get_overlay_text(self):
+        """return image-overlay text for row"""
         status, lvl = self.get_status_lvl()
         musiq_score = self.get("musiq_score")
-        name = self.get("file_name")
-        return f"{status} {lvl} {musiq_score}\n{name}"
+        return f"{status} {lvl} {musiq_score}".strip()
+
+    def get_tooltip_filename(self):
+        """return tooltip text containing file name only"""
+        return f"      {self.get('file_name')}      "
 
     def get_hyp_sq(self, row):
         """Return the square of the distance between two points in Euclidian geometry.

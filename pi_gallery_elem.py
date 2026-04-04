@@ -254,12 +254,13 @@ class PiGalleryElem(PiElement):
                 rotate=rotate,
                 dup_target_badge=show_badge,
                 badge_for_gallery=True,
+                overlay_text=row.get_overlay_text(),
             )
 
             # key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
             key = self._thumb_key(row_nbr,col_nbr)
             c.window[key].update(data=thumb,size=resize_size)
-            c.window[key].set_tooltip(row.get_tooltip())
+            c.window[key].set_tooltip(row.get_tooltip_filename())
             self._set_bg_color(i,key)
 
             col_nbr += 1
