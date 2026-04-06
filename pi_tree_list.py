@@ -26,7 +26,7 @@ class PiTreeList(PiElement):
         menu = None
 
         if c.app_function == c.APP_RVW_IMG:
-            status_menu = StatusMenu(self.get_selected_rows)
+            status_menu = StatusMenu()
             menu = ['',
             [ status_menu.get_set_menu(),
                 '---',

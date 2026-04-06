@@ -4,31 +4,24 @@
 
     "Set status" uses canonical events on pi_config (EVT_STATUS_*) handled once
     in pi_status_apply; row targets come from status_menu_rowgetter (set on
-    right-click). rowget on StatusMenu is only for Show / duplicate-group items.
+    right-click).
 
     Use something like this to embed the items in your menu:
 
-    status_menu = StatusMenu(self.rowgetter)
+    status_menu = StatusMenu()
     menu = ['',
              [ 'your item 1',
                status_menu.get_set_menu(),
-               status_menu.get_show_menu(),
+               status_menu.get_show_submenu(),
                'your item 2']
             ]
 
 '''
 
 import pi_config as c
-from pi_action_show_dup_group import PiShowDuplicateGroup
 
 
 class StatusMenu():
-    def __init__(self,rowget=None):
-        self.rowget = rowget
-        self._show_dup_group = (
-            PiShowDuplicateGroup(rowget=rowget) if rowget is not None else None
-        )
-
     @staticmethod
     def get_set_menu():
         """Shared menu definition; same event strings on tree, gallery, image, dup."""
@@ -49,16 +42,14 @@ class StatusMenu():
                 f'&Good or Best::{c.EVT_STATUS_TBD_GOOD_OR_BEST}',
             ],
         ]
-    
-    def get_show_submenu(self):
-        show_submenu =  [
+
+    @staticmethod
+    def get_show_submenu():
+        return [
             f'&All::{c.EVT_SHOW_ALL}',
             f'To Be Determined (&TBD)::{c.EVT_SHOW_TBD}',
             f'Possible &Duplicate::{c.EVT_SHOW_POSSIBLE_DUP}',
             f'Possible &Good or Best::{c.EVT_SHOW_POSSIBLE_GOOD_PLUS}',
             f'Possible &Best::{c.EVT_SHOW_POSSIBLE_BEST}',
-            f'&Custom::{c.EVT_NOT_IMPL}', #{c.EVT_SHOW_CUSTOM}'
+            f'&Custom::{c.EVT_NOT_IMPL}', #{c.EVT_SHOW_CUSTOM'}
         ]
-        if self._show_dup_group is not None:
-            show_submenu = show_submenu + [self._show_dup_group.item()]
-        return show_submenu

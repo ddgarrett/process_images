@@ -32,7 +32,7 @@ class PiImageElem(PiElement):
         self._menu = None
         
         if c.app_function == c.APP_RVW_IMG:
-            status_menu = StatusMenu(self.get_row)
+            status_menu = StatusMenu()
 
             self._menu =  ['', 
                 [ status_menu.get_set_menu(),
