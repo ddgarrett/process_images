@@ -124,16 +124,13 @@ class PiActionMap(PiAction):
         cnt = 0
         for row in rows:
             fn = row['file_name']
-            sub_uri = row['img_date_time']
-            sub_uri = f'{sub_uri[0:4]}/{sub_uri[5:7]}'
             lat_lon = (float(row['img_lat']),float(row['img_lon']))
             lat += lat_lon[0]
             lon += lat_lon[1]
             cnt += 1
 
-            uri = f'{c.BLOG_URI}/{sub_uri}'
             anchor = f'{fn}'
-            href_descr = self._get_href_descr(uri,anchor)
+            uri, href_descr = self._resolve_blog_link(row['img_date_time'], anchor)
             href = f'<a href="{uri}#{anchor}" target="_blank">{row.get_readable_date()} - {href_descr}</a>'
             
             try:
@@ -171,21 +168,36 @@ class PiActionMap(PiAction):
         del gmap1
 
 
-    def _get_href_descr(self,uri,anchor):
-        '''
-            Given the URI and anchor, return the description 
-            for the photo which follows the anchor. 
+    @staticmethod
+    def _blog_uri_for_month(year: int, month: int) -> str:
+        return f'{c.BLOG_URI}/{year}/{month:02d}'
 
-            The description is based on the descrition 
-            that is enclosed by the tag:
-                <figcaption>...</figcaption>
+    @staticmethod
+    def _next_calendar_month(year: int, month: int) -> tuple:
+        if month == 12:
+            return year + 1, 1
+        return year, month + 1
 
-            which follows the anchor:
-                <p id="{anchor}">
+    def _resolve_blog_link(self, img_date_time: str, anchor: str) -> tuple:
         '''
-        html = self._get_html(uri)
-        anchor_html = self._find_anchor(html,anchor)
-        return self._get_fig_caption(anchor_html,anchor)
+            Find blog page URI and figcaption for anchor.
+
+            Tries year/month from img_date_time, then the following month only.
+            Returns (uri, description). URI is the page where the anchor was found,
+            or the photo month URI if not found in either month.
+        '''
+        year = int(img_date_time[0:4])
+        month = int(img_date_time[5:7])
+        uri_photo_month = self._blog_uri_for_month(year, month)
+
+        for uri in (uri_photo_month, self._blog_uri_for_month(*self._next_calendar_month(year, month))):
+            html = self._get_html(uri)
+            anchor_html = self._find_anchor(html, anchor)
+            if anchor_html is not None:
+                return uri, self._get_fig_caption(anchor_html, anchor)
+
+        print('tag not found:', f'id="{anchor}"')
+        return uri_photo_month, anchor
     
     def _get_html(self,uri):
         ''' Return the HTML for a given URI.
@@ -214,16 +226,15 @@ class PiActionMap(PiAction):
 
         return self._page_dict[uri]
     
-    def _find_anchor(self,html,anchor):
+    def _find_anchor(self, html, anchor):
         ''' Return a substring of html which 
             follows the specified anchor
         '''
         tag = f'id="{anchor}"'
         idx = html.find(tag)
         if idx < 0:
-            print("tag not found:",tag)
             return None
-        
+
         return html[idx:]
 
     def _get_fig_caption(self,html,default_caption):
