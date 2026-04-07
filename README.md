@@ -125,6 +125,7 @@ which provides:
    - Use the existing filters and menus:
      - Filter by status (`tbd`, `reject`, `bad`, `dup`, `ok`, `good`, `best`).
      - Use the Duplicate Review level and the “possible duplicate” filters to quickly review auto-flagged duplicates.
+     - Use `TBD Best + Best` to focus on final-best candidates (`rvw_lvl='4' and status='tbd'`) plus already selected Best (`rvw_lvl='5' and status='best'`).
 
 Because the analysis happens in a shared library, you can:
 

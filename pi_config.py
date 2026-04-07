@@ -47,6 +47,7 @@ EVT_SHOW_TBD           = '-SHOW_TBD-'
 EVT_SHOW_POSSIBLE_DUP  = '-SHOW_POSSIBLE_DUP-'
 EVT_SHOW_POSSIBLE_GOOD_PLUS = '-SHOW_POSSIBLE_GOOD_PLUS-'
 EVT_SHOW_POSSIBLE_BEST = '-SHOW_POSSIBLE_BEST-'
+EVT_SHOW_TBD_BEST_PLUS_BEST = '-SHOW_TBD_BEST_PLUS_BEST-'
 EVT_SHOW_CUSTOM        = '-SHOW_CUSTOM-'
 
 EVT_NOT_IMPL       = '-NOT_IMPLEMENTED-'
@@ -116,6 +117,7 @@ PiFilterTable(EVT_SHOW_TBD, FilterTbd())
 PiFilterTable(EVT_SHOW_POSSIBLE_DUP, FilterPossibleDup())
 PiFilterTable(EVT_SHOW_POSSIBLE_GOOD_PLUS, FilterPossibleGoodPlus())
 PiFilterTable(EVT_SHOW_POSSIBLE_BEST, FilterPossibleBest())
+PiFilterTable(EVT_SHOW_TBD_BEST_PLUS_BEST, FilterTbdBestPlusBest())
 
 ''' set when collection is created or loaded '''
 table:ImageCollection = ImageCollection('') # may be filtered

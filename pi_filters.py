@@ -37,6 +37,15 @@
        - if not chosen, level left at '4' and status set to 'good'
        - if not chosen, level set to '5' and status set to 'best'
 
+    Standard Show filters in the UI:
+    - To Be Determined (TBD): img_status == 'tbd'
+    - Possible Duplicate: (rvw_lvl < '3' and img_status == 'tbd') or img_status == 'dup'
+    - Possible Good or Best: rvw_lvl > '3' or img_status == 'tbd'
+    - Possible Best: rvw_lvl > '4' or img_status == 'tbd'
+    - TBD Best + Best:
+      (rvw_lvl == '4' and img_status == 'tbd') or
+      (rvw_lvl == '5' and img_status == 'best')
+
 '''
 from __future__ import annotations
 import os
@@ -151,6 +160,21 @@ class FilterPossibleBest(Filter):
     
     def get_descr(self):
         return "possible Best"
+
+class FilterTbdBestPlusBest(Filter):
+    ''' Filter rows for TBD Best candidates plus final Best '''
+
+    def test(self,row:Row):
+        if row['rvw_lvl'] == c.LVL_GOOD and row['img_status'] == c.STAT_TBD:
+            return True
+
+        if row['rvw_lvl'] == c.LVL_BEST and row['img_status'] == c.STAT_BEST:
+            return True
+
+        return False
+
+    def get_descr(self):
+        return "TBD Best + Best"
     
 '''
     Filters based on Level and Status

@@ -51,5 +51,6 @@ class StatusMenu():
             f'Possible &Duplicate::{c.EVT_SHOW_POSSIBLE_DUP}',
             f'Possible &Good or Best::{c.EVT_SHOW_POSSIBLE_GOOD_PLUS}',
             f'Possible &Best::{c.EVT_SHOW_POSSIBLE_BEST}',
+            f'TBD Best + Best::{c.EVT_SHOW_TBD_BEST_PLUS_BEST}',
             f'&Custom::{c.EVT_NOT_IMPL}', #{c.EVT_SHOW_CUSTOM'}
         ]
