@@ -136,6 +136,16 @@ class ImgColRow(Row):
         musiq_score = self.get("musiq_score")
         return f"{status} {lvl} {musiq_score}".strip()
 
+    def get_cosine_overlay_text(self):
+        """cosine_sim for gallery thumbnail (bottom-right); None if omitted."""
+        raw = self.get("cosine_sim")
+        if raw is None:
+            return None
+        s = str(raw)
+        if s.strip() == "" or s.strip() == "-1":
+            return None
+        return s
+
     def get_tooltip_filename(self):
         """return tooltip text containing file name only"""
         return f"      {self.get('file_name')}      "

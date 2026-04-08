@@ -71,8 +71,13 @@ def _paste_dup_target_badge(img: PIL.Image.Image, gallery_thumb: bool) -> PIL.Im
     return base
 
 
-def _draw_overlay_text(img: PIL.Image.Image, text: str, gallery_thumb: bool) -> PIL.Image.Image:
-    """Draw bottom-left status text with a dark translucent background."""
+def _draw_overlay_corner_text(
+    img: PIL.Image.Image,
+    text: str,
+    gallery_thumb: bool,
+    align: str,
+) -> PIL.Image.Image:
+    """Draw text along the bottom edge; align 'left' or 'right' (same style either way)."""
     if not text:
         return img
     w, h = img.size
@@ -84,9 +89,8 @@ def _draw_overlay_text(img: PIL.Image.Image, text: str, gallery_thumb: bool) -> 
     font_size = 13 if gallery_thumb else 18
     font = _load_overlay_font(font_size)
 
-    # Keep overlay compact for small thumbnails.
     max_chars = 24 if gallery_thumb else 44
-    overlay_text = text.strip()
+    overlay_text = text
     if len(overlay_text) > max_chars:
         overlay_text = overlay_text[: max_chars - 3] + "..."
 
@@ -97,7 +101,10 @@ def _draw_overlay_text(img: PIL.Image.Image, text: str, gallery_thumb: bool) -> 
     pad_x = 4 if gallery_thumb else 8
     pad_y = 3 if gallery_thumb else 5
     margin = 2 if gallery_thumb else 6
-    x = margin
+    if align == "right":
+        x = max(margin, w - tw - 2 * pad_x - margin)
+    else:
+        x = margin
     y = max(margin, h - th - 2 * pad_y - margin)
 
     draw.rectangle(
@@ -122,11 +129,13 @@ def cnv_image(
     dup_target_badge=False,
     badge_for_gallery=False,
     overlay_text=None,
+    overlay_text_right=None,
 ):
     ''' Convert a file or byte stream to a Tkinter image.
         If resize value provide, resize the image.
         If dup_target_badge, overlay assets/dup_target_badge.png bottom-right.
         badge_for_gallery True uses a smaller icon than the main image view.
+        overlay_text_right draws a label bottom-right (after the badge if any).
         Return both the Tkinter image and the original image size.
     '''
     try:
@@ -147,7 +156,13 @@ def cnv_image(
         if dup_target_badge:
             img = _paste_dup_target_badge(img, badge_for_gallery)
         if overlay_text:
-            img = _draw_overlay_text(img, overlay_text, badge_for_gallery)
+            img = _draw_overlay_corner_text(
+                img, overlay_text, badge_for_gallery, "left"
+            )
+        if overlay_text_right:
+            img = _draw_overlay_corner_text(
+                img, overlay_text_right, badge_for_gallery, "right"
+            )
 
         if img.mode not in ("RGB", "RGBA"):
             img = img.convert("RGB")

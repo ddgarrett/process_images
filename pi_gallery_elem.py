@@ -255,6 +255,7 @@ class PiGalleryElem(PiElement):
                 dup_target_badge=show_badge,
                 badge_for_gallery=True,
                 overlay_text=row.get_overlay_text(),
+                overlay_text_right=row.get_cosine_overlay_text(),
             )
 
             # key = (f'{self.key}Thumbnail', row_nbr*self._cols+col_nbr)
