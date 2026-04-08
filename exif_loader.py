@@ -18,6 +18,7 @@ import hjson  # NOTE: uses hjson instead of json for easier reading json
 
 import pi_config as c
 import pi_util as util
+from image_analysis_lib.scoring import status_csv_to_collection_fields
 from image_collection import ImageCollection
 from pi_dup_group import refresh_dup_target_flags
 from table import Table
@@ -25,29 +26,10 @@ from table import Table
 SCORES_CSV_NAME = "image_scores_and_status.csv"
 
 
-def _status_csv_to_collection(status_raw: str | None) -> tuple[str, str]:
-    """Map image_scores_and_status.csv 'status' to (img_status, rvw_lvl as string).
-
-    Unknown or empty status uses ("tbd", "0").
-    """
-    s = (status_raw or "").strip()
-    if s == "poor quality":
-        return ("bad", "1")
-    if s == "dup":
-        return ("dup", "2")
-    if s == "best":
-        return ("best", "5")
-    if s == "good":
-        return ("tbd", "4")
-    if s == "TBD":
-        return ("tbd", "3")
-    return ("tbd", "0")
-
-
 def apply_musiq_scores_csv(table: Table, root_dir: str) -> None:
     """If image_scores_and_status.csv exists under root_dir, copy musiq_score,
-    img_status, rvw_lvl (from status), and dup_photo onto collection rows where
-    file_location and file_name match. Then refresh dup_target (T/F) from
+    img_status, rvw_lvl (from status), dup_photo, and cosine_sim onto collection rows
+    where file_location and file_name match. Then refresh dup_target (T/F) from
     dup_photo links."""
     scores_path = os.path.join(root_dir, SCORES_CSV_NAME)
     if not os.path.isfile(scores_path):
@@ -71,14 +53,19 @@ def apply_musiq_scores_csv(table: Table, root_dir: str) -> None:
                     f"required columns. Required columns: {req_list}"
                 )
                 return
-            # (file_location, file_name) -> (musiq_score, img_status, rvw_lvl, dup_photo)
-            by_key: dict[tuple[str, str], tuple[str, str, str, str]] = {}
+            fieldnames = set(reader.fieldnames)
+            has_cosine = "cosine_sim" in fieldnames
+            # (file_location, file_name) -> (musiq_score, img_status, rvw_lvl, dup_photo, cosine_sim)
+            by_key: dict[
+                tuple[str, str], tuple[str, str, str, str, str]
+            ] = {}
             for raw in reader:
                 key = (raw["file_location"], raw["file_name"])
                 score = raw.get("musiq_score")
-                img_status, rvw_lvl = _status_csv_to_collection(raw.get("status"))
+                img_status, rvw_lvl = status_csv_to_collection_fields(raw.get("status"))
                 dup_photo = raw.get("dup_photo")
-                by_key[key] = (score, img_status, rvw_lvl, dup_photo)  # type: ignore
+                cosine_sim = raw.get("cosine_sim") if has_cosine else ""
+                by_key[key] = (score, img_status, rvw_lvl, dup_photo, cosine_sim)  # type: ignore
     except OSError:
         return
 
@@ -86,11 +73,12 @@ def apply_musiq_scores_csv(table: Table, root_dir: str) -> None:
         k = (r["file_location"], r["file_name"])
         if k not in by_key:
             continue
-        score, img_status, rvw_lvl, dup_photo = by_key[k]
+        score, img_status, rvw_lvl, dup_photo, cosine_sim = by_key[k]
         r["musiq_score"] = score
         r["img_status"] = img_status
         r["rvw_lvl"] = rvw_lvl
         r["dup_photo"] = dup_photo
+        r["cosine_sim"] = cosine_sim
 
     refresh_dup_target_flags(table.rows())
 

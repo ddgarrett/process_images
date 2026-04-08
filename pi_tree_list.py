@@ -30,6 +30,7 @@ class PiTreeList(PiElement):
             menu = ['',
             [ status_menu.get_set_menu(),
                 '---',
+                f'Recalc Status::{c.EVT_RECALC_STATUS}',
                 PiActionMap(rowget=self.get_selected_rows).item(), 
                 PiActionExport(rowget=self.get_selected_rows).item(), 
                 PiActionBlog(rowget=self.get_selected_rows).item(),

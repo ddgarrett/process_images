@@ -72,6 +72,9 @@ EVT_STATUS_TBD_DUPLICATE = '-STSTBD_DUP-'
 EVT_STATUS_TBD_OK_GOOD_BEST = '-STSTBD_OKGB-'
 EVT_STATUS_TBD_GOOD_OR_BEST = '-STSTBD_GOB-'
 
+# Recalculate img_status / rvw_lvl from dedup_parms.json (tree context menu).
+EVT_RECALC_STATUS = '-RECALC-STATUS-'
+
 # EVT_ACT_MAP     = '-MAP-'
 
 # standard image statuses

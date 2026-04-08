@@ -20,6 +20,7 @@ from pi_image_elem import PiImageElem
 from pi_macos_popup import install_macos_popup_fallbacks
 from pi_status_apply import register_status_menu_handlers
 from pi_status_menu_context import install_status_menu_context_bindings
+from pi_recalc_status import register_recalc_status_handler
 from pi_tree_list import PiTreeList
 
 elements = []
@@ -125,6 +126,7 @@ def main():
 
     register_status_menu_handlers()
     c.window = init_window()
+    register_recalc_status_handler(_ui_refs["tree"].get_selected_rows)
     install_macos_popup_fallbacks(c.window, _ui_refs)
     install_status_menu_context_bindings(c.window, _ui_refs)
     c.status = c.window["-STATUS-"]
