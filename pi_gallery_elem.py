@@ -15,12 +15,35 @@ from pi_image_util import cnv_image
 from status_menu import StatusMenu
 from pi_util import get_fn_for_row
 
+# Slider min: at this value (and only this step) no MUSIQ filter is applied.
+MUSIQ_SLIDER_MIN_NO_FILTER = 3.0
+
+
+def _musiq_cell_strictly_above_threshold(cell, thr: float) -> bool:
+    """True if cell is d.ddd (one digit, dot, three digits) and score > floor string.
+
+    thr is a step on (MUSIQ_SLIDER_MIN_NO_FILTER, 6.0]; formatted to one decimal as d.ddd.
+    Assumes real scores are 1.000-9.999 so len-5 lexicographic compare matches numeric.
+    Blank or bad shape is False (hidden when filter is on).
+    """
+    if cell is None:
+        return False
+    s = str(cell).strip()
+    if len(s) != 5 or s[1] != ".":
+        return False
+    if not all(ch.isdigit() for ch in (s[0], s[2], s[3], s[4])):
+        return False
+    floor_s = f"{round(thr, 1):.3f}"
+    return s > floor_s
+
+
 class PiGalleryElem(PiElement):
 
     def __init__(self, key="-GALLERY-", events=None, cols=3, rows=3):
         super().__init__(key=key)
         self._new_size = (50,50)
         self._collection_rows = [] # rows being displayed
+        self._base_collection_rows = []  # after tree/dup filter, before musiq filter
         self._selected_rows = []   # rows selected
 
         self._rows = rows
@@ -40,11 +63,13 @@ class PiGalleryElem(PiElement):
         self._end_key  = f'{self.key}END-'
 
         self._pgnbr_key  = f'{self.key}PGNBR-'
+        self._musiq_slider_key = f'{self.key}MUSIQ-'
 
         c.listeners.add(self._pgdn_key,self._pgdn)
         c.listeners.add(self._pgup_key,self._pgup)
         c.listeners.add(self._home_key,self._home)
         c.listeners.add(self._end_key,self._end)
+        c.listeners.add(self._musiq_slider_key, self._musiq_slider_changed)
 
         self._menu = None
         
@@ -100,11 +125,22 @@ class PiGalleryElem(PiElement):
 
         layout = [
             [sg.Frame("", layout_thumbnail_frame, size=(width, height), border_width=0,expand_x=True, expand_y=True,key=f'{self.key}gallery_frame')],
-            [sg.Text("Page            ", size=0, key=self._pgnbr_key), 
+            [sg.Text("Page            ", size=0, key=self._pgnbr_key),
              sg.Push(),
-             sg.Button('PgUp',key=self._pgup_key), 
-             sg.Button('PgDn',key=self._pgdn_key), 
-             sg.Button('Home',key=self._home_key), 
+             sg.Slider(
+                 (MUSIQ_SLIDER_MIN_NO_FILTER, 6.0),
+                 default_value=MUSIQ_SLIDER_MIN_NO_FILTER,
+                 orientation="h",
+                 resolution=0.1,
+                 enable_events=True,
+                 key=self._musiq_slider_key,
+                 size=(36, 18),
+                 pad=((8, 8), (0, 0)),
+             ),
+             sg.Push(),
+             sg.Button('PgUp',key=self._pgup_key),
+             sg.Button('PgDn',key=self._pgdn_key),
+             sg.Button('Home',key=self._home_key),
              sg.Button('End',key=self._end_key)],
         ]
 
@@ -124,6 +160,7 @@ class PiGalleryElem(PiElement):
             a filtered list of rows instead?
         '''
 
+        self._base_collection_rows = []
         self._collection_rows = []
         self._selected_rows = []
         self._page = 0
@@ -132,8 +169,9 @@ class PiGalleryElem(PiElement):
         rows = c.table.rows()
         if len(rows) > 0 and len(files_folders) > 0:
             filter = SelectedTreeNodesFilter(files_folders)
-            self._collection_rows = filter.filter(rows)
+            self._base_collection_rows = filter.filter(rows)
 
+        self._apply_musiq_filter(values)
         self._display_pg()
 
     def resize_image(self,event,values):
@@ -182,6 +220,40 @@ class PiGalleryElem(PiElement):
             filename = get_fn_for_row(self._selected_rows[-1])
             values = {c.EVT_IMG_SELECT:[filename]}
             c.listeners.notify(c.EVT_IMG_SELECT,values)
+
+    def _musiq_slider_changed(self, event, values):
+        self._selected_rows = []
+        self._apply_musiq_filter(values)
+        self._display_pg()
+
+    def _musiq_threshold(self, values):
+        # Listeners sometimes pass a partial values dict (e.g. EVT_IMG_SELECT only).
+        # Merge last full window.read() snapshot so slider keys stay available.
+        base = c.last_window_values if c.last_window_values is not None else {}
+        overlay = values if values is not None else {}
+        merged = {**base, **overlay}
+        try:
+            return float(merged.get(self._musiq_slider_key, MUSIQ_SLIDER_MIN_NO_FILTER))
+        except (TypeError, ValueError):
+            return MUSIQ_SLIDER_MIN_NO_FILTER
+
+    def _apply_musiq_filter(self, values):
+        thr = self._musiq_threshold(values)
+        if round(thr, 1) == MUSIQ_SLIDER_MIN_NO_FILTER:
+            self._collection_rows = list(self._base_collection_rows)
+        else:
+            self._collection_rows = []
+            for row in self._base_collection_rows:
+                if _musiq_cell_strictly_above_threshold(row.get("musiq_score"), thr):
+                    self._collection_rows.append(row)
+        self._clamp_page_to_last()
+
+    def _clamp_page_to_last(self):
+        last = self._last_page()
+        if self._page > last:
+            self._page = last
+        if self._page < 0:
+            self._page = 0
 
     def _pgup(self,event,values):
         ''' move one page up'''

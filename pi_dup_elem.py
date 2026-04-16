@@ -16,6 +16,7 @@ class PiDupElem(PiGalleryElem):
         super().__init__(key=key, events=events, cols=cols, rows=rows)
 
     def files_selected(self, event, values):
+        self._base_collection_rows = []
         self._collection_rows = []
         self._selected_rows = []
         self._page = 0
@@ -24,13 +25,16 @@ class PiDupElem(PiGalleryElem):
         all_rows = c.table._original_rows if c.table else []
         dup_target = resolve_duplicate_group_target(selected_rows, all_rows)
         if dup_target:
-            self._collection_rows = DuplicateGroupFilter(dup_target).filter(all_rows)
+            self._base_collection_rows = DuplicateGroupFilter(dup_target).filter(
+                all_rows
+            )
             self._update_status_if_active(values, f"Duplicates for /{dup_target}")
         else:
             self._update_status_if_active(
                 values, "Duplicates: no duplicate group for current selection"
             )
 
+        self._apply_musiq_filter(values)
         self._display_pg()
 
     def _get_selected_rows(self, event, values):
