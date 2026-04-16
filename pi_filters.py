@@ -45,6 +45,7 @@
     - TBD Best + Best:
       (rvw_lvl == '4' and img_status == 'tbd') or
       (rvw_lvl == '5' and img_status == 'best')
+    - Best: rvw_lvl == '5' and img_status == 'best'
 
 '''
 from __future__ import annotations
@@ -189,6 +190,15 @@ class LevelStatusFilter(Filter):
     def test(self,row:Row):
         return (row['rvw_lvl'] == self._level and
                 row['img_status'] == self._status)
+
+class FilterFinalBest(LevelStatusFilter):
+    ''' Rows already marked Best (review level 5, status best). '''
+
+    def __init__(self):
+        super().__init__(c.LVL_BEST, c.STAT_BEST)
+
+    def get_descr(self):
+        return "Best"
     
 ''' 
     Filter for specific status and level
