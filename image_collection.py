@@ -111,13 +111,15 @@ class ImageCollection(CsvTable):
 
 
 class ImgColRow(Row):
-    def get(self, col_name: str) -> any:
+    def get(self, col_name: str, default=None) -> any:
         if col_name == COL_STATUS_LVL:
             return self.get_status_lvl()
 
         if col_name == COL_TOOL_TIP:
             return self.get_tooltip()
 
+        if self._cols.get(col_name) is None:
+            return default
         return super().get(col_name)
 
     def get_status_lvl(self):

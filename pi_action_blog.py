@@ -22,6 +22,17 @@ import shutil
 import pi_config as c
 from pi_action import PiAction
 
+
+def _field_or_placeholder(row, field_name):
+    value = row.get(field_name)
+    if value is None:
+        return f'{{{field_name}}}'
+    value = str(value).strip()
+    if value == '':
+        return f'{{{field_name}}}'
+    return value
+
+
 class PiActionBlog(PiAction):
     '''
         Generate skeleton blog entries for selected files and folders.
@@ -50,26 +61,30 @@ class PiActionBlog(PiAction):
     @staticmethod
     def get_body(row):
         ''' Return the blog body for a single row '''
+        intro = _field_or_placeholder(row, 'img_intro_paragraph')
+        album_uri = _field_or_placeholder(row, 'img_album_uri')
+        caption = _field_or_placeholder(row, 'img_caption')
+        ext_descr = _field_or_placeholder(row, 'img_ext_descr')
         return f'''
 <!----- image and paragraph(s) describing picture -->
 <p id="{row['file_name']}">
-{{image_intro_paragraph}}
+{intro}
 </p>
 <br>
 <div class="separator" style="clear: both; text-align: center;">
-<a href="{{album}}" target="_blank">
+<a href="{album_uri}" target="_blank">
 <figure> 
     <!-- image height or width at 500 - manually override -->
     <!----- image {row['file_name']} -->
 
 
 
-<figcaption>{{image_caption}}</figcaption>
+<figcaption>{caption}</figcaption>
 </figure> 
 </a></div>
 
 <p> <!--- optional - delete if not needed -->
-{{image_extended_description}} 
+{ext_descr}
 </p>
 '''
 
