@@ -136,14 +136,20 @@ class PiActionMap(PiAction):
 
             anchor = f'{fn}'
             uri, href_descr, img_src = self._resolve_blog_link(row['img_date_time'], anchor)
-            href = f'<a href="{uri}#{anchor}" target="_blank">{row.get_readable_date()} - {href_descr}</a>'
+            blog_url = f'{uri}#{anchor}'
+            safe_href = html.escape(blog_url, quote=True)
+            href = (
+                f'<a href="{safe_href}" target="_blank">'
+                f'{row.get_readable_date()} - {href_descr}</a>'
+            )
             if img_src:
                 safe_src = html.escape(img_src, quote=True)
-                thumb = (
+                img_tag = (
                     f'<img src="{safe_src}" alt="" '
                     f'style="max-width:{MAP_INFO_THUMB_MAX_PX}px;height:auto;'
                     'display:block;margin:0 auto 8px;">'
                 )
+                thumb = f'<a href="{safe_href}" target="_blank">{img_tag}</a>'
                 block = f'{thumb}{href}'
             else:
                 block = href
