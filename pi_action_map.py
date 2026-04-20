@@ -15,7 +15,9 @@
         # set up action for Map Event and Tree List 
         PiActionMap(rowget=self.get_selected_rows).item(),
 '''
+import html
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -35,6 +37,9 @@ from urllib.error   import URLError
 import pi_config as c
 from pi_action import PiAction
 from pi_filters import SelectedTreeNodesFilter
+
+# Max CSS width (px) for blog image in each map marker info window.
+MAP_INFO_THUMB_MAX_PX = 120
 
 
 def _open_local_html(map_path: str) -> None:
@@ -130,17 +135,27 @@ class PiActionMap(PiAction):
             cnt += 1
 
             anchor = f'{fn}'
-            uri, href_descr = self._resolve_blog_link(row['img_date_time'], anchor)
+            uri, href_descr, img_src = self._resolve_blog_link(row['img_date_time'], anchor)
             href = f'<a href="{uri}#{anchor}" target="_blank">{row.get_readable_date()} - {href_descr}</a>'
+            if img_src:
+                safe_src = html.escape(img_src, quote=True)
+                thumb = (
+                    f'<img src="{safe_src}" alt="" '
+                    f'style="max-width:{MAP_INFO_THUMB_MAX_PX}px;height:auto;'
+                    'display:block;margin:0 auto 8px;">'
+                )
+                block = f'{thumb}{href}'
+            else:
+                block = href
             
             try:
                 idx = lat_lon_lst.index(lat_lon)
                 weights[idx] = weights[idx] + 1
-                markers[lat_lon] = f'{markers[lat_lon]}<BR>{href}' 
+                markers[lat_lon] = f'{markers[lat_lon]}<BR>{block}'
             except ValueError:
                 lat_lon_lst.append(lat_lon)
                 weights.append(1)
-                markers[lat_lon] = href
+                markers[lat_lon] = block
 
         lat = lat / cnt
         lon = lon / cnt
@@ -180,24 +195,26 @@ class PiActionMap(PiAction):
 
     def _resolve_blog_link(self, img_date_time: str, anchor: str) -> tuple:
         '''
-            Find blog page URI and figcaption for anchor.
+            Find blog page URI, figcaption, and figure image URL for anchor.
 
             Tries year/month from img_date_time, then the following month only.
-            Returns (uri, description). URI is the page where the anchor was found,
-            or the photo month URI if not found in either month.
+            Returns (uri, description, img_src_or_none). URI is the page where the
+            anchor was found, or the photo month URI if not found in either month.
         '''
         year = int(img_date_time[0:4])
         month = int(img_date_time[5:7])
         uri_photo_month = self._blog_uri_for_month(year, month)
 
         for uri in (uri_photo_month, self._blog_uri_for_month(*self._next_calendar_month(year, month))):
-            html = self._get_html(uri)
-            anchor_html = self._find_anchor(html, anchor)
+            page_html = self._get_html(uri)
+            anchor_html = self._find_anchor(page_html, anchor)
             if anchor_html is not None:
-                return uri, self._get_fig_caption(anchor_html, anchor)
+                caption = self._get_fig_caption(anchor_html, anchor)
+                img_src = self._get_figure_image_src(anchor_html)
+                return uri, caption, img_src
 
         print('tag not found:', f'id="{anchor}"')
-        return uri_photo_month, anchor
+        return uri_photo_month, anchor, None
     
     def _get_html(self,uri):
         ''' Return the HTML for a given URI.
@@ -258,7 +275,23 @@ class PiActionMap(PiAction):
             return default_caption
         
         return html[0:idx2]
-        
 
-        
+    _IMG_SRC_RE = re.compile(
+        r'<img\b[^>]*\bsrc\s*=\s*([\'"])(?P<src>.*?)\1',
+        re.IGNORECASE | re.DOTALL,
+    )
+
+    @classmethod
+    def _get_figure_image_src(cls, anchor_html: str):
+        '''First <img src="..."> after the anchor and before <figcaption>, if any.'''
+        if not anchor_html:
+            return None
+        low = anchor_html.lower()
+        fc = low.find('<figcaption>')
+        head = anchor_html[:fc] if fc >= 0 else anchor_html
+        m = cls._IMG_SRC_RE.search(head)
+        if not m:
+            return None
+        src = m.group('src').strip()
+        return src or None
 
