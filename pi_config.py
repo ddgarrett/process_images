@@ -59,6 +59,7 @@ EVT_DUP_IMG_SELECT = '-DUP_IMGSEL-'
 EVT_TABLE_LOAD    = '-TABLE_LOAD-'
 EVT_TABLE_ROW_CHG = '-ROW_CHG-'
 EVT_WIN_CONFIG    = WINDOW_CONFIG
+EVT_TREE_SCORE    = '-TREE_SCORE-'
 
 # Canonical "Set status" menu events (single global handlers; row source from status_menu_rowgetter).
 EVT_STATUS_SET_REJECT = '-STS_REJECT-'
@@ -103,6 +104,12 @@ status_menu_rowgetter = None
 
 # Last full values dict from window.read(); used when macOS Tk menu emits write_event_value(..., None).
 last_window_values = None
+
+# True while tree slider is programmatically syncing tab sliders.
+syncing_from_tree = False
+
+# User-facing label for current Show... filter status.
+current_show_filter_label = "All Images"
 
 ''' standard global actions '''
 PiOpenCollection(EVT_FILE_OPEN)

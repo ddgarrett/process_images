@@ -222,6 +222,8 @@ class PiGalleryElem(PiElement):
             c.listeners.notify(c.EVT_IMG_SELECT,values)
 
     def _musiq_slider_changed(self, event, values):
+        if c.syncing_from_tree:
+            return
         self._selected_rows = []
         self._apply_musiq_filter(values)
         self._display_pg()
