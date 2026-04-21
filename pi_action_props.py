@@ -12,6 +12,7 @@ from pi_util import get_fn_for_row
 _K_FN = '-PROPS-FILENAME-'
 _K_LAT = '-PROPS-LAT-'
 _K_LON = '-PROPS-LON-'
+_K_TITLE = '-PROPS-TITLE-'
 _K_CAPTION = '-PROPS-CAPTION-'
 _K_ALBUM = '-PROPS-ALBUM-'
 _K_INTRO = '-PROPS-INTRO-'
@@ -76,6 +77,7 @@ class PiFileProperties(PiAction):
             [sg.Image(key=_K_THUMB, size=(280, 280))],
             [sg.Text('GPS Lat', size=(12, 1)), sg.Input(str(row.get('img_lat', '') or ''), key=_K_LAT, expand_x=True)],
             [sg.Text('GPS Lon', size=(12, 1)), sg.Input(str(row.get('img_lon', '') or ''), key=_K_LON, expand_x=True)],
+            [sg.Text('Title', size=(12, 1)), sg.Input(str(row.get('img_title', '') or ''), key=_K_TITLE, expand_x=True)],
             [sg.Text('Caption', size=(12, 1)), sg.Input(str(row.get('img_caption', '') or ''), key=_K_CAPTION, expand_x=True)],
             [sg.Text('Album URI', size=(12, 1)), sg.Input(str(row.get('img_album_uri', '') or ''), key=_K_ALBUM, expand_x=True)],
             [sg.Text('Intro', size=(12, 1)), sg.Multiline(str(row.get('img_intro_paragraph', '') or ''), key=_K_INTRO, size=(70, 5), expand_x=True)],
@@ -110,6 +112,7 @@ class PiFileProperties(PiAction):
 
             row['img_lat'] = lat_value
             row['img_lon'] = lon_value
+            row['img_title'] = str(dlg_values.get(_K_TITLE, '')).strip()
             row['img_caption'] = str(dlg_values.get(_K_CAPTION, '')).strip()
             row['img_album_uri'] = str(dlg_values.get(_K_ALBUM, '')).strip()
             row['img_intro_paragraph'] = _normalize_text(str(dlg_values.get(_K_INTRO, '')))

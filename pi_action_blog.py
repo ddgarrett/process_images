@@ -1,23 +1,20 @@
-'''
-    Generate skeleton blog entries for  selected files 
+"""
+Generate skeleton blog entries for  selected files
 
-    Listens for event names generated when this action was created.
+Listens for event names generated when this action was created.
 
-    Like all actions, this class has a 'handle_event(self,event,values)' method.
+Like all actions, this class has a 'handle_event(self,event,values)' method.
 
-    When a new instance of this class is created:
-        text   - menu item text to display
-        rowget - method to call to get list of rows to export
+When a new instance of this class is created:
+    text   - menu item text to display
+    rowget - method to call to get list of rows to export
 
-    To use, simply create a new instance with the name of the event
-    and the key of the list within event values. For example:
+To use, simply create a new instance with the name of the event
+and the key of the list within event values. For example:
 
-        # set up action for Export Event and Tree List 
-        PiActionBlog(rowget=self.get_selected_rows).item(),
-'''
-import os
-from pathlib import Path
-import shutil
+    # set up action for Export Event and Tree List
+    PiActionBlog(rowget=self.get_selected_rows).item(),
+"""
 
 import pi_config as c
 from pi_action import PiAction
@@ -26,20 +23,34 @@ from pi_action import PiAction
 def _field_or_placeholder(row, field_name):
     value = row.get(field_name)
     if value is None:
-        return f'{{{field_name}}}'
+        return f"{{{field_name}}}"
     value = str(value).strip()
-    if value == '':
-        return f'{{{field_name}}}'
+    if value == "":
+        return f"{{{field_name}}}"
     return value
 
 
+def _html_if_stripped_field(row, field_name, prefix, suffix):
+    """If row[field_name] is non-blank after strip, return prefix + value + suffix. Else ''.
+
+    Uses the same stripped blank test as _field_or_placeholder (no placeholder in output).
+    """
+    value = row.get(field_name)
+    if value is None:
+        return ""
+    text = str(value).strip()
+    if text == "":
+        return ""
+    return f"{prefix}{text}{suffix}"
+
+
 class PiActionBlog(PiAction):
-    '''
-        Generate skeleton blog entries for selected files and folders.
-        Parms:
-        text   - menu item text to display
-        rowget - method to call to get list of rows to export
-    '''
+    """
+    Generate skeleton blog entries for selected files and folders.
+    Parms:
+    text   - menu item text to display
+    rowget - method to call to get list of rows to export
+    """
 
     last_id = 0  # for generating unique Event IDs
 
@@ -47,27 +58,32 @@ class PiActionBlog(PiAction):
     def next_id(cls):
         cls.last_id += 1
         return cls.last_id
-    
+
     @staticmethod
     def get_header():
-        ''' Return a string with the blog header html '''
-        
-        return ''' 
+        """Return a string with the blog header html"""
+
+        return """ 
 <!--- intro paragraph(s)  --->
 <p>
 {intro}
 </p>
-'''
+"""
+
     @staticmethod
     def get_body(row):
-        ''' Return the blog body for a single row '''
-        intro = _field_or_placeholder(row, 'img_intro_paragraph')
-        album_uri = _field_or_placeholder(row, 'img_album_uri')
-        caption = _field_or_placeholder(row, 'img_caption')
-        ext_descr = _field_or_placeholder(row, 'img_ext_descr')
+        """Return the blog body for a single row"""
+        intro = _field_or_placeholder(row, "img_intro_paragraph")
+        album_uri = _field_or_placeholder(row, "img_album_uri")
+        caption = _field_or_placeholder(row, "img_caption")
+        title_html = _html_if_stripped_field(row, "img_title", "<h2>", "</h2>")
+        ext_html = _html_if_stripped_field(row, "img_ext_descr", "<p>", "</p>")
         return f'''
+<!----- optional image title -->
+{title_html}
+
 <!----- image and paragraph(s) describing picture -->
-<p id="{row['file_name']}">
+<p id="{row["file_name"]}">
 {intro}
 </p>
 <br>
@@ -75,7 +91,7 @@ class PiActionBlog(PiAction):
 <a href="{album_uri}" target="_blank">
 <figure> 
     <!-- image height or width at 500 - manually override -->
-    <!----- image {row['file_name']} -->
+    <!----- image {row["file_name"]} -->
 
 
 
@@ -83,23 +99,21 @@ class PiActionBlog(PiAction):
 </figure> 
 </a></div>
 
-<p> <!--- optional - delete if not needed -->
-{ext_descr}
-</p>
+{ext_html}
 '''
 
     @staticmethod
     def get_footer():
-         ''' Return a string with blog footer html '''
+        """Return a string with blog footer html"""
 
-         return '''
+        return """
 <!--- final link to album --->
 <p>
 <a href="{album}" target="_blank">Click this link or one of the pictures above to see more pictures in the  {album_name} photo album</a></p>
 <br>
-'''
+"""
 
-    def __init__(self,text="Generate Blog",rowget=None,fn="blog.html"):
+    def __init__(self, text="Generate Blog", rowget=None, fn="blog.html"):
         self._id = self.next_id()
         self._text = text
         self._rowget = rowget
@@ -107,19 +121,19 @@ class PiActionBlog(PiAction):
         super().__init__(event=self._get_event())
 
     def _get_event(self):
-        return f'-PiActionBlog{self._id}-'
+        return f"-PiActionBlog{self._id}-"
 
     def item(self):
-        ''' return an item name and unique event id'''
-        return f'{self._text}::{self._get_event()}'
+        """return an item name and unique event id"""
+        return f"{self._text}::{self._get_event()}"
 
-    def handle_event(self,event,values):
-        ''' Handle Export Event - get list of rows and copy
-            those images to _export subdirectory. '''
+    def handle_event(self, event, values):
+        """Handle Export Event - get list of rows and copy
+        those images to _export subdirectory."""
 
-        fn = f'{c.directory}/{self._fn}'
-        print("filename: ",fn)
-        with open(fn,'w',encoding="utf-8") as f:
+        fn = f"{c.directory}/{self._fn}"
+        print("filename: ", fn)
+        with open(fn, "w", encoding="utf-8") as f:
             f.write(self.get_header())
 
             for row in self._rowget(values):
