@@ -74,6 +74,14 @@ class PiActionBlog(PiAction):
     def get_body(row):
         """Return the blog body for a single row"""
         intro = _field_or_placeholder(row, "img_intro_paragraph")
+        intro_raw = row.get("img_intro_paragraph")
+        intro_blank = intro_raw is None or str(intro_raw).strip() == ""
+        if intro_blank:
+            intro_block = f'<br id="{row["file_name"]}">'
+        else:
+            intro_block = f'''<p id="{row["file_name"]}">
+{intro}
+</p>'''
         album_uri = _field_or_placeholder(row, "img_album_uri")
         caption = _field_or_placeholder(row, "img_caption")
         title_html = _html_if_stripped_field(row, "img_title", "<br><h2>", "</h2>")
@@ -83,9 +91,7 @@ class PiActionBlog(PiAction):
 {title_html}
 
 <!----- image and paragraph(s) describing picture -->
-<p id="{row["file_name"]}">
-{intro}
-</p>
+{intro_block}
 <br>
 <div class="separator" style="clear: both; text-align: center;">
 <a href="{album_uri}" target="_blank">
