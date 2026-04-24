@@ -76,7 +76,7 @@ class PiActionBlog(PiAction):
         intro = _field_or_placeholder(row, "img_intro_paragraph")
         album_uri = _field_or_placeholder(row, "img_album_uri")
         caption = _field_or_placeholder(row, "img_caption")
-        title_html = _html_if_stripped_field(row, "img_title", "<h2>", "</h2>")
+        title_html = _html_if_stripped_field(row, "img_title", "<br><h2>", "</h2>")
         ext_html = _html_if_stripped_field(row, "img_ext_descr", "<p>", "</p>")
         return f'''
 <!----- optional image title -->
