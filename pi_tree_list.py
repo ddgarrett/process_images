@@ -18,7 +18,7 @@ from status_menu import StatusMenu
 MUSIQ_SLIDER_MIN_NO_FILTER = 3.0
 
 
-def _musiq_cell_strictly_above_threshold(cell, thr: float) -> bool:
+def _musiq_cell_at_or_above_threshold(cell, thr: float) -> bool:
     if cell is None:
         return False
     s = str(cell).strip()
@@ -27,7 +27,19 @@ def _musiq_cell_strictly_above_threshold(cell, thr: float) -> bool:
     if not all(ch.isdigit() for ch in (s[0], s[2], s[3], s[4])):
         return False
     floor_s = f"{round(thr, 1):.3f}"
-    return s > floor_s
+    return s >= floor_s
+
+
+def _musiq_cell_strictly_below_threshold(cell, thr: float) -> bool:
+    if cell is None:
+        return False
+    s = str(cell).strip()
+    if len(s) != 5 or s[1] != ".":
+        return False
+    if not all(ch.isdigit() for ch in (s[0], s[2], s[3], s[4])):
+        return False
+    floor_s = f"{round(thr, 1):.3f}"
+    return s < floor_s
 
 
 class PiTreeList(PiElement):
@@ -57,6 +69,8 @@ class PiTreeList(PiElement):
 
         self._tree_data = PiTreeData(c.table.rows())
         self._score_slider_key = c.EVT_TREE_SCORE
+        self._score_cmp_btn_key = f"{self.key}SCORECMP-"
+        self._score_cmp_less_than = False
         self._show_events = (
             c.EVT_SHOW_ALL,
             c.EVT_SHOW_TBD,
@@ -84,22 +98,34 @@ class PiTreeList(PiElement):
         
         self._key_id_dict = {}
         c.listeners.add(self._score_slider_key, self._tree_score_changed)
+        c.listeners.add(self._score_cmp_btn_key, self._toggle_tree_score_comparator)
         for evt in self._show_events:
             c.listeners.add(evt, self._show_filter_selected)
 
     def get_element(self) -> sg.Column:
+        cmp_button = sg.Button(
+            self._score_cmp_button_text(),
+            key=self._score_cmp_btn_key,
+            enable_events=True,
+            tooltip="Toggle tree score comparator",
+            button_color=self._score_cmp_button_color(),
+            size=(12, 1),
+            pad=((8, 8), (2, 6)),
+        )
+        score_slider = sg.Slider(
+            (3.0, 6.0),
+            default_value=3.0,
+            orientation="h",
+            resolution=0.1,
+            enable_events=True,
+            key=self._score_slider_key,
+            size=(28, 16),
+            pad=((8, 8), (2, 6)),
+        )
         slider_row = [
             sg.Push(),
-            sg.Slider(
-                (3.0, 6.0),
-                default_value=3.0,
-                orientation="h",
-                resolution=0.1,
-                enable_events=True,
-                key=self._score_slider_key,
-                size=(28, 16),
-                pad=((8, 8), (2, 2)),
-            ),
+            sg.Column([[cmp_button]], pad=(0, 0), vertical_alignment="bottom"),
+            sg.Column([[score_slider]], pad=(0, 0), vertical_alignment="bottom"),
             sg.Push(),
         ]
         return sg.Column([[self._tree], slider_row], expand_x=True, expand_y=True, pad=(0, 0))
@@ -135,10 +161,27 @@ class PiTreeList(PiElement):
 
     def _tree_score_changed(self, event, values):
         threshold = self._tree_slider_value(values)
-        self._sync_tab_sliders(threshold)
         self._rebuild_tree(values)
         self._update_status_summary(values)
         self._notify_tree_selection_with_threshold(values, threshold)
+
+    def _toggle_tree_score_comparator(self, event, values):
+        self._score_cmp_less_than = not self._score_cmp_less_than
+        if c.window is not None and self._score_cmp_btn_key in c.window.AllKeysDict:
+            c.window[self._score_cmp_btn_key].update(
+                text=self._score_cmp_button_text(),
+                button_color=self._score_cmp_button_color(),
+            )
+        threshold = self._tree_slider_value(values)
+        # Keep tree slider threshold, but reset tab sliders to "off".
+        self._sync_tab_sliders(MUSIQ_SLIDER_MIN_NO_FILTER)
+        base = c.last_window_values if c.last_window_values is not None else {}
+        overlay = values if values is not None else {}
+        merged = {**base, **overlay}
+        merged[self._score_slider_key] = threshold
+        self._rebuild_tree(merged)
+        self._update_status_summary(merged)
+        self._notify_tree_selection_with_threshold(merged, threshold)
 
     def _show_filter_selected(self, event, values):
         threshold = MUSIQ_SLIDER_MIN_NO_FILTER
@@ -171,19 +214,19 @@ class PiTreeList(PiElement):
         overlay = values if values is not None else {}
         merged = {**base, **overlay}
         merged[self._score_slider_key] = threshold
-        merged["-GALLERY-MUSIQ-"] = threshold
-        merged["-DUP-MUSIQ-"] = threshold
         merged[self.key] = self._current_tree_selection_keys()
         c.listeners.notify(self.key, merged)
 
     def _visible_rows(self, values):
         rows = c.table.rows() if c.table else []
         thr = self._tree_slider_value(values)
-        if round(thr, 1) == MUSIQ_SLIDER_MIN_NO_FILTER:
-            return list(rows)
         visible = []
         for row in rows:
-            if _musiq_cell_strictly_above_threshold(row.get("musiq_score"), thr):
+            if self._score_cmp_less_than:
+                keep = _musiq_cell_strictly_below_threshold(row.get("musiq_score"), thr)
+            else:
+                keep = _musiq_cell_at_or_above_threshold(row.get("musiq_score"), thr)
+            if keep:
                 visible.append(row)
         return visible
 
@@ -238,15 +281,27 @@ class PiTreeList(PiElement):
 
     def _update_status_summary(self, values):
         threshold = self._tree_slider_value(values)
-        if round(threshold, 1) == MUSIQ_SLIDER_MIN_NO_FILTER:
-            score_txt = "off"
-        else:
-            score_txt = f">{threshold:.1f}"
+        score_txt = f"{self._score_cmp_symbol()}{threshold:.1f}"
         show_txt = c.current_show_filter_label
         visible = len(self._tree_data.rows)
         c.update_status(
             f"Show: {show_txt} | Tree Score: {score_txt} | Visible files: {visible}"
         )
+
+    def _score_cmp_button_text(self):
+        if self._score_cmp_less_than:
+            return "Tree Score <"
+        return "Tree Score >="
+
+    def _score_cmp_symbol(self):
+        if self._score_cmp_less_than:
+            return "<"
+        return ">="
+
+    def _score_cmp_button_color(self):
+        if self._score_cmp_less_than:
+            return ("white", "#1F7A1F")
+        return ("white", "#2F5D8A")
 
     def _current_tree_selection_keys(self):
         if c.window is None:

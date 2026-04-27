@@ -15,16 +15,16 @@ from pi_image_util import cnv_image
 from status_menu import StatusMenu
 from pi_util import get_fn_for_row
 
-# Slider min: at this value (and only this step) no MUSIQ filter is applied.
+# Slider range minimum.
 MUSIQ_SLIDER_MIN_NO_FILTER = 3.0
 
 
 def _musiq_cell_strictly_above_threshold(cell, thr: float) -> bool:
     """True if cell is d.ddd (one digit, dot, three digits) and score > floor string.
 
-    thr is a step on (MUSIQ_SLIDER_MIN_NO_FILTER, 6.0]; formatted to one decimal as d.ddd.
+    thr is a step on [MUSIQ_SLIDER_MIN_NO_FILTER, 6.0]; formatted to one decimal as d.ddd.
     Assumes real scores are 1.000-9.999 so len-5 lexicographic compare matches numeric.
-    Blank or bad shape is False (hidden when filter is on).
+    Blank or bad shape is False.
     """
     if cell is None:
         return False
@@ -241,13 +241,10 @@ class PiGalleryElem(PiElement):
 
     def _apply_musiq_filter(self, values):
         thr = self._musiq_threshold(values)
-        if round(thr, 1) == MUSIQ_SLIDER_MIN_NO_FILTER:
-            self._collection_rows = list(self._base_collection_rows)
-        else:
-            self._collection_rows = []
-            for row in self._base_collection_rows:
-                if _musiq_cell_strictly_above_threshold(row.get("musiq_score"), thr):
-                    self._collection_rows.append(row)
+        self._collection_rows = []
+        for row in self._base_collection_rows:
+            if _musiq_cell_strictly_above_threshold(row.get("musiq_score"), thr):
+                self._collection_rows.append(row)
         self._clamp_page_to_last()
 
     def _clamp_page_to_last(self):
