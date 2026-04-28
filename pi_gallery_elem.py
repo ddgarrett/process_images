@@ -12,6 +12,7 @@ import pi_config as c
 from pi_element import PiElement
 from pi_filters import SelectedTreeNodesFilter
 from pi_image_util import cnv_image
+from pi_tree_list import get_tree_visible_rows
 from status_menu import StatusMenu
 from pi_util import get_fn_for_row
 
@@ -155,9 +156,8 @@ class PiGalleryElem(PiElement):
     def files_selected(self,event,values):
         ''' Display a new list of collection rows
          
-            Get the list of rows from current table, 
-            BUT - in future may have to make a change to get 
-            a filtered list of rows instead?
+            Base rows come from the same tree-visibility logic used to
+            show file nodes under folders, then we apply selected nodes.
         '''
 
         self._base_collection_rows = []
@@ -166,7 +166,7 @@ class PiGalleryElem(PiElement):
         self._page = 0
 
         files_folders = values[event] # files and folders to display
-        rows = c.table.rows()
+        rows = get_tree_visible_rows(values, c.tree_score_cmp_less_than)
         if len(rows) > 0 and len(files_folders) > 0:
             filter = SelectedTreeNodesFilter(files_folders)
             self._base_collection_rows = filter.filter(rows)

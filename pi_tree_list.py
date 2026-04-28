@@ -42,6 +42,30 @@ def _musiq_cell_strictly_below_threshold(cell, thr: float) -> bool:
     return s < floor_s
 
 
+def _tree_slider_value(values):
+    base = c.last_window_values if c.last_window_values is not None else {}
+    overlay = values if values is not None else {}
+    merged = {**base, **overlay}
+    try:
+        return round(float(merged.get(c.EVT_TREE_SCORE, MUSIQ_SLIDER_MIN_NO_FILTER)), 1)
+    except (TypeError, ValueError):
+        return MUSIQ_SLIDER_MIN_NO_FILTER
+
+
+def get_tree_visible_rows(values, score_cmp_less_than=False):
+    rows = c.table.rows() if c.table else []
+    thr = _tree_slider_value(values)
+    visible = []
+    for row in rows:
+        if score_cmp_less_than:
+            keep = _musiq_cell_strictly_below_threshold(row.get("musiq_score"), thr)
+        else:
+            keep = _musiq_cell_at_or_above_threshold(row.get("musiq_score"), thr)
+        if keep:
+            visible.append(row)
+    return visible
+
+
 class PiTreeList(PiElement):
 
     def __init__(self,key="-TREE-",headings=[],events=[]):
@@ -70,7 +94,7 @@ class PiTreeList(PiElement):
         self._tree_data = PiTreeData(c.table.rows())
         self._score_slider_key = c.EVT_TREE_SCORE
         self._score_cmp_btn_key = f"{self.key}SCORECMP-"
-        self._score_cmp_less_than = False
+        self._score_cmp_less_than = c.tree_score_cmp_less_than
         self._show_events = (
             c.EVT_SHOW_ALL,
             c.EVT_SHOW_TBD,
@@ -167,6 +191,7 @@ class PiTreeList(PiElement):
 
     def _toggle_tree_score_comparator(self, event, values):
         self._score_cmp_less_than = not self._score_cmp_less_than
+        c.tree_score_cmp_less_than = self._score_cmp_less_than
         if c.window is not None and self._score_cmp_btn_key in c.window.AllKeysDict:
             c.window[self._score_cmp_btn_key].update(
                 text=self._score_cmp_button_text(),
@@ -190,13 +215,7 @@ class PiTreeList(PiElement):
         self._sync_tab_sliders(threshold)
 
     def _tree_slider_value(self, values):
-        base = c.last_window_values if c.last_window_values is not None else {}
-        overlay = values if values is not None else {}
-        merged = {**base, **overlay}
-        try:
-            return round(float(merged.get(self._score_slider_key, MUSIQ_SLIDER_MIN_NO_FILTER)), 1)
-        except (TypeError, ValueError):
-            return MUSIQ_SLIDER_MIN_NO_FILTER
+        return _tree_slider_value(values)
 
     def _sync_tab_sliders(self, threshold):
         if c.window is None:
@@ -218,17 +237,7 @@ class PiTreeList(PiElement):
         c.listeners.notify(self.key, merged)
 
     def _visible_rows(self, values):
-        rows = c.table.rows() if c.table else []
-        thr = self._tree_slider_value(values)
-        visible = []
-        for row in rows:
-            if self._score_cmp_less_than:
-                keep = _musiq_cell_strictly_below_threshold(row.get("musiq_score"), thr)
-            else:
-                keep = _musiq_cell_at_or_above_threshold(row.get("musiq_score"), thr)
-            if keep:
-                visible.append(row)
-        return visible
+        return get_tree_visible_rows(values, self._score_cmp_less_than)
 
     def _snapshot_tree_state(self):
         if c.window is None:

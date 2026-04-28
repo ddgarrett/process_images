@@ -108,6 +108,9 @@ last_window_values = None
 # True while tree slider is programmatically syncing tab sliders.
 syncing_from_tree = False
 
+# True when the tree score comparator is in "<" mode.
+tree_score_cmp_less_than = False
+
 # User-facing label for current Show... filter status.
 current_show_filter_label = "All Images"
 
