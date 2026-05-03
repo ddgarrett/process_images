@@ -1,6 +1,7 @@
 ''' Implement action to display and update properties '''
 
 import re
+from datetime import datetime
 
 import FreeSimpleGUI as sg
 
@@ -43,6 +44,57 @@ def _normalize_text(value):
     return re.sub(r'\s+', ' ', value).strip()
 
 
+def _format_img_date_time(raw):
+    ''' EXIF-backed rows store img_date_time like 1969:12:31 16:00:00. '''
+    s = str(raw).strip()
+    if not s:
+        return ''
+    dt = datetime.strptime(s, '%Y:%m:%d %H:%M:%S')
+    return dt.strftime('%m-%d-%Y %H:%M')
+
+
+def _detail_camera_line(row):
+    make = str(row.get('img_make', '') or '').strip()
+    model = str(row.get('img_model', '') or '').strip()
+    if make == 'na':
+        make = ''
+    if model == 'na':
+        model = ''
+    parts = [p for p in (make, model) if p]
+    return ' | '.join(parts) if parts else ''
+
+
+def _format_file_size_human(n):
+    ''' Bytes as e.g. 1.5 MB (1024-based units). '''
+    try:
+        n = int(n)
+    except (TypeError, ValueError):
+        return str(n)
+    if n < 0:
+        return str(n)
+    if n < 1024:
+        return f'{n:,} bytes'
+    val = float(n)
+    for unit in ('KB', 'MB', 'GB', 'TB'):
+        val /= 1024.0
+        if val < 1024.0 or unit == 'TB':
+            s = f'{val:.2f}'.rstrip('0').rstrip('.')
+            return f'{s} {unit}'
+    return f'{n:,} bytes'
+
+
+def _detail_dims_line(row):
+    w = row.get('img_width', '')
+    h = row.get('img_len', '')
+    fs = row.get('file_size', '')
+    try:
+        fs_n = int(fs)
+        fs_s = _format_file_size_human(fs_n)
+    except (TypeError, ValueError):
+        fs_s = str(fs)
+    return f'{w} x {h}  |  {fs_s}'
+
+
 def _parse_coord(text, label, low, high):
     txt = str(text).strip()
     if txt == '':
@@ -72,9 +124,27 @@ class PiFileProperties(PiAction):
         except (TypeError, ValueError):
             rotate = 1
 
+        detail_dt = _format_img_date_time(row.get('img_date_time', '') or '')
+        detail_cam = _detail_camera_line(row)
+        detail_dims = _detail_dims_line(row)
+
+        thumb_col = sg.Column(
+            [[sg.Image(key=_K_THUMB, size=(280, 280))]],
+            vertical_alignment='top',
+        )
+        details_col = sg.Column(
+            [
+                [sg.Text(detail_dt)],
+                [sg.Text(detail_cam)],
+                [sg.Text(detail_dims)],
+            ],
+            expand_x=True,
+            vertical_alignment='top',
+        )
+
         layout = [
             [sg.Text('File'), sg.Text(fn, key=_K_FN, expand_x=True)],
-            [sg.Image(key=_K_THUMB, size=(280, 280))],
+            [thumb_col, details_col],
             [sg.Text('GPS Lat', size=(12, 1)), sg.Input(str(row.get('img_lat', '') or ''), key=_K_LAT, expand_x=True)],
             [sg.Text('GPS Lon', size=(12, 1)), sg.Input(str(row.get('img_lon', '') or ''), key=_K_LON, expand_x=True)],
             [sg.Text('Title', size=(12, 1)), sg.Input(str(row.get('img_title', '') or ''), key=_K_TITLE, expand_x=True)],
@@ -85,7 +155,14 @@ class PiFileProperties(PiAction):
             [sg.Push(), sg.Button('Update', key=_E_UPDATE), sg.Button('Cancel', key=_E_CANCEL)],
         ]
 
-        window = sg.Window('Image Properties', layout, modal=True, finalize=True, resizable=True)
+        window = sg.Window(
+            'Image Properties',
+            layout,
+            modal=True,
+            finalize=True,
+            resizable=True,
+            keep_on_top=True,
+        )
 
         thumb, _ = cnv_image(full_fn, resize=(280, 280), rotate=rotate)
         if thumb != '':
