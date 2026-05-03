@@ -32,7 +32,8 @@ metadata:CsvTable = CsvTable("image_collection_metadata.csv")
 TRACE_EVENTS = True
 
 # standard events
-EVT_FILE_OPEN  = '-FILE_OPEN-'
+EVT_FILE_OPEN_FOLDER = '-FILE_OPEN_FOLDER-'
+EVT_FILE_OPEN_CSV = '-FILE_OPEN_CSV-'
 EVT_FILE_NEW   = '-FILE_NEW-'
 EVT_FILE_SAVE  = '-FILE_SAVE-'
 EVT_ADD_FOLDERS  = '-ADD_FOLDERS-'
@@ -115,7 +116,8 @@ tree_score_cmp_less_than = False
 current_show_filter_label = "All Images"
 
 ''' standard global actions '''
-PiOpenCollection(EVT_FILE_OPEN)
+PiOpenCollectionFolder(EVT_FILE_OPEN_FOLDER)
+PiOpenCollectionCsv(EVT_FILE_OPEN_CSV)
 PiNewCollection(EVT_FILE_NEW)
 PiAddFolders(EVT_ADD_FOLDERS)
 PiSaveCollection(EVT_FILE_SAVE)

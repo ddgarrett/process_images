@@ -43,19 +43,40 @@ class PiAction:
 
 ''' A few Common Global Actions for New, Save, Open, Filter Table'''
 
-class PiOpenCollection(PiAction):
-    def handle_event(self,event,values):
-        filename = sg.popup_get_file('',no_window=True,file_types=(("Image Collection", "image_collection.csv"),))
+def _try_open_collection_csv(filename: str, values) -> None:
+    table = ImageCollection(filename)
+    if table:
+        d = os.path.dirname(filename)
+        util.set_collection(table, d, values)
+        c.update_status(f"Collection with {len(c.table.rows())} images loaded from {d}")
+    else:
+        c.update_status("Error opening collection file")
+
+
+class PiOpenCollectionCsv(PiAction):
+    def handle_event(self, event, values):
+        filename = sg.popup_get_file(
+            '',
+            no_window=True,
+            file_types=(("CSV", "*.csv"),),
+        )
         if filename:
-            table = ImageCollection(filename)
-            if table:
-                d = os.path.dirname(filename)
-                util.set_collection(table,d,values)
-                c.update_status(f"Collection with {len(c.table.rows())} images loaded from {d}")
-            else:
-                c.update_status("Error opening collection file")
+            _try_open_collection_csv(filename, values)
         else:
-            c.update_status("Open collection canceled")
+            c.update_status("Open CSV canceled")
+
+
+class PiOpenCollectionFolder(PiAction):
+    def handle_event(self, event, values):
+        d = sg.popup_get_folder('', no_window=True)
+        if not d:
+            c.update_status("Open folder canceled")
+            return
+        filename = os.path.join(d, "image_collection.csv")
+        if not os.path.isfile(filename):
+            c.update_status(f"No image_collection.csv in {d}")
+            return
+        _try_open_collection_csv(filename, values)
 
 class PiNewCollection(PiAction):
     def handle_event(self,event,values):

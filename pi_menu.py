@@ -24,7 +24,11 @@ class PiMenu(PiElement):
         # ------ Menu Definition ------ #
         menu_def = [['&File', 
                         [f'&New::{c.EVT_FILE_NEW}',
-                         f'&Open::{c.EVT_FILE_OPEN}', 
+                         '&Open',
+                         [
+                             f'&Folder::{c.EVT_FILE_OPEN_FOLDER}',
+                             f'CSV &file::{c.EVT_FILE_OPEN_CSV}',
+                         ],
                          f'&Save::{c.EVT_FILE_SAVE}', 
                          f'&Add Folders::{c.EVT_ADD_FOLDERS}',
                          PiActionReorgImg().item(),
