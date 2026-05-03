@@ -88,12 +88,21 @@ class SelectedTreeNodesFilter(Filter):
                 file_loc,_,file_name = name.rpartition('/')
                 self._filter_files.add((file_loc,file_name))
 
+    @staticmethod
+    def _row_in_folder(file_loc: str, folder_key: str) -> bool:
+        """True if file_loc is exactly folder_key or a path under it (not a sibling prefix)."""
+        if folder_key == "":
+            return True
+        if file_loc == folder_key:
+            return True
+        return file_loc.startswith(folder_key + "/")
+
     def test(self,row:Row):
         file_loc = row['file_location']
-        for dir in self._filter_folders:
-            if file_loc.startswith(dir):
+        for folder_key in self._filter_folders:
+            if self._row_in_folder(file_loc, folder_key):
                 return True
-            
+
         file_name = row['file_name']
         return (file_loc,file_name) in self._filter_files
     
