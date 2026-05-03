@@ -2,14 +2,13 @@
     Display a Tree List based on data in the global config.table table
 '''
 
-import os
 
 import FreeSimpleGUI as sg
-from pi_action_export import PiActionExport
-from pi_action_map import PiActionMap
-from pi_action_blog import PiActionBlog
 
 import pi_config as c
+from pi_action_blog import PiActionBlog
+from pi_action_export import PiActionExport
+from pi_action_map import PiActionMap
 from pi_element import PiElement
 from pi_filters import SelectedTreeNodesFilter
 from pi_treedata import PiTreeData
@@ -131,9 +130,9 @@ class PiTreeList(PiElement):
             self._score_cmp_button_text(),
             key=self._score_cmp_btn_key,
             enable_events=True,
-            tooltip="Toggle tree score comparator",
+            tooltip="Toggle  score comparator",
             button_color=self._score_cmp_button_color(),
-            size=(12, 1),
+            size=(8, 1),
             pad=((8, 8), (2, 6)),
         )
         score_slider = sg.Slider(
@@ -294,13 +293,13 @@ class PiTreeList(PiElement):
         show_txt = c.current_show_filter_label
         visible = len(self._tree_data.rows)
         c.update_status(
-            f"Show: {show_txt} | Tree Score: {score_txt} | Visible files: {visible}"
+            f"Show: {show_txt} | Score: {score_txt} | Visible files: {visible}"
         )
 
     def _score_cmp_button_text(self):
         if self._score_cmp_less_than:
-            return "Tree Score <"
-        return "Tree Score >="
+            return "Score <"
+        return "Score >="
 
     def _score_cmp_symbol(self):
         if self._score_cmp_less_than:
