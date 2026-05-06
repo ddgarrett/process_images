@@ -32,6 +32,7 @@ class PiMenu(PiElement):
                          f'&Save::{c.EVT_FILE_SAVE}', 
                          f'&Add Folders::{c.EVT_ADD_FOLDERS}',
                          PiActionReorgImg().item(),
+                         f'&Merge Collection...::{c.EVT_FILE_MERGE_COLLECTION}',
                          f'E&xit::{c.EVT_EXIT}' 
                         ] 
                     ],

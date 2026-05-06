@@ -36,6 +36,7 @@ EVT_FILE_OPEN_FOLDER = '-FILE_OPEN_FOLDER-'
 EVT_FILE_OPEN_CSV = '-FILE_OPEN_CSV-'
 EVT_FILE_NEW   = '-FILE_NEW-'
 EVT_FILE_SAVE  = '-FILE_SAVE-'
+EVT_FILE_MERGE_COLLECTION = '-FILE_MERGE_COLLECTION-'
 EVT_ADD_FOLDERS  = '-ADD_FOLDERS-'
 EVT_CLEANUP_DIR  = '-REORG_IMG-'
 EVT_FILE_PROPS = '-FILE_PROPS-'
@@ -119,6 +120,8 @@ current_show_filter_label = "All Images"
 PiOpenCollectionFolder(EVT_FILE_OPEN_FOLDER)
 PiOpenCollectionCsv(EVT_FILE_OPEN_CSV)
 PiNewCollection(EVT_FILE_NEW)
+from pi_action_merge_collection import PiMergeCollection
+PiMergeCollection(EVT_FILE_MERGE_COLLECTION)
 PiAddFolders(EVT_ADD_FOLDERS)
 PiSaveCollection(EVT_FILE_SAVE)
 PiFileProperties(EVT_FILE_PROPS)
