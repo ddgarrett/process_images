@@ -161,8 +161,9 @@ class PiFileProperties(PiAction):
             modal=True,
             finalize=True,
             resizable=True,
-            keep_on_top=True,
         )
+        # Stay above the main app window without Tk global topmost (other apps can cover this dialog).
+        window.TKroot.transient(c.window.TKroot)
 
         thumb, _ = cnv_image(full_fn, resize=(280, 280), rotate=rotate)
         if thumb != '':
@@ -180,11 +181,11 @@ class PiFileProperties(PiAction):
 
             ok, lat_value, err = _parse_coord(dlg_values.get(_K_LAT, ''), 'GPS latitude', -90, 90)
             if not ok:
-                sg.popup(err)
+                sg.popup(err, keep_on_top=True)
                 continue
             ok, lon_value, err = _parse_coord(dlg_values.get(_K_LON, ''), 'GPS longitude', -180, 180)
             if not ok:
-                sg.popup(err)
+                sg.popup(err, keep_on_top=True)
                 continue
 
             row['img_lat'] = lat_value
