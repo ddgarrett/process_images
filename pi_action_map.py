@@ -1,5 +1,5 @@
 '''
-    Create a heat map with gps locations for selected files.
+    Create a map with gps locations for selected files.
     Listens for events specified when this action was created.
 
     Like all actions, this class has a 'handle_event(self,event,values)' method.
@@ -72,7 +72,7 @@ def _open_local_html(map_path: str) -> None:
 
 class PiActionMap(PiAction):
     '''
-        Create a heatmap for selected files and folders.
+        Create a map for selected files and folders.
         Parms:
         text   - menu item text to display
         rowget - method to call to get list of rows to map
@@ -109,20 +109,17 @@ class PiActionMap(PiAction):
         rows = [r for r in rows 
                 if r['img_lat'] != '0' and r['img_lon'] != '0']
 
-        # generate heatmap for selected_rows
         if len(rows) > 0:
             self._generate_map(rows)
 
     def _generate_map(self,rows):
-        ''' generate a google maps heatmap for list of rows '''
+        ''' generate a google maps html file for list of rows '''
 
         # dictionary mapping a URI to the hmtl for that URI
         self._page_dict = {}
 
         marker_html = "<a href='file://{c.directory}row'>The Presidio</a>"
 
-        lat_lon_lst = []
-        weights = []
         markers = {}
         lat = 0
         lon = 0 
@@ -154,29 +151,17 @@ class PiActionMap(PiAction):
             else:
                 block = href
             
-            try:
-                idx = lat_lon_lst.index(lat_lon)
-                weights[idx] = weights[idx] + 1
+            if lat_lon in markers:
                 markers[lat_lon] = f'{markers[lat_lon]}<BR>{block}'
-            except ValueError:
-                lat_lon_lst.append(lat_lon)
-                weights.append(1)
+            else:
                 markers[lat_lon] = block
 
         lat = lat / cnt
         lon = lon / cnt
 
         gmap1 = gmplot.GoogleMapPlotter(lat,lon,13,apikey=apikey)
-        pts = zip(*lat_lon_lst)
         for k,v in markers.items():
             gmap1.marker(k[0],k[1], label='I', info_window=v)
-
-        gmap1.heatmap(
-            *pts,
-            radius=40,
-            weights=weights,
-            # gradient=[(0, 0, 255, 0), (0, 255, 0, 0.9), (255, 0, 0, 1)]
-        )
 
         # Pass the absolute path
         map_fn = c.directory + "/" + "temp_map.html"
