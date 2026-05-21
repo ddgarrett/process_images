@@ -79,13 +79,22 @@ def init_window():
 
     # ------ GUI Defintion ------ #
     status_row = [
-        sg.Text(
-            "",
-            relief=sg.RELIEF_SUNKEN,
-            size=(55, 1),
-            pad=(0, 3),
-            key="-STATUS-",
+        sg.Column(
+            [
+                [
+                    sg.Text(
+                        "",
+                        relief=sg.RELIEF_SUNKEN,
+                        size=(1, 1),
+                        pad=(0, 3),
+                        key="-STATUS-",
+                        expand_x=True,
+                    )
+                ],
+            ],
             expand_x=True,
+            pad=(0, 0),
+            key="-STATUSCOL-",
         ),
         sg.Text(
             "",
@@ -97,6 +106,12 @@ def init_window():
         ),
         sg.Sizegrip(pad=(3, 3)),
     ]
+    status_bar = sg.Column(
+        [status_row],
+        expand_x=True,
+        pad=(0, 0),
+        key="-STATUSBAR-",
+    )
 
     layout = [
         [menu.get_element()],
@@ -124,7 +139,7 @@ def init_window():
                 pad=(0, 0),
             )
         ],
-        [sg.pin(sg.Column([status_row], expand_x=True, pad=(0, 0)))],
+        [sg.pin(status_bar, expand_x=True)],
     ]
 
     return sg.Window(
@@ -143,6 +158,15 @@ def _configure_status_label_padding():
         c.window[key].Widget.configure(padx=4, pady=4)
 
 
+def _ensure_status_bar_expand():
+    """Keep pinned status row stretched to full window width after resize."""
+    if c.window is None:
+        return
+    for key in ("-STATUSBAR-", "-STATUSCOL-", "-STATUS-"):
+        if key in c.window.AllKeysDict:
+            c.window[key].expand(expand_x=True)
+
+
 def main():
 
     register_status_menu_handlers()
@@ -153,6 +177,7 @@ def main():
     c.status = c.window["-STATUS-"]
     c.status_filter = c.window["-STATUS-FILTER-"]
     _configure_status_label_padding()
+    _ensure_status_bar_expand()
     c.update_show_filter_status()
 
     c.window.bind("<Control_L><s>", "-FILE_SAVE-")
@@ -196,6 +221,7 @@ def main():
                 print(f"buffering: {next_event}")
 
             print(f"e: {event} ")
+            _ensure_status_bar_expand()
 
         c.listeners.notify(event, values)
 
