@@ -104,6 +104,14 @@ def init_window():
                 key="-STATUS-",
                 expand_x=True,
             ),
+            sg.Text(
+                "",
+                relief=sg.RELIEF_SUNKEN,
+                size=(38, 1),
+                pad=(0, 3),
+                key="-STATUS-FILTER-",
+                justification="right",
+            ),
             sg.Sizegrip(pad=(3, 3)),
         ],
     ]
@@ -118,8 +126,10 @@ def init_window():
     )
 
 
-def update_status(text):
-    c.window["-STATUS-"].update(text)
+def _configure_status_label_padding():
+    """Tk padx/pady: space between label text and the sunken border."""
+    for key in ("-STATUS-", "-STATUS-FILTER-"):
+        c.window[key].Widget.configure(padx=4, pady=4)
 
 
 def main():
@@ -130,6 +140,9 @@ def main():
     install_macos_popup_fallbacks(c.window, _ui_refs)
     install_status_menu_context_bindings(c.window, _ui_refs)
     c.status = c.window["-STATUS-"]
+    c.status_filter = c.window["-STATUS-FILTER-"]
+    _configure_status_label_padding()
+    c.update_show_filter_status()
 
     c.window.bind("<Control_L><s>", "-FILE_SAVE-")
 

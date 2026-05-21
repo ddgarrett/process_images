@@ -290,11 +290,9 @@ class PiTreeList(PiElement):
     def _update_status_summary(self, values):
         threshold = self._tree_slider_value(values)
         score_txt = f"{self._score_cmp_symbol()}{threshold:.1f}"
-        show_txt = c.current_show_filter_label
         visible = len(self._tree_data.rows)
-        c.update_status(
-            f"Show: {show_txt} | Score: {score_txt} | Visible files: {visible}"
-        )
+        c.update_show_filter_status()
+        c.update_status(f"Score: {score_txt} | Visible files: {visible}")
 
     def _score_cmp_button_text(self):
         if self._score_cmp_less_than:

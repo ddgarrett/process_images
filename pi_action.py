@@ -135,11 +135,10 @@ class PiFilterTable(PiAction):
         c.listeners.notify(c.EVT_TABLE_LOAD,values)
 
         if self._filter == None:
-            c.current_show_filter_label = "All Images"
-            c.update_status("Showing All Images")
+            c.current_show_filter_label = "All"
         else:
             c.current_show_filter_label = self._filter.get_descr()
-            c.update_status(f"Collection Filtered for {self._filter.get_descr()}")
+        c.update_show_filter_status()
 
 class PiTestCode(PiAction):
     def handle_event(self,event,values):

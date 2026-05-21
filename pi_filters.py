@@ -141,7 +141,7 @@ class FilterPossibleDup(Filter):
         return False
     
     def get_descr(self):
-        return "possible Good or Best"
+        return "Possible Duplicate"
     
 class FilterPossibleGoodPlus(Filter):
     ''' Filter rows which are possibly Good or Best
@@ -155,7 +155,7 @@ class FilterPossibleGoodPlus(Filter):
         return False
     
     def get_descr(self):
-        return "possible Good or Best"
+        return "Possible Good or Best"
     
 class FilterPossibleBest(Filter):
     ''' Filter rows which are possibly Good or Best
@@ -169,7 +169,7 @@ class FilterPossibleBest(Filter):
         return False
     
     def get_descr(self):
-        return "possible Best"
+        return "Possible Best"
 
 class FilterTbdBestPlusBest(Filter):
     ''' Filter rows for TBD Best candidates plus final Best '''

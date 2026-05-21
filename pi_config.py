@@ -114,7 +114,7 @@ syncing_from_tree = False
 tree_score_cmp_less_than = False
 
 # User-facing label for current Show... filter status.
-current_show_filter_label = "All Images"
+current_show_filter_label = "All"
 
 ''' standard global actions '''
 PiOpenCollectionFolder(EVT_FILE_OPEN_FOLDER)
@@ -150,8 +150,15 @@ app_function = APP_RVW_IMG  # default to Review Images
 
 ''' initialized in main() '''
 window:sg.Window = None   # main window
-status:sg.Element = None  # status display element
+status:sg.Element = None  # left status display element
+status_filter:sg.Element = None  # right Show... filter display
 
 def update_status(msg):
     if status != None:
         status.update(msg)
+
+def update_show_filter_status():
+    """Refresh right status from current_show_filter_label."""
+    if status_filter is None:
+        return
+    status_filter.update(f"Showing: {current_show_filter_label}")
