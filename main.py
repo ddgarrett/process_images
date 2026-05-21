@@ -78,42 +78,53 @@ def init_window():
     ]
 
     # ------ GUI Defintion ------ #
+    status_row = [
+        sg.Text(
+            "",
+            relief=sg.RELIEF_SUNKEN,
+            size=(55, 1),
+            pad=(0, 3),
+            key="-STATUS-",
+            expand_x=True,
+        ),
+        sg.Text(
+            "",
+            relief=sg.RELIEF_SUNKEN,
+            size=(38, 1),
+            pad=(0, 3),
+            key="-STATUS-FILTER-",
+            justification="right",
+        ),
+        sg.Sizegrip(pad=(3, 3)),
+    ]
+
     layout = [
         [menu.get_element()],
         [
-            sg.Pane(
+            sg.Column(
                 [
-                    sg.Column([[tree.get_element()]], expand_y=True),
-                    sg.Column(tab_group, key="-IMGCOL-"),
+                    [
+                        sg.Pane(
+                            [
+                                sg.Column([[tree.get_element()]], expand_y=True),
+                                sg.Column(tab_group, key="-IMGCOL-"),
+                            ],
+                            orientation="h",
+                            relief=sg.RELIEF_SUNKEN,
+                            expand_x=True,
+                            expand_y=True,
+                            k="-PANE-",
+                            border_width=1,
+                            background_color="white",
+                        )
+                    ],
                 ],
-                orientation="h",
-                relief=sg.RELIEF_SUNKEN,
                 expand_x=True,
                 expand_y=True,
-                k="-PANE-",
-                border_width=1,
-                background_color="white",
+                pad=(0, 0),
             )
         ],
-        [
-            sg.Text(
-                "",
-                relief=sg.RELIEF_SUNKEN,
-                size=(55, 1),
-                pad=(0, 3),
-                key="-STATUS-",
-                expand_x=True,
-            ),
-            sg.Text(
-                "",
-                relief=sg.RELIEF_SUNKEN,
-                size=(38, 1),
-                pad=(0, 3),
-                key="-STATUS-FILTER-",
-                justification="right",
-            ),
-            sg.Sizegrip(pad=(3, 3)),
-        ],
+        [sg.pin(sg.Column([status_row], expand_x=True, pad=(0, 0)))],
     ]
 
     return sg.Window(
