@@ -94,15 +94,6 @@ class PiTreeList(PiElement):
         self._score_slider_key = c.EVT_TREE_SCORE
         self._score_cmp_btn_key = f"{self.key}SCORECMP-"
         self._score_cmp_less_than = c.tree_score_cmp_less_than
-        self._show_events = (
-            c.EVT_SHOW_ALL,
-            c.EVT_SHOW_TBD,
-            c.EVT_SHOW_POSSIBLE_DUP,
-            c.EVT_SHOW_POSSIBLE_GOOD_PLUS,
-            c.EVT_SHOW_POSSIBLE_BEST,
-            c.EVT_SHOW_TBD_BEST_PLUS_BEST,
-            c.EVT_SHOW_FINAL_BEST,
-        )
         self._tree = (
             sg.Tree(data=self._tree_data,
                     headings=headings,
@@ -122,8 +113,6 @@ class PiTreeList(PiElement):
         self._key_id_dict = {}
         c.listeners.add(self._score_slider_key, self._tree_score_changed)
         c.listeners.add(self._score_cmp_btn_key, self._toggle_tree_score_comparator)
-        for evt in self._show_events:
-            c.listeners.add(evt, self._show_filter_selected)
 
     def get_element(self) -> sg.Column:
         cmp_button = sg.Button(
@@ -173,9 +162,17 @@ class PiTreeList(PiElement):
     ''' Event Handlers '''
     def update_list(self,event,values):
         ''' Update the tree data after a table is loaded or filtered '''
-        self._rebuild_tree(values)
-        self._update_status_summary(values)
-        self._notify_tree_selection_with_threshold(values, self._tree_slider_value(values))
+        if c.show_filter_score_reset:
+            c.show_filter_score_reset = False
+            self._set_score_comparator(False)
+            threshold = MUSIQ_SLIDER_MIN_NO_FILTER
+            if c.window is not None and self._score_slider_key in c.window.AllKeysDict:
+                c.window[self._score_slider_key].update(value=threshold)
+            self._sync_tab_sliders(threshold)
+            self._refresh_tree_for_threshold(values, threshold)
+            return
+        threshold = self._tree_slider_value(values)
+        self._refresh_tree_for_threshold(values, threshold)
 
     def update_rows(self,event,values):
         ''' update display after row value changes '''
@@ -184,21 +181,28 @@ class PiTreeList(PiElement):
 
     def _tree_score_changed(self, event, values):
         threshold = self._tree_slider_value(values)
-        self._rebuild_tree(values)
-        self._update_status_summary(values)
-        self._notify_tree_selection_with_threshold(values, threshold)
+        self._refresh_tree_for_threshold(values, threshold)
 
     def _toggle_tree_score_comparator(self, event, values):
-        self._score_cmp_less_than = not self._score_cmp_less_than
-        c.tree_score_cmp_less_than = self._score_cmp_less_than
+        self._set_score_comparator(not self._score_cmp_less_than)
+        threshold = self._tree_slider_value(values)
+        # Keep tree slider threshold, but reset tab sliders to "off".
+        self._sync_tab_sliders(MUSIQ_SLIDER_MIN_NO_FILTER)
+        self._refresh_tree_for_threshold(values, threshold)
+
+    def _tree_slider_value(self, values):
+        return _tree_slider_value(values)
+
+    def _set_score_comparator(self, less_than):
+        self._score_cmp_less_than = less_than
+        c.tree_score_cmp_less_than = less_than
         if c.window is not None and self._score_cmp_btn_key in c.window.AllKeysDict:
             c.window[self._score_cmp_btn_key].update(
                 text=self._score_cmp_button_text(),
                 button_color=self._score_cmp_button_color(),
             )
-        threshold = self._tree_slider_value(values)
-        # Keep tree slider threshold, but reset tab sliders to "off".
-        self._sync_tab_sliders(MUSIQ_SLIDER_MIN_NO_FILTER)
+
+    def _refresh_tree_for_threshold(self, values, threshold):
         base = c.last_window_values if c.last_window_values is not None else {}
         overlay = values if values is not None else {}
         merged = {**base, **overlay}
@@ -206,15 +210,6 @@ class PiTreeList(PiElement):
         self._rebuild_tree(merged)
         self._update_status_summary(merged)
         self._notify_tree_selection_with_threshold(merged, threshold)
-
-    def _show_filter_selected(self, event, values):
-        threshold = MUSIQ_SLIDER_MIN_NO_FILTER
-        if c.window is not None and self._score_slider_key in c.window.AllKeysDict:
-            c.window[self._score_slider_key].update(value=threshold)
-        self._sync_tab_sliders(threshold)
-
-    def _tree_slider_value(self, values):
-        return _tree_slider_value(values)
 
     def _sync_tab_sliders(self, threshold):
         if c.window is None:

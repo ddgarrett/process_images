@@ -131,6 +131,7 @@ class PiFilterTable(PiAction):
         if not c.table:
             return 
         
+        c.show_filter_score_reset = True
         c.table.filter_rows(self._filter)
         c.listeners.notify(c.EVT_TABLE_LOAD,values)
 
